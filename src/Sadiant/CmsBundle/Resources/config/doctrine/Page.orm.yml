@@ -1,0 +1,42 @@
+Sadiant\CmsBundle\Entity\Page:
+    type: entity
+    table: page
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        content:
+            type: text
+        slug:
+            type: string
+            length: 255
+            unique: true
+        breadcrumb:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+            nullable: true
+        status:
+            type: string
+            length: 127
+        parent_id:
+            type: integer
+            nullable: true
+#        layout_id:
+#            type: integer
+    manyToOne:
+        parent:
+            targetEntity: Page
+            mappedBy: parent_id
+            inversedBy: children
+    oneToMany:
+        children:
+            targetEntity: Page
+            mappedBy: parent_id
+            inversedBy: parent
