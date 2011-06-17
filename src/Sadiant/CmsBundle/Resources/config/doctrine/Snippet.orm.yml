@@ -1,0 +1,13 @@
+Sadiant\CmsBundle\Entity\Snippet:
+    type: entity
+    table: snippet
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        content:
+            type: text

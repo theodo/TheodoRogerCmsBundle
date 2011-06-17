@@ -28,8 +28,8 @@ Sadiant\CmsBundle\Entity\Page:
         parent_id:
             type: integer
             nullable: true
-#        layout_id:
-#            type: integer
+        layout_id:
+            type: integer
     manyToOne:
         parent:
             targetEntity: Page
@@ -40,3 +40,8 @@ Sadiant\CmsBundle\Entity\Page:
             targetEntity: Page
             mappedBy: parent_id
             inversedBy: parent
+    manyToOne:
+        layout:
+            targetEntity: Layout
+            mapped_by: layout_id
+            inversedBy: pages

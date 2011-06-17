@@ -1,0 +1,22 @@
+Sadiant\CmsBundle\Entity\Layout:
+    type: entity
+    table: layout
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        content:
+            type: text
+        content_type:
+            type: string
+            length: 255
+            nullable: true
+    oneToMany:
+        pages:
+            targetEntity: Page
+            mappedBy: layout_id
+            inversedBy: layout

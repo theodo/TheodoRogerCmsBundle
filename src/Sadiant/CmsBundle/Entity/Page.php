@@ -50,14 +50,19 @@ class Page
     private $parent_id;
 
     /**
+     * @var integer $layout_id
+     */
+    private $layout_id;
+
+    /**
      * @var Sadiant\CmsBundle\Entity\Page
      */
     private $children;
 
     /**
-     * @var Sadiant\CmsBundle\Entity\Page
+     * @var Sadiant\CmsBundle\Entity\Layout
      */
-    private $parent;
+    private $layout;
 
     public function __construct()
     {
@@ -215,6 +220,26 @@ class Page
     }
 
     /**
+     * Set layout_id
+     *
+     * @param integer $layoutId
+     */
+    public function setLayoutId($layoutId)
+    {
+        $this->layout_id = $layoutId;
+    }
+
+    /**
+     * Get layout_id
+     *
+     * @return integer $layoutId
+     */
+    public function getLayoutId()
+    {
+        return $this->layout_id;
+    }
+
+    /**
      * Add children
      *
      * @param Sadiant\CmsBundle\Entity\Page $children
@@ -233,6 +258,31 @@ class Page
     {
         return $this->children;
     }
+
+    /**
+     * Set layout
+     *
+     * @param Sadiant\CmsBundle\Entity\Layout $layout
+     */
+    public function setLayout(\Sadiant\CmsBundle\Entity\Layout $layout)
+    {
+        $this->layout = $layout;
+    }
+
+    /**
+     * Get layout
+     *
+     * @return Sadiant\CmsBundle\Entity\Layout $layout
+     */
+    public function getLayout()
+    {
+        return $this->layout;
+    }
+    /**
+     * @var Sadiant\CmsBundle\Entity\Page
+     */
+    private $parent;
+
 
     /**
      * Set parent
