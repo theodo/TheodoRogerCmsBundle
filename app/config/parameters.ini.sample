@@ -4,9 +4,9 @@
 [parameters]
     database_driver   = pdo_mysql
     database_host     = localhost
-    database_name     = symfony
-    database_user     = root
-    database_password =
+    database_name     = theodocms
+    database_user     = theodocms
+    database_password = theodocmspwd
 
     mailer_transport  = smtp
     mailer_host       = localhost
@@ -15,4 +15,4 @@
 
     locale            = en
 
-    secret            = ThisTokenIsNotSoSecretChangeIt
+    secret            = 463a06ee69fbea064218b1d02c416125

@@ -1,0 +1,13 @@
+; These parameters can be imported into other config files
+; by enclosing the key with % (like %database_user%)
+; Comments start with ';', as in php.ini
+[parameters]
+    database_driver   = pdo_mysql
+    database_host     = localhost
+    database_name     = theodocms_test
+    database_user     = theodocms
+    database_password = theodocmspwd
+
+    locale            = en
+
+    secret            = 463a06ee69fbea064218b1d02c416125

@@ -1,4 +1,5 @@
 imports:
+    - { resource: parameters_test.ini }
     - { resource: config_dev.yml }
 
 framework:
@@ -9,6 +10,20 @@ framework:
 web_profiler:
     toolbar: false
     intercept_redirects: false
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
 
 swiftmailer:
     disable_delivery: true

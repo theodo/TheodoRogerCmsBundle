@@ -8,3 +8,8 @@ vendor/*
 undercontrol.xml
 clover.xml
 phpunit.xml
+app/config/parameters.ini
+app/config/parameters_test.ini
+app/config/dbs.list
+app/config/create_dbs.sql
+
