@@ -1,5 +1,7 @@
 app/cache/*
 app/logs/*
+log
+cache
 symfttpd
 nbproject
 vendor/*
