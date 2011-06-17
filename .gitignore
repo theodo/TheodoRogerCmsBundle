@@ -1,0 +1,8 @@
+app/cache/*
+app/logs/*
+symfttpd
+nbproject
+vendor/*
+undercontrol.xml
+clover.xml
+phpunit.xml
