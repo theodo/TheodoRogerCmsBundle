@@ -4,7 +4,7 @@ namespace Sadiant\CmsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ContentControllerTest extends WebTestCase
+class PageControllerTest extends WebTestCase
 {
     public function testIndex()
     {

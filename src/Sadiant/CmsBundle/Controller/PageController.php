@@ -13,10 +13,10 @@ namespace Sadiant\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ContentController extends Controller
+class PageController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SadiantCmsBundle:Content:index.html.twig');
+        return $this->render('SadiantCmsBundle:Page:index.html.twig');
     }
 }
