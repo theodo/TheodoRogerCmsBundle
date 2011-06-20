@@ -53,4 +53,4 @@
 [DoctrineFixturesBundle]
     git=http://github.com/symfony/DoctrineFixturesBundle.git
     version=origin/master
-    target=/bundles/Symfony/Bundle
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle

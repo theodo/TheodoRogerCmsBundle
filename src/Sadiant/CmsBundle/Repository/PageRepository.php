@@ -12,4 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class PageRepository extends EntityRepository
 {
+    // Page status
+    const STATUS_DRAFT    = 'Draft';
+    const STATUS_REVIEWED = 'Reviewed';
+    const STATUS_PUBLISH  = 'Publish';
+    const STATUS_HIDDEN   = 'Hidden';
+
+    // List of available status
+    protected $available_status = array(
+        self::STATUS_DRAFT,
+        self::STATUS_REVIEWED,
+        self::STATUS_PUBLISH,
+        self::STATUS_HIDDEN
+    );
+
+    /**
+     * Return list of available status
+     *
+     * @return array
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function getAvailableStatus()
+    {
+        return $this->available_status;
+    }
 }
