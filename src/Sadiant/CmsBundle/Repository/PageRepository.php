@@ -19,7 +19,7 @@ class PageRepository extends EntityRepository
     const STATUS_HIDDEN   = 'Hidden';
 
     // List of available status
-    protected $available_status = array(
+    protected $availableStatus = array(
         self::STATUS_DRAFT,
         self::STATUS_REVIEWED,
         self::STATUS_PUBLISH,
@@ -35,6 +35,6 @@ class PageRepository extends EntityRepository
      */
     public function getAvailableStatus()
     {
-        return $this->available_status;
+        return $this->availableStatus;
     }
 }
