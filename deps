@@ -45,3 +45,12 @@
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
+
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+    version=origin/master
+
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    version=origin/master
+    target=/bundles/Symfony/Bundle
