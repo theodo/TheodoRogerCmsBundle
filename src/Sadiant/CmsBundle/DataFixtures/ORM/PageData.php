@@ -30,7 +30,7 @@ EOF
 );
         $page1->setSlug('homepage');
         $page1->setBreadcrumb('Homepage');
-        $page1->setDescription("Cms homepage, can't be deleted !");
+        $page1->setDescription("Cms homepage");
         $page1->setStatus(PageRepository::STATUS_PUBLISH);
 
         $manager->persist($page1);
@@ -58,4 +58,18 @@ EOF
         // Save pages
         $manager->flush();
     }
+
+    /**
+     * Retrieve the order number of current fixture
+     *
+     * @return integer
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function getOrder()
+    {
+        // The order in which fixtures will be loaded
+        return 1;
+    }
+
 }
