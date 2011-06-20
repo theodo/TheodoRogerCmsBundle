@@ -1,0 +1,12 @@
+<h1>{{ title }}</h1>
+
+Form:
+{% if layout is defined %} 
+<form action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
+{% else %}
+<form action="{{ url('layout_new') }}" method="post" {{ form_enctype(form) }}>
+{% endif %}
+    {{ form_widget(form) }}
+    
+    <input type="submit" />
+</form>

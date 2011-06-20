@@ -1,9 +1,11 @@
 <h1>Layouts</h1>
+<a href="{{ url('layout_new') }}">Niou</a>
 <ul>
     {% for layout in layouts %}
     <li>
-        <a href="{{ url('layout_view', { 'id': layout.id }) }}">{{ layout.name }}</a>
+        <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
     </li>
     {% endfor %}
 </ul>
+<a href="{{ url('layout_new') }}">Niou</a>
 The End

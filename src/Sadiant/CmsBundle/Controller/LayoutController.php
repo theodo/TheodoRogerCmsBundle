@@ -25,7 +25,12 @@ class LayoutController extends Controller
         return $this->get('doctrine')->getEntityManager();
     }
 
-
+    /**
+     * Liste des Layouts
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-20
+     */
     public function indexAction()
     {
         $layouts = $this->getEM()
@@ -37,7 +42,71 @@ class LayoutController extends Controller
                 );
     }
 
-    public function viewAction($id)
+    /**
+     * Nouveau Layout
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function newAction()
+    {
+        $form = $this->createForm(new LayoutType());
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if ($form->isValid())
+            {
+                // perform some action, such as save the object to the database
+                $layout = $form->getData();
+                $this->getEM()->persist($layout);
+                $this->getEM()->flush();
+
+                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+            }
+        }
+
+        return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
+                array(
+                    'title' => 'Nouveau Layout',
+                    'form' => $form->createView()
+                  )
+                );
+    }
+
+    /**
+     * Update un Layout
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function updateAction()
+    {
+        $form = $this->createForm(new LayoutType());
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if ($form->isValid())
+            {
+                // perform some action, such as save the object to the database
+                $layout = $form->getData();
+                $this->getEM()->persist($layout);
+                $this->getEM()->flush();
+
+                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+            }
+        }
+    }
+
+    /**
+     * Edition d'un layout
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-20
+     * @param Int $id
+     */
+    public function editAction($id)
     {
         $layout = $this->getEM()
             ->getRepository('Sadiant\CmsBundle\Entity\Layout')
@@ -45,8 +114,9 @@ class LayoutController extends Controller
 
         $form = $this->createForm(new LayoutType(), $layout);
 
-        return $this->render('SadiantCmsBundle:Layout:view.html.twig',
+        return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
                 array(
+                    'title' => 'Edition '.$layout->getName(),
                     'layout' => $layout,
                     'form' => $form->createView()
                   )

@@ -2,10 +2,17 @@ homepage:
     pattern:  /
     defaults: { _controller: SadiantCmsBundle:Page:index }
 
+layout_new:
+    pattern: /layout/new
+    defaults: { _controller: SadiantCmsBundle:Layout:new }
 
-layout_view:
+layout_update:
     pattern: /layout/{id}
-    defaults: { _controller: SadiantCmsBundle:Layout:view }
+    defaults: { _controller: SadiantCmsBundle:Layout:update }
+
+layout_edit:
+    pattern: /layout/{id}/edit
+    defaults: { _controller: SadiantCmsBundle:Layout:edit }
 
 layout_list:
     pattern: /layout

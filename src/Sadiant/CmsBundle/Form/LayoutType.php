@@ -12,6 +12,7 @@ class LayoutType extends AbstractType
 
     public function buildForm(FormBuilder $builder, array $options)
     {
+        //$builder->add('id', 'hidden');
         $builder->add('name', 'text');
         $builder->add('content', 'text');
     }
