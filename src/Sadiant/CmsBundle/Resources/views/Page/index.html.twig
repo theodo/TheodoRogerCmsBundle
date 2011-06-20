@@ -1,1 +1,9 @@
-Hello!
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block page_title %}{% trans %}Pages{% endtrans %}{% endblock %}
+
+{% block content %}
+  <div>
+    <h3>{% trans %}Pages{% endtrans %}</h3>
+  </div>
+{% endblock %}
