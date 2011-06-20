@@ -12,6 +12,5 @@ app/config/parameters.ini
 app/config/parameters_test.ini
 app/config/dbs.list
 app/config/create_dbs.sql
-app/bootstrap.php.cache
 app/bootstrap_cache.php.cache
 
