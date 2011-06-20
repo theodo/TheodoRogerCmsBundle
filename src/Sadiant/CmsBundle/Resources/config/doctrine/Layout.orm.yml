@@ -16,8 +16,8 @@ Sadiant\CmsBundle\Entity\Layout:
             type: string
             length: 255
             nullable: true
-    oneToMany:
-        pages:
-            targetEntity: Page
-            mappedBy: layout_id
-            inversedBy: layout
+#    oneToMany:
+#        pages:
+#            targetEntity: Page
+#            mappedBy: layout_id
+#            inversedBy: layout
