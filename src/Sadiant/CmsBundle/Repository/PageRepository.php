@@ -49,7 +49,8 @@ class PageRepository extends EntityRepository
     {
         // Create sql query
         $sql_query = <<<EOF
-SELECT p FROM SadiantCmsBundle:Page p
+SELECT p, c FROM SadiantCmsBundle:Page p
+  LEFT JOIN p.children c
   WHERE p.parent_id IS NULL
   ORDER BY p.name
 EOF;
