@@ -1,6 +1,7 @@
 Sadiant\CmsBundle\Entity\Layout:
     type: entity
     table: layout
+    repositoryClass: Sadiant\CmsBundle\Repository\LayoutRepository
     id:
         id:
             type: integer

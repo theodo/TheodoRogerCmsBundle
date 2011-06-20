@@ -3,6 +3,10 @@ homepage:
     defaults: { _controller: SadiantCmsBundle:Page:index }
 
 
-layout:
+layout_view:
+    pattern: /layout/{id}
+    defaults: { _controller: SadiantCmsBundle:Layout:view }
+
+layout_list:
     pattern: /layout
     defaults: { _controller: SadiantCmsBundle:Layout:index }

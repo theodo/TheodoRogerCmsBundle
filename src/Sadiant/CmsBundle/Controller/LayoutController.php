@@ -12,11 +12,44 @@
 namespace Sadiant\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sadiant\CmsBundle\Form\LayoutType;
 
 class LayoutController extends Controller
 {
+    /**
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEM()
+    {
+        return $this->get('doctrine')->getEntityManager();
+    }
+
+
     public function indexAction()
     {
-        return $this->render('SadiantCmsBundle:Layout:index.html.twig');
+        $layouts = $this->getEM()
+            ->getRepository('Sadiant\CmsBundle\Entity\Layout')
+            ->findAll();
+
+        return $this->render('SadiantCmsBundle:Layout:index.html.twig',
+                array('layouts' => $layouts)
+                );
+    }
+
+    public function viewAction($id)
+    {
+        $layout = $this->getEM()
+            ->getRepository('Sadiant\CmsBundle\Entity\Layout')
+            ->findOneById($id);
+
+        $form = $this->createForm(new LayoutType(), $layout);
+
+        return $this->render('SadiantCmsBundle:Layout:view.html.twig',
+                array(
+                    'layout' => $layout,
+                    'form' => $form->createView()
+                  )
+                );
     }
 }
