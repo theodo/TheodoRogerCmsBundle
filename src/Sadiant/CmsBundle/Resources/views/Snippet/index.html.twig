@@ -1,0 +1,11 @@
+<h1>Layouts</h1>
+<a href="{{ url('snippet_new') }}">Niou</a>
+<ul>
+    {% for snippet in snippets %}
+    <li>
+        <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ url('snippet_new') }}">Niou</a>
+The End

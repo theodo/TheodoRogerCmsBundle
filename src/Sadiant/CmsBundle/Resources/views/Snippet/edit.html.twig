@@ -1,0 +1,12 @@
+<h1>{{ title }}</h1>
+
+Form:
+{% if snippet is defined %} 
+<form action="{{ url('snippet_update', { 'id': snippet.id }) }}" method="post" {{ form_enctype(form) }}>
+{% else %}
+<form action="{{ url('snippet_new') }}" method="post" {{ form_enctype(form) }}>
+{% endif %}
+    {{ form_widget(form) }}
+    
+    <input type="submit" />
+</form>

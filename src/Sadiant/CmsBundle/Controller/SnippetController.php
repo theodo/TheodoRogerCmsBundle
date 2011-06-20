@@ -12,9 +12,9 @@
 namespace Sadiant\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sadiant\CmsBundle\Form\LayoutType;
+use Sadiant\CmsBundle\Form\SnippetType;
 
-class LayoutController extends Controller
+class SnippetController extends Controller
 {
     /**
      *
@@ -26,80 +26,79 @@ class LayoutController extends Controller
     }
 
     /**
-     * Liste des Layouts
+     * Liste des Snippets
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
     public function indexAction()
     {
-        $layouts = $this->getEM()
-            ->getRepository('Sadiant\CmsBundle\Entity\Layout')
+        $snippets = $this->getEM()
+            ->getRepository('Sadiant\CmsBundle\Entity\Snippet')
             ->findAll();
 
-        return $this->render('SadiantCmsBundle:Layout:index.html.twig',
-                array('layouts' => $layouts)
+        return $this->render('SadiantCmsBundle:Snippet:index.html.twig',
+                array('snippets' => $snippets)
                 );
     }
 
     /**
-     * Nouveau Layout
+     * Nouveau Snippet
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
     public function newAction()
     {
-        $form = $this->createForm(new LayoutType());
+        $form = $this->createForm(new SnippetType());
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
             if ($form->isValid())
             {
-                // perform some action, such as save the object to the database
-                $layout = $form->getData();
-                $this->getEM()->persist($layout);
+                $snippet = $form->getData();
+                $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
 
-                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                return $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
             }
         }
 
-        return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
+        return $this->render('SadiantCmsBundle:Snippet:edit.html.twig',
                 array(
-                    'title' => 'Nouveau Layout',
+                    'title' => 'Nouveau Snippet',
                     'form' => $form->createView()
                   )
                 );
     }
 
     /**
-     * Update un Layout
+     * Update un Snippet
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
     public function updateAction()
     {
-        $form = $this->createForm(new LayoutType());
+        $form = $this->createForm(new SnippetType());
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
             if ($form->isValid())
             {
-                $layout = $form->getData();
-                $this->getEM()->persist($layout);
+                $snippet = $form->getData();
+                $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
 
-                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                return $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
             }
         }
     }
 
     /**
-     * Edition d'un layout
+     * Edition d'un Snippet
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -107,16 +106,16 @@ class LayoutController extends Controller
      */
     public function editAction($id)
     {
-        $layout = $this->getEM()
-            ->getRepository('Sadiant\CmsBundle\Entity\Layout')
+        $snippet = $this->getEM()
+            ->getRepository('Sadiant\CmsBundle\Entity\Snippet')
             ->findOneById($id);
 
-        $form = $this->createForm(new LayoutType(), $layout);
+        $form = $this->createForm(new SnippetType(), $snippet);
 
-        return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
+        return $this->render('SadiantCmsBundle:Snippet:edit.html.twig',
                 array(
-                    'title' => 'Edition '.$layout->getName(),
-                    'layout' => $layout,
+                    'title' => 'Edition '.$snippet->getName(),
+                    'snippet' => $snippet,
                     'form' => $form->createView()
                   )
                 );

@@ -17,3 +17,19 @@ layout_edit:
 layout_list:
     pattern: /layout
     defaults: { _controller: SadiantCmsBundle:Layout:index }
+
+snippet_new:
+    pattern: /snippet/new
+    defaults: { _controller: SadiantCmsBundle:Snippet:new }
+
+snippet_update:
+    pattern: /snippet/{id}
+    defaults: { _controller: SadiantCmsBundle:Snippet:update }
+
+snippet_edit:
+    pattern: /snippet/{id}/edit
+    defaults: { _controller: SadiantCmsBundle:Snippet:edit }
+
+snippet_list:
+    pattern: /snippet
+    defaults: { _controller: SadiantCmsBundle:Snippet:index }

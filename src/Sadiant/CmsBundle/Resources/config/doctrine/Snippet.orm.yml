@@ -1,6 +1,7 @@
 Sadiant\CmsBundle\Entity\Snippet:
     type: entity
     table: snippet
+    repositoryClass: Sadiant\CmsBundle\Repository\SnippetRepository
     id:
         id:
             type: integer
