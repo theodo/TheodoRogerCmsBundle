@@ -1,9 +1,23 @@
 {% extends "SadiantCmsBundle::layout.html.twig" %}
 
-{% block page_title %}{% trans %}Pages{% endtrans %}{% endblock %}
+{% block page_title "Pages" %}
 
 {% block content %}
   <div>
-    <h3>{% trans %}Pages{% endtrans %}</h3>
+    <h1>{% trans %}Pages{% endtrans %}</h1>
+
+    <ul id="page-list">
+      {% for page in pages %}
+      <li>
+        {{ page.name }} {{ page.status }}
+
+        <ul>
+          {% for child in page.children %}
+            <li>{{ child.name }}  {{ child.status }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 {% endblock %}

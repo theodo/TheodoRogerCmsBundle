@@ -15,7 +15,7 @@ class PageRepository extends EntityRepository
     // Page status
     const STATUS_DRAFT    = 'Draft';
     const STATUS_REVIEWED = 'Reviewed';
-    const STATUS_PUBLISH  = 'Publish';
+    const STATUS_PUBLISH  = 'Published';
     const STATUS_HIDDEN   = 'Hidden';
 
     // List of available status
@@ -36,5 +36,27 @@ class PageRepository extends EntityRepository
     public function getAvailableStatus()
     {
         return $this->availableStatus;
+    }
+
+    /**
+     * List main pages
+     *
+     * @return array
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function queryForMainPages()
+    {
+        // Create sql query
+        $sql_query = <<<EOF
+SELECT p FROM SadiantCmsBundle:Page p
+  WHERE p.parent_id IS NULL
+  ORDER BY p.name
+EOF;
+
+        // Create doctrine query
+        $query = $this->getEntityManager()->createQuery($sql_query);
+
+        return $query;
     }
 }

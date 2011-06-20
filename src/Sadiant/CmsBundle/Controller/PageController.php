@@ -15,8 +15,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PageController extends Controller
 {
+    /**
+     * List pages
+     *
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-20
+     */
     public function indexAction()
     {
-        return $this->render('SadiantCmsBundle:Page:index.html.twig');
+        // Retrieve pages
+        $pages = $this->getDoctrine()->getEntityManager()->getRepository('SadiantCmsBundle:Page')->queryForMainPages()->getResult();
+
+        return $this->render('SadiantCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
 }
