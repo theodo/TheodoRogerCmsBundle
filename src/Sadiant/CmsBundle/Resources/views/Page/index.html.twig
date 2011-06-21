@@ -13,7 +13,9 @@
 
         <ul>
           {% for child in page.children %}
-            <li>{{ child.name }}  {{ child.status }}</li>
+            <li>
+              {{ child.name }}  {{ child.status }}
+            </li>
           {% endfor %}
         </ul>
       </li>
