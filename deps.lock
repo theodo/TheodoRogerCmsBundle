@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-symfony 8b168a142b07992e8261d66bfb0e732fc5824ee1
-=======
 symfony bb7a9d75eac5edda97b7617365155e5796bf54d2
->>>>>>> Stashed changes
 twig 027f4890a76536a6bade74c0e130e5553fc0eeea
 monolog 8492eb74b30429c68beeca22ded788a487d0fd82
 doctrine-common 0ba250a785178d7cdb579ce82151731c04849abf
