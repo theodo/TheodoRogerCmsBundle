@@ -12,6 +12,7 @@
 namespace Sadiant\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sadiant\CmsBundle\Repository\PageRepository;
 
 use Twig_Loader_String;
 use Twig_Error_Syntax;
@@ -76,5 +77,41 @@ EOF;
         }
 
         return $response;
+    }
+
+    /**
+     * New page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function newAction()
+    {
+        
+    }
+    
+    /**
+     * Edit page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function editAction()
+    {
+        
+    }
+    
+    /**
+     * Remove page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function removeAction()
+    {
+
     }
 }

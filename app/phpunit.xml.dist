@@ -31,10 +31,18 @@
             <exclude>
                 <directory>../src/*/*Bundle/Resources</directory>
                 <directory>../src/*/*Bundle/Tests</directory>
+                <directory>../src/*/*Bundle/DataFixtures</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
+                <directory>../src/*/Bundle/*Bundle/DataFixtures</directory>
             </exclude>
         </whitelist>
     </filter>
+
+    <logging>
+        <log type="coverage-html" target="../clover.html"/>
+        <log type="coverage-clover" target="../clover.xml"/>
+        <log type="junit" target="../undercontrol.xml" logIncompleteSkipped="false"/>
+    </logging>
 
 </phpunit>

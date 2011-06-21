@@ -7,7 +7,8 @@ nbproject
 vendor/*
 undercontrol.xml
 clover.xml
-phpunit.xml
+clover.html
+app/phpunit.xml
 app/config/parameters.ini
 app/config/parameters_test.ini
 app/config/dbs.list

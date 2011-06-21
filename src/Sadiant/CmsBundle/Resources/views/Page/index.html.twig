@@ -9,11 +9,13 @@
     <ul id="page-list">
       {% for page in pages %}
       <li>
-        {{ page.name }} {{ page.status }}
+        {% include "SadiantCmsBundle:Page:page-row.html.twig" %}
 
         <ul>
           {% for child in page.children %}
-            <li>{{ child.name }}  {{ child.status }}</li>
+            <li>
+              {% include "SadiantCmsBundle:Page:page-row.html.twig" with {'page': child} %}
+            </li>
           {% endfor %}
         </ul>
       </li>

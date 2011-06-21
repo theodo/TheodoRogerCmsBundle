@@ -12,6 +12,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class PageRepository extends EntityRepository
 {
+    // Homepage slug
+    const SLUG_HOMEPAGE   = 'homepage';
+    
     // Page status
     const STATUS_DRAFT    = 'Draft';
     const STATUS_REVIEWED = 'Reviewed';
