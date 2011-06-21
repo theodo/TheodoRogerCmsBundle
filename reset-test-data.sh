@@ -1,11 +1,16 @@
 #!/bin/bash
 
-# variable fournie par Hudson
+# variable fournie par Jenkins
 [ -n "${SYMFTTPD_PATH}" ] && export PATH="${PATH}:${SYMFTTPD_PATH}"
 set -u
 
 # symlinks
-which mksymlinks2 && mksymlinks2
+if which mksymlinks2; then
+  mksymlinks2
+elif which mksymlinks; then
+  mksymlinks
+fi
+
 ./checksamples.php ln
 
 #test database
