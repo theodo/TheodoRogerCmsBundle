@@ -123,4 +123,21 @@ class SnippetController extends Controller
                   )
                 );
     }
+
+    /**
+     * Supprime un snippet
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-21
+     * @param integer $id
+     */
+    public function deleteAction($id)
+    {
+        $snippet = $this->getEM()
+            ->getRepository('Sadiant\CmsBundle\Entity\Snippet')
+            ->findOneById($id);
+        $this->getEM()->remove($snippet);
+        $this->getEM()->flush();
+        return $this->redirect($this->generateUrl('snippet_list'));
+    }
 }

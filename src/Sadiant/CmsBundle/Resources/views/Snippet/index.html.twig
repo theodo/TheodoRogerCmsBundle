@@ -1,11 +1,14 @@
-<h1>Layouts</h1>
-<a href="{{ url('snippet_new') }}">Niou</a>
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block content %}
+<h1>Snippets</h1>
+<a href="{{ url('snippet_new') }}">Add</a>
 <ul>
     {% for snippet in snippets %}
     <li>
-        <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>
+        <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>          <a href="{{ url('snippet_delete', { 'id': snippet.id }) }}">Delete</a>
     </li>
     {% endfor %}
 </ul>
-<a href="{{ url('snippet_new') }}">Niou</a>
-The End
+<a href="{{ url('snippet_new') }}">Add</a>
+{% endblock %}

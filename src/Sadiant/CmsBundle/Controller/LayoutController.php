@@ -123,4 +123,21 @@ class LayoutController extends Controller
                   )
                 );
     }
+
+    /**
+     * Supprime un layout
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-21
+     * @param integer $id
+     */
+    public function deleteAction($id)
+    {
+        $layout = $this->getEM()
+            ->getRepository('Sadiant\CmsBundle\Entity\Layout')
+            ->findOneById($id);
+        $this->getEM()->remove($layout);
+        $this->getEM()->flush();
+        return $this->redirect($this->generateUrl('layout_list'));
+    }
 }

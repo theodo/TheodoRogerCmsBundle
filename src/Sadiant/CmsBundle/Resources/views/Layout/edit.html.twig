@@ -1,5 +1,9 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
 <h1>{{ title }}</h1>
 
+<a href="{{ url('layout_list') }}">Back to list</a>
+<br />
 Form:
 {% if layout is defined %} 
 <form action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
@@ -10,3 +14,9 @@ Form:
     
     <input type="submit" />
 </form>
+<br />
+<br />
+{% if layout is defined %}
+<a href="{{ url('layout_delete', { 'id': layout.id }) }}">Delete</a>
+{% endif %}
+<a href="{{ url('layout_list') }}">Back to list</a>
