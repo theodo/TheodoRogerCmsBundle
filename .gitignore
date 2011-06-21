@@ -8,7 +8,7 @@ vendor/*
 undercontrol.xml
 clover.xml
 clover.html
-phpunit.xml
+app/phpunit.xml
 app/config/parameters.ini
 app/config/parameters_test.ini
 app/config/dbs.list
