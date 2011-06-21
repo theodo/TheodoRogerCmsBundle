@@ -12,6 +12,7 @@
 namespace Sadiant\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sadiant\CmsBundle\Repository\PageRepository;
 
 class PageController extends Controller
 {
@@ -28,5 +29,41 @@ class PageController extends Controller
         $pages = $this->getDoctrine()->getEntityManager()->getRepository('SadiantCmsBundle:Page')->queryForMainPages()->getResult();
 
         return $this->render('SadiantCmsBundle:Page:index.html.twig', array('pages' => $pages));
+    }
+
+    /**
+     * New page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function newAction()
+    {
+        
+    }
+    
+    /**
+     * Edit page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function editAction()
+    {
+        
+    }
+    
+    /**
+     * Remove page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function removeAction()
+    {
+        
     }
 }

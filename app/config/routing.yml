@@ -1,3 +1,24 @@
 homepage:
     pattern:  /
     defaults: { _controller: SadiantCmsBundle:Page:index }
+
+# Page routing
+admin:
+    pattern:  /admin
+    defaults: { _controller: SadiantCmsBundle:Page:index }
+
+page_list:
+    pattern:  /admin/pages
+    defaults: { _controller: SadiantCmsBundle:Page:index }
+
+page_new:
+    pattern:  /admin/pages/{id}/new
+    defaults: { _controller: SadiantCmsBundle:Page:new }
+
+page_edit:
+    pattern:  /admin/pages/{id}/edit
+    defaults: { _controller: SadiantCmsBundle:Page:edit }
+
+page_remove:
+    pattern:  /admin/pages/{id}/remove
+    defaults: { _controller: SadiantCmsBundle:Page:remove }

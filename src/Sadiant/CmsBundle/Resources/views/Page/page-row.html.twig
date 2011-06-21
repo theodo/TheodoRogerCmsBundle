@@ -1,0 +1,7 @@
+<a href="{{ url('page_edit', {'id' : page.id}) }}">{{ page.name }}</a>
+
+{{ page.status }}
+
+<a href="{{ url('page_new', {'id' : page.id}) }}">{% trans %}Add Child{% endtrans %}</a>
+
+<a href="{{ url('page_remove', {'id' : page.id}) }}">{% trans %}Remove{% endtrans %}</a>
