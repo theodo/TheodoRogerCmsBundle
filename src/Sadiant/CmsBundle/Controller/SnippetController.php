@@ -34,7 +34,7 @@ class SnippetController extends Controller
     public function indexAction()
     {
         $snippets = $this->getEM()
-            ->getRepository('Sadiant\CmsBundle\Entity\Snippet')
+            ->getRepository('SadiantCmsBundle:Snippet')
             ->findAll();
 
         return $this->render('SadiantCmsBundle:Snippet:index.html.twig',
@@ -79,9 +79,12 @@ class SnippetController extends Controller
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
-    public function updateAction()
+    public function updateAction($id)
     {
-        $form = $this->createForm(new SnippetType());
+        $snippet = $this->getEM()
+            ->getRepository('SadiantCmsBundle:Snippet')
+            ->findOneById($id);
+        $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -107,7 +110,7 @@ class SnippetController extends Controller
     public function editAction($id)
     {
         $snippet = $this->getEM()
-            ->getRepository('Sadiant\CmsBundle\Entity\Snippet')
+            ->getRepository('SadiantCmsBundle:Snippet')
             ->findOneById($id);
 
         $form = $this->createForm(new SnippetType(), $snippet);

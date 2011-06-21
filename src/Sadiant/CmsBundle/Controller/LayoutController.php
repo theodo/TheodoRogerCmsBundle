@@ -34,7 +34,7 @@ class LayoutController extends Controller
     public function indexAction()
     {
         $layouts = $this->getEM()
-            ->getRepository('Sadiant\CmsBundle\Entity\Layout')
+            ->getRepository('SadiantCmsBundle:Layout')
             ->findAll();
 
         return $this->render('SadiantCmsBundle:Layout:index.html.twig',
@@ -55,8 +55,7 @@ class LayoutController extends Controller
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 // perform some action, such as save the object to the database
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
@@ -80,16 +79,19 @@ class LayoutController extends Controller
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
-    public function updateAction()
+    public function updateAction($id)
     {
-        $form = $this->createForm(new LayoutType());
+        $layout = $this->getEM()
+            ->getRepository('SadiantCmsBundle:Layout')
+            ->findOneById($id);
+        $form = $this->createForm(new LayoutType(), $layout);
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $layout = $form->getData();
+
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
 

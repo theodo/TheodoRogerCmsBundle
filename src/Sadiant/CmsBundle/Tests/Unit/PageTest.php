@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\Loader;
 use Sadiant\CmsBundle\DataFixtures\ORM\PageData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\ORM\Query;
 
 class PageTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +20,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $kernel = new \AppKernel('dev', true);
+        $kernel = new \AppKernel('test', true);
         $kernel->boot();
         $this->em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
 
@@ -52,7 +53,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve available status
-        $availableStatus = $em->getRepository('Sadiant\CmsBundle\Entity\Page')->getAvailableStatus();
+        $availableStatus = $em->getRepository('SadiantCmsBundle:Page')->getAvailableStatus();
 
         // Test type of return
         $this->assertInternalType('array', $availableStatus);
@@ -73,7 +74,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $aboutPage = $em->getRepository('Sadiant\CmsBundle\Entity\Page')->findOneBy(array('slug' => 'about'));
+        $aboutPage = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('slug' => 'about'));
 
         // Test aboutPage
         $this->assertInstanceOf('Sadiant\CmsBundle\Entity\Page', $aboutPage);
@@ -83,5 +84,54 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $parentPage = $aboutPage->getParent();
         $this->assertInstanceOf('Sadiant\CmsBundle\Entity\Page', $parentPage);
         $this->assertEquals('Homepage', $parentPage->getName());
+    }
+
+    /**
+     * Test getChildren function
+     *
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function testGetChildren()
+    {
+        // Retrieve entity manager
+        $em = $this->getEntityManager();
+
+        // Retrieve "about" page
+        $homepage = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
+
+        // Test hompepage
+        $this->assertInstanceOf('Sadiant\CmsBundle\Entity\Page', $homepage);
+        $this->assertEquals('Homepage', $homepage->getName());
+
+        // Retrieve children pages
+        $childrenPages = $homepage->getChildren();
+        $this->assertInstanceOf('Doctrine\ORM\PersistentCollection', $childrenPages);
+        $this->assertEquals(2, $childrenPages->count());
+    }
+
+    /**
+     * Test queryForMainPages function
+     *
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-20
+     */
+    public function testQueryForMainPages()
+    {
+        // Retrieve entity manager
+        $em = $this->getEntityManager();
+
+        // Retrieve "main" pages
+        $pages = $em->getRepository('SadiantCmsBundle:Page')->queryForMainPages()->getResult(Query::HYDRATE_OBJECT);
+
+        // Check pages
+        $this->assertInternalType('array', $pages);
+        $this->assertEquals(1, count($pages));
+
+        // Check first page
+        $page = reset($pages);
+        $this->assertInstanceOf('Sadiant\CmsBundle\Entity\Page', $page);
+        $this->assertEquals('Homepage', $page->getName());
+        $this->assertTrue(is_null($page->getParentId()));
     }
 }

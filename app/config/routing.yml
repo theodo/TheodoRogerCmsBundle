@@ -3,33 +3,37 @@ homepage:
     defaults: { _controller: SadiantCmsBundle:Page:index }
 
 layout_new:
-    pattern: /layout/new
+    pattern: /admin/layout/new
     defaults: { _controller: SadiantCmsBundle:Layout:new }
 
 layout_update:
-    pattern: /layout/{id}
+    pattern: /admin/layout/{id}
     defaults: { _controller: SadiantCmsBundle:Layout:update }
 
 layout_edit:
-    pattern: /layout/{id}/edit
+    pattern: /admin/layout/{id}/edit
     defaults: { _controller: SadiantCmsBundle:Layout:edit }
 
 layout_list:
-    pattern: /layout
+    pattern: /admin/layout
     defaults: { _controller: SadiantCmsBundle:Layout:index }
 
 snippet_new:
-    pattern: /snippet/new
+    pattern: /admin/snippet/new
     defaults: { _controller: SadiantCmsBundle:Snippet:new }
 
 snippet_update:
-    pattern: /snippet/{id}
+    pattern: /admin/snippet/{id}
     defaults: { _controller: SadiantCmsBundle:Snippet:update }
 
 snippet_edit:
-    pattern: /snippet/{id}/edit
+    pattern: /admin/snippet/{id}/edit
     defaults: { _controller: SadiantCmsBundle:Snippet:edit }
 
 snippet_list:
-    pattern: /snippet
+    pattern: /admin/snippet
     defaults: { _controller: SadiantCmsBundle:Snippet:index }
+
+default:
+    pattern: /visible/{slug}
+    defaults: { _controller: SadiantCmsBundle:Page:visible }

@@ -28,7 +28,7 @@ class PageData implements FixtureInterface
 </div>
 EOF
 );
-        $page1->setLayoutId(1);
+        //$page1->setLayoutId(1);
         $page1->setSlug('homepage');
         $page1->setBreadcrumb('Homepage');
         $page1->setDescription("Cms homepage");
@@ -49,13 +49,45 @@ EOF
 </div>
 EOF
 );
-        $page2->setLayoutId(1);
+        //$page2->setLayoutId(1);
         $page2->setSlug('about');
         $page2->setBreadcrumb('About');
         $page2->setDescription("About page");
         $page2->setStatus(PageRepository::STATUS_PUBLISH);
         $page2->setParent($page1);
         $manager->persist($page2);
+
+        // Create new page (Theodo)
+        $page3 = new Page();
+        $page3->setName('Theodo');
+        $page3->setContent(<<<EOF
+<div id="theodo">
+  <h2>Theodo</h2>
+</div>
+EOF
+);
+        $page3->setSlug('theodo');
+        $page3->setBreadcrumb('Theodo');
+        $page3->setDescription("Theodo page");
+        $page3->setStatus(PageRepository::STATUS_DRAFT);
+        $page3->setParent($page1);
+        $manager->persist($page3);
+
+        // Create new page (Theodo team)
+        $page4 = new Page();
+        $page4->setName('Theodo team');
+        $page4->setContent(<<<EOF
+<div id="theodo-team">
+  <h2>Theodo team</h2>
+</div>
+EOF
+);
+        $page4->setSlug('theodo-team');
+        $page4->setBreadcrumb('Theodo team');
+        $page4->setDescription("Theodo team page");
+        $page4->setStatus(PageRepository::STATUS_DRAFT);
+        $page4->setParent($page3);
+        $manager->persist($page4);
 
         // Save pages
         $manager->flush();

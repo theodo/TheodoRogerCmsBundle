@@ -60,9 +60,9 @@ class Page
     private $children;
 
     /**
-     * @var Sadiant\CmsBundle\Entity\Layout
+     * @var Sadiant\CmsBundle\Entity\Page
      */
-    private $layout;
+    private $parent;
 
     public function __construct()
     {
@@ -258,31 +258,6 @@ class Page
     {
         return $this->children;
     }
-
-    /**
-     * Set layout
-     *
-     * @param Sadiant\CmsBundle\Entity\Layout $layout
-     */
-    public function setLayout(\Sadiant\CmsBundle\Entity\Layout $layout)
-    {
-        $this->layout = $layout;
-    }
-
-    /**
-     * Get layout
-     *
-     * @return Sadiant\CmsBundle\Entity\Layout $layout
-     */
-    public function getLayout()
-    {
-        return $this->layout;
-    }
-    /**
-     * @var Sadiant\CmsBundle\Entity\Page
-     */
-    private $parent;
-
 
     /**
      * Set parent

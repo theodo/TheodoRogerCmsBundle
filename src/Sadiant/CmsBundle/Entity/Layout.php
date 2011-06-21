@@ -29,16 +29,17 @@ class Layout
      */
     private $content_type;
 
-    /**
-     * @var Sadiant\CmsBundle\Entity\Page
-     */
-    private $pages;
 
-    public function __construct()
+    /**
+     * Set Id
+     *
+     * @param integer $id
+     */
+    public function setId($id)
     {
-        $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->id = $id;
     }
-    
+
     /**
      * Get id
      *
@@ -107,25 +108,5 @@ class Layout
     public function getContentType()
     {
         return $this->content_type;
-    }
-
-    /**
-     * Add pages
-     *
-     * @param Sadiant\CmsBundle\Entity\Page $pages
-     */
-    public function addPages(\Sadiant\CmsBundle\Entity\Page $pages)
-    {
-        $this->pages[] = $pages;
-    }
-
-    /**
-     * Get pages
-     *
-     * @return Doctrine\Common\Collections\Collection $pages
-     */
-    public function getPages()
-    {
-        return $this->pages;
     }
 }
