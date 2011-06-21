@@ -2,5 +2,3 @@ app/config/dbs.list.sample
 app/config/dbs.sample.list
 app/config/parameters.sample.ini
 app/config/parameters.ini.sample
-app/config/parameters_test.sample.ini
-app/config/parameters_test.ini.sample

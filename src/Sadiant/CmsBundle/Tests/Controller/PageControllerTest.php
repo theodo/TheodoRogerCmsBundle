@@ -17,6 +17,8 @@ class PageControllerTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('GET', '/');
 
+        print_r("\n> Test \"Pages\" index");
+
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Homepage.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*About.*/', $client->getResponse()->getContent());

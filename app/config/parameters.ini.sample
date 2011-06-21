@@ -8,6 +8,8 @@
     database_user     = theodocms
     database_password = theodocmspwd
 
+    test_database_name = theodocms_test
+
     mailer_transport  = smtp
     mailer_host       = localhost
     mailer_user       =

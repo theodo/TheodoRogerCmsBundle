@@ -20,15 +20,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
+        // Load and boot kernel
         $kernel = new \AppKernel('test', true);
         $kernel->boot();
-        $this->em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
 
-        $loader = new Loader();
-        $loader->addFixture(new PageData());
-        $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->em, $purger);
-        $executor->execute($loader->getFixtures());
+        // Load "test" entity manager
+        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
     }
 
     /**
@@ -49,6 +46,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testAvailableStatus()
     {
+        print_r("\n> Test \"getAvailableStatus\" function");
+
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -70,6 +69,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParent()
     {
+        print_r("\n> Test \"getParent\" function");
+
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -94,6 +95,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
+        print_r("\n> Test \"getChildren\" function");
+
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -118,6 +121,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryForMainPages()
     {
+        print_r("\n> Test \"queryForMainPages\" function");
+
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
