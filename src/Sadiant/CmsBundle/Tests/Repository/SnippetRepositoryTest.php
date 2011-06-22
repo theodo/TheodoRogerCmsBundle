@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Sadiant\CmsBundle\Entity\Layout;
+use Sadiant\CmsBundle\Entity\Snippet;
 use Sadiant\CmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Sadiant\CmsBundle\DataFixtures\ORM\LayoutData;
+use Sadiant\CmsBundle\DataFixtures\ORM\SnippetData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
 
-class LayoutTest extends \PHPUnit_Framework_TestCase
+class SnippetRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -39,13 +39,20 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getPages function
+     * Test snippet count
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-22
-     * Coming soon =)
+     * @since 2011-06-20
      */
-    public function testGetParent()
+    public function testCount()
     {
+        // Retrieve entity manager
+        $em = $this->getEntityManager();
+
+        // Retrieve available snippets
+        $snippets = $em->getRepository('Sadiant\CmsBundle\Entity\Snippet')->findAll();
+
+        // Test number of snippets
+        $this->assertEquals(1, count($snippets));
     }
 }

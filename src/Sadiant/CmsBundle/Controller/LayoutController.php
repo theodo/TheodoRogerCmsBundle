@@ -56,7 +56,6 @@ class LayoutController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                // perform some action, such as save the object to the database
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
@@ -91,7 +90,6 @@ class LayoutController extends Controller
 
             if ($form->isValid()) {
                 $layout = $form->getData();
-
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
 

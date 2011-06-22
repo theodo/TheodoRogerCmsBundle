@@ -12,8 +12,4 @@ use Doctrine\ORM\EntityRepository;
  */
 class LayoutRepository extends EntityRepository
 {
-  public function getTest()
-  {
-    return 'Mathieu';
-  }
 }

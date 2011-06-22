@@ -38,20 +38,9 @@ class SnippetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test snippet count
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * Avoid warning, to delete
      */
-    public function testCount()
+    public function testNothing()
     {
-        // Retrieve entity manager
-        $em = $this->getEntityManager();
-
-        // Retrieve available snippets
-        $snippets = $em->getRepository('Sadiant\CmsBundle\Entity\Snippet')->findAll();
-
-        // Test number of snippets
-        $this->assertEquals(1, count($snippets));
     }
 }

@@ -11,7 +11,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
 
-class LayoutTest extends \PHPUnit_Framework_TestCase
+class LayoutRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -39,13 +39,20 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getPages function
+     * Test layout count
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-22
-     * Coming soon =)
      */
-    public function testGetParent()
+    public function testCount()
     {
+        // Retrieve entity manager
+        $em = $this->getEntityManager();
+
+        // Retrieve available snippets
+        $layouts = $em->getRepository('Sadiant\CmsBundle\Entity\Layout')->findAll();
+
+        // Test number of snippets
+        $this->assertEquals(2, count($layouts));
     }
 }
