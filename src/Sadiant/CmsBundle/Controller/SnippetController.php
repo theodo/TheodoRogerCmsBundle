@@ -138,13 +138,23 @@ class SnippetController extends Controller
      * @since 2011-06-21
      * @param integer $id
      */
-    public function deleteAction($id)
+    public function removeAction($id)
     {
         $snippet = $this->getEM()
             ->getRepository('Sadiant\CmsBundle\Entity\Snippet')
             ->findOneById($id);
-        $this->getEM()->remove($snippet);
-        $this->getEM()->flush();
-        return $this->redirect($this->generateUrl('snippet_list'));
+
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') {
+            $this->getEM()->remove($snippet);
+            $this->getEM()->flush();
+
+            return $this->redirect($this->generateUrl('snippet_list'));
+        }
+
+        return $this->render('SadiantCmsBundle:Snippet:remove.html.twig',
+                array(
+                  'snippet' => $snippet
+                ));
     }
 }

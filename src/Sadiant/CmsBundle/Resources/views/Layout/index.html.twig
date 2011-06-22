@@ -6,7 +6,7 @@
 <ul>
     {% for layout in layouts %}
     <li>
-        <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a> <a href="{{ url('layout_delete', { 'id': layout.id }) }}">Delete</a>
+        <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a> <a href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
     </li>
     {% endfor %}
 </ul>

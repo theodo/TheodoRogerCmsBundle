@@ -6,7 +6,7 @@
 <ul>
     {% for snippet in snippets %}
     <li>
-        <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>          <a href="{{ url('snippet_delete', { 'id': snippet.id }) }}">Delete</a>
+        <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>          <a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
     </li>
     {% endfor %}
 </ul>

@@ -43,9 +43,9 @@ layout_list:
     pattern: /admin/layout
     defaults: { _controller: SadiantCmsBundle:Layout:index }
 
-layout_delete:
-    pattern: /admin/layout/{id}/delete
-    defaults: { _controller: SadiantCmsBundle:Layout:delete }
+layout_remove:
+    pattern: /admin/layout/{id}/remove
+    defaults: { _controller: SadiantCmsBundle:Layout:remove }
 
 snippet_new:
     pattern: /admin/snippet/new
@@ -63,9 +63,9 @@ snippet_list:
     pattern: /admin/snippet
     defaults: { _controller: SadiantCmsBundle:Snippet:index }
 
-snippet_delete:
-    pattern: /admin/snippet/{id}/delete
-    defaults: { _controller: SadiantCmsBundle:Snippet:delete }
+snippet_remove:
+    pattern: /admin/snippet/{id}/remove
+    defaults: { _controller: SadiantCmsBundle:Snippet:remove }
 
 visible:
     pattern: /visible/{slug}

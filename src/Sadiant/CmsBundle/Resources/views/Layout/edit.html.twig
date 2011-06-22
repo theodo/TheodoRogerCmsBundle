@@ -22,7 +22,7 @@ Form:
 <br />
 <br />
 {% if layout is defined %}
-<a href="{{ url('layout_delete', { 'id': layout.id }) }}">Delete</a>
+<a href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
 {% endif %}
 <a href="{{ url('layout_list') }}">Back to list</a>
 {% endblock %}

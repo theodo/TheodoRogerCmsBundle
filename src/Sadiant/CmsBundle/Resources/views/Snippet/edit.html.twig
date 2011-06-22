@@ -15,7 +15,7 @@ Form:
     <input type="submit" />
 </form>
 {% if snippet is defined %}
-<a href="{{ url('snippet_delete', { 'id': snippet.id }) }}">Delete</a>
+<a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
 {% endif %}
 <a href="{{ url('snippet_list') }}">Back to list</a>
 {% endblock %}

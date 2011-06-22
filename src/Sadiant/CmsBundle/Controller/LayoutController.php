@@ -137,13 +137,23 @@ class LayoutController extends Controller
      * @since 2011-06-21
      * @param integer $id
      */
-    public function deleteAction($id)
+    public function removeAction($id)
     {
         $layout = $this->getEM()
             ->getRepository('Sadiant\CmsBundle\Entity\Layout')
             ->findOneById($id);
-        $this->getEM()->remove($layout);
-        $this->getEM()->flush();
-        return $this->redirect($this->generateUrl('layout_list'));
+
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') {
+            $this->getEM()->remove($layout);
+            $this->getEM()->flush();
+
+            return $this->redirect($this->generateUrl('layout_list'));
+        }
+
+        return $this->render('SadiantCmsBundle:Layout:remove.html.twig',
+                array(
+                  'layout' => $layout
+                ));
     }
 }
