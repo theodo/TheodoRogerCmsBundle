@@ -1,7 +1,3 @@
-homepage:
-    pattern:  /
-    defaults: { _controller: SadiantCmsBundle:Page:index }
-
 # Page routing
 admin:
     pattern:  /admin
@@ -30,3 +26,48 @@ page_remove:
 page_expand:
     pattern:  /admin/pages/{id}/expand
     defaults: { _controller: SadiantCmsBundle:Page:expand }
+
+layout_new:
+    pattern: /admin/layouts/new
+    defaults: { _controller: SadiantCmsBundle:Layout:new }
+
+layout_update:
+    pattern: /admin/layouts/{id}
+    defaults: { _controller: SadiantCmsBundle:Layout:update }
+
+layout_edit:
+    pattern: /admin/layouts/{id}/edit
+    defaults: { _controller: SadiantCmsBundle:Layout:edit }
+
+layout_list:
+    pattern: /admin/layouts
+    defaults: { _controller: SadiantCmsBundle:Layout:index }
+
+layout_remove:
+    pattern: /admin/layouts/{id}/remove
+    defaults: { _controller: SadiantCmsBundle:Layout:remove }
+
+snippet_new:
+    pattern: /admin/snippets/new
+    defaults: { _controller: SadiantCmsBundle:Snippet:new }
+
+snippet_update:
+    pattern: /admin/snippets/{id}
+    defaults: { _controller: SadiantCmsBundle:Snippet:update }
+
+snippet_edit:
+    pattern: /admin/snippets/{id}/edit
+    defaults: { _controller: SadiantCmsBundle:Snippet:edit }
+
+snippet_list:
+    pattern: /admin/snippets
+    defaults: { _controller: SadiantCmsBundle:Snippet:index }
+
+snippet_remove:
+    pattern: /admin/snippets/{id}/remove
+    defaults: { _controller: SadiantCmsBundle:Snippet:remove }
+
+visible:
+    pattern: /visible/{slug}
+    defaults: { _controller: SadiantCmsBundle:Page:visible }
+

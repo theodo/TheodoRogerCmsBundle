@@ -28,6 +28,7 @@ class PageData implements FixtureInterface
 </div>
 EOF
 );
+        //$page1->setLayoutId(1);
         $page1->setSlug('homepage');
         $page1->setBreadcrumb('Homepage');
         $page1->setDescription("Cms homepage");
@@ -49,6 +50,7 @@ EOF
 </div>
 EOF
 );
+        //$page2->setLayoutId(1);
         $page2->setSlug('about');
         $page2->setBreadcrumb('About');
         $page2->setDescription("About page");

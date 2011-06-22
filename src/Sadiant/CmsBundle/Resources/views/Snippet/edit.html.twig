@@ -1,0 +1,21 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<a href="{{ url('snippet_list') }}">Back to list</a>
+<br />
+Form:
+{% if snippet is defined %} 
+<form action="{{ url('snippet_update', { 'id': snippet.id }) }}" method="post" {{ form_enctype(form) }}>
+{% else %}
+<form action="{{ url('snippet_new') }}" method="post" {{ form_enctype(form) }}>
+{% endif %}
+    {{ form_widget(form) }}
+    
+    <input type="submit" />
+</form>
+{% if snippet is defined %}
+<a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
+{% endif %}
+<a href="{{ url('snippet_list') }}">Back to list</a>
+{% endblock %}

@@ -42,4 +42,8 @@ Sadiant\CmsBundle\Entity\Page:
         children:
             targetEntity: Page
             mappedBy: parent
-            
+#    manyToOne:
+#        layout:
+#            targetEntity: Layout
+#            mapped_by: layout_id
+#            inversedBy: pages

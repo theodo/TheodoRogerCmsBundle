@@ -1,16 +1,16 @@
 <ul id="navigation">
     <li class="current ">
-        <a href="/admin/pages">Content</a>
+        <a href="{{ url('page_list') }}">Content</a>
         <ul id="nav_sub">
             <li>
-                <a class="current" href="/admin/pages">
+                <a class="current" href="{{ url('page_list') }}">
                     <span>Pages</span>
                 </a>
             </li>
         </ul>
     </li>
     <li class="">
-        <a href="/admin/layouts">Design</a>
+        <a href="{{ url('layout_list') }}">Design</a>
     </li>
     <li class="">
         <a href="/admin/preferences">Settings</a>

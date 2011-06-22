@@ -1,0 +1,15 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block page_title %}
+Remove snippet
+{% endblock %}
+
+{% block content %}
+
+Are you sure you want to <strong>permanently remove</strong> the following snippet:
+{{ snippet.name }}
+<form action="{{ url('snippet_remove', { 'id': snippet.id }) }}" method="post" }}>
+    <input type="submit" />
+    <a href="{{ url('snippet_list') }}">Cancel</a>
+</form>
+{% endblock %}

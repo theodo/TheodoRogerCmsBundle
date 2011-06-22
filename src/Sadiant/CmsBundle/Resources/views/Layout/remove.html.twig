@@ -1,0 +1,15 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block page_title %}
+Remove layout
+{% endblock %}
+
+{% block content %}
+
+Are you sure you want to <strong>permanently remove</strong> the following layout:
+{{ layout.name }}
+<form action="{{ url('layout_remove', { 'id': layout.id }) }}" method="post" }}>
+    <input type="submit" />
+    <a href="{{ url('layout_list') }}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block content %}
+<h1>Layouts</h1>
+<a href="{{ url('layout_new') }}">Add</a>
+<ul>
+    {% for layout in layouts %}
+    <li>
+        <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a> <a href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ url('layout_new') }}">Add</a>
+<br/>
+<br />
+{% endblock %}

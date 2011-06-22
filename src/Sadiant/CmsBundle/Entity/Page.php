@@ -58,6 +58,11 @@ class Page
     private $parent_id;
 
     /**
+     * @var integer $layout_id
+     */
+    private $layout_id;
+
+    /**
      * @var Sadiant\CmsBundle\Entity\Page
      */
     private $children;
@@ -220,6 +225,26 @@ class Page
     public function getParentId()
     {
         return $this->parent_id;
+    }
+
+    /**
+     * Set layout_id
+     *
+     * @param integer $layoutId
+     */
+    public function setLayoutId($layoutId)
+    {
+        $this->layout_id = $layoutId;
+    }
+
+    /**
+     * Get layout_id
+     *
+     * @return integer $layoutId
+     */
+    public function getLayoutId()
+    {
+        return $this->layout_id;
     }
 
     /**
