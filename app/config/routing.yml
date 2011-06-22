@@ -1,8 +1,4 @@
-homepage:
-    pattern:  /
-    defaults: { _controller: SadiantCmsBundle:Page:homepage }
-
-# Page routing
+# Admin routing
 admin:
     pattern:  /admin
     defaults: { _controller: SadiantCmsBundle:Page:index }
@@ -71,7 +67,7 @@ snippet_remove:
     pattern: /admin/snippets/{id}/remove
     defaults: { _controller: SadiantCmsBundle:Snippet:remove }
 
-visible:
-    pattern: /visible/{slug}
-    defaults: { _controller: SadiantCmsBundle:Page:visible }
+page:
+    pattern: /{slug}
+    defaults: { _controller: SadiantCmsBundle:Frontend:page }
 

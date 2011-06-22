@@ -64,9 +64,17 @@ EOF
         $page3 = new Page();
         $page3->setName('Theodo');
         $page3->setContent(<<<EOF
+{% extends 'layout:normal' %}
+
+{% block content %} 
 <div id="theodo">
   <h2>Theodo</h2>
 </div>
+{% endblock %}
+
+{% block footer %}
+Copyright Theodo 2011
+{% endblock %}
 EOF
 );
         $page3->setSlug('theodo');
