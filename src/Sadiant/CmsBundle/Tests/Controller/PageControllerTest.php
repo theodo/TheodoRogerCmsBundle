@@ -14,7 +14,7 @@ class PageControllerTest extends WebTestCase
      */
     private $em;
 
-    public function __construct()
+    public function setUp()
     {
         // Load and boot kernel
         $kernel = new \AppKernel('test', true);
@@ -139,23 +139,7 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*New page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
-        
-        // Submit form with error
-        $crawler = $client->submit($form, array( 
-            'page[parent_id]'  => '2222',
-            'page[name]'       => 'Functional test',
-            'page[slug]'       => 'functional-test',
-            'page[breadcrumb]' => 'Functional test',
-            'page[content]'    => '<p>Functional test page content</p>',
-            'page[status]'     => PageRepository::STATUS_PUBLISH
-        ));
-        
-        // Test return
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*New page.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*&quot;id&quot; &quot;2222&quot; does&#039;nt exists.*/', $client->getResponse()->getContent());
-        
+
         // Submit valid form
         $crawler = $client->submit($form, array( 
             'page[parent_id]'  => $this->em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
@@ -166,6 +150,7 @@ class PageControllerTest extends WebTestCase
             'page[status]'     => PageRepository::STATUS_PUBLISH
         ));
 
+        
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();

@@ -19,7 +19,7 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private $em;
 
-    public function __construct()
+    public function setUp()
     {
         // Load and boot kernel
         $kernel = new \AppKernel('test', true);
