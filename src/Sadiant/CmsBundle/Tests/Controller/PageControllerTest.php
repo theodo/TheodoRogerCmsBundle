@@ -15,7 +15,7 @@ class PageControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/admin');
 
         print_r("\n> Test \"Pages\" index");
 

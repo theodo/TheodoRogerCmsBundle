@@ -29,6 +29,9 @@ Sadiant\CmsBundle\Entity\Page:
         parent_id:
             type: integer
             nullable: true
+        published_at:
+            type: date
+            nullable: true
 #        layout_id:
 #            type: integer
     manyToOne:

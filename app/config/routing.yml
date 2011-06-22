@@ -19,6 +19,14 @@ page_edit:
     pattern:  /admin/pages/{id}/edit
     defaults: { _controller: SadiantCmsBundle:Page:edit }
 
+page_update:
+    pattern:  /admin/pages/{id}/update
+    defaults: { _controller: SadiantCmsBundle:Page:update }
+
 page_remove:
     pattern:  /admin/pages/{id}/remove
     defaults: { _controller: SadiantCmsBundle:Page:remove }
+
+page_expand:
+    pattern:  /admin/pages/{id}/expand
+    defaults: { _controller: SadiantCmsBundle:Page:expand }

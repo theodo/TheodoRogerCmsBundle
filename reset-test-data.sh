@@ -16,6 +16,8 @@ fi
 #test database
 ./dbtool.php
 
+./app/console doctrine:generate:entities Sadiant
+
 ./app/console doctrine:database:drop --force --connection=test
 ./app/console doctrine:database:create --connection=test
 ./app/console doctrine:schema:create --em=test
