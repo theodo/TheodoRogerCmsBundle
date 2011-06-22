@@ -87,6 +87,5 @@ class PageTest extends \PHPUnit_Framework_TestCase
         // Retrieve children pages
         $childrenPages = $homepage->getChildren();
         $this->assertInstanceOf('Doctrine\ORM\PersistentCollection', $childrenPages);
-        $this->assertEquals(2, $childrenPages->count());
     }
 }
