@@ -52,6 +52,6 @@ class SnippetTest extends \PHPUnit_Framework_TestCase
         $snippets = $em->getRepository('Sadiant\CmsBundle\Entity\Snippet')->findAll();
 
         // Test number of snippets
-        $this->assertEquals(0, count($snippets));
+        $this->assertEquals(1, count($snippets));
     }
 }

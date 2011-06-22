@@ -1,5 +1,6 @@
 {% extends "SadiantCmsBundle::layout.html.twig" %}
 
+{% block content %}
 <h1>{{ title }}</h1>
 <a href="{{ url('snippet_list') }}">Back to list</a>
 <br />
@@ -17,3 +18,4 @@ Form:
 <a href="{{ url('snippet_delete', { 'id': snippet.id }) }}">Delete</a>
 {% endif %}
 <a href="{{ url('snippet_list') }}">Back to list</a>
+{% endblock %}
