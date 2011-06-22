@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "# Build entities";
+app/console doctrine:generate:entities Sadiant
+
 echo "# Load dev environnement";
 
 app/console doctrine:database:drop --force

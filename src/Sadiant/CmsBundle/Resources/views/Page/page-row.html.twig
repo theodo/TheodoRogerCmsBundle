@@ -1,3 +1,9 @@
+{% if page.children|length and page.parent %}
+  <a class="expandable" href="{{ url('page_expand', {'id' : page.id}) }}">
+    {% trans %}Expand{% endtrans %}
+  </a>
+{% endif %}
+
 <a href="{{ url('page_edit', {'id' : page.id}) }}">{{ page.name }}</a>
 
 {{ page.status }}

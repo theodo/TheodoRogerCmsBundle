@@ -278,4 +278,29 @@ class Page
     {
         return $this->parent;
     }
+    /**
+     * @var date $published_at
+     */
+    private $published_at;
+
+
+    /**
+     * Set published_at
+     *
+     * @param date $publishedAt
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->published_at = $publishedAt;
+    }
+
+    /**
+     * Get published_at
+     *
+     * @return date $publishedAt
+     */
+    public function getPublishedAt()
+    {
+        return $this->published_at;
+    }
 }

@@ -33,6 +33,7 @@ EOF
         $page1->setBreadcrumb('Homepage');
         $page1->setDescription("Cms homepage");
         $page1->setStatus(PageRepository::STATUS_PUBLISH);
+        $page1->setPublishedAt(new \DateTime('now'));
 
         $manager->persist($page1);
 
@@ -55,6 +56,8 @@ EOF
         $page2->setDescription("About page");
         $page2->setStatus(PageRepository::STATUS_PUBLISH);
         $page2->setParent($page1);
+        $page2->setPublishedAt(new \DateTime('now'));
+
         $manager->persist($page2);
 
         // Create new page (Theodo)

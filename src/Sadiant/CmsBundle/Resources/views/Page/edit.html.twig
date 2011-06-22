@@ -1,0 +1,20 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+{% block page_title "Pages" %}
+
+{% block content %}
+  <div>
+    <h1>{% trans %}Pages{% endtrans %}</h1>
+
+    {% if page is defined %} 
+    <form action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
+    {% else %}
+    <form action="{{ url('page_new', { 'id': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
+    {% endif %}
+    
+      {{ form_widget(form) }}
+       
+      <input type="submit" />
+    </form>
+  </div>
+{% endblock %}

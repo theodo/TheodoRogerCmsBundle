@@ -13,6 +13,8 @@ namespace Sadiant\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sadiant\CmsBundle\Repository\PageRepository;
+use Sadiant\CmsBundle\Form\PageType;
+use Sadiant\CmsBundle\Entity\Page;
 
 use Twig_Loader_String;
 use Twig_Error_Syntax;
@@ -31,7 +33,7 @@ class PageController extends Controller
         // Retrieve pages
         $pages = $this->getDoctrine()->getEntityManager()->getRepository('SadiantCmsBundle:Page')->queryForMainPages()->getResult();
 
-        return $this->render('SadiantCmsBundle:Page:index.html.twig', array('pages' => $pages));
+        return $this->render('SadiantCmsBundle:Page:index.html.twig',array('pages' => $pages));
     }
 
     /**
@@ -88,7 +90,29 @@ EOF;
      */
     public function newAction()
     {
+        // Retrieve request
+        $request = $this->getRequest();
+
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
         
+        // Retrieve parent page
+        $parent_page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
+
+        // Create new page
+        $page = new Page();
+        $page->setParentId($parent_page->getId());
+        
+        // Create form
+        $form = $this->createForm(new PageType($em), $page);
+
+        return $this->render(
+            'SadiantCmsBundle:Page:edit.html.twig',
+            array(
+                'form' => $form->createView(),
+                'parent_page' => $parent_page
+            )
+        );
     }
     
     /**
@@ -100,7 +124,7 @@ EOF;
      */
     public function editAction()
     {
-        
+
     }
     
     /**
