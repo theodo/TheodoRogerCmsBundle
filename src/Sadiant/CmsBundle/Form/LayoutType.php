@@ -14,7 +14,7 @@ class LayoutType extends AbstractType
     {
         $builder->add('id', 'hidden');
         $builder->add('name', 'text');
-        $builder->add('content', 'text');
+        $builder->add('content', 'textarea');
         $builder->add('content_type', 'text');
     }
 

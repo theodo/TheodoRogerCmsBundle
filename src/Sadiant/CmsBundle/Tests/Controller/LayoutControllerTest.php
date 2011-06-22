@@ -20,7 +20,7 @@ class LayoutControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Layouts.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*normal.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*Delete.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Remove.*/', $client->getResponse()->getContent());
     }
 
     /**

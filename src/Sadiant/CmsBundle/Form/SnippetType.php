@@ -14,7 +14,7 @@ class SnippetType extends AbstractType
     {
         $builder->add('id', 'hidden');
         $builder->add('name', 'text');
-        $builder->add('content', 'text');
+        $builder->add('content', 'textarea');
     }
 
     public function getDefaultOptions(array $options)
