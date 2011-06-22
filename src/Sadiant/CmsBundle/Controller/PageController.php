@@ -220,4 +220,39 @@ EOF;
     {
 
     }
+    
+    /**
+     * Homepage action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function homepageAction()
+    {
+        // Update twig loader
+        $twigEnvironment = $this->get('twig');
+        $oldLoader = $twigEnvironment->getLoader();
+        $twigEngine = $this->get('templating');
+        
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page
+        $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE));
+
+        $twigEnvironment->setLoader(new Twig_Loader_String());
+        try
+        {
+          $response = $twigEngine->renderResponse($page->getContent());
+          $twigEnvironment->setLoader($oldLoader);
+        }
+        catch (Twig_Error_Syntax $e)
+        {
+          $twigEnvironment->setLoader($oldLoader);
+          throw $e;
+        }
+
+        return $response;
+    }
 }
