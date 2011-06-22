@@ -193,7 +193,7 @@ class PageControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/admin');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
-        $this->em->flush();
+
         $this->em->getConnection()->rollBack();
     }
 }
