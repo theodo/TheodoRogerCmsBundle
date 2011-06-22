@@ -96,6 +96,14 @@ class LayoutController extends Controller
                 return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
             }
         }
+
+        return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
+                array(
+                    'title' => 'Edition '.$layout->getName(),
+                    'layout' => $layout,
+                    'form' => $form->createView()
+                  )
+                );
     }
 
     /**

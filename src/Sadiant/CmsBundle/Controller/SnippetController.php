@@ -98,6 +98,13 @@ class SnippetController extends Controller
                 return $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
             }
         }
+        return $this->render('SadiantCmsBundle:Snippet:edit.html.twig',
+            array(
+                'title' => 'Edition '.$snippet->getName(),
+                'snippet' => $snippet,
+                'form' => $form->createView()
+            )
+        );
     }
 
     /**
