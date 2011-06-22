@@ -54,9 +54,28 @@ class PageController extends Controller
         // Create new page
         $page = new Page();
         $page->setParentId($parent_page->getId());
+        $page->setParent($parent_page);
         
         // Create form
-        $form = $this->createForm(new PageType($em), $page);
+        $form = $this->createForm(new PageType(), $page);
+        
+        // Request is post, bind and save form
+        if ($request->getMethod() == 'POST')
+        {
+            // Bind form
+            $form->bindRequest($request);
+
+            // Check form
+            if ($form->isValid())
+            {
+                // Perform some action, such as save the object to the database
+                $page = $form->getData();
+                $em->persist($page);
+                $em->flush(); 
+
+                return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+            }
+        }
 
         return $this->render(
             'SadiantCmsBundle:Page:edit.html.twig',
@@ -76,7 +95,64 @@ class PageController extends Controller
      */
     public function editAction()
     {
+        // Retrieve request
+        $request = $this->getRequest();
 
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page
+        $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
+        
+        // Create form
+        $form = $this->createForm(new PageType(false), $page);
+        
+        return $this->render(
+            'SadiantCmsBundle:Page:edit.html.twig',
+            array(
+                'form' => $form->createView(),
+                'page' => $page
+            )
+        );
+    }
+    
+    /**
+     * Update page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function updateAction()
+    {
+        // Retrieve request
+        $request = $this->getRequest();
+
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page
+        $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
+        
+        // Create form
+        $form = $this->createForm(new PageType(false), $page);
+
+        // Request is post
+        if ($request->getMethod() == 'POST')
+        {
+            // Bind form
+            $form->bindRequest($request);
+ 
+            // Check form and save object
+            if ($form->isValid())
+            {
+                $page = $form->getData();
+                $em->persist($page);
+                $em->flush();
+            }
+        }
+
+        return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
     }
     
     /**

@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
+    - { resource: '@SadiantCmsBundle/Resources/config/services.yml' }
 
 framework:
     secret:          %secret%

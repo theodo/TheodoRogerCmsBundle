@@ -10,15 +10,28 @@ use Sadiant\CmsBundle\Repository\PageRepository;
 
 class PageType extends AbstractType
 {
-    protected $em;
+    protected $is_new;
 
-    public function __construct($em)
+    /**
+     * Form constructor
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
+    public function __construct($is_new = true)
     {
-        $this->em = $em;
+        $this->is_new = $is_new;
     }
     
+    /**
+     * Form builder
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
     public function buildForm(FormBuilder $builder, array $options)
-    {   
+    {
+        // Set inputs
         $builder->add('parent_id', 'hidden', array('required' => true));
         $builder->add('name', 'text', array('required' => true));
         $builder->add('slug', 'text', array('required' => true));
@@ -26,14 +39,23 @@ class PageType extends AbstractType
         $builder->add('description', 'text', array('required' => false));
         $builder->add('content', 'textarea', array('required' => true));
         $builder->add('status', 'choice', array(
-            'choices'   => $this->em->getRepository('SadiantCmsBundle:Page')->getAvailableStatus(),
+            'choices'   => PageRepository::getAvailableStatus(),
             'required'  => true
         ));
         
-        // @TODO à afficher uniquement si "edit"
-        $builder->add('published_at', 'date', array('required' => false));
+        // Display published_at date only in edition
+        if (!$this->is_new)
+        {
+            $builder->add('published_at', 'date', array('required' => false));
+        }
     }
    
+    /**
+     * Form default options
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-21
+     */
     public function getDefaultOptions(array $options)
     {
         return array(

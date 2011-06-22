@@ -5,18 +5,26 @@
   </a>
 {% endif %}
 #}
+
 <tr class="{% if page.children %}children_visible{% else %}no_children{% endif %} node page level_{{ level }}">
     <td class="page">
-      <a href="{{ url('page_edit', {'id' : page.id}) }}">{{ page.name }}</a>
+      <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
+        {{ page.name }}
+      </a>
     </td>
     <td class="status">
       {{ page.status }}
     </td>
     <td class="add_child">
-      <a href="{{ url('page_new', {'id' : page.id}) }}">{% trans %}Add Child{% endtrans %}</a>
+      <a id="new-{{ page.slug }}-child" href="{{ url('page_new', {'id' : page.id}) }}">
+        {% trans %}Add Child{% endtrans %}
+      </a>
+
     </td>
     <td class="remove">
-      <a href="{{ url('page_remove', {'id' : page.id}) }}">{% trans %}Remove{% endtrans %}</a>
+      <a id="remove-{{ page.slug }}" href="{{ url('page_remove', {'id' : page.id}) }}">
+        {% trans %}Remove{% endtrans %}
+      </a>
     </td>
 </tr>
 {% for child in page.children %}

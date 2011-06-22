@@ -4,11 +4,11 @@
 
 {% block content %}
   <div>
-    <h1>{% trans %}Pages{% endtrans %}</h1>
-
     {% if page is defined %} 
+    <h1>{% trans %}Edit page{% endtrans %}</h1>
     <form action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
+    <h1>{% trans %}New page{% endtrans %}</h1>
     <form action="{{ url('page_new', { 'id': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
     
