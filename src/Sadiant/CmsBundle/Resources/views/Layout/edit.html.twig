@@ -15,23 +15,11 @@ Form:
 {% else %}
 <form action="{{ url('layout_new') }}" method="post" {{ form_enctype(form) }}>
 {% endif %}
-    <div>
-        {{ form_label(form.name) }}
-        {{ form_errors(form.name) }}
-        {{ form_widget(form.name) }}
-    </div>
-    <div>
-        {{ form_label(form.content) }}
-        {{ form_errors(form.content) }}
-        {{ form_widget(form.content) }}
-    </div>
-    <div>
-        {{ form_label(form.content_type) }}
-        {{ form_errors(form.content_type) }}
-        {{ form_widget(form.content_type) }}
-    </div>
+    {{ form_widget(form) }}
     
-    <input type="submit" />
+    <input type="submit" value="Save Changes" name="lala" />
+    <input type="submit" value="Save and Continue Editing" name="lili" />
+    <a href="{{ url('layout_list') }}">Cancel</a>
 </form>
 <br />
 <br />

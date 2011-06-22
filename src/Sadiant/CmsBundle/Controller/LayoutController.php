@@ -73,6 +73,18 @@ class LayoutController extends Controller
     }
 
     /**
+     * TODO
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-22
+     * @param type $form
+     * @param type $request
+     */
+    public function processForm($form, $request)
+    {
+    }
+
+    /**
      * Update un Layout
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
