@@ -8,10 +8,20 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <a href="{{ url('page_list') }}">Pages</a> <a href="{{ url('layout_list') }}">Layouts</a> <a href="{{ url('snippet_list') }}">Snippets</a> 
-        <div id="container">
-          {% block content %}{% endblock %}
-        </div>
+        <div id="page">
+            <div id="header">
+                {% include "SadiantCmsBundle::site_links.html.twig" %}
+                {% include "SadiantCmsBundle::navigation.html.twig" %}
+                <div id="header_bottom">
+                    <div></div>
+                </div>
+            </div>
+            <div id="main">
+                <div id="content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+         </div>
 
         {% block javascripts %}{% endblock %}
     </body>

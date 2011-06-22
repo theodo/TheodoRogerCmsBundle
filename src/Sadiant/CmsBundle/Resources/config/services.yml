@@ -1,0 +1,9 @@
+parameters:
+    cms_services.validator.exists.class: Sadiant\CmsBundle\Validator\Exists
+
+services:
+    cms_services.validator.exists:
+        class:     Sadiant\CmsBundle\Validator\ExistsValidator
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+             - { name: validator.constraint_validator, alias: validator.exists }

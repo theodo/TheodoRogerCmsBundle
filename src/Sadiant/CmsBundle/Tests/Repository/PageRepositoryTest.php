@@ -3,6 +3,7 @@
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
 use Sadiant\CmsBundle\Entity\Page;
+use Sadiant\CmsBundle\Repository\PageRepository;
 use Sadiant\CmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
@@ -18,7 +19,7 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private $em;
 
-    public function __construct()
+    public function setUp()
     {
         // Load and boot kernel
         $kernel = new \AppKernel('test', true);
@@ -48,11 +49,8 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         print_r("\n> Test \"getAvailableStatus\" function");
 
-        // Retrieve entity manager
-        $em = $this->getEntityManager();
-
         // Retrieve available status
-        $availableStatus = $em->getRepository('SadiantCmsBundle:Page')->getAvailableStatus();
+        $availableStatus = PageRepository::getAvailableStatus();
 
         // Test type of return
         $this->assertInternalType('array', $availableStatus);

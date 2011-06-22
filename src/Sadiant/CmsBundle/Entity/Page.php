@@ -2,7 +2,15 @@
 
 namespace Sadiant\CmsBundle\Entity;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+
+use Sadiant\CmsBundle\Repository\PageRepository;
+use Sadiant\CmsBundle\Validator\Unique;
+use Sadiant\CmsBundle\Validator\Exists;
 
 /**
  * Sadiant\CmsBundle\Entity\Page
@@ -303,4 +311,32 @@ class Page
     {
         return $this->published_at;
     }
+    
+    /**
+     * Page validator
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-22
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        // Parent validator: not null and exists
+        $metadata->addPropertyConstraint('parent_id', new NotBlank());
+        $metadata->addPropertyConstraint('parent_id', new Exists(array('entity' => 'SadiantCmsBundle:Page', 'property' => 'id')));
+        
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+
+        // Slug validator: not null and unique
+        $metadata->addPropertyConstraint('slug', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('slug'))));
+
+        // Content validator: not null
+        $metadata->addPropertyConstraint('content', new NotBlank());
+
+        // Status validator: not null and available
+        $metadata->addPropertyConstraint('status', new NotBlank());
+        $metadata->addPropertyConstraint('status', new Choice(array('choices' => PageRepository::getAvailableStatus())));
+    }
+
 }

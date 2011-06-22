@@ -2,15 +2,9 @@
 
 <!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
-    backupGlobals               = "false"
-    backupStaticAttributes      = "false"
     colors                      = "true"
-    convertErrorsToExceptions   = "true"
-    convertNoticesToExceptions  = "true"
-    convertWarningsToExceptions = "true"
-    processIsolation            = "false"
+    processIsolation            = "true"
     stopOnFailure               = "false"
-    syntaxCheck                 = "false"
     bootstrap                   = "bootstrap.php.cache" >
 
     <testsuites>
@@ -32,16 +26,20 @@
                 <directory>../src/*/*Bundle/Resources</directory>
                 <directory>../src/*/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/DataFixtures</directory>
+                <directory>../src/*/*Bundle/DependencyInjection</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
                 <directory>../src/*/Bundle/*Bundle/DataFixtures</directory>
+                <directory>../src/*/*Bundle/DependencyInjection</directory>
             </exclude>
         </whitelist>
     </filter>
 
     <logging>
+<!--
         <log type="coverage-html" target="../clover.html"/>
         <log type="coverage-clover" target="../clover.xml"/>
+-->
         <log type="junit" target="../undercontrol.xml" logIncompleteSkipped="false"/>
     </logging>
 

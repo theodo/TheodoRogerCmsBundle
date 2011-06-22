@@ -3,23 +3,20 @@
 {% block page_title "Pages" %}
 
 {% block content %}
-  <div>
-    <h1>{% trans %}Pages{% endtrans %}</h1>
-
-    <ul id="page-list">
-      {% for page in pages %}
-      <li>
-        {% include "SadiantCmsBundle:Page:page-row.html.twig" %}
-
-        <ul>
-          {% for child in page.children %}
-            <li>
-              {% include "SadiantCmsBundle:Page:page-row.html.twig" with {'page': child} %}
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+    <div class="outset">
+        <table class="index" summary="{% trans %}Page hierarchy of the current site{% endtrans %}">
+            <thead>
+                <tr>
+                    <th class="page">{% trans %}Page{% endtrans %}</th>
+                    <th class="status">{% trans %}Status{% endtrans %}</th>
+                    <th class="modify" colspan="2">{% trans %}Modify{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for page in pages %}
+                {% include "SadiantCmsBundle:Page:page-row.html.twig" with {'page': page, 'level': 0} %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
