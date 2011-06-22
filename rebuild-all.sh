@@ -17,4 +17,6 @@ app/console doctrine:database:create --connection=test
 app/console doctrine:schema:create --em=test
 app/console doctrine:fixtures:load --em=test
 
+app/console cache:clear
+
 phpunit -c app
