@@ -319,11 +319,7 @@ class Page
      * @since 2011-06-22
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        // Parent validator: not null and exists
-        $metadata->addPropertyConstraint('parent_id', new NotBlank());
-        $metadata->addPropertyConstraint('parent_id', new Exists(array('entity' => 'SadiantCmsBundle:Page', 'property' => 'id')));
-        
+    {        
         // Name validator: not null
         $metadata->addPropertyConstraint('name', new NotBlank());
 
