@@ -24,8 +24,25 @@
                 </tr>
             </thead>
             <tbody>
-            {% include "SadiantCmsBundle:Page:page-list.html.twig" with {'pages': pages, 'level' : 0} %}
+              {% if pages|length == 0 %}
+                <td colspan="4" class="empty">{% trans %}No pages{% endtrans %}</td>
+              {% else %}
+                {% include "SadiantCmsBundle:Page:page-list.html.twig" with {'pages': pages, 'level' : 0} %}
+              {% endif %}
             </tbody>
         </table>
     </div>
+
+    {% if pages|length == 0 %}
+      <div id="actions">
+        <ul>
+          <li>
+            <a href="{{ url('page_new', {'id' : 'homepage'}) }}">
+              <img src="/bundles/sadiantcms/images/admin/plus.png" alt="">
+              New Homepage
+            </a>
+          </li>
+        </ul>
+      </div>
+    {% endif %}
 {% endblock %}

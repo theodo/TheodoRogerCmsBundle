@@ -53,8 +53,25 @@ class PageController extends Controller
 
         // Create new page
         $page = new Page();
-        $page->setParentId($parent_page->getId());
-        $page->setParent($parent_page);
+        
+        // Create the homepage
+        if ($parent_page)
+        {
+            $page->setParentId($parent_page->getId());
+            $page->setParent($parent_page);  
+        }
+        else if ($request->getMethod() != 'POST')
+        {
+            $page->setName('Homepage');
+            $page->setBreadcrumb('Homepage');
+            $page->setSlug('homepage');
+
+            $parent_page = 'homepage';
+        }
+        else if ($request->getMethod() == 'POST')
+        {
+            $parent_page = 'homepage';
+        }
         
         // Initialize form hasErros
         $hasErrors = false;
