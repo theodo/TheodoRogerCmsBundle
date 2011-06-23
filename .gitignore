@@ -15,4 +15,4 @@ app/config/dbs.list
 app/config/create_dbs.sql
 app/bootstrap_cache.php.cache
 src/Sadiant/CmsBundle/Entity/*.php~
-
+web/bundles/*

@@ -16,10 +16,6 @@ use Sadiant\CmsBundle\Repository\PageRepository;
 use Sadiant\CmsBundle\Form\PageType;
 use Sadiant\CmsBundle\Entity\Page;
 
-use Twig_Loader_Array;
-use Twig_Loader_String;
-use Twig_Error_Syntax;
-
 class PageController extends Controller
 {
     /**
@@ -35,56 +31,6 @@ class PageController extends Controller
         $pages = $this->getDoctrine()->getEntityManager()->getRepository('SadiantCmsBundle:Page')->queryForMainPages()->getResult();
 
         return $this->render('SadiantCmsBundle:Page:index.html.twig',array('pages' => $pages));
-    }
-
-    /**
-     * Test for page display
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-21
-     */
-    public function visibleAction($slug)
-    {
-        $page = $this->getDoctrine()
-                ->getEntityManager()
-                ->getRepository('SadiantCmsBundle:Page')
-                ->findOneBySlug($slug);
-
-        //on modifie le loader de twig
-        $twig_environment = $this->get('twig');
-        $old_loader = $twig_environment->getLoader();
-        $twig_engine = $this->get('templating');
-
-        //$layout = $page->getLayout()->getContent();
-        $layout =  $this->getDoctrine()
-                ->getEntityManager()
-                ->getRepository('SadiantCmsBundle:Layout')
-                ->findOneById(1)->getContent();
-        $page_content = $page->getContent();
-        $content = array();
-        $content['layout'] = <<<EOF
-HEADER
-{% block lala %} lulu {% endblock %}
-FOOTER
-EOF;
-        $content['index'] = <<<EOF
-{% extends 'layout' %}
-{% block lala %} lala {% endblock %}
-EOF;
-
-        $twig_environment->setLoader(new Twig_Loader_Array($content));
-        try
-        {
-          $response = $twig_engine->renderResponse('index');
-          $twig_environment->setLoader($old_loader);
-        }
-        catch (Twig_Error_Syntax $e)
-        {
-          $twig_environment->setLoader($old_loader);
-          throw $e;
-        }
-
-        return $response;
     }
 
     /**
@@ -110,6 +56,9 @@ EOF;
         $page->setParentId($parent_page->getId());
         $page->setParent($parent_page);
         
+        // Initialize form hasErros
+        $hasErrors = false;
+        
         // Create form
         $form = $this->createForm(new PageType(), $page);
         
@@ -127,15 +76,28 @@ EOF;
                 $em->persist($page);
                 $em->flush(); 
 
-                return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('page_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                }
+
+                return $redirect;
+            }
+            else
+            {
+                $hasErrors = true;
             }
         }
 
         return $this->render(
             'SadiantCmsBundle:Page:edit.html.twig',
             array(
-                'form' => $form->createView(),
-                'parent_page' => $parent_page
+                'form'        => $form->createView(),
+                'parent_page' => $parent_page,
+                'hasErrors'   => $hasErrors,
+                'isNew'       => true
             )
         );
     }
@@ -157,6 +119,12 @@ EOF;
         
         // Retrieve page
         $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
+        
+        // Set published at
+        if (!$page->getPublishedAt())
+        {
+            $page->setPublishedAt(new \DateTime('now'));
+        }
         
         // Create form
         $form = $this->createForm(new PageType(false), $page);
@@ -191,6 +159,9 @@ EOF;
         // Create form
         $form = $this->createForm(new PageType(false), $page);
 
+        // Initialize form hasErros
+        $hasErrors = false;
+
         // Request is post
         if ($request->getMethod() == 'POST')
         {
@@ -203,10 +174,30 @@ EOF;
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();
+                
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('page_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                }
+
+                return $redirect;
+            }
+            else
+            {
+                $hasErrors = true;
             }
         }
 
-        return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+        return $this->render(
+            'SadiantCmsBundle:Page:edit.html.twig',
+            array(
+                'form'      => $form->createView(),
+                'page'      => $page,
+                'hasErrors' => $hasErrors
+            )
+        );
     }
     
     /**
@@ -219,6 +210,33 @@ EOF;
     public function removeAction()
     {
 
+    }
+    
+    /**
+     * Expand page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function expandAction()
+    {
+        // Retrieve request
+        $request = $this->getRequest();
+
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page childrens
+        $pages = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')))->getChildren();
+        
+        return $this->render(
+            'SadiantCmsBundle:Page:page-list.html.twig',
+            array(
+                'pages' => $pages,
+                'level' => $request->get('level')
+            )
+        );
     }
     
     /**

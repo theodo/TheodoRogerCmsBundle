@@ -1,5 +1,13 @@
 {% extends "SadiantCmsBundle::layout.html.twig" %}
 
+{% block javascripts_assets %}
+<script src="{{ asset('bundles/sadiantcms/js/page.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/sadiantcms/css/page.css') }}" type="text/css" media="all" />
+{% endblock %}
+
 {% block page_title "Pages" %}
 
 {% block content %}
@@ -13,9 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for page in pages %}
-                {% include "SadiantCmsBundle:Page:page-row.html.twig" with {'page': page, 'level': 0} %}
-            {% endfor %}
+            {% include "SadiantCmsBundle:Page:page-list.html.twig" with {'pages': pages, 'level' : 0} %}
             </tbody>
         </table>
     </div>

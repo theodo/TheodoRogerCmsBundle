@@ -1,12 +1,9 @@
-homepage:
-    pattern:  /
-    defaults: { _controller: SadiantCmsBundle:Page:homepage }
-
-# Page routing
+# Admin routing
 admin:
     pattern:  /admin
     defaults: { _controller: SadiantCmsBundle:Page:index }
 
+# Page routing
 page_list:
     pattern:  /admin/pages
     defaults: { _controller: SadiantCmsBundle:Page:index }
@@ -28,9 +25,10 @@ page_remove:
     defaults: { _controller: SadiantCmsBundle:Page:remove }
 
 page_expand:
-    pattern:  /admin/pages/{id}/expand
+    pattern:  /admin/pages/{id}/expand/{level}
     defaults: { _controller: SadiantCmsBundle:Page:expand }
 
+# Layout routing
 layout_new:
     pattern: /admin/layouts/new
     defaults: { _controller: SadiantCmsBundle:Layout:new }
@@ -51,6 +49,7 @@ layout_remove:
     pattern: /admin/layouts/{id}/remove
     defaults: { _controller: SadiantCmsBundle:Layout:remove }
 
+# Snippet routing
 snippet_new:
     pattern: /admin/snippets/new
     defaults: { _controller: SadiantCmsBundle:Snippet:new }
@@ -71,7 +70,8 @@ snippet_remove:
     pattern: /admin/snippets/{id}/remove
     defaults: { _controller: SadiantCmsBundle:Snippet:remove }
 
-visible:
-    pattern: /visible/{slug}
-    defaults: { _controller: SadiantCmsBundle:Page:visible }
+# Frontend routing
+page:
+    pattern: /{slug}
+    defaults: { _controller: SadiantCmsBundle:Frontend:page }
 

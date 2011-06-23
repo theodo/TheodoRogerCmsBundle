@@ -20,12 +20,21 @@ class LayoutData implements FixtureInterface
         $layout1 = new Layout();
         $layout1->setName('normal');
         $layout1->setContent(<<<EOF
-<head></head>
+<html>
+<head>
+    <title>{% block title %}No title{% endblock %}</title>
+</head>
 <body>
   <div id="container">
     {% block content %}{% endblock %}
   </div>
+  
+  <hr />
+  <div id="footer">
+    {% block footer %}{% endblock %}
+  </div>
 </body>
+</html>
 EOF
 );
         $manager->persist($layout1);
