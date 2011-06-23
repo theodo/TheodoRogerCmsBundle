@@ -7,9 +7,3 @@
 {
   display: block;
 }
-
-#content table.index .children_visible td.page,
-#content table.index .children_hidden td.page
-{
-  padding-left: 55px;
-}

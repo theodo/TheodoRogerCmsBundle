@@ -2,10 +2,10 @@ jQuery(document).ready(function ()
 {
   // Load input name listener
   loadInputNameListener();
-  
+
   // Load more/less listeners
   loadExtraFieldsListeners();
-  
+
   // Load expand page listener
   loadExpandPageListener();
 });
@@ -20,11 +20,11 @@ var loadExpandPageListener = function ()
 {
   // Set listener on input
   jQuery('.expandable').live('click', function (event)
-  {    
+  {
     event.preventDefault();
 
     // Retrieve node
-    var node = jQuery(event.target);
+    var node = jQuery(this);
 
     // Load children
     loadChildren(node);
@@ -48,6 +48,7 @@ var loadChildren = function (node)
   // Test if page has children in html
   else if (jQuery('.child_' + node.parents('tr.node').attr('id')).length > 0)
   {
+
     // Show children
     showChildren(node);
   }
@@ -70,9 +71,9 @@ var hideChildren = function (node)
   // Hide children
   var children = jQuery('.child_' + node.parents('tr.node').attr('id'));
   children.hide();
-  
+
   // Update expand picture
-  node.html('+');
+  node.html('<img alt="toggle children" class="expander" src="/bundles/sadiantcms/images/admin/expand.png" />');
   
   // remove expanded class
   node.removeClass('expanded');
@@ -95,10 +96,10 @@ var showChildren = function (node)
   // Show children
   var children = jQuery('.child_' + node.parents('tr.node').attr('id'));
   children.show();
-  
+
   // Update expand picture
-  node.html('-');
-  
+  node.html('<img alt="toggle children" class="expander" src="/bundles/sadiantcms/images/admin/collapse.png" />');
+
   // remove expanded class
   node.addClass('expanded');
 }
@@ -117,7 +118,7 @@ var loadAjaxChildren = function (node)
     beforeSend: function ()
     {
       // Show ajax loader
-      node.parent('td').find('.ajax-loader').removeClass('hide');
+      node.parents('td').find('.ajax-loader').removeClass('hide');
     },
     success: function (response)
     {
@@ -128,12 +129,12 @@ var loadAjaxChildren = function (node)
       node.addClass('expanded');
 
       // Update expand picture
-      node.html('-');
+      node.html('<img alt="toggle children" class="expander" src="/bundles/sadiantcms/images/admin/collapse.png" />');
     },
     complete: function()
     {
       // Hide ajax loader
-      node.parent('td').find('.ajax-loader').addClass('hide');
+      node.parents('td').find('.ajax-loader').addClass('hide');
     }
   });
 }
@@ -151,7 +152,7 @@ var loadInputNameListener = function ()
   {    
     // Update breadcrumb value
     updateBreadcrumbValue();
-    
+
     // Update slug value
     updateSlugValue();
   });
