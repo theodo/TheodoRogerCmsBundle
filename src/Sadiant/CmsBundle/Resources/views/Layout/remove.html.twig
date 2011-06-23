@@ -9,7 +9,7 @@ Remove layout
 Are you sure you want to <strong>permanently remove</strong> the following layout:
 {{ layout.name }}
 <form action="{{ url('layout_remove', { 'id': layout.id }) }}" method="post" }}>
-    <input type="submit" />
+    <input type="submit" value="Remove"/>
     <a href="{{ url('layout_list') }}">Cancel</a>
 </form>
 {% endblock %}

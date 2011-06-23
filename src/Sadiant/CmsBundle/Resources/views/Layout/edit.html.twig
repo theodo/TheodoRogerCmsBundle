@@ -9,7 +9,6 @@ Edition layout
 
 <a class="list-layout" href="{{ url('layout_list') }}">Back to list</a>
 <br />
-Form:
 {% if layout is defined %} 
 <form action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
 {% else %}

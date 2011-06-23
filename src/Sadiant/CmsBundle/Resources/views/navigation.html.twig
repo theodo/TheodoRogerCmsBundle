@@ -11,6 +11,18 @@
     </li>
     <li class="">
         <a href="{{ url('layout_list') }}">Design</a>
+        <ul id="nav_sub">
+            <li>
+                <a class="current" href="{{ url('layout_list') }}">
+                    <span>Layouts!</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('snippet_list') }}">
+                    <span>Snippets!</span>
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="">
         <a href="/admin/preferences">Settings</a>

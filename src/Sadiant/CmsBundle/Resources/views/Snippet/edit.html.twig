@@ -4,7 +4,6 @@
 <h1>{{ title }}</h1>
 <a class="list-snippet" href="{{ url('snippet_list') }}">Back to list</a>
 <br />
-Form:
 {% if snippet is defined %} 
 <form action="{{ url('snippet_update', { 'id': snippet.id }) }}" method="post" {{ form_enctype(form) }}>
 {% else %}
@@ -13,7 +12,7 @@ Form:
     {{ form_widget(form) }}
     <input type="submit" value="Save Changes" name="save-and-list" />
     <input type="submit" value="Save and Continue Editing" name="save-and-edit" />
-    <a href="{{ url('layout_list') }}">Cancel</a>
+    <a href="{{ url('snippet_list') }}">Cancel</a>
 </form>
 {% if snippet is defined %}
 <a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
