@@ -125,7 +125,7 @@ class LayoutControllerTest extends WebTestCase
         $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
 
         // Retrieve form
-        $form = $crawler->filterXPath('//input[@type="submit"]')->form();
+        $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
         
         // Submit form with errors
         $crawler = $client->submit($form, array());
@@ -152,7 +152,7 @@ class LayoutControllerTest extends WebTestCase
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
         // Update Form
-        $form = $crawler->filterXPath('//input[@type="submit"]')->form();
+        $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
         $form['layout[content_type]']  = 'text/html';
 
         // Submit the form
