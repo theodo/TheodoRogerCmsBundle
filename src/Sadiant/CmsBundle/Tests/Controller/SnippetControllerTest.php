@@ -98,6 +98,23 @@ class SnippetControllerTest extends WebTestCase
     }
 
     /**
+     * Test snippet remove
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function testRemove()
+    {
+        print_r("\n> SnippetController - Test remove action");
+
+        $client = $this->createClient();
+        $crawler = $client->request('GET','/admin/snippets/1/remove');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
+    }
+
+    /**
      * Test workflow
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>

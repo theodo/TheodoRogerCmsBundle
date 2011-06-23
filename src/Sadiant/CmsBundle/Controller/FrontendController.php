@@ -53,7 +53,7 @@ class FrontendController extends Controller
         $twig_environment->setLoader(new Twig_Loader_Database($this->getDoctrine()->getEntityManager()));
         try
         {
-          $response = $twig_engine->renderResponse($page->getName());
+          $response = $twig_engine->renderResponse('page:'.$page->getName());
           $twig_environment->setLoader($old_loader);
         }
         catch (Twig_Error $e)

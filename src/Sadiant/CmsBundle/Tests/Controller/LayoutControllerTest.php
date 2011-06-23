@@ -98,6 +98,23 @@ class LayoutControllerTest extends WebTestCase
     }
 
     /**
+     * Test layout remove
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function testRemove()
+    {
+        print_r("\n> LayoutController - Test remove action");
+
+        $client = $this->createClient();
+        $crawler = $client->request('GET','/admin/layouts/1/remove');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
+    }
+
+    /**
      * Test workflow
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
