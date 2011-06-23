@@ -1,0 +1,28 @@
+{% extends "SadiantCmsBundle::layout.html.twig" %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/sadiantcms/css/page.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block page_title "Pages" %}
+
+{% block content %}
+  <div>
+    <h1>{% trans %}Delete{% endtrans %} {{page.name}}</h1>
+    
+    <p>
+      {% trans %}Are you sure you want to <strong class="warning">permanently remove</strong> the following pages?{% endtrans %}
+    </p>
+    
+    <div class="inset">
+      {% render "SadiantCmsBundle:Page:siteMapComponent" with {'from_id': page.id} %}
+    </div>
+    
+    <form action="{{ url('page_remove', {'id' : page.id}) }}" method="post">      
+      <input type="submit" value="{% trans %}Delete{% endtrans %}" />
+
+      <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+    </form>
+  </div>
+{% endblock %}

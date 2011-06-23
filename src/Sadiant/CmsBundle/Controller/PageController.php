@@ -209,7 +209,31 @@ class PageController extends Controller
      */
     public function removeAction()
     {
+        // Retrieve request
+        $request = $this->getRequest();
 
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page
+        $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
+
+        // Request is post
+        if ($request->getMethod() == 'POST')
+        {
+            // Delete page
+            $em->remove($page);
+            $em->flush();
+            
+            return $redirect = $this->redirect($this->generateUrl('page_list'));
+        }
+        
+        return $this->render(
+            'SadiantCmsBundle:Page:remove.html.twig',
+            array(
+                'page' => $page
+            )
+        );
     }
     
     /**
@@ -272,5 +296,31 @@ class PageController extends Controller
         }
 
         return $response;
+    }
+    
+    /**
+     * Site map action
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function siteMapComponentAction()
+    {
+        // Retrieve request
+        $request = $this->getRequest();
+
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page
+        $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('from_id')));
+
+        return $this->render(
+            'SadiantCmsBundle:Page:site-map-component.html.twig',
+            array(
+                'page'  => $page,
+                'level' => 0
+            )
+        );
     }
 }

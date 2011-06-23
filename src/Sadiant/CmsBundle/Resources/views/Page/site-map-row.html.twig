@@ -1,0 +1,20 @@
+{% set padding_left %}
+  {% if level == 0 %}
+    9px
+  {% elseif level == 1 %}
+    32px
+  {% else %}
+    {{level * 27}}px
+  {% endif %}
+{% endset %}
+
+
+<tr id="page_{{page.id}}" class="level_{{level}} no_children node page">
+  <td style="padding-left: {{padding_left}};" class="page">
+    <span class="w1">{{page.name}}</span>
+  </td>
+</tr>
+
+{% for child in page.children %}
+  {% include "SadiantCmsBundle:Page:site-map-row.html.twig" with {'page': child, 'level': level + 1} %}
+{% endfor %}

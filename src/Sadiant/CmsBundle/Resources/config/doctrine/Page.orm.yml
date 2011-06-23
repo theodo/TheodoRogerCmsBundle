@@ -32,8 +32,6 @@ Sadiant\CmsBundle\Entity\Page:
         published_at:
             type: date
             nullable: true
-#        layout_id:
-#            type: integer
     manyToOne:
         parent:
             targetEntity: Page
@@ -42,8 +40,4 @@ Sadiant\CmsBundle\Entity\Page:
         children:
             targetEntity: Page
             mappedBy: parent
-#    manyToOne:
-#        layout:
-#            targetEntity: Layout
-#            mapped_by: layout_id
-#            inversedBy: pages
+            cascade: ["remove"]
