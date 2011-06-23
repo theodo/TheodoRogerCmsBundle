@@ -18,11 +18,10 @@
       {% if page.children|length > 0 and page.parent %}
         <a class="expandable" href="{{ url('page_expand', {'id' : page.id, 'level' : level + 1}) }}">+</a>
       {% endif %}
-
+      <img alt="" class="icon" src="/bundles/sadiantcms/images/admin/page.png" />
       <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
         {{ page.name }}
       </a>
-
       <img src="/bundles/sadiantcms/images/admin/spinner.gif" class="ajax-loader hide">
     </td>
     <td class="status">

@@ -281,8 +281,9 @@ ul#navigation li.dimmed a
   background-position: 0 -48px;
 }
 
-ul#navigation ul#nav_sub
+ul#navigation ul.nav_sub
 {
+  display: none;
   background: url(/bundles/sadiantcms/images/admin/navigation_secondary_background.png) repeat-x;
   font-size: 95%;
   clear: both;
@@ -296,12 +297,17 @@ ul#navigation ul#nav_sub
   z-index: 10;
 }
 
-ul#navigation ul#nav_sub li
+ul#navigation .current ul.nav_sub
+{
+  display: block;
+}
+
+ul#navigation ul.nav_sub li
 {
   margin: 0;
 }
 
-ul#navigation ul#nav_sub li a
+ul#navigation ul.nav_sub li a
 {
   background: url(/bundles/sadiantcms/images/admin/navigation_secondary_background.png) repeat-x;
   color: #555;
@@ -314,26 +320,26 @@ ul#navigation ul#nav_sub li a
   height: 38px;
 }
 
-ul#navigation ul#nav_sub li a:hover
+ul#navigation ul.nav_sub li a:hover
 {
   background-position: left -40px;
   color: #444;
 }
 
-ul#navigation ul#nav_sub li a.current
+ul#navigation ul.nav_sub li a.current
 {
   background: url(/bundles/sadiantcms/images/admin/navigation_secondary_background.png) left -80px repeat-x;
   color: #333;
   font-weight: bold;
 }
 
-ul#navigation ul#nav_sub li a.current:hover
+ul#navigation ul.nav_sub li a.current:hover
 {
   background-position: left -120px;
   color: #222;
 }
 
-ul#navigation ul#nav_sub li a span
+ul#navigation ul.nav_sub li a span
 {
   background: url(/bundles/sadiantcms/images/admin/navigation_secondary_separator.gif) right bottom no-repeat;
   display: block;

@@ -8,11 +8,14 @@
 <link rel="stylesheet" href="{{ asset('bundles/sadiantcms/css/page.css') }}" type="text/css" media="all" />
 {% endblock %}
 
+{% set tab = 'content' %}
+{% set nav = 'pages' %}
+
 {% block page_title "Pages" %}
 
 {% block content %}
     <div class="outset">
-        <table class="index" summary="{% trans %}Page hierarchy of the current site{% endtrans %}">
+        <table class="index" id="site_map" summary="{% trans %}Page hierarchy of the current site{% endtrans %}">
             <thead>
                 <tr>
                     <th class="page">{% trans %}Page{% endtrans %}</th>
