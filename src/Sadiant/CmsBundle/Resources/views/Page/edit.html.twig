@@ -1,5 +1,9 @@
 {% extends "SadiantCmsBundle::layout.html.twig" %}
 
+{% block javascripts_assets %}
+<script src="{{ asset('bundles/sadiantcms/js/page-edit.js') }}" type="text/javascript"></script>
+{% endblock %}
+
 {% block page_title "Pages" %}
 
 {% block content %}
