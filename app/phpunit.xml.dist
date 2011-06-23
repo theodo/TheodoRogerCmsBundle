@@ -3,8 +3,7 @@
 <!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
     colors                      = "true"
-    processIsolation            = "truegit push
-"
+    processIsolation            = "true"
     stopOnFailure               = "false"
     bootstrap                   = "bootstrap.php.cache" >
 
