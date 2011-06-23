@@ -68,13 +68,20 @@ var loadChildren = function (node)
 var hideChildren = function (node)
 {
   // Hide children
-  jQuery('.child_' + node.parents('tr.node').attr('id')).hide();
+  var children = jQuery('.child_' + node.parents('tr.node').attr('id'));
+  children.hide();
   
   // Update expand picture
   node.html('+');
   
   // remove expanded class
-  node.removeClass('expanded')
+  node.removeClass('expanded');
+
+  // Hide node children
+  jQuery.each(children, function (index, child)
+  {
+    hideChildren(jQuery(child).find('a.expandable'));
+  });
 }
 
 /**
@@ -85,14 +92,15 @@ var hideChildren = function (node)
  */
 var showChildren = function (node)
 {
-  // Hide children
-  jQuery('.child_' + node.parents('tr.node').attr('id')).show();
+  // Show children
+  var children = jQuery('.child_' + node.parents('tr.node').attr('id'));
+  children.show();
   
   // Update expand picture
   node.html('-');
   
   // remove expanded class
-  node.addClass('expanded')
+  node.addClass('expanded');
 }
 
 /**
