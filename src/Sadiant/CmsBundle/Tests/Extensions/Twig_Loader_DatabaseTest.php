@@ -11,8 +11,6 @@ use Sadiant\CmsBundle\Repository\PageRepository;
 use Sadiant\CmsBundle\Tests\Unit;
 use Sadiant\CmsBundle\Extensions\Twig_Loader_Database;
 
-use Twig_Error_Loader;
-
 class Twig_Loader_DatabaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
