@@ -73,7 +73,14 @@ class PageController extends Controller
                 $em->persist($page);
                 $em->flush(); 
 
-                return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('page_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                }
+
+                return $redirect;
             }
         }
 
@@ -103,6 +110,12 @@ class PageController extends Controller
         
         // Retrieve page
         $page = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
+        
+        // Set published at
+        if (!$page->getPublishedAt())
+        {
+            $page->setPublishedAt(new \DateTime('now'));
+        }
         
         // Create form
         $form = $this->createForm(new PageType(false), $page);
@@ -149,10 +162,25 @@ class PageController extends Controller
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();
+                
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('page_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                }
+
+                return $redirect;
             }
         }
 
-        return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+        return $this->render(
+            'SadiantCmsBundle:Page:edit.html.twig',
+            array(
+                'form' => $form->createView(),
+                'page' => $page
+            )
+        );
     }
     
     /**

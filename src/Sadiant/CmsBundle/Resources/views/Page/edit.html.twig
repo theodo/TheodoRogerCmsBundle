@@ -13,8 +13,11 @@
     {% endif %}
     
       {{ form_widget(form) }}
-       
-      <input type="submit" />
+
+      <input type="submit" value="{% trans %}Save{% endtrans %}" name="save-and-list" />
+      <input type="submit" value="{% trans %}Save and continue editing{% endtrans %}"  name="save-and-edit" />
+
+      <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
     </form>
   </div>
 {% endblock %}

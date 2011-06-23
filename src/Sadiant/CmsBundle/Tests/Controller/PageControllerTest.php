@@ -91,8 +91,6 @@ class PageControllerTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('GET', '/admin/pages/1/update');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit page.*/', $client->getResponse()->getContent());
     }
@@ -128,7 +126,7 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
 
         // Retrieve form
-        $form = $crawler->filterXPath('//input[@type="submit"]')->form();
+        $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
         
         // Submit form with errors
         $crawler = $client->submit($form, array());
@@ -147,7 +145,8 @@ class PageControllerTest extends WebTestCase
             'page[slug]'       => 'functional-test',
             'page[breadcrumb]' => 'Functional test',
             'page[content]'    => '<p>Functional test page content</p>',
-            'page[status]'     => PageRepository::STATUS_PUBLISH
+            'page[status]'     => PageRepository::STATUS_PUBLISH,
+            'save-and-edit'    => true
         ));
 
         
@@ -170,8 +169,7 @@ class PageControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*admin\/pages\/.*\/edit$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*Edit page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*admin\/pages$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
         
         // Back to admin homepage
