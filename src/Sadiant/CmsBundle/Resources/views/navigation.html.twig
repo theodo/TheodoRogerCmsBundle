@@ -1,11 +1,11 @@
 {% set current_tab = tab|default('content') %}
 {% set current_nav = nav|default('pages') %}
 <ul id="navigation">
-    <li{% if current_tab == 'content' %} class="current "{% endif %}>
+    <li{% if current_tab == 'content' %} class="current"{% endif %}>
         <a href="{{ url('page_list') }}">Content</a>
         <ul class="nav_sub">
             <li>
-                <a{% if current_nav == 'pages' %} class="current "{% endif %} href="{{ url('page_list') }}">
+                <a{% if current_nav == 'pages' %} class="current"{% endif %} href="{{ url('page_list') }}">
                     <span>Pages</span>
                 </a>
             </li>
@@ -15,12 +15,12 @@
         <a href="{{ url('layout_list') }}">Design</a>
         <ul class="nav_sub">
             <li>
-                <a{% if current_nav == 'layouts' %} class="current "{% endif %} href="{{ url('layout_list') }}">
+                <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
                     <span>Layouts</span>
                 </a>
             </li>
             <li>
-                <a{% if current_nav == 'snippets' %} class="current "{% endif %} href="{{ url('snippet_list') }}">
+                <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
                     <span>Snippets</span>
                 </a>
             </li>
@@ -30,17 +30,17 @@
         <a href="/admin/preferences">Settings</a>
         <ul class="nav_sub">
             <li>
-                <a{% if current_nav == 'personal' %} class="current "{% endif %} href="#">
+                <a{% if current_nav == 'personal' %} class="current"{% endif %} href="#">
                     <span>Personal</span>
                 </a>
             </li>
             <li>
-                <a{% if current_nav == 'users' %} class="current "{% endif %} href="#">
+                <a{% if current_nav == 'users' %} class="current"{% endif %} href="#">
                     <span>Users</span>
                 </a>
             </li>
             <li>
-                <a{% if current_nav == 'extensions' %} class="current "{% endif %} href="#">
+                <a{% if current_nav == 'extensions' %} class="current"{% endif %} href="#">
                     <span>Extensions</span>
                 </a>
             </li>

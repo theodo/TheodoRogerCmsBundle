@@ -9,12 +9,12 @@
 {% endset %}
 
 <tr
-  id="page_{{page.id}}"
+  id="page_{{ page.id }}"
   class="
   node page level_{{ level }}
-  {% if page.parent %} child_page_{{page.parentId}}{% endif %}
+  {% if page.parent %} child_page_{{ page.parentId }}{% endif %}
   ">
-    <td class="page" style="padding-left: {{padding_left}};">
+    <td class="page" style="padding-left: {{ padding_left }};">
         <span class="w1">
             {% if page.children|length > 0 and page.parent %}
                 <a class="expandable" href="{{ url('page_expand', {'id' : page.id, 'level' : level + 1}) }}">

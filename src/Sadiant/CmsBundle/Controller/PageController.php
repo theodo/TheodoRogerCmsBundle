@@ -30,7 +30,7 @@ class PageController extends Controller
         // Retrieve pages
         $pages = $this->getDoctrine()->getEntityManager()->getRepository('SadiantCmsBundle:Page')->queryForMainPages()->getResult();
 
-        return $this->render('SadiantCmsBundle:Page:index.html.twig',array('pages' => $pages));
+        return $this->render('SadiantCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
 
     /**
