@@ -1,16 +1,29 @@
-{#
-{% if page.children|length and page.parent %}
-  <a class="expandable" href="{{ url('page_expand', {'id' : page.id}) }}">
-    {% trans %}Expand{% endtrans %}
-  </a>
-{% endif %}
-#}
+{% set padding_left %}
+  {% if level == 0 %}
+    9px
+  {% elseif level == 1 %}
+    32px
+  {% else %}
+    {{level * 27}}px
+  {% endif %}
+{% endset %}
 
-<tr class="{% if page.children %}children_visible{% else %}no_children{% endif %} node page level_{{ level }}">
-    <td class="page">
+<tr
+  id="page_{{page.id}}"
+  class="
+  {% if page.children|length > 0 and not page.parent %}children_visible{% else %}no_children{% endif %} node page level_{{ level }}
+  {% if page.parent %} child_page_{{page.parentId}}{% endif %}
+  ">
+    <td class="page" style="padding-left:{{padding_left}};">
+      {% if page.children|length > 0 and page.parent %}
+        <a class="expandable" href="{{ url('page_expand', {'id' : page.id, 'level' : level + 1}) }}">+</a>
+      {% endif %}
+
       <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
         {{ page.name }}
       </a>
+
+      <img src="/bundles/sadiantcms/images/admin/spinner.gif" class="ajax-loader hide">
     </td>
     <td class="status">
       {{ page.status }}
@@ -27,6 +40,9 @@
       </a>
     </td>
 </tr>
-{% for child in page.children %}
-  {% include "SadiantCmsBundle:Page:page-row.html.twig" with {'page': child, 'level': level + 1} %}
-{% endfor %}
+
+{% if page.children|length > 0 and not page.parent %}
+  {% for child in page.children %}
+    {% include "SadiantCmsBundle:Page:page-row.html.twig" with {'page': child, 'level': level + 1} %}
+  {% endfor %}
+{% endif %}

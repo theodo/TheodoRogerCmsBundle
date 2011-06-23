@@ -213,6 +213,33 @@ class PageController extends Controller
     }
     
     /**
+     * Expand page action
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function expandAction()
+    {
+        // Retrieve request
+        $request = $this->getRequest();
+
+        // Retrieve EntityManager
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Retrieve page childrens
+        $pages = $em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('id' => $request->get('id')))->getChildren();
+        
+        return $this->render(
+            'SadiantCmsBundle:Page:page-list.html.twig',
+            array(
+                'pages' => $pages,
+                'level' => $request->get('level')
+            )
+        );
+    }
+    
+    /**
      * Homepage action
      * 
      * @return string
