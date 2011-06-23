@@ -56,6 +56,9 @@ class PageController extends Controller
         $page->setParentId($parent_page->getId());
         $page->setParent($parent_page);
         
+        // Initialize form hasErros
+        $hasErrors = false;
+        
         // Create form
         $form = $this->createForm(new PageType(), $page);
         
@@ -82,13 +85,19 @@ class PageController extends Controller
 
                 return $redirect;
             }
+            else
+            {
+                $hasErrors = true;
+            }
         }
 
         return $this->render(
             'SadiantCmsBundle:Page:edit.html.twig',
             array(
-                'form' => $form->createView(),
-                'parent_page' => $parent_page
+                'form'        => $form->createView(),
+                'parent_page' => $parent_page,
+                'hasErrors'   => $hasErrors,
+                'isNew'       => true
             )
         );
     }
@@ -150,6 +159,9 @@ class PageController extends Controller
         // Create form
         $form = $this->createForm(new PageType(false), $page);
 
+        // Initialize form hasErros
+        $hasErrors = false;
+
         // Request is post
         if ($request->getMethod() == 'POST')
         {
@@ -172,13 +184,18 @@ class PageController extends Controller
 
                 return $redirect;
             }
+            else
+            {
+                $hasErrors = true;
+            }
         }
 
         return $this->render(
             'SadiantCmsBundle:Page:edit.html.twig',
             array(
-                'form' => $form->createView(),
-                'page' => $page
+                'form'      => $form->createView(),
+                'page'      => $page,
+                'hasErrors' => $hasErrors
             )
         );
     }

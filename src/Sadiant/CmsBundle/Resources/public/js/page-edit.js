@@ -2,6 +2,9 @@ jQuery(document).ready(function ()
 {
   // Load input name listener
   loadInputNameListener();
+  
+  // Load more/less listeners
+  loadExtraFieldsListeners();
 });
 
 /**
@@ -13,13 +16,31 @@ jQuery(document).ready(function ()
 var loadInputNameListener = function ()
 {
   // Set listener on input
-  jQuery('#page_name').bind('keyup', function (event)
+  jQuery('#page_name').bind('keyup', function ()
   {    
     // Update breadcrumb value
     updateBreadcrumbValue();
     
     // Update slug value
     updateSlugValue();
+  });
+}
+
+/**
+ * Load more/less listeners
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @since 2011-06-23
+ */
+var loadExtraFieldsListeners = function ()
+{
+  // Set listener on more/less links
+  jQuery('#link-more-fields, #link-less-fields').bind('click', function (event)
+  {
+    event.preventDefault();
+
+    jQuery('.extra-fields-link').toggle();
+    jQuery('#extra-fields').toggle(200);
   });
 }
 
