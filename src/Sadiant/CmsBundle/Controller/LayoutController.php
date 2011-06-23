@@ -66,7 +66,7 @@ class LayoutController extends Controller
 
         return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
                 array(
-                    'title' => 'Nouveau Layout',
+                    'title' => 'New layout',
                     'form' => $form->createView()
                   )
                 );
@@ -135,7 +135,7 @@ class LayoutController extends Controller
 
         return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
                 array(
-                    'title' => 'Edition '.$layout->getName(),
+                    'title' => 'Edit '.$layout->getName(),
                     'layout' => $layout,
                     'form' => $form->createView()
                   )
