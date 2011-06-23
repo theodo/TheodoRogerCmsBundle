@@ -61,7 +61,14 @@ class SnippetController extends Controller
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
 
-                return $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('snippet_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
+                }
+
+                return $redirect;
             }
         }
 
@@ -94,6 +101,15 @@ class SnippetController extends Controller
                 $snippet = $form->getData();
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
+
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('snippet_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
+                }
+
+                return $redirect;
             }
         }
 

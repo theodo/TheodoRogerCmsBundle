@@ -60,7 +60,14 @@ class LayoutController extends Controller
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
 
-                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('layout_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                }
+
+                return $redirect;
             }
         }
 
@@ -104,6 +111,15 @@ class LayoutController extends Controller
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
+
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('layout_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                }
+
+                return $redirect;
             }
         }
 

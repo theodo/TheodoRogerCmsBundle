@@ -16,9 +16,8 @@ Form:
 <form action="{{ url('layout_new') }}" method="post" {{ form_enctype(form) }}>
 {% endif %}
     {{ form_widget(form) }}
-    
-    <input type="submit" />
-    {# <input type="submit" value="Save and Continue Editing" name="lili" /> #}
+    <input type="submit" value="Save Changes" name="save-and-list" />
+    <input type="submit" value="Save and Continue Editing" name="save-and-edit" />
     <a href="{{ url('layout_list') }}">Cancel</a>
 </form>
 <br />
