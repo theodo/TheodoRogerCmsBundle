@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Layouts</h1>
-<a href="{{ url('layout_new') }}">Add</a>
+<a class="new-layout" href="{{ url('layout_new') }}">Add</a>
 <ul>
     {% for layout in layouts %}
     <li>
@@ -10,7 +10,7 @@
     </li>
     {% endfor %}
 </ul>
-<a href="{{ url('layout_new') }}">Add</a>
+<a class="new-layout" href="{{ url('layout_new') }}">Add</a>
 <br/>
 <br />
 {% endblock %}

@@ -13,8 +13,8 @@ class SnippetType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('id', 'hidden');
-        $builder->add('name', 'text');
-        $builder->add('content', 'textarea');
+        $builder->add('name', 'text', array('required' => true));
+        $builder->add('content', 'textarea', array('required' => true));
     }
 
     public function getDefaultOptions(array $options)

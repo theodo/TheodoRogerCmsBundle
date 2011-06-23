@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>{{ title }}</h1>
-<a href="{{ url('snippet_list') }}">Back to list</a>
+<a class="list-snippet" href="{{ url('snippet_list') }}">Back to list</a>
 <br />
 Form:
 {% if snippet is defined %} 
@@ -17,5 +17,5 @@ Form:
 {% if snippet is defined %}
 <a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
 {% endif %}
-<a href="{{ url('snippet_list') }}">Back to list</a>
+<a class="list-snippet" href="{{ url('snippet_list') }}">Back to list</a>
 {% endblock %}
