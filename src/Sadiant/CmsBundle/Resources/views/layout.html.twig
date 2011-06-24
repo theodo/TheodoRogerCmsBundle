@@ -10,7 +10,8 @@
         {% block javascripts_assets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    {% set body_class = body_class|default('') %}
+    <body{% if body_class != '' %} class="{{ body_class }}"{% endif %}>
         <div id="page">
             <div id="header">
                 {% render "SadiantCmsBundle:User:boxComponent" %}
