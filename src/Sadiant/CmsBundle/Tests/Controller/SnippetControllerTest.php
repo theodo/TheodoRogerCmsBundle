@@ -23,6 +23,48 @@ class SnippetControllerTest extends WebTestCase
         // Load "test" entity manager
         $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
     }
+    
+    /**
+     * User connection
+     * 
+     * @return Crawler
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-24
+     */
+    protected function login($client, $username = 'admin', $password = 'admin')
+    {
+        // Retrieve crawler
+        $crawler = $client->request('GET', '/admin');
+
+        // Select the login form
+        $form = $crawler->filterXPath('//input[@name="login"]')->form();
+
+        // Submit the form with valid credentials
+        $crawler = $client->submit(
+            $form,
+            array(
+                '_username' => $username,
+                '_password' => $password
+            )
+        );
+
+        // Response should be success
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        return $crawler;
+    }
+
+    /**
+     * Logout user
+     * 
+     * @return Crawler
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-24
+     */
+    protected function logout($client)
+    {
+        return $client->request('GET', '/admin/logout');
+    }
 
     /**
      * Test snippet list
@@ -35,6 +77,7 @@ class SnippetControllerTest extends WebTestCase
         print_r("\n> SnippetController - Test list action");
 
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/snippets');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -54,6 +97,7 @@ class SnippetControllerTest extends WebTestCase
       print_r("\n> SnippetController - Test new action");
 
       $client = $this->createClient();
+      $crawler = $this->login($client);
       $crawler = $client->request('GET', '/admin/snippets/new');
 
       $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -71,6 +115,7 @@ class SnippetControllerTest extends WebTestCase
         print_r("\n> SnippetController - Test edit action");
 
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/snippets/1/edit');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -89,6 +134,7 @@ class SnippetControllerTest extends WebTestCase
         print_r("\n> SnippetController - Test update action");
 
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET','/admin/snippets/1');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -108,6 +154,7 @@ class SnippetControllerTest extends WebTestCase
         print_r("\n> SnippetController - Test remove action");
 
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET','/admin/snippets/1/remove');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -128,6 +175,7 @@ class SnippetControllerTest extends WebTestCase
         $this->em->getConnection()->beginTransaction();
 
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET','/admin/snippets');
 
         //Test status

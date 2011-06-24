@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "# Build entities";
-php app/console doctrine:generate:entities Sadiant
+php app/console doctrine:generate:entities SadiantCmsBundle
 
 echo "# Load dev environnement";
 
@@ -20,4 +20,4 @@ php app/console doctrine:fixtures:load --em=test
 php app/console assets:install web --symlink
 php app/console cache:clear
 
-phpunit -c app
+#phpunit -c app

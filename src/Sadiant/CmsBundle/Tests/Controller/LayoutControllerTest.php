@@ -23,6 +23,36 @@ class LayoutControllerTest extends WebTestCase
         // Load "test" entity manager
         $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
     }
+    
+    /**
+     * User connection
+     * 
+     * @return Crawler
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-24
+     */
+    protected function login($client, $username = 'admin', $password = 'admin')
+    {
+        // Retrieve crawler
+        $crawler = $client->request('GET', '/admin');
+        
+        // Select the login form
+        $form = $crawler->filterXPath('//input[@name="login"]')->form();
+ 
+        // Submit the form with valid credentials
+        $crawler = $client->submit(
+            $form,
+            array(
+                '_username' => $username,
+                '_password' => $password
+            )
+        );
+
+        // Response should be success
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        return $crawler;
+    }
 
     /**
      * Test layout list
@@ -35,6 +65,10 @@ class LayoutControllerTest extends WebTestCase
         print_r("\n> LayoutController - Test list action");
 
         $client = $this->createClient();
+        
+        // Connect user
+        $crawler = $this->login($client);
+
         $crawler = $client->request('GET', '/admin/layouts');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -54,6 +88,10 @@ class LayoutControllerTest extends WebTestCase
       print_r("\n> LayoutController - Test new action");
 
       $client = $this->createClient();
+      
+      // Connect user
+      $crawler = $this->login($client);
+        
       $crawler = $client->request('GET', '/admin/layouts/new');
 
       $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -71,6 +109,10 @@ class LayoutControllerTest extends WebTestCase
         print_r("\n> LayoutController - Test edit action");
 
         $client = $this->createClient();
+
+        // Connect user
+        $crawler = $this->login($client);
+
         $crawler = $client->request('GET', '/admin/layouts/1/edit');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -89,6 +131,10 @@ class LayoutControllerTest extends WebTestCase
         print_r("\n> LayoutController - Test update action");
 
         $client = $this->createClient();
+
+        // Connect user
+        $crawler = $this->login($client);
+
         $crawler = $client->request('GET','/admin/layouts/1');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -108,6 +154,10 @@ class LayoutControllerTest extends WebTestCase
         print_r("\n> LayoutController - Test remove action");
 
         $client = $this->createClient();
+
+        // Connect user
+        $crawler = $this->login($client);
+
         $crawler = $client->request('GET','/admin/layouts/1/remove');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -128,6 +178,10 @@ class LayoutControllerTest extends WebTestCase
         $this->em->getConnection()->beginTransaction();
 
         $client = $this->createClient();
+
+        // Connect user
+        $crawler = $this->login($client);
+
         $crawler = $client->request('GET','/admin/layouts');
 
         //Test status

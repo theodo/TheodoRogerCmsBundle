@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block page_title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('bundles/sadiantcms/css/main.css') }}" type="text/css" media="all" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class='single_form'>
+        <div id="page">
+            <div id="main">
+                {% block notice %}{% endblock %}
+              
+                <div id="content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+         </div>
+    </body>
+</html>

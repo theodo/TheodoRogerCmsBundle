@@ -30,7 +30,7 @@
         <a href="/admin/preferences">Settings</a>
         <ul class="nav_sub">
             <li>
-                <a{% if current_nav == 'personal' %} class="current"{% endif %} href="#">
+                <a{% if current_nav == 'personal' %} class="current"{% endif %} href="{{ url('user_preferences') }}">
                     <span>Personal</span>
                 </a>
             </li>

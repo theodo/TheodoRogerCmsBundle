@@ -1,0 +1,13 @@
+Sadiant\CmsBundle\Entity\Role:
+    type: entity
+    table: role
+    repositoryClass: Sadiant\CmsBundle\Repository\RoleRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false

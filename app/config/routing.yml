@@ -1,7 +1,18 @@
 # Admin routing
-admin:
+login:
     pattern:  /admin
-    defaults: { _controller: SadiantCmsBundle:Page:index }
+    defaults: { _controller: SadiantCmsBundle:User:login }
+
+login_check:
+    pattern:  /admin/login
+
+logout:
+    pattern:   /admin/logout
+
+# User routing
+user_preferences:
+    pattern:  /admin/preferences/edit
+    defaults: { _controller: SadiantCmsBundle:User:preferences }
 
 # Page routing
 page_list:

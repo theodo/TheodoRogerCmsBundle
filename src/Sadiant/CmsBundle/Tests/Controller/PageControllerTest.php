@@ -23,6 +23,48 @@ class PageControllerTest extends WebTestCase
         // Load "test" entity manager
         $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
     }
+    
+    /**
+     * User connection
+     * 
+     * @return Crawler
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-24
+     */
+    protected function login($client, $username = 'admin', $password = 'admin')
+    {
+        // Retrieve crawler
+        $crawler = $client->request('GET', '/admin');
+
+        // Select the login form
+        $form = $crawler->filterXPath('//input[@name="login"]')->form();
+
+        // Submit the form with valid credentials
+        $crawler = $client->submit(
+            $form,
+            array(
+                '_username' => $username,
+                '_password' => $password
+            )
+        );
+
+        // Response should be success
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        return $crawler;
+    }
+
+    /**
+     * Logout user
+     * 
+     * @return Crawler
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-24
+     */
+    protected function logout($client)
+    {
+        return $client->request('GET', '/admin/logout');
+    }
 
     /**
      * Test index action
@@ -33,7 +75,11 @@ class PageControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/admin');
+
+        // Connect user
+        $crawler = $this->login($client);
+
+        $crawler = $client->request('GET', '/admin/pages');
 
         print_r("\n> Test page index action");
 
@@ -53,6 +99,7 @@ class PageControllerTest extends WebTestCase
     public function testNew()
     {
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/pages/1/new');
 
         print_r("\n> Test page new action");
@@ -70,6 +117,7 @@ class PageControllerTest extends WebTestCase
     public function testEdit()
     {
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/pages/1/edit');
 
         print_r("\n> Test page edit action");
@@ -89,6 +137,7 @@ class PageControllerTest extends WebTestCase
         print_r("\n> Test page update action");
         
         $client = $this->createClient();
+        $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/pages/1/update');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -109,7 +158,8 @@ class PageControllerTest extends WebTestCase
         $this->em->getConnection()->beginTransaction();
         
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/admin');
+        $crawler = $this->login($client);
+        $crawler = $client->request('GET', '/admin/pages');
 
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -172,7 +222,7 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
         
         // Back to admin homepage
-        $crawler = $client->request('GET', '/admin');
+        $crawler = $client->request('GET', '/admin/pages');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
