@@ -16,7 +16,7 @@ use Sadiant\CmsBundle\Repository\PageRepository;
 use Sadiant\CmsBundle\Form\PageType;
 use Sadiant\CmsBundle\Entity\Page;
 
-class PageController extends Controller
+class PageController extends BaseController
 {
     /**
      * List pages
@@ -188,6 +188,9 @@ class PageController extends Controller
             // Check form and save object
             if ($form->isValid())
             {
+                // remove twig cached file
+                $this->removeCache($page->getName(), 'page');
+
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();

@@ -5,6 +5,7 @@ namespace Sadiant\CmsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Sadiant\CmsBundle\Entity\Snippet
@@ -96,6 +97,7 @@ class Snippet
     {        
         // Name validator: not null
         $metadata->addPropertyConstraint('name', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
 
         // Content validator: not null
         $metadata->addPropertyConstraint('content', new NotBlank());

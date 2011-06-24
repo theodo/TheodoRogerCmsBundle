@@ -14,7 +14,7 @@ namespace Sadiant\CmsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sadiant\CmsBundle\Form\LayoutType;
 
-class LayoutController extends Controller
+class LayoutController extends BaseController
 {
     /**
      *
@@ -108,6 +108,11 @@ class LayoutController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
+
+                // remove twig cached file
+                $this->removeCache($layout->getName(), 'layout');
+
+                // save layout
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();

@@ -14,7 +14,7 @@ namespace Sadiant\CmsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sadiant\CmsBundle\Form\SnippetType;
 
-class SnippetController extends Controller
+class SnippetController extends BaseController
 {
     /**
      *
@@ -98,6 +98,9 @@ class SnippetController extends Controller
 
             if ($form->isValid())
             {
+                // remove twig cached file
+                $this->removeCache($snippet->getName(), 'snippet');
+
                 $snippet = $form->getData();
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
