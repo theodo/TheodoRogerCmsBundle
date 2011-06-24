@@ -26,14 +26,18 @@ security:
         main:
             pattern:    ^/admin/*
             form_login:
-                check_path: /admin/login
-                login_path: /admin
+                check_path:  /admin/login
+                login_path:  /admin
+                remember_me: true
             logout:
-                path:   /admin/logout
-                target: /admin
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+                path:               /admin/logout
+                target:             /admin
+                invalidate_session: true
+            http_basic: true
+            remember_me:
+                key:      463a06ee69fbea064218b1d02c416125
+                lifetime: 86400
+                path:     /
 
     access_control:
         - { path: ^/admin/*, roles: ROLE_USER }

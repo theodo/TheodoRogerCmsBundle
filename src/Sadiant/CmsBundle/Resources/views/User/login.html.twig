@@ -25,6 +25,11 @@
                 <input class="textbox password" id="password" maxlength="40" name="_password" size="40" type="password" value="" />
             </p>
 
+            <p class="remember_me">
+                <input type="checkbox" value="1" name="_remember_me" id="remember_me" class="checkbox">
+                <label for="remember_me" class="checkbox">{% trans %}Remember me{% endtrans %}</label>
+            </p>
+
             <input type="hidden" name="_target_path" value="{{ url('page_list') }}" />
 
             <p class='buttons'>
