@@ -149,7 +149,6 @@ class PageControllerTest extends WebTestCase
             'save-and-edit'    => true
         ));
 
-        
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();

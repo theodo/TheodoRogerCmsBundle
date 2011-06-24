@@ -134,7 +134,7 @@ class SnippetControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         // Retrieve "Add snippet" link and click
-        $link = $crawler->filterXPath('//a[@class="new-snippet"]')->link();
+        $link = $crawler->filterXPath('//a[@id="new-snippet"]')->link();
         $crawler = $client->click($link);
 
         // Test status and content
