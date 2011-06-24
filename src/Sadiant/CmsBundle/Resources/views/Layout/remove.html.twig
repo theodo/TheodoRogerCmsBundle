@@ -4,15 +4,27 @@
 {% set nav = 'layouts' %}
 
 {% block page_title %}
-Remove layout
+{% trans %}Remove Layout{% endtrans %}
 {% endblock %}
 
 {% block content %}
-
-Are you sure you want to <strong>permanently remove</strong> the following layout:
-{{ layout.name }}
-<form action="{{ url('layout_remove', { 'id': layout.id }) }}" method="post" }}>
-    <input type="submit" value="Remove"/>
-    <a href="{{ url('layout_list') }}">Cancel</a>
+<h1>{% trans %}Remove Layout{% endtrans %}</h1>
+<p>{% trans %}Are you sure you want to <strong class="warning">permanently remove</strong> the following layout?{% endtrans %}</p>
+<table class="index" id="layouts">
+    <tbody>
+        <tr class="node level_1">
+            <td class="layout">
+                <img alt="" src="/bundles/sadiantcms/images/admin/layout.png">
+                <span class="title">{{ layout.name }}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<form action="{{ url('layout_remove', { 'id': layout.id }) }}" method="post" class="edit_layout">
+    <p class="buttons">
+        <input class="button" type="submit" value="Delete Layout" />
+        {% trans %}or{% endtrans %}
+        <a href="{{ url('layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
+    </p>
 </form>
 {% endblock %}
