@@ -22,7 +22,7 @@
 </table>
 <form action="{{ url('layout_remove', { 'id': layout.id }) }}" method="post" class="edit_layout">
     <p class="buttons">
-        <input class="button" type="submit" value="Delete Layout" />
+        <input class="button" type="submit" value="{% trans %}Delete Layout{% endtrans %}" />
         {% trans %}or{% endtrans %}
         <a href="{{ url('layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
     </p>
