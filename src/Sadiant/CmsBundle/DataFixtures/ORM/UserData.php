@@ -36,7 +36,7 @@ class UserData extends AbstractFixture implements OrderedFixtureInterface, Conta
         $user->setName('Theodore De Banville');
         $user->setUsername('admin');
         $user->setSalt(md5(time()));
-        $user->setEmail('dev@theodo.fr');
+        $user->setEmail('dev+admin@theodo.fr');
         $user->setIsMainAdmin(true);
         $user->getUserRoles()->add($this->getReference('admin-role'));
         
@@ -52,7 +52,7 @@ class UserData extends AbstractFixture implements OrderedFixtureInterface, Conta
         $user1->setUsername('user');
         $user1->setPassword('user');
         $user1->setSalt(md5(time()));
-        $user1->setEmail('dev@theodo.fr');
+        $user1->setEmail('dev+user@theodo.fr');
         $user1->getUserRoles()->add($this->getReference('user-role'));
         
         $encoder = $factory->getEncoder($user1);

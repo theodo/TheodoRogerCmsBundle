@@ -15,6 +15,7 @@ Sadiant\CmsBundle\Entity\User:
             type: string
             length: 255
             nullable: false
+            unique: true
         password:
             type: string
             length: 255
@@ -27,6 +28,7 @@ Sadiant\CmsBundle\Entity\User:
             type: string
             length: 255
             nullable: false
+            unique: true
         language:
             type: string
             length: 2

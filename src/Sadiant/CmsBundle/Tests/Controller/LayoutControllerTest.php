@@ -41,10 +41,12 @@ class LayoutControllerTest extends WebTestCase
 
         // Submit the form with valid credentials
         $crawler = $client->submit(
-                        $form, array(
-                    '_username' => $username,
-                    '_password' => $password
-                        )
+            $form,
+            array(
+                '_username'    => $username,
+                '_password'    => $password,
+                '_remember_me' => true
+            )
         );
 
         // Response should be success

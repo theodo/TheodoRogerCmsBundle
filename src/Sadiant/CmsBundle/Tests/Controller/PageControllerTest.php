@@ -43,8 +43,9 @@ class PageControllerTest extends WebTestCase
         $crawler = $client->submit(
             $form,
             array(
-                '_username' => $username,
-                '_password' => $password
+                '_username'    => $username,
+                '_password'    => $password,
+                '_remember_me' => true
             )
         );
 
