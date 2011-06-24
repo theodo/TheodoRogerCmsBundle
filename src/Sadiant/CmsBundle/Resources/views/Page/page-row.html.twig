@@ -22,7 +22,8 @@
                 </a>
             {% endif %}
             <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
-                <img alt="" class="icon" src="/bundles/sadiantcms/images/admin/page.png" /> {{ page.name }}
+                <img alt="" class="icon" src="/bundles/sadiantcms/images/admin/page.png" />
+                <span class="title">{{ page.name }}</span>
             </a>
             <img src="/bundles/sadiantcms/images/admin/spinner.gif" class="ajax-loader hide busy" alt="" />
         </span>
