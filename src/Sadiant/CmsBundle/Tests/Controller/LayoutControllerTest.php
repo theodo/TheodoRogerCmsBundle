@@ -2,10 +2,28 @@
 
 namespace Sadiant\CmsBundle\Tests\Controller;
 
+require_once __DIR__.'/../../../../../app/AppKernel.php';
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Sadiant\CmsBundle\Repository\LayoutRepository;
 
 class LayoutControllerTest extends WebTestCase
 {
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    public function setUp()
+    {
+        // Load and boot kernel
+        $kernel = new \AppKernel('test', true);
+        $kernel->boot();
+
+        // Load "test" entity manager
+        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
+    }
+
     /**
      * Test layout list
      *
@@ -14,6 +32,8 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testList()
     {
+        print_r("\n> LayoutController - Test list action");
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/admin/layouts');
 
@@ -24,18 +44,152 @@ class LayoutControllerTest extends WebTestCase
     }
 
     /**
+     * Test new action
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-22
+     */
+    public function testNew()
+    {
+      print_r("\n> LayoutController - Test new action");
+
+      $client = $this->createClient();
+      $crawler = $client->request('GET', '/admin/layouts/new');
+
+      $this->assertEquals(200, $client->getResponse()->getStatusCode());
+      $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
+    }
+
+    /**
      * Test layout edit
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-22
      */
-    public function testView()
+    public function testEdit()
     {
+        print_r("\n> LayoutController - Test edit action");
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/admin/layouts/1/edit');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-//        $this->assertRegexp('/.*Layout.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*name.*/', $client->getResponse()->getContent());
+    }
+    
+    /**
+     * Test layout update
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function testUpdate()
+    {
+        print_r("\n> LayoutController - Test update action");
+
+        $client = $this->createClient();
+        $crawler = $client->request('GET','/admin/layouts/1');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
+    }
+
+    /**
+     * Test layout remove
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function testRemove()
+    {
+        print_r("\n> LayoutController - Test remove action");
+
+        $client = $this->createClient();
+        $crawler = $client->request('GET','/admin/layouts/1/remove');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
+    }
+
+    /**
+     * Test workflow
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-23
+     */
+    public function testWorkflow()
+    {
+        print_r("\n> LayoutController - Test workflow");
+        
+        // Start transaction
+        $this->em->getConnection()->beginTransaction();
+
+        $client = $this->createClient();
+        $crawler = $client->request('GET','/admin/layouts');
+
+        //Test status
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        // Retrieve "Add layout" link and click
+        $link = $crawler->filterXPath('//a[@class="new-layout"]')->link();
+        $crawler = $client->click($link);
+
+        // Test status and content
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
+
+        // Retrieve form
+        $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
+        
+        // Submit form with errors
+        $crawler = $client->submit($form, array());
+        $crawler = $client->request('POST', $form->getUri());
+
+        // Test return
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*admin\/layouts\/new$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
+
+        // Submit valid form
+        $crawler = $client->submit($form, array( 
+            'layout[name]'          => 'Functional test',
+            'layout[content]'       => 'Functional test',
+        ));
+
+        // Test return
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*admin\/layouts\/.*\/edit$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
+
+        // Update Form
+        $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
+        $form['layout[content_type]']  = 'text/html';
+
+        // Submit the form
+        $crawler = $client->submit($form);
+
+        // Test return
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertRegexp('/.*admin\/layouts\/.*\/edit$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
+
+        // Back to admin homepage
+        $link = $crawler->filterXPath('//a[@class="list-layout"]')->link();
+        $crawler = $client->click($link);
+
+        // Test status and content
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
+
+        $this->em->getConnection()->rollBack();
     }
 }

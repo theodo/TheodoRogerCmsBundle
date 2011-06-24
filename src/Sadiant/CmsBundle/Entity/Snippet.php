@@ -3,6 +3,8 @@
 namespace Sadiant\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Sadiant\CmsBundle\Entity\Snippet
@@ -83,5 +85,19 @@ class Snippet
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Snippet validator
+     *
+     * 
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {        
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+
+        // Content validator: not null
+        $metadata->addPropertyConstraint('content', new NotBlank());
     }
 }

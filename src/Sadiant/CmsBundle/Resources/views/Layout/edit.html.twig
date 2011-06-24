@@ -10,18 +10,16 @@ Edition layout
 {% block content %}
 <h1>{{ title }}</h1>
 
-<a href="{{ url('layout_list') }}">Back to list</a>
+<a class="list-layout" href="{{ url('layout_list') }}">Back to list</a>
 <br />
-Form:
 {% if layout is defined %} 
 <form action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
 {% else %}
 <form action="{{ url('layout_new') }}" method="post" {{ form_enctype(form) }}>
 {% endif %}
     {{ form_widget(form) }}
-    
-    <input type="submit" value="Save Changes" name="lala" />
-    <input type="submit" value="Save and Continue Editing" name="lili" />
+    <input type="submit" value="Save Changes" name="save-and-list" />
+    <input type="submit" value="Save and Continue Editing" name="save-and-edit" />
     <a href="{{ url('layout_list') }}">Cancel</a>
 </form>
 <br />
@@ -29,5 +27,5 @@ Form:
 {% if layout is defined %}
 <a href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
 {% endif %}
-<a href="{{ url('layout_list') }}">Back to list</a>
+<a class="list-layout" href="{{ url('layout_list') }}">Back to list</a>
 {% endblock %}

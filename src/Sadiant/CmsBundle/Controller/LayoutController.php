@@ -60,13 +60,20 @@ class LayoutController extends Controller
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
 
-                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('layout_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                }
+
+                return $redirect;
             }
         }
 
         return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
                 array(
-                    'title' => 'Nouveau Layout',
+                    'title' => 'New layout',
                     'form' => $form->createView()
                   )
                 );
@@ -105,17 +112,18 @@ class LayoutController extends Controller
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
 
-                return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                // Set redirect route
+                $redirect = $this->redirect($this->generateUrl('layout_list'));
+                if ($request->get('save-and-edit'))
+                {
+                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                }
+
+                return $redirect;
             }
         }
 
-        return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
-                array(
-                    'title' => 'Edition '.$layout->getName(),
-                    'layout' => $layout,
-                    'form' => $form->createView()
-                  )
-                );
+        return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
     }
 
     /**
@@ -135,7 +143,7 @@ class LayoutController extends Controller
 
         return $this->render('SadiantCmsBundle:Layout:edit.html.twig',
                 array(
-                    'title' => 'Edition '.$layout->getName(),
+                    'title' => 'Edit '.$layout->getName(),
                     'layout' => $layout,
                     'form' => $form->createView()
                   )

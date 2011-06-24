@@ -3,6 +3,8 @@
 namespace Sadiant\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Sadiant\CmsBundle\Entity\Layout
@@ -108,5 +110,19 @@ class Layout
     public function getContentType()
     {
         return $this->content_type;
+    }
+
+    /**
+     * Layout validator
+     *
+     * 
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {        
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+
+        // Content validator: not null
+        $metadata->addPropertyConstraint('content', new NotBlank());
     }
 }

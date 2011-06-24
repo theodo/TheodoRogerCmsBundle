@@ -5,7 +5,7 @@
 
 {% block content %}
 <h1>Snippets</h1>
-<a href="{{ url('snippet_new') }}">Add</a>
+<a class="new-snippet" href="{{ url('snippet_new') }}">Add</a>
 <ul>
     {% for snippet in snippets %}
     <li>
@@ -13,5 +13,5 @@
     </li>
     {% endfor %}
 </ul>
-<a href="{{ url('snippet_new') }}">Add</a>
+<a class="new-snippet" href="{{ url('snippet_new') }}">Add</a>
 {% endblock %}

@@ -15,10 +15,18 @@ class SnippetData implements FixtureInterface
         $snippet1 = new Snippet();
         $snippet1->setName('bonsoir');
         $snippet1->setContent(<<<EOF
- Bonsoir !
+Bonsoir !
 EOF
 );
         $manager->persist($snippet1);
+
+        $snippet2 = new Snippet();
+        $snippet2->setName('theodo');
+        $snippet2->setContent(<<<EOF
+ <a href="http://www.theodo.fr alt="">Theodo</a>
+EOF
+);
+        $manager->persist($snippet2);
 
         // Save snippet
         $manager->flush();
