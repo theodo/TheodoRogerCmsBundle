@@ -46,7 +46,7 @@ class UserController extends Controller
             'error'         => $error,
         ));
     }
-    
+
     /**
      * User box
      * 

@@ -2,7 +2,7 @@
 
 namespace Sadiant\CmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Sadiant\CmsBundle\Repository\SnippetRepository;
@@ -23,7 +23,7 @@ class SnippetControllerTest extends WebTestCase
         // Load "test" entity manager
         $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
     }
-    
+
     /**
      * User connection
      * 
@@ -33,6 +33,8 @@ class SnippetControllerTest extends WebTestCase
      */
     protected function login($client, $username = 'admin', $password = 'admin')
     {
+        $this->logout($client);
+
         // Retrieve crawler
         $crawler = $client->request('GET', '/admin');
 
@@ -41,11 +43,10 @@ class SnippetControllerTest extends WebTestCase
 
         // Submit the form with valid credentials
         $crawler = $client->submit(
-            $form,
-            array(
-                '_username' => $username,
-                '_password' => $password
-            )
+                        $form, array(
+                    '_username' => $username,
+                    '_password' => $password
+                        )
         );
 
         // Response should be success
@@ -84,6 +85,8 @@ class SnippetControllerTest extends WebTestCase
         $this->assertRegexp('/.*Snippets.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*theodo.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Remove.*/', $client->getResponse()->getContent());
+
+        $this->logout($client);
     }
 
     /**
@@ -94,14 +97,16 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testNew()
     {
-      print_r("\n> SnippetController - Test new action");
+        print_r("\n> SnippetController - Test new action");
 
-      $client = $this->createClient();
-      $crawler = $this->login($client);
-      $crawler = $client->request('GET', '/admin/snippets/new');
+        $client = $this->createClient();
+        $crawler = $this->login($client);
+        $crawler = $client->request('GET', '/admin/snippets/new');
 
-      $this->assertEquals(200, $client->getResponse()->getStatusCode());
-      $this->assertRegexp('/.*New snippet.*/', $client->getResponse()->getContent());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*New snippet.*/', $client->getResponse()->getContent());
+
+        $this->logout($client);
     }
 
     /**
@@ -121,8 +126,10 @@ class SnippetControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*name.*/', $client->getResponse()->getContent());
+
+        $this->logout($client);
     }
-    
+
     /**
      * Test snippet update
      *
@@ -135,12 +142,14 @@ class SnippetControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET','/admin/snippets/1');
+        $crawler = $client->request('GET', '/admin/snippets/1');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
+
+        $this->logout($client);
     }
 
     /**
@@ -155,10 +164,12 @@ class SnippetControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET','/admin/snippets/1/remove');
+        $crawler = $client->request('GET', '/admin/snippets/1/remove');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
+
+        $this->logout($client);
     }
 
     /**
@@ -170,13 +181,13 @@ class SnippetControllerTest extends WebTestCase
     public function testWorkflow()
     {
         print_r("\n> SnippetController - Test workflow");
-        
+
         // Start transaction
         $this->em->getConnection()->beginTransaction();
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET','/admin/snippets');
+        $crawler = $client->request('GET', '/admin/snippets');
 
         //Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -191,7 +202,7 @@ class SnippetControllerTest extends WebTestCase
 
         // Retrieve form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
-        
+
         // Submit form with errors
         $crawler = $client->submit($form, array());
         $crawler = $client->request('POST', $form->getUri());
@@ -203,10 +214,10 @@ class SnippetControllerTest extends WebTestCase
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
         // Submit valid form
-        $crawler = $client->submit($form, array( 
-            'snippet[name]'          => 'Functional test',
-            'snippet[content]'       => 'Functional test',
-        ));
+        $crawler = $client->submit($form, array(
+                    'snippet[name]' => 'Functional test',
+                    'snippet[content]' => 'Functional test',
+                ));
 
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -218,7 +229,7 @@ class SnippetControllerTest extends WebTestCase
 
         // Update Form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
-        $form['snippet[content]']  = 'Update test';
+        $form['snippet[content]'] = 'Update test';
 
         // Submit the form
         $crawler = $client->submit($form);
@@ -241,5 +252,7 @@ class SnippetControllerTest extends WebTestCase
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
         $this->em->getConnection()->rollBack();
+
+        $this->logout($client);
     }
 }
