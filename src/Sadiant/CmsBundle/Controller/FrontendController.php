@@ -45,23 +45,6 @@ class FrontendController extends Controller
                 ->getRepository('SadiantCmsBundle:Page')
                 ->findOneBySlug($slug);
 
-        //on modifie le loader de twig
-        $twig_environment = $this->get('twig');
-        $old_loader = $twig_environment->getLoader();
-        $twig_engine = $this->get('templating');
-
-        $twig_environment->setLoader(new Twig_Loader_Database($this->getDoctrine()->getEntityManager()));
-        try
-        {
-          $response = $twig_engine->renderResponse('page:'.$page->getName());
-          $twig_environment->setLoader($old_loader);
-        }
-        catch (Twig_Error $e)
-        {
-          $twig_environment->setLoader($old_loader);
-          throw $e;
-        }
-
-        return $response;
+        return $this->get('thot_cms.templating')->renderResponse('page:'.$page->getName());
     }
 }

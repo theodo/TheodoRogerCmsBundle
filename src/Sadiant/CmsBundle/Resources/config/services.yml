@@ -1,9 +1,17 @@
 parameters:
-    cms_services.validator.exists.class: Sadiant\CmsBundle\Validator\Exists
-
+    thot_cms.twig.loader.class: Sadiant\CmsBundle\Extensions\Twig_Loader_Database
+    thot_cms.caching.class: Sadiant\CmsBundle\Extensions\Twig_Cache_Database
+    
 services:
-    cms_services.validator.exists:
-        class:     Sadiant\CmsBundle\Validator\ExistsValidator
+    thot_cms.twig.loader:
+        class: %thot_cms.twig.loader.class%
         arguments: ['@doctrine.orm.entity_manager']
-        tags:
-             - { name: validator.constraint_validator, alias: validator.exists }
+    thot_cms.twig:
+        class: %twig.class%
+        arguments: ['@thot_cms.twig.loader', %twig.options%]
+    thot_cms.templating:
+        class: %templating.engine.twig.class%
+        arguments: ['@thot_cms.twig', '@templating.name_parser', '@templating.globals']
+    thot_cms.caching:
+        class: %thot_cms.caching.class%
+        arguments: ['@thot_cms.twig']

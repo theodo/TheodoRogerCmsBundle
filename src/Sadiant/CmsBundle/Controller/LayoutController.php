@@ -14,7 +14,7 @@ namespace Sadiant\CmsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sadiant\CmsBundle\Form\LayoutType;
 
-class LayoutController extends BaseController
+class LayoutController extends Controller
 {
     /**
      *
@@ -59,6 +59,8 @@ class LayoutController extends BaseController
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
+                
+                $this->get('thot_cms.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('layout_list'));
@@ -110,12 +112,14 @@ class LayoutController extends BaseController
             if ($form->isValid()) {
 
                 // remove twig cached file
-                $this->removeCache($layout->getName(), 'layout');
+                $this->get('thot_cms.caching')->invalidate('layout:'.$layout->getName());
 
                 // save layout
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
+                
+                $this->get('thot_cms.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('layout_list'));

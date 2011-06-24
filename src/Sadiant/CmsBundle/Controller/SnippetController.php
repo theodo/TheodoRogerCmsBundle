@@ -14,7 +14,7 @@ namespace Sadiant\CmsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sadiant\CmsBundle\Form\SnippetType;
 
-class SnippetController extends BaseController
+class SnippetController extends Controller
 {
     /**
      *
@@ -60,6 +60,8 @@ class SnippetController extends BaseController
                 $snippet = $form->getData();
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
+                
+                $this->get('thot_cms.caching')->warmup('snippet:'.$snippet->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
@@ -99,12 +101,13 @@ class SnippetController extends BaseController
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->removeCache($snippet->getName(), 'snippet');
+                $this->get('thot_cms.caching')->invalidate('snippet:'.$snippet->getName());
 
                 $snippet = $form->getData();
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
 
+                $this->get('thot_cms.caching')->warmup('snippet:'.$snippet->getName());
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
                 if ($request->get('save-and-edit'))

@@ -16,7 +16,7 @@ use Sadiant\CmsBundle\Repository\PageRepository;
 use Sadiant\CmsBundle\Form\PageType;
 use Sadiant\CmsBundle\Entity\Page;
 
-class PageController extends BaseController
+class PageController extends Controller
 {
     /**
      * List pages
@@ -92,6 +92,8 @@ class PageController extends BaseController
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush(); 
+                
+                $this->get('thot_cms.caching')->warmup('page:'.$page->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
@@ -189,11 +191,13 @@ class PageController extends BaseController
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->removeCache($page->getName(), 'page');
+                $this->get('thot_cms.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();
+                
+                $this->get('thot_cms.caching')->warmup('page:'.$page->getName());
                 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));

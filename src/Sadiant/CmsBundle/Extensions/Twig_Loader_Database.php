@@ -83,28 +83,27 @@ class Twig_Loader_Database implements Twig_LoaderInterface
         
         // parsing names of the kind 'type:name' 
         $name_parts = explode(':', $name);
-        if (count($name_parts) > 1)
+        if (count($name_parts) < 2)
         {
-            $name = $name_parts[1];
-            if (!in_array($name_parts[0], $types))
-            {
-                throw new Twig_Error_Loader('Type "'.$name_parts[0].'" is not accepted. Accepted types are: '.implode(', ', $types));
-            }
-            $types = array($name_parts[0]);
-        }
-
-        foreach($types as $type)
-        {
-            $template = $this->getEntityManager()
-                    ->getRepository('SadiantCmsBundle:'.ucfirst($type))
-                    ->findOneByName($name);
-            if ($template)
-            {
-                return $template->getContent();
-            }
+            throw new Twig_Error_Loader('A template type must be specified using the "type:name" syntax');
         }
         
-        throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type(s): '.implode(', ', $types));
+        $name = $name_parts[1];
+        $type = $name_parts[0];
+        if (!in_array($type, $types))
+        {
+            throw new Twig_Error_Loader('Type "'.$type.'" is not accepted. Accepted types are: '.implode(', ', $types));
+        }
+        
+        $template = $this->getEntityManager()
+                ->getRepository('SadiantCmsBundle:'.ucfirst($type))
+                ->findOneByName($name);
+        if (!$template)
+        {
+            throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type(s): '.implode(', ', $types));
+        }
+        
+        return $template->getContent();
     }
 
     /**
@@ -127,6 +126,6 @@ class Twig_Loader_Database implements Twig_LoaderInterface
      */
     public function isFresh($name, $time)
     {
-        return true;
+        return true; // isFresh is handled by cache invalidation
     }
 }
