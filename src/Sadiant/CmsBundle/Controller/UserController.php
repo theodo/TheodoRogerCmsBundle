@@ -24,6 +24,12 @@ class UserController extends Controller
      */
     public function loginAction()
     {
+        // User already authenticated, redirect to page list
+        if($this->get('session')->has('_security_main'))
+        {
+            return $this->redirect($this->generateUrl('page_list'));
+        }
+
         // Get the login error if there is one
         if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
         {

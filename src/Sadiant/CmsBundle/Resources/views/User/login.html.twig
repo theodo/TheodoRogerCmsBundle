@@ -8,6 +8,12 @@
             <p>{{ error.message }}</p>
         </div>
     {% endif %}
+
+    {% if app.session.hasFlash('notice') %}
+        <div id="notice">
+            <p>{{ app.session.flash('notice') }}</p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
