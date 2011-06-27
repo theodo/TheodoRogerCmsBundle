@@ -1194,6 +1194,7 @@ body.edit_personal_preferences #avatar p.caption
 
 #content table.index .page .w1 img.expander
 {
+  top: -3px;
   left: -25px;
   position: absolute;
   padding: 3px;
