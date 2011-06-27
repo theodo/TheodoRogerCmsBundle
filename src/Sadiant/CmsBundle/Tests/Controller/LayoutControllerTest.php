@@ -190,6 +190,24 @@ class LayoutControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
+        $link = $crawler->filterXPath('//a[@id="remove-layout-3"]')->link();
+        $crawler = $client->click($link);
+
+        // Test status and content
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
+
+        // Retrieve the delete form
+        $form = $crawler->filterXPath('//input[@type="submit"]')->form();
+
+        // Submit the form
+        $crawler = $client->submit($form);
+
+        // Test return
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertRegexp('/.*admin\/layouts$/', $client->getRequest()->getUri());
+
         $this->em->getConnection()->rollBack();
     }
 }

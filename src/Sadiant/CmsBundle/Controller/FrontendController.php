@@ -17,17 +17,9 @@ use Sadiant\CmsBundle\Extensions\Twig_Loader_Database;
 use Twig_Error_Syntax;
 use Twig_Loader_Array;
 
+
 class FrontendController extends Controller
 {
-    /**
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEM()
-    {
-        return $this->get('doctrine')->getEntityManager();
-    }
-
     /**
      * Test for page display
      *

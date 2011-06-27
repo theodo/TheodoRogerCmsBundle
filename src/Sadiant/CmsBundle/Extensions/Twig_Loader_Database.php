@@ -87,14 +87,14 @@ class Twig_Loader_Database implements Twig_LoaderInterface
         {
             throw new Twig_Error_Loader('A template type must be specified using the "type:name" syntax');
         }
-        
+
         $name = $name_parts[1];
         $type = $name_parts[0];
         if (!in_array($type, $types))
         {
             throw new Twig_Error_Loader('Type "'.$type.'" is not accepted. Accepted types are: '.implode(', ', $types));
         }
-        
+
         $template = $this->getEntityManager()
                 ->getRepository('SadiantCmsBundle:'.ucfirst($type))
                 ->findOneByName($name);
@@ -102,7 +102,7 @@ class Twig_Loader_Database implements Twig_LoaderInterface
         {
             throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type(s): '.implode(', ', $types));
         }
-        
+
         return $template->getContent();
     }
 

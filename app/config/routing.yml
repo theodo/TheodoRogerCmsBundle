@@ -73,5 +73,4 @@ snippet_remove:
 # Frontend routing
 page:
     pattern: /{slug}
-    defaults: { _controller: SadiantCmsBundle:Frontend:page }
-
+    defaults: { _controller: SadiantCmsBundle:Frontend:page, slug: null }

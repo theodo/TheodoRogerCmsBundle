@@ -23,7 +23,7 @@ EOF
         $snippet2 = new Snippet();
         $snippet2->setName('theodo');
         $snippet2->setContent(<<<EOF
- <a href="http://www.theodo.fr alt="">Theodo</a>
+ <a id="theodo-link" href="http://localhost:4042/theodo">Theodo</a>
 EOF
 );
         $manager->persist($snippet2);

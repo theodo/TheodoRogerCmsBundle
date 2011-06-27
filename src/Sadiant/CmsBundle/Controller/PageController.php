@@ -93,7 +93,7 @@ class PageController extends Controller
                 $em->persist($page);
                 $em->flush(); 
                 
-                $this->get('thot_cms.caching')->warmup('page:'.$page->getName());
+                $this->get('thot_cms.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
@@ -197,7 +197,7 @@ class PageController extends Controller
                 $em->persist($page);
                 $em->flush();
                 
-                $this->get('thot_cms.caching')->warmup('page:'.$page->getName());
+                $this->get('thot_cms.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
                 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
