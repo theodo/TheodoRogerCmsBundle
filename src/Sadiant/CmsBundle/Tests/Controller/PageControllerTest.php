@@ -108,7 +108,7 @@ class PageControllerTest extends WebTestCase
         print_r("\n> Test page new action");
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*New page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
         
         $this->logout($client);
     }
@@ -128,7 +128,7 @@ class PageControllerTest extends WebTestCase
         print_r("\n> Test page edit action");
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*Edit page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
         
         $this->logout($client);
     }
@@ -148,7 +148,7 @@ class PageControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/admin/pages/1/update');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*Edit page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
         
         $this->logout($client);
     }
@@ -181,7 +181,7 @@ class PageControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         
         // Test page content
-        $this->assertRegexp('/.*New page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
 
         // Retrieve form
@@ -194,7 +194,7 @@ class PageControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*New page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
         // Submit valid form
@@ -212,7 +212,7 @@ class PageControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertRegexp('/.*admin\/pages\/.*\/edit$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*Edit page.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
         
         // Update Form

@@ -106,7 +106,7 @@ class SnippetControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/admin/snippets/new');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*New snippet.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Snippet.*/', $client->getResponse()->getContent());
 
         $this->logout($client);
     }
@@ -200,7 +200,7 @@ class SnippetControllerTest extends WebTestCase
 
         // Test status and content
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*New snippet.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Snippet.*/', $client->getResponse()->getContent());
 
         // Retrieve form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
@@ -212,7 +212,7 @@ class SnippetControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*admin\/snippets\/new$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*New snippet.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Snippet.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
         // Submit valid form

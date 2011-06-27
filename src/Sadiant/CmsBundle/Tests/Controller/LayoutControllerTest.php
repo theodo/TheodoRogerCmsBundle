@@ -110,7 +110,7 @@ class LayoutControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/admin/layouts/new');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Layout.*/', $client->getResponse()->getContent());
 
         $this->logout($client);
     }
@@ -216,7 +216,7 @@ class LayoutControllerTest extends WebTestCase
 
         // Test status and content
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Layout.*/', $client->getResponse()->getContent());
 
         // Retrieve form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
@@ -228,7 +228,7 @@ class LayoutControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*admin\/layouts\/new$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*New layout.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*New Layout.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
         // Submit valid form
