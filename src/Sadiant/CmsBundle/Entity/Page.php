@@ -334,5 +334,4 @@ class Page
         $metadata->addPropertyConstraint('status', new NotBlank());
         $metadata->addPropertyConstraint('status', new Choice(array('choices' => PageRepository::getAvailableStatus())));
     }
-
 }

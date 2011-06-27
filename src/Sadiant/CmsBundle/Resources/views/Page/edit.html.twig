@@ -38,7 +38,7 @@
     <h1>{% trans %}Edit Page{% endtrans %}</h1>
     <form id="new_page" action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% elseif parent_page == 'homepage' %}
-    <h1>{% trans %}New Homeage{% endtrans %}</h1>
+    <h1>{% trans %}New Homepage{% endtrans %}</h1>
     <form id="new_page" action="{{ url('page_new', { 'id': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
     <h1>{% trans %}New Page{% endtrans %}</h1>

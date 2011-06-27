@@ -59,4 +59,18 @@ class Role implements RoleInterface
     {
         return $this->getName();
     }
+
+    /**
+     * toString function
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06)27
+     */
+    public function __toString()
+    {
+        $available_role_names = \Sadiant\CmsBundle\Repository\RoleRepository::getAvailableRoles();
+        
+        return $available_role_names[$this->getName()];
+    }
 }

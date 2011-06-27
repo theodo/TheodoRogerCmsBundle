@@ -10,9 +10,33 @@ logout:
     pattern:   /admin/logout
 
 # User routing
+user_list:
+    pattern:  /admin/users
+    defaults: { _controller: SadiantCmsBundle:User:list }
+
+user_edit:
+    pattern:  /admin/users/{id}/edit
+    defaults: { _controller: SadiantCmsBundle:User:edit }
+
+user_new:
+    pattern:  /admin/users/new
+    defaults: { _controller: SadiantCmsBundle:User:new }
+
+user_remove:
+    pattern:  /admin/users/{id}/remove
+    defaults: { _controller: SadiantCmsBundle:User:remove }
+
 user_preferences:
     pattern:  /admin/preferences/edit
     defaults: { _controller: SadiantCmsBundle:User:preferences }
+
+user_preferencesUpdate:
+    pattern:  /admin/preferences/update
+    defaults: { _controller: SadiantCmsBundle:User:preferencesUpdate }
+
+user_update:
+    pattern:  /admin/users/{id}/update
+    defaults: { _controller: SadiantCmsBundle:User:update }
 
 # Page routing
 page_list:

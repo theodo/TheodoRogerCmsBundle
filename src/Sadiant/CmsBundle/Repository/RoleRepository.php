@@ -14,6 +14,8 @@ class RoleRepository extends EntityRepository
 {
     const ROLE_USER  = 'ROLE_USER';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_USER_NAME  = 'Designer';
+    const ROLE_ADMIN_NAME = 'Administrator';
 
     /**
      * Return available roles
@@ -25,8 +27,8 @@ class RoleRepository extends EntityRepository
     public static function getAvailableRoles()
     {
         return array(
-            self::ROLE_USER  => self::ROLE_USER,
-            self::ROLE_ADMIN => self::ROLE_ADMIN,
+            self::ROLE_USER  => self::ROLE_USER_NAME,
+            self::ROLE_ADMIN => self::ROLE_ADMIN_NAME,
         );
     }
 }

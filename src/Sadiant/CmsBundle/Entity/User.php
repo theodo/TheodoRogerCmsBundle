@@ -2,8 +2,16 @@
 
 namespace Sadiant\CmsBundle\Entity;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\True;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+
+use Sadiant\CmsBundle\Repository\UserRepository;
 
 /**
  * Sadiant\CmsBundle\Entity\User
@@ -284,4 +292,79 @@ class User implements UserInterface
         return $this->getId() == $user->getId();
     }
 
+    /**
+     * Return gravatar hash of user email
+     * 
+     * @return string
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-27
+     */
+    public function getGravatarEmailHash()
+    {
+       return md5(strtolower(trim($this->getEmail())));
+    }
+    
+    private $password_confirm;
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     */
+    public function setPasswordConfirm($password_confirm)
+    {
+        $this->password_confirm = $password_confirm;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string $password
+     */
+    public function getPasswordConfirm()
+    {
+        return $this->password_confirm;
+    }
+    
+    
+    /**
+     * Check password
+     * 
+     * @return boolean
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since date
+     */
+    public function isValidPassword()
+    {
+        return $this->getPasswordConfirm() === $this->getPassword();
+    }
+
+    /**
+     * User validator
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-27
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+
+        // Username validator: not null and unique
+        $metadata->addPropertyConstraint('username', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('username'))));
+
+        // Email validator: not null and unique
+        $metadata->addPropertyConstraint('email', new NotBlank());
+        $metadata->addPropertyConstraint('email', new Email());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('email'))));
+
+        // Password validator : not blank and match to confirmation
+        $metadata->addPropertyConstraint('password', new NotBlank());
+        $metadata->addPropertyConstraint('password_confirm', new NotBlank());
+        $metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
+
+        // Language validator: available
+        $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + UserRepository::getAvailableLanguages())));
+    }
 }

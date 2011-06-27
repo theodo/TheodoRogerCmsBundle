@@ -2049,3 +2049,13 @@ table.index td.note
   display: inline;
   text-shadow: #666 1px 1px 0;
 }
+
+.hide
+{
+  display: none;
+}
+
+.display
+{
+  display: block;
+}

@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li>
-                <a{% if current_nav == 'users' %} class="current"{% endif %} href="#">
+                <a{% if current_nav == 'users' %} class="current"{% endif %} href="{{ url('user_list') }}">
                     <span>Users</span>
                 </a>
             </li>
