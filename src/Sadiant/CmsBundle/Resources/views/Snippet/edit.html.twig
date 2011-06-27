@@ -51,7 +51,7 @@
             <input type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
             <input type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
             {% trans %}or{% endtrans %}
-            <a href="{{ url('snippet_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            <a class="list-snippet" href="{{ url('snippet_list') }}">{% trans %}Cancel{% endtrans %}</a>
             {# {% if snippet is defined %}
             <a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">{% trans %}Remove{% endtrans %}</a>
             {% endif %}
