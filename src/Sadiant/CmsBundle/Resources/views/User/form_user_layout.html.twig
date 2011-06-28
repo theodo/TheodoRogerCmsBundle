@@ -1,0 +1,43 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_widget %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }}>
+        {{ block('field_rows') }}
+        {{ form_rest(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_widget %}
+
+{% block field_widget %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    {% set class = class|default('textbox') %}
+    {% set size = size|default('32') %}
+    <input size="{{ size }}" class="{{ class }}" type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endspaceless %}
+{% endblock field_widget %}
+
+{% block text_widget %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    {{ block('field_widget') }}
+{% endspaceless %}
+{% endblock text_widget %}
+
+{% block password_widget %}
+{% spaceless %}
+    {% set type = type|default('password') %}
+    {% set size = size|default('15') %}
+    {{ block('field_widget') }}
+{% endspaceless %}
+{% endblock password_widget %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    {% set class = class|default('textarea') %}
+    {% set rows = rows|default('4') %}
+    {% set cols = cols|default('53') %}
+    <textarea class="{{ class }}" rows="{{ rows }}" cols="{{ cols }}" {{ block('widget_attributes') }}>{{ value }}</textarea>
+{% endspaceless %}
+{% endblock textarea_widget %}

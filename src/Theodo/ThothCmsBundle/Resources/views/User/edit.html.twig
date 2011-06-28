@@ -17,28 +17,8 @@
 {% endif %}
 
 {% block page_title title %}
-
-{% form_theme form _self %}
-{% block _user_name_widget %}
-    <input class="textbox activate" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _user_email_widget %}
-    <input class="textbox" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _user_username_widget %}
-    <input class="textbox" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _user_password_widget %}
-    <input class="textbox big" size="15" type="password" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _user_password_confirm_widget %}
-    <input class="textbox big" size="15" type="password" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _user_notes_widget %}
-{% spaceless %}
-    <textarea class="textarea" cols="53" rows="4" {{ block('widget_attributes') }}>{{ value }}</textarea>
-{% endspaceless %}
-{% endblock %}
+  
+{% form_theme form 'SadiantCmsBundle:User:form_user_layout.html.twig' %}
 
 {% block content %}  
     {% if user is defined %} 

@@ -10,22 +10,7 @@
 <script src="{{ asset('bundles/theodothothcms/js/user.js') }}" type="text/javascript"></script>
 {% endblock %}
 
-{% form_theme form _self %}
-{% block _userpreferences_name_widget %}
-    <input class="textbox activate" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _userpreferences_email_widget %}
-    <input class="textbox" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _userpreferences_username_widget %}
-    <input class="textbox" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _userpreferences_password_widget %}
-    <input class="textbox big" size="15" type="password" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _userpreferences_password_confirm_widget %}
-    <input class="textbox big" size="15" type="password" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
+{% form_theme form 'SadiantCmsBundle:User:form_user_layout.html.twig' %}
 
 {% block content %}
     <h1>{% trans %}Personal Preferences{% endtrans %}</h1>
