@@ -18,26 +18,14 @@
     <form class="edit_user" action="{{ url('user_preferencesUpdate') }}" method="post" {{ form_enctype(form) }}>
         <div id="avatar">
           <img width="80" height="80" src="http://www.gravatar.com/avatar/{{user.gravatarEmailHash}}" class="avatar" alt="" />
-          <p class="caption">Avatar provided by Gravatar.com</p>
+          <p class="caption">{% trans %}Avatar provided by Gravatar.com{% endtrans %}</p>
         </div>
       
-        <p>
-            {{ form_label(form.name) }}
-            {{ form_widget(form.name) }}
-            {{ form_errors(form.name) }}
-        </p>
+        <p>{{ form_row(form.name) }}</p>
       
-        <p>
-            {{ form_label(form.username) }}
-            {{ form_widget(form.username) }}
-            {{ form_errors(form.username) }}
-        </p>
+        <p>{{ form_row(form.username) }}</p>
       
-        <p>
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-        </p>
+        <p>{{ form_row(form.email) }}</p>
       
         <p id="display_password" class="{% if form_errors(form.password) or form_errors(form) %}hide{% else %}display{% endif %}">
             <label>{% trans %}Password{% endtrans %}</label>
@@ -48,19 +36,10 @@
             </span>
         </p>
 
-        {{ form_errors(form) }}
-
-        <div class="set change-password {% if form_errors(form.password) or form_errors(form) %}display{% else %}hide{% endif %}">
+        <div class="set change-password {% if form_errors(form.password) %}display{% else %}hide{% endif %}">
+            <p>{{ form_row(form.password) }}</p>
             <p>
-                {{ form_label(form.password) }}
-                {{ form_widget(form.password) }}
-                {{ form_errors(form.password) }}
-            </p>
-
-            <p>
-                {{ form_label(form.password_confirm) }}
-                {{ form_widget(form.password_confirm) }}
-                {{ form_errors(form.password_confirm) }}
+                {{ form_row(form.password_confirm) }}
                 <span>
                     {% trans %} or {% endtrans %}
                     <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
@@ -68,11 +47,7 @@
             </p>
         </div>
         
-        <p>
-            {{ form_label(form.language) }}
-            {{ form_widget(form.language) }}
-            {{ form_errors(form.language) }}
-        </p>
+        <p>{{ form_row(form.language) }}</p>
 
         {{ form_rest(form) }}
       

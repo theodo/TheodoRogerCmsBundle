@@ -31,26 +31,14 @@
 
         <div id="avatar">
           <img width="80" height="80" src="http://www.gravatar.com/avatar/{{gravatarHash}}" class="avatar" alt="" />
-          <p class="caption">Avatar provided by Gravatar.com</p>
+          <p class="caption">{% trans %}Avatar provided by Gravatar.com{% endtrans %}</p>
         </div>
 
-        <p>
-            {{ form_label(form.name) }}
-            {{ form_widget(form.name) }}
-            {{ form_errors(form.name) }}
-        </p>
+        <p>{{ form_row(form.name) }}</p>
       
-        <p>
-            {{ form_label(form.username) }}
-            {{ form_widget(form.username) }}
-            {{ form_errors(form.username) }}
-        </p>
+        <p>{{ form_row(form.username) }}</p>
       
-        <p>
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-        </p>
+        <p>{{ form_row(form.email) }}</p>
       
         <p id="display_password" class="{% if form_errors(form.password) or form_errors(form) or user is not defined %}hide{% else %}display{% endif %}">
             <label>{% trans %}Password{% endtrans %}</label>
@@ -60,19 +48,10 @@
             </span>
         </p>
 
-        {{ form_errors(form) }}
-
-        <div class="set change-password {% if form_errors(form.password) or form_errors(form) or user is not defined  %}display{% else %}hide{% endif %}">
+        <div class="set change-password {% if form_errors(form.password) or user is not defined  %}display{% else %}hide{% endif %}">
+            <p>{{ form_row(form.password) }}</p>
             <p>
-                {{ form_label(form.password) }}
-                {{ form_widget(form.password, { 'attr' : { 'class' : 'input-password' } }) }}
-                {{ form_errors(form.password) }}
-            </p>
-
-            <p>
-                {{ form_label(form.password_confirm) }}
-                {{ form_widget(form.password_confirm, { 'attr' : { 'class' : 'input-password' } }) }}
-                {{ form_errors(form.password_confirm) }}
+                {{ form_row(form.password_confirm) }}
 
                 {% if user is defined  %}
                     <span>
@@ -83,23 +62,12 @@
             </p>
         </div>
 
-        <p>
-            {{ form_label(form.user_roles) }}
-            {{ form_widget(form.user_roles) }}
-            {{ form_errors(form.user_roles) }}
-        </p>
+        <p>{{ form_row(form.user_roles) }}</p>
         
-        <p>
-            {{ form_label(form.language) }}
-            {{ form_widget(form.language) }}
-            {{ form_errors(form.language) }}
-        </p>
+        <p>{{ form_row(form.language) }}</p>
         
-        <p>
-            {{ form_label(form.notes) }}
-            {{ form_widget(form.notes) }}
-            {{ form_errors(form.notes) }}
-        </p>
+        <p>{{ form_row(form.notes) }}</p>
+
         {{ form_rest(form) }}
       
         <p class="buttons">

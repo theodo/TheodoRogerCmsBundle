@@ -1999,6 +1999,7 @@ div.textarea_toolbar button.selected
 
 #content form p span.error-with-field span.error
 {
+  position: relative;
   line-height: 1.4;
   background-color: #c00;
   color: white;

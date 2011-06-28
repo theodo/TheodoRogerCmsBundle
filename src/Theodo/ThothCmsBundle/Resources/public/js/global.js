@@ -23,3 +23,26 @@ var string_to_slug = function(str)
 
   return str;
 }
+
+jQuery(document).ready(function ()
+{
+  // Load input name listener
+  closeErrorListener();
+});
+
+/**
+ * Closes error messages
+ *
+ * @author cyrillej
+ * @since 2011-06-28
+ */
+var closeErrorListener = function ()
+{
+  // Set listener on input
+  jQuery('.closer').live('click', function (event)
+  {
+    event.preventDefault();
+
+    jQuery(this).parent().fadeOut('slow');
+  });
+}

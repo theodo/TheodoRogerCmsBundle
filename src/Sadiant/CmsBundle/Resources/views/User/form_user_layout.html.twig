@@ -1,14 +1,5 @@
 {% extends 'form_div_layout.html.twig' %}
 
-{% block form_widget %}
-{% spaceless %}
-    <div {{ block('widget_container_attributes') }}>
-        {{ block('field_rows') }}
-        {{ form_rest(form) }}
-    </div>
-{% endspaceless %}
-{% endblock form_widget %}
-
 {% block field_widget %}
 {% spaceless %}
     {% set type = type|default('text') %}
@@ -21,6 +12,7 @@
 {% block text_widget %}
 {% spaceless %}
     {% set type = type|default('text') %}
+    {% set class = class|default('textbox') %}
     {{ block('field_widget') }}
 {% endspaceless %}
 {% endblock text_widget %}
@@ -29,7 +21,7 @@
 {% spaceless %}
     {% set type = type|default('password') %}
     {% set size = size|default('15') %}
-    {{ block('field_widget') }}
+    {{ block('field_widget', { 'attr' : { 'class' : 'input-password' } }) }}
 {% endspaceless %}
 {% endblock password_widget %}
 
@@ -41,3 +33,33 @@
     <textarea class="{{ class }}" rows="{{ rows }}" cols="{{ cols }}" {{ block('widget_attributes') }}>{{ value }}</textarea>
 {% endspaceless %}
 {% endblock textarea_widget %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <span class="error-with-field">
+            {% for error in errors %}
+                <span class="error">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<a href="#" class="closer">x</a></span>
+            {% endfor %}
+        </span>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block field_row %}
+{% spaceless %}
+    <p>
+    {% if errors|length > 0 %}
+        <span class="error-with-field">
+    {% endif %}
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    {% if errors|length > 0 %}
+            {% for error in errors %}
+                <span class="error">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<a href="#" class="closer">x</a></span>
+            {% endfor %}
+        </span>
+    {% endif %}
+    </p>
+{% endspaceless %}
+{% endblock field_row %}
