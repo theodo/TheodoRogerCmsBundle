@@ -60,6 +60,21 @@ class UserData extends AbstractFixture implements OrderedFixtureInterface, Conta
         $user1->setPassword($password);
         
         $manager->persist($user1);
+        
+        // Create cient user
+        $user2 = new User();
+        $user2->setName('Client');
+        $user2->setUsername('client');
+        $user2->setPassword('client');
+        $user2->setSalt(md5(time()));
+        $user2->setEmail('dev+client@theodo.fr');
+        $user2->getUserRoles()->add($this->getReference('client-role'));
+        
+        $encoder = $factory->getEncoder($user2);
+        $password = $encoder->encodePassword('client', $user2->getSalt());
+        $user2->setPassword($password);
+        
+        $manager->persist($user2);
 
         // Save users
         $manager->flush();

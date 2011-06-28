@@ -226,7 +226,7 @@ class UserControllerTest extends WebTestCase
         // Submit valid form
         $crawler = $client->submit($form, array(
                     'user[name]' => 'User de test',
-                    'user[username]' => '·userdetest',
+                    'user[username]' => 'userdetest',
                     'user[email]' => 'userdetest@theodo.fr',
                     'user[password]' => 'testpwd',
                     'user[password_confirm]' => 'testpwd',
@@ -243,7 +243,7 @@ class UserControllerTest extends WebTestCase
         $this->assertRegexp('/.*Administrator, Designer*/', $client->getResponse()->getContent());
 
         // Remove user
-        $crawler = $client->request('GET', '/admin/users/3/remove');
+        $crawler = $client->request('GET', '/admin/users/4/remove');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Remove User de test*/', $client->getResponse()->getContent());
 

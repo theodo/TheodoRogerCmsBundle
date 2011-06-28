@@ -3,8 +3,9 @@ security:
         Theodo\ThothCmsBundle\Entity\User: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_USER:        ROLE_CLIENT
+        ROLE_ADMIN:       [ROLE_USER, ROLE_CLIENT]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_CLIENT, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         main:
@@ -40,7 +41,10 @@ security:
                 path:     /
 
     access_control:
-        - { path: ^/admin/*, roles: ROLE_USER }
-        - { path: ^/admin/users, roles: ROLE_ADMIN }
-        - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/users*, roles: ROLE_ADMIN }
+        - { path: ^/admin/snippets*, roles: ROLE_USER }
+        - { path: ^/admin/layouts*, roles: ROLE_USER }
+        - { path: ^/admin/*, roles: ROLE_CLIENT }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

@@ -11,21 +11,25 @@
             </li>
         </ul>
     </li>
-    <li{% if current_tab == 'design' %} class="current"{% endif %}>
-        <a href="{{ url('layout_list') }}">Design</a>
-        <ul class="nav_sub">
-            <li>
-                <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
-                    <span>Layouts</span>
-                </a>
-            </li>
-            <li>
-                <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
-                    <span>Snippets</span>
-                </a>
-            </li>
-        </ul>
-    </li>
+    
+    {% if is_granted('ROLE_USER') %}
+        <li{% if current_tab == 'design' %} class="current"{% endif %}>
+            <a href="{{ url('layout_list') }}">Design</a>
+            <ul class="nav_sub">
+                <li>
+                    <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
+                        <span>Layouts</span>
+                    </a>
+                </li>
+                <li>
+                    <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
+                        <span>Snippets</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    {% endif %}
+
     <li{% if current_tab == 'settings' %} class="current"{% endif %}>
         <a href="{{ url('user_preferences') }}">Settings</a>
         <ul class="nav_sub">
@@ -34,16 +38,19 @@
                     <span>Personal</span>
                 </a>
             </li>
-            <li>
-                <a{% if current_nav == 'users' %} class="current"{% endif %} href="{{ url('user_list') }}">
-                    <span>Users</span>
-                </a>
-            </li>
-            <li>
-                <a{% if current_nav == 'extensions' %} class="current"{% endif %} href="#">
-                    <span>Extensions</span>
-                </a>
-            </li>
+            
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a{% if current_nav == 'users' %} class="current"{% endif %} href="{{ url('user_list') }}">
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a{% if current_nav == 'extensions' %} class="current"{% endif %} href="#">
+                        <span>Extensions</span>
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </li>
 </ul>

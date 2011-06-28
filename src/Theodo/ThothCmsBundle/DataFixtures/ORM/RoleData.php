@@ -27,12 +27,18 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface
         $user_role = new Role();
         $user_role->setName(RoleRepository::ROLE_USER);
         $manager->persist($user_role);
+        
+        // Create client role
+        $client_role = new Role();
+        $client_role->setName(RoleRepository::ROLE_CLIENT);
+        $manager->persist($client_role);
 
         // Save users
         $manager->flush();
         
         $this->addReference('admin-role', $admin_role);
         $this->addReference('user-role', $user_role);
+        $this->addReference('client-role', $client_role);
     }
 
     /**
