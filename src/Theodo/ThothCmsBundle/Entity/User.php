@@ -361,6 +361,18 @@ class User implements UserInterface
 
         return true;
     }
+    
+    /**
+     * Check roles
+     * 
+     * @return boolean
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function isValidRole()
+    {
+        return count($this->getRoles());
+    }
 
     /**
      * User validator
@@ -385,6 +397,9 @@ class User implements UserInterface
         // Password validator : not blank and match to confirmation
         $metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
         $metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
+        
+        // Role validator
+        $metadata->addGetterConstraint('validRole', new True(array('message' => 'This value should not be blank')));
 
         // Language validator: available
         $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + array_keys(UserRepository::getAvailableLanguages()))));

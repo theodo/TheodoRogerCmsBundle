@@ -26,6 +26,7 @@ security:
 
         main:
             pattern:    ^/admin/*
+            access_denied_url: /admin/access-denied
             form_login:
                 check_path:  /admin/login
                 login_path:  /admin
@@ -45,6 +46,6 @@ security:
         - { path: ^/admin/snippets*, roles: ROLE_USER }
         - { path: ^/admin/layouts*, roles: ROLE_USER }
         - { path: ^/admin/*, roles: ROLE_CLIENT }
-        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }        
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

@@ -8,6 +8,10 @@ login_check:
 
 logout:
     pattern:   /admin/logout
+    
+user_accessDenied:
+    pattern: /admin/access-denied
+    defaults: { _controller: TheodoThothCmsBundle:User:accessDenied }
 
 # User routing
 user_list:

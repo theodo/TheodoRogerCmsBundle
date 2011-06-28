@@ -22,6 +22,20 @@ use Theodo\ThothCmsBundle\Entity\User;
 class UserController extends Controller
 {
     /**
+     * Access denied action
+     * 
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function accessDeniedAction()
+    {
+        // Set flash message
+        $this->get('session')->setFlash('error', $this->get('translator')->trans('Access denied, you must have more privileges to perform this action.'));
+
+        return $this->redirect($this->generateUrl('page_list'));
+    }
+
+    /**
      * Login action
      * 
      * @author Vincent Guillon <vincentg@theodo.fr>
