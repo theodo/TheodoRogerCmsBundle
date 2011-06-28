@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            new Sadiant\CmsBundle\SadiantCmsBundle(),
+            new Theodo\ThothCmsBundle\TheodoThothCmsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

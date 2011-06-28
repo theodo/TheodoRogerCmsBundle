@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
-    - { resource: '@SadiantCmsBundle/Resources/config/services.yml' }
+    - { resource: '@TheodoThothCmsBundle/Resources/config/services.yml' }
 
 framework:
     secret:          %secret%
@@ -60,11 +60,11 @@ doctrine:
             default:
                 connection:   default
                 mappings:
-                    SadiantCmsBundle: ~
+                    TheodoThothCmsBundle: ~
             test:
                 connection:   test
                 mappings:
-                    SadiantCmsBundle: ~
+                    TheodoThothCmsBundle: ~
 
 
 # Swiftmailer Configuration

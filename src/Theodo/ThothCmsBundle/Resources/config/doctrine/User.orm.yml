@@ -1,0 +1,52 @@
+Theodo\ThothCmsBundle\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: Theodo\ThothCmsBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
+        username:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        password:
+            type: string
+            length: 255
+            nullable: false
+        salt:
+            type: string
+            length: 255
+            nullable: false
+        email:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        language:
+            type: string
+            length: 2
+            nullable: true
+        notes:
+            type: text
+            nullable: true
+        is_main_admin:
+            type: boolean
+            nullable: true
+    manyToMany:
+        user_roles:
+            targetEntity: Role
+            joinTable:
+              name: user_role
+              joinColumns:
+                user_id:
+                  referencedColumnName: id
+              inverseJoinColumns:
+                role_id:
+                  referencedColumnName: id
