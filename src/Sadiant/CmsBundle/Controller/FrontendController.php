@@ -30,7 +30,6 @@ class FrontendController extends Controller
     {
         if(!$slug)
         {
-
             $page = $this->getDoctrine()
                 ->getEntityManager()
                 ->getRepository('SadiantCmsBundle:Page')
