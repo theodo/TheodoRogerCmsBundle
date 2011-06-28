@@ -34,7 +34,7 @@ class UserControllerTest extends WebTestCase
     protected function login($client, $username = 'admin', $password = 'admin')
     {
         // Retrieve crawler
-        $crawler = $client->request('GET', '/admin');
+        $crawler = $client->request('GET', '/cms');
 
         // Select the login form
         $form = $crawler->filterXPath('//input[@name="login"]')->form();
@@ -63,7 +63,7 @@ class UserControllerTest extends WebTestCase
      */
     protected function logout($client)
     {
-        return $client->request('GET', '/admin/logout');
+        return $client->request('GET', '/cms/logout');
     }
 
     /**
@@ -79,7 +79,7 @@ class UserControllerTest extends WebTestCase
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/admin/users');
+        $crawler = $client->request('GET', '/cms/users');
 
         print_r("\n> Test user list action");
 
@@ -104,7 +104,7 @@ class UserControllerTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/new');
+        $crawler = $client->request('GET', '/cms/users/new');
 
         print_r("\n> Test user new action");
 
@@ -125,7 +125,7 @@ class UserControllerTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/1/edit');
+        $crawler = $client->request('GET', '/cms/users/1/edit');
 
         print_r("\n> Test user edit action");
 
@@ -149,7 +149,7 @@ class UserControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/1/update');
+        $crawler = $client->request('GET', '/cms/users/1/update');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit User.*/', $client->getResponse()->getContent());
@@ -171,7 +171,7 @@ class UserControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/2/remove');
+        $crawler = $client->request('GET', '/cms/users/2/remove');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Remove User.*/', $client->getResponse()->getContent());
@@ -194,7 +194,7 @@ class UserControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users');
+        $crawler = $client->request('GET', '/cms/users');
 
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -208,7 +208,7 @@ class UserControllerTest extends WebTestCase
 
         // Test page content
         $this->assertRegexp('/.*New User.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*admin\/users\/new$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/users\/new$/', $client->getRequest()->getUri());
 
         // Retrieve form
         $form = $crawler->filterXPath('//input[@name="save"]')->form();
@@ -219,7 +219,7 @@ class UserControllerTest extends WebTestCase
 
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*admin\/users\/new$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/users\/new$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*New User.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Can not create user due some errors*/', $client->getResponse()->getContent());
 
@@ -238,12 +238,12 @@ class UserControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*admin\/users/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/users/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*has been created.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Administrator, Designer*/', $client->getResponse()->getContent());
 
         // Remove user
-        $crawler = $client->request('GET', '/admin/users/4/remove');
+        $crawler = $client->request('GET', '/cms/users/4/remove');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Remove User de test*/', $client->getResponse()->getContent());
 
@@ -252,11 +252,11 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('POST', $form->getUri());
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*admin\/users/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/users/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*has been removed.*/', $client->getResponse()->getContent());
 
         // Tyr to remove  main admin user
-        $crawler = $client->request('GET', '/admin/users/1/remove');
+        $crawler = $client->request('GET', '/cms/users/1/remove');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Remove Theodore De Banville*/', $client->getResponse()->getContent());
         $form = $crawler->filterXPath('//input[@type="submit"]')->form();

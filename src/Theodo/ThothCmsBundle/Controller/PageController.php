@@ -93,7 +93,7 @@ class PageController extends Controller
                 $em->persist($page);
                 $em->flush(); 
                 
-                $this->get('thot_cms.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
+                $this->get('thoth_frontend.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
@@ -191,13 +191,13 @@ class PageController extends Controller
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->get('thot_cms.caching')->invalidate('page:'.$page->getName());
+                $this->get('thoth_frontend.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();
                 
-                $this->get('thot_cms.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
+                $this->get('thoth_frontend.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
                 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));

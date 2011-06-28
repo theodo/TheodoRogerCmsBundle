@@ -43,6 +43,6 @@ class FrontendController extends Controller
                     ->findOneBySlug($slug);
         }
 
-        return $this->get('thot_cms.templating')->renderResponse('page:'.$page->getName());
+        return $this->get('thoth_frontend.templating')->renderResponse('page:'.$page->getName());
     }
 }

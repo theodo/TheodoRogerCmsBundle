@@ -331,16 +331,10 @@ class User implements UserInterface
      * 
      * @return boolean
      * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-27
+     * @since date
      */
     public function isValidPassword()
     {
-        // Object Update ?
-        if ($this->getId())
-        {
-            return (!$this->getPasswordConfirm() && !$this->getPassword()) || ($this->getPasswordConfirm() === $this->getPassword());
-        }
-        
         return $this->getPasswordConfirm() === $this->getPassword();
     }
 
@@ -395,6 +389,8 @@ class User implements UserInterface
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('email'))));
 
         // Password validator : not blank and match to confirmation
+        $metadata->addPropertyConstraint('password', new NotBlank());
+        $metadata->addPropertyConstraint('password_confirm', new NotBlank());
         $metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
         $metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
         

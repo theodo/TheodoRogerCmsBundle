@@ -34,7 +34,7 @@ class PageControllerTest extends WebTestCase
     protected function login($client, $username = 'admin', $password = 'admin')
     {
         // Retrieve crawler
-        $crawler = $client->request('GET', '/admin');
+        $crawler = $client->request('GET', '/cms');
 
         // Select the login form
         $form = $crawler->filterXPath('//input[@name="login"]')->form();
@@ -63,7 +63,7 @@ class PageControllerTest extends WebTestCase
      */
     protected function logout($client)
     {
-        return $client->request('GET', '/admin/logout');
+        return $client->request('GET', '/cms/logout');
     }
 
     /**
@@ -79,7 +79,7 @@ class PageControllerTest extends WebTestCase
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/admin/pages');
+        $crawler = $client->request('GET', '/cms/pages');
 
         print_r("\n> Test page index action");
 
@@ -102,7 +102,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages/1/new');
+        $crawler = $client->request('GET', '/cms/pages/1/new');
 
         print_r("\n> Test page new action");
 
@@ -122,7 +122,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages/1/edit');
+        $crawler = $client->request('GET', '/cms/pages/1/edit');
 
         print_r("\n> Test page edit action");
 
@@ -144,7 +144,7 @@ class PageControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages/1/update');
+        $crawler = $client->request('GET', '/cms/pages/1/update');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
@@ -167,7 +167,7 @@ class PageControllerTest extends WebTestCase
 
         $client = $this->createClient();
         $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages');
+        $crawler = $client->request('GET', '/cms/pages');
 
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -181,7 +181,7 @@ class PageControllerTest extends WebTestCase
 
         // Test page content
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/pages\/.*\/new$/', $client->getRequest()->getUri());
 
         // Retrieve form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
@@ -192,7 +192,7 @@ class PageControllerTest extends WebTestCase
 
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/pages\/.*\/new$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
@@ -210,7 +210,7 @@ class PageControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*admin\/pages\/.*\/edit$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/pages\/.*\/edit$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
@@ -226,11 +226,11 @@ class PageControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*admin\/pages$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*cms\/pages$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
         // Back to admin homepage
-        $crawler = $client->request('GET', '/admin/pages');
+        $crawler = $client->request('GET', '/cms/pages');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 

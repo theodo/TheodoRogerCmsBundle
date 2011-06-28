@@ -1,112 +1,112 @@
 # Admin routing
 login:
-    pattern:  /admin
+    pattern:  /cms
     defaults: { _controller: TheodoThothCmsBundle:User:login }
 
 login_check:
-    pattern:  /admin/login
+    pattern:  /cms/login
 
 logout:
-    pattern:   /admin/logout
+    pattern:   /cms/logout
     
 user_accessDenied:
-    pattern: /admin/access-denied
+    pattern: /cms/access-denied
     defaults: { _controller: TheodoThothCmsBundle:User:accessDenied }
 
 # User routing
 user_list:
-    pattern:  /admin/users
+    pattern:  /cms/users
     defaults: { _controller: TheodoThothCmsBundle:User:list }
 
 user_edit:
-    pattern:  /admin/users/{id}/edit
+    pattern:  /cms/users/{id}/edit
     defaults: { _controller: TheodoThothCmsBundle:User:edit }
 
 user_new:
-    pattern:  /admin/users/new
+    pattern:  /cms/users/new
     defaults: { _controller: TheodoThothCmsBundle:User:new }
 
 user_remove:
-    pattern:  /admin/users/{id}/remove
+    pattern:  /cms/users/{id}/remove
     defaults: { _controller: TheodoThothCmsBundle:User:remove }
 
 user_preferences:
-    pattern:  /admin/preferences/edit
+    pattern:  /cms/preferences/edit
     defaults: { _controller: TheodoThothCmsBundle:User:preferences }
 
 user_preferencesUpdate:
-    pattern:  /admin/preferences/update
+    pattern:  /cms/preferences/update
     defaults: { _controller: TheodoThothCmsBundle:User:preferencesUpdate }
 
 user_update:
-    pattern:  /admin/users/{id}/update
+    pattern:  /cms/users/{id}/update
     defaults: { _controller: TheodoThothCmsBundle:User:update }
 
 # Page routing
 page_list:
-    pattern:  /admin/pages
+    pattern:  /cms/pages
     defaults: { _controller: TheodoThothCmsBundle:Page:index }
 
 page_new:
-    pattern:  /admin/pages/{id}/new
+    pattern:  /cms/pages/{id}/new
     defaults: { _controller: TheodoThothCmsBundle:Page:new }
 
 page_edit:
-    pattern:  /admin/pages/{id}/edit
+    pattern:  /cms/pages/{id}/edit
     defaults: { _controller: TheodoThothCmsBundle:Page:edit }
 
 page_update:
-    pattern:  /admin/pages/{id}/update
+    pattern:  /cms/pages/{id}/update
     defaults: { _controller: TheodoThothCmsBundle:Page:update }
 
 page_remove:
-    pattern:  /admin/pages/{id}/remove
+    pattern:  /cms/pages/{id}/remove
     defaults: { _controller: TheodoThothCmsBundle:Page:remove }
 
 page_expand:
-    pattern:  /admin/pages/{id}/expand/{level}
+    pattern:  /cms/pages/{id}/expand/{level}
     defaults: { _controller: TheodoThothCmsBundle:Page:expand }
 
 # Layout routing
 layout_new:
-    pattern: /admin/layouts/new
+    pattern: /cms/layouts/new
     defaults: { _controller: TheodoThothCmsBundle:Layout:new }
 
 layout_update:
-    pattern: /admin/layouts/{id}
+    pattern: /cms/layouts/{id}
     defaults: { _controller: TheodoThothCmsBundle:Layout:update }
 
 layout_edit:
-    pattern: /admin/layouts/{id}/edit
+    pattern: /cms/layouts/{id}/edit
     defaults: { _controller: TheodoThothCmsBundle:Layout:edit }
 
 layout_list:
-    pattern: /admin/layouts
+    pattern: /cms/layouts
     defaults: { _controller: TheodoThothCmsBundle:Layout:index }
 
 layout_remove:
-    pattern: /admin/layouts/{id}/remove
+    pattern: /cms/layouts/{id}/remove
     defaults: { _controller: TheodoThothCmsBundle:Layout:remove }
 
 # Snippet routing
 snippet_new:
-    pattern: /admin/snippets/new
+    pattern: /cms/snippets/new
     defaults: { _controller: TheodoThothCmsBundle:Snippet:new }
 
 snippet_update:
-    pattern: /admin/snippets/{id}
+    pattern: /cms/snippets/{id}
     defaults: { _controller: TheodoThothCmsBundle:Snippet:update }
 
 snippet_edit:
-    pattern: /admin/snippets/{id}/edit
+    pattern: /cms/snippets/{id}/edit
     defaults: { _controller: TheodoThothCmsBundle:Snippet:edit }
 
 snippet_list:
-    pattern: /admin/snippets
+    pattern: /cms/snippets
     defaults: { _controller: TheodoThothCmsBundle:Snippet:index }
 
 snippet_remove:
-    pattern: /admin/snippets/{id}/remove
+    pattern: /cms/snippets/{id}/remove
     defaults: { _controller: TheodoThothCmsBundle:Snippet:remove }
 
 # Frontend routing

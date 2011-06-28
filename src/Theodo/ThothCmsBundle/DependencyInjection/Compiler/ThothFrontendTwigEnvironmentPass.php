@@ -11,16 +11,20 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  */
-class FrontendTwigEnvironmentPass implements CompilerPassInterface
+class ThothFrontendTwigEnvironmentPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (false === $container->hasDefinition('thot_cms.twig')) {
+        if (false === $container->hasDefinition('thoth_frontend.twig')) {
             return;
         }
 
-        $definition = $container->getDefinition('thot_cms.twig');
-
+        $definition = $container->getDefinition('thoth_frontend.twig');
+        
+        // Extensions must always be registered before everything else.
+        // For instance, global variable definitions must be registered
+        // afterward. If not, the globals from the extensions will never
+        // be registered.
         $calls = $definition->getMethodCalls();
         $definition->setMethodCalls(array());
         foreach ($container->findTaggedServiceIds('twig.extension') as $id => $attributes) {

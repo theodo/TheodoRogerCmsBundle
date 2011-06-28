@@ -21,19 +21,19 @@ security:
             security: false
 
         login:
-            pattern:  ^/admin$
+            pattern:  ^/cms$
             security: false
 
         main:
-            pattern:    ^/admin/*
-            access_denied_url: /admin/access-denied
+            pattern:    ^/cms/*
+            access_denied_url: /cms/access-denied
             form_login:
-                check_path:  /admin/login
-                login_path:  /admin
+                check_path:  /cms/login
+                login_path:  /cms
                 remember_me: true
             logout:
-                path:               /admin/logout
-                target:             /admin
+                path:               /cms/logout
+                target:             /cms
                 invalidate_session: true
             http_basic: true
             remember_me:
@@ -42,10 +42,10 @@ security:
                 path:     /
 
     access_control:
-        - { path: ^/admin/users*, roles: ROLE_ADMIN }
-        - { path: ^/admin/snippets*, roles: ROLE_USER }
-        - { path: ^/admin/layouts*, roles: ROLE_USER }
-        - { path: ^/admin/*, roles: ROLE_CLIENT }
-        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }        
+        - { path: ^/cms/users*, roles: ROLE_ADMIN }
+        - { path: ^/cms/snippets*, roles: ROLE_USER }
+        - { path: ^/cms/layouts*, roles: ROLE_USER }
+        - { path: ^/cms/*, roles: ROLE_CLIENT }
+        - { path: ^/cms, roles: IS_AUTHENTICATED_ANONYMOUSLY }        
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
