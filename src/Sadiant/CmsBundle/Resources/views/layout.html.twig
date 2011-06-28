@@ -13,21 +13,6 @@
     {% set body_class = body_class|default('') %}
     <body{% if body_class != '' %} class="{{ body_class }}"{% endif %}>
         <div id="page">
-            {% block notice %}
-                {% if app.session.hasFlash('notice') %}
-                    <div id="notice">
-                        <p>{{ app.session.flash('notice') }}</p>
-                    </div>
-                {% endif %}
-            {% endblock %}
-          
-            {% block global_error %}
-                {% if app.session.hasFlash('error') %}
-                    <div id="error">
-                        <p>{{ app.session.flash('error') }}</p>
-                    </div>
-                {% endif %}
-            {% endblock %}
             <div id="header">
                 {% render "SadiantCmsBundle:User:boxComponent" %}
                 {% include "SadiantCmsBundle::navigation.html.twig" %}
@@ -37,6 +22,21 @@
             </div>
 
             <div id="main">
+                {% block notice %}
+                    {% if app.session.hasFlash('notice') %}
+                        <div id="notice">
+                            <p>{{ app.session.flash('notice') }}</p>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% block global_error %}
+                    {% if app.session.hasFlash('error') %}
+                        <div id="error">
+                            <p>{{ app.session.flash('error') }}</p>
+                        </div>
+                    {% endif %}
+                {% endblock %}
                 <div id="content">
                     {% block content %}{% endblock %}
                 </div>
