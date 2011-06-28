@@ -186,7 +186,7 @@ body.single_form #content #single_form
 #header
 {
   font-size: 90%;
-  background: #11649e url(/bundles/sadiantcms/images/admin/navigation_background.png) repeat-x;
+  background: #11649e url(/bundles/theodothothcms/images/admin/navigation_background.png) repeat-x;
   width: 100%;
   position: relative;
   height: auto;
@@ -216,7 +216,7 @@ body.single_form #content #single_form
 #view_site
 {
   font-size: 90%;
-  background: url(/bundles/sadiantcms/images/admin/view_site.png) no-repeat;
+  background: url(/bundles/theodothothcms/images/admin/view_site.png) no-repeat;
   display: block;
   position: absolute;
   right: 12px;
@@ -247,7 +247,7 @@ ul#navigation li
 
 ul#navigation li a
 {
-  background: url(/bundles/sadiantcms/images/admin/navigation_tabs.png) left top repeat-x;
+  background: url(/bundles/theodothothcms/images/admin/navigation_tabs.png) left top repeat-x;
   color: #edd;
   display: block;
   height: 30px;
@@ -284,7 +284,7 @@ ul#navigation li.dimmed a
 ul#navigation ul.nav_sub
 {
   display: none;
-  background: url(/bundles/sadiantcms/images/admin/navigation_secondary_background.png) repeat-x;
+  background: url(/bundles/theodothothcms/images/admin/navigation_secondary_background.png) repeat-x;
   font-size: 95%;
   clear: both;
   left: 0;
@@ -309,7 +309,7 @@ ul#navigation ul.nav_sub li
 
 ul#navigation ul.nav_sub li a
 {
-  background: url(/bundles/sadiantcms/images/admin/navigation_secondary_background.png) repeat-x;
+  background: url(/bundles/theodothothcms/images/admin/navigation_secondary_background.png) repeat-x;
   color: #555;
   display: -moz-inline-stack;
   display: inline-block;
@@ -328,7 +328,7 @@ ul#navigation ul.nav_sub li a:hover
 
 ul#navigation ul.nav_sub li a.current
 {
-  background: url(/bundles/sadiantcms/images/admin/navigation_secondary_background.png) left -80px repeat-x;
+  background: url(/bundles/theodothothcms/images/admin/navigation_secondary_background.png) left -80px repeat-x;
   color: #333;
   font-weight: bold;
 }
@@ -341,7 +341,7 @@ ul#navigation ul.nav_sub li a.current:hover
 
 ul#navigation ul.nav_sub li a span
 {
-  background: url(/bundles/sadiantcms/images/admin/navigation_secondary_separator.gif) right bottom no-repeat;
+  background: url(/bundles/theodothothcms/images/admin/navigation_secondary_separator.gif) right bottom no-repeat;
   display: block;
   margin: 0;
   padding: 0 26px;
@@ -357,7 +357,7 @@ ul#navigation ul.nav_sub li a span
 
 #header_bottom div
 {
-  background: url(/bundles/sadiantcms/images/admin/navigation_shadow.png) repeat-x;
+  background: url(/bundles/theodothothcms/images/admin/navigation_shadow.png) repeat-x;
   position: absolute;
   top: 38px;
   width: 100%;
@@ -533,7 +533,7 @@ img.avatar.avatar_32x32
 
 .drawer_contents
 {
-  background: #7e7e7e url(/bundles/sadiantcms/images/admin/navigation_shadow.png) repeat-x;
+  background: #7e7e7e url(/bundles/theodothothcms/images/admin/navigation_shadow.png) repeat-x;
   -moz-border-radius-bottomright: 6px;
   -webkit-border-bottom-right-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -629,18 +629,18 @@ img.avatar.avatar_32x32
 
 .drawer_handle a.more
 {
-  background: #7e7e7e url(/bundles/sadiantcms/images/admin/metadata_toggle.png) no-repeat 85% 8px;
+  background: #7e7e7e url(/bundles/theodothothcms/images/admin/metadata_toggle.png) no-repeat 85% 8px;
 }
 
 .drawer_handle a.less
 {
-  background: #7e7e7e url(/bundles/sadiantcms/images/admin/metadata_toggle.png) no-repeat 85% -21px;
+  background: #7e7e7e url(/bundles/theodothothcms/images/admin/metadata_toggle.png) no-repeat 85% -21px;
 }
 
 .box
 {
   color: #333;
-  background: #f5f1e2 url(/bundles/sadiantcms/images/admin/vertical_tan_gradient.png) top left repeat-x;
+  background: #f5f1e2 url(/bundles/theodothothcms/images/admin/vertical_tan_gradient.png) top left repeat-x;
   font-size: 90%;
   padding: 1px 15px 10px;
   margin: 3px 0 20px;
@@ -764,7 +764,7 @@ body.reversed #content form .hint
 
 body.reversed #content form .buttons
 {
-  background: white url(/bundles/sadiantcms/images/admin/buttons_background.png) bottom repeat-x;
+  background: white url(/bundles/theodothothcms/images/admin/buttons_background.png) bottom repeat-x;
   padding: 12px 10px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -821,7 +821,7 @@ body.reversed #content .box
 
 body.single_form #content #single_form
 {
-  background: #f5f1e2 url(/bundles/sadiantcms/images/admin/vertical_tan_gradient.png) center -15px repeat-x;
+  background: #f5f1e2 url(/bundles/theodothothcms/images/admin/vertical_tan_gradient.png) center -15px repeat-x;
   border: 0.35em solid #efead3;
   padding: 0.5em 1.5em;
   padding-right: 22px;
@@ -932,7 +932,7 @@ body.single_form #content #single_form .buttons
 
 body.single_form #content p.version
 {
-  background: url(/bundles/sadiantcms/images/admin/single_form_shadow.png) top center no-repeat;
+  background: url(/bundles/theodothothcms/images/admin/single_form_shadow.png) top center no-repeat;
   color: #666;
   font-size: 80%;
   padding-top: 10px;
@@ -1088,7 +1088,7 @@ body.edit_personal_preferences #avatar p.caption
   text-decoration: none;
   font-size: 80%;
   padding: 0 0 0 20px;
-  background: url(/bundles/sadiantcms/images/admin/plus.png) 4px 0 no-repeat;
+  background: url(/bundles/theodothothcms/images/admin/plus.png) 4px 0 no-repeat;
 }
 
 #content table.index .remove
@@ -1103,7 +1103,7 @@ body.edit_personal_preferences #avatar p.caption
   text-decoration: none;
   font-size: 80%;
   padding: 0 0 0 20px;
-  background: url(/bundles/sadiantcms/images/admin/minus.png) 4px 0 no-repeat;
+  background: url(/bundles/theodothothcms/images/admin/minus.png) 4px 0 no-repeat;
 }
 
 #content table.index .remove .disabled
@@ -1111,7 +1111,7 @@ body.edit_personal_preferences #avatar p.caption
   color: #ccc;
   font-size: 80%;
   padding: 0 0 0 20px;
-  background: url(/bundles/sadiantcms/images/admin/minus_disabled.png) 4px 0 no-repeat;
+  background: url(/bundles/theodothothcms/images/admin/minus_disabled.png) 4px 0 no-repeat;
 }
 
 #content table.index .node .layout
@@ -1348,7 +1348,7 @@ body.reversed #content h1
   left: 0;
   right: 0;
   bottom: 0;
-  background: #777 url(/bundles/sadiantcms/images/admin/shadow_grey.png) repeat-x;
+  background: #777 url(/bundles/theodothothcms/images/admin/shadow_grey.png) repeat-x;
 }
 
 #actions ul
@@ -1364,7 +1364,7 @@ body.reversed #content h1
 
 #actions ul li a
 {
-  background: #eee url(/bundles/sadiantcms/images/admin/buttons_background.png) repeat-x;
+  background: #eee url(/bundles/theodothothcms/images/admin/buttons_background.png) repeat-x;
   color: #333;
   font-size: 80%;
   padding: 8px 12px;
@@ -1387,7 +1387,7 @@ body.reversed #content h1
 
 #actions ul li a:active
 {
-  background: #fff url(/bundles/sadiantcms/images/admin/shadow.png) repeat-x;
+  background: #fff url(/bundles/theodothothcms/images/admin/shadow.png) repeat-x;
   color: #000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1414,7 +1414,7 @@ body.reversed #content h1
 {
   display: block;
   float: left;
-  background: #fff url(/bundles/sadiantcms/images/admin/shadow.png) repeat-x;
+  background: #fff url(/bundles/theodothothcms/images/admin/shadow.png) repeat-x;
   color: #999;
   font-size: 80%;
   padding: 6px 12px 6px 12px;
@@ -1431,7 +1431,7 @@ body.reversed #content h1
 
 #actions .pagination a:hover
 {
-  background: #fff url(/bundles/sadiantcms/images/admin/buttons_background.png) repeat-x;
+  background: #fff url(/bundles/theodothothcms/images/admin/buttons_background.png) repeat-x;
   color: #06c;
   text-shadow: none;
   -webkit-box-shadow: 1px 2px 4px #333333;
@@ -1441,7 +1441,7 @@ body.reversed #content h1
 
 #actions .pagination a:active
 {
-  background: #fff url(/bundles/sadiantcms/images/admin/shadow.png) repeat-x;
+  background: #fff url(/bundles/theodothothcms/images/admin/shadow.png) repeat-x;
   color: #000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1770,7 +1770,7 @@ div.popup .reference table h4
 #tab_control .pages .page
 {
   padding: 12px 20px 20px;
-  background: url(/bundles/sadiantcms/images/admin/vertical_tan_gradient.png) top left repeat-x #f5f1e2;
+  background: url(/bundles/theodothothcms/images/admin/vertical_tan_gradient.png) top left repeat-x #f5f1e2;
   -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
@@ -1836,7 +1836,7 @@ body.reversed #tab_control textarea
 
 input.date
 {
-  background: white url(/bundles/sadiantcms/images/admin/calendar_down.gif) right no-repeat;
+  background: white url(/bundles/theodothothcms/images/admin/calendar_down.gif) right no-repeat;
   padding-right: 26px;
   width: 11em;
 }
