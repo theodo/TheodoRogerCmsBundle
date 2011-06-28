@@ -54,7 +54,7 @@
             {{ form_errors(form.email) }}
         </p>
       
-        <p id="display_password" class="{% if form_errors(form.password) %}hide{% else %}display{% endif %}">
+        <p id="display_password" class="{% if form_errors(form.password) or form_errors(form) %}hide{% else %}display{% endif %}">
             <label>{% trans %}Password{% endtrans %}</label>
 
             <span class="value">
@@ -63,7 +63,9 @@
             </span>
         </p>
 
-        <div class="set change-password {% if form_errors(form.password) %}display{% else %}hide{% endif %}">
+        {{ form_errors(form) }}
+
+        <div class="set change-password {% if form_errors(form.password) or form_errors(form) %}display{% else %}hide{% endif %}">
             <p>
                 {{ form_label(form.password) }}
                 {{ form_widget(form.password) }}

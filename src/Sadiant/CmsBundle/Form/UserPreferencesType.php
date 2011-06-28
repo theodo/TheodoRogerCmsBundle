@@ -38,8 +38,8 @@ class UserPreferencesType extends AbstractType
         $builder->add('username', 'text', array('required' => true));
         $builder->add('email', 'text', array('required' => true));
 
-        $builder->add('password', 'password', array('required' => true));
-        $builder->add('password_confirm', 'password', array('required' => true));
+        $builder->add('password', 'password', array('required' => false));
+        $builder->add('password_confirm', 'password', array('required' => false));
         
         $builder->add('language', 'choice', array(
             'choices'   => UserRepository::getAvailableLanguages(),

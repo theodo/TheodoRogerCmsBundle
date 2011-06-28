@@ -146,11 +146,11 @@ class UserController extends Controller
                 // Perform some action, such as save the object to the database
                 $user = $form->getData();
 
-                // Set password
+                // Check password update
                 $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                 $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                 $user->setPassword($password);
-                
+
                 $em->persist($user);
                 $em->flush();
                 
@@ -248,7 +248,8 @@ class UserController extends Controller
         
         // Retrieve connected user
         $user = $this->get('security.context')->getToken()->getUser();
-
+        $user_password = $user->getPassword();
+        
         // Create form
         $form = $this->createForm(new UserPreferencesType(false), $user);
         
@@ -266,10 +267,21 @@ class UserController extends Controller
             {
                 $user = $form->getData();
                 
-                // Set password
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                $user->setPassword($password);
+                // Check password update
+                if ($user->getPassword() && $user_password != $user->getPassword())
+                {
+                    // Encode password
+                    if ($user->getPassword() && $user->getPasswordConfirm())
+                    {
+                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                        $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                        $user->setPassword($password);
+                    }
+                }
+                else
+                {
+                    $user->setPassword($user_password);
+                }
                 
                 $em->persist($user);
                 $em->flush();
@@ -311,6 +323,7 @@ class UserController extends Controller
         
         // Retrieve user
         $user = $em->getRepository('SadiantCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
+        $user_password = $user->getPassword();
         
         // Create form
         $form = $this->createForm(new UserType(false), $user);
@@ -326,11 +339,21 @@ class UserController extends Controller
             {
                 $user = $form->getData();
 
-                // Set password
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                $user->setPassword($password);
-
+                // Check password update
+                if ($user->getPassword() && $user_password != $user->getPassword())
+                {
+                    // Encode password
+                    if ($user->getPassword() && $user->getPasswordConfirm())
+                    {
+                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                        $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                        $user->setPassword($password);
+                    }
+                }
+                else
+                {
+                    $user->setPassword($user_password);
+                }
                 $em->persist($user);
                 $em->flush();
 

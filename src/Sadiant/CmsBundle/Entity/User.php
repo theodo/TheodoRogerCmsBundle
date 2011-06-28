@@ -17,7 +17,7 @@ use Sadiant\CmsBundle\Repository\UserRepository;
  * Sadiant\CmsBundle\Entity\User
  */
 class User implements UserInterface
-{
+{    
     /**
      * @var integer $id
      */
@@ -332,11 +332,35 @@ class User implements UserInterface
      * 
      * @return boolean
      * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date
+     * @since 2011-06-27
      */
     public function isValidPassword()
     {
+        // Object Update ?
+        if ($this->getId())
+        {
+            return (!$this->getPasswordConfirm() && !$this->getPassword()) || ($this->getPasswordConfirm() === $this->getPassword());
+        }
+        
         return $this->getPasswordConfirm() === $this->getPassword();
+    }
+
+    /**
+     * Check not empty password
+     * 
+     * @return boolean
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function isNotEmptyPassword()
+    {
+        // Object is new ?
+        if (!$this->getId() && $this->isValidPassword())
+        {
+            return $this->getPasswordConfirm() && $this->getPassword();
+        }
+
+        return true;
     }
 
     /**
@@ -360,9 +384,8 @@ class User implements UserInterface
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('email'))));
 
         // Password validator : not blank and match to confirmation
-        $metadata->addPropertyConstraint('password', new NotBlank());
-        $metadata->addPropertyConstraint('password_confirm', new NotBlank());
         $metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
+        $metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
 
         // Language validator: available
         $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + array_keys(UserRepository::getAvailableLanguages()))));
