@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\TheodoCmsBundle\Entity\Snippet;
-use Theodo\TheodoCmsBundle\Repository\SnippetRepository;
-use Theodo\TheodoCmsBundle\Entity\Layout;
-use Theodo\TheodoCmsBundle\Repository\LayoutRepository;
-use Theodo\TheodoCmsBundle\Entity\Page;
-use Theodo\TheodoCmsBundle\Repository\PageRepository;
-use Theodo\TheodoCmsBundle\Tests\Unit;
-use Theodo\TheodoCmsBundle\Extensions\Twig_Loader_Database;
+use Theodo\ThothCmsBundle\Entity\Snippet;
+use Theodo\ThothCmsBundle\Repository\SnippetRepository;
+use Theodo\ThothCmsBundle\Entity\Layout;
+use Theodo\ThothCmsBundle\Repository\LayoutRepository;
+use Theodo\ThothCmsBundle\Entity\Page;
+use Theodo\ThothCmsBundle\Repository\PageRepository;
+use Theodo\ThothCmsBundle\Tests\Unit;
+use Theodo\ThothCmsBundle\Extensions\Twig_Loader_Database;
 
 class Twig_Loader_DatabaseTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,15 +50,15 @@ class Twig_Loader_DatabaseTest extends \PHPUnit_Framework_TestCase
         
         $twig_loader_database = new Twig_Loader_Database($this->getEntityManager());
         
-        $page = $this->getEntityManager()->getRepository('TheodoTheodoCmsBundle:Page')->findOneByName('theodo');
+        $page = $this->getEntityManager()->getRepository('TheodoThothCmsBundle:Page')->findOneByName('theodo');
 
         $this->assertEquals($twig_loader_database->getSource('page:theodo'), $page->getContent());
         
-        $layout = $this->getEntityManager()->getRepository('TheodoTheodoCmsBundle:Layout')->findOneByName('normal');
+        $layout = $this->getEntityManager()->getRepository('TheodoThothCmsBundle:Layout')->findOneByName('normal');
 
         $this->assertEquals($twig_loader_database->getSource('layout:normal'), $layout->getContent());
         
-        $snippet = $this->getEntityManager()->getRepository('TheodoTheodoCmsBundle:Snippet')->findOneByName('bonsoir');
+        $snippet = $this->getEntityManager()->getRepository('TheodoThothCmsBundle:Snippet')->findOneByName('bonsoir');
 
         $this->assertEquals($twig_loader_database->getSource('snippet:bonsoir'), $snippet->getContent());
 
