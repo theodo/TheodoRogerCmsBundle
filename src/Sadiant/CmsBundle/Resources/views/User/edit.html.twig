@@ -72,7 +72,7 @@
             {{ form_errors(form.email) }}
         </p>
       
-        <p id="display_password" class="{% if form_errors(form.password) %}hide{% else %}display{% endif %}">
+        <p id="display_password" class="{% if form_errors(form.password) or user is not defined %}hide{% else %}display{% endif %}">
             <label>{% trans %}Password{% endtrans %}</label>
             <span class="value">
               •••••
@@ -80,7 +80,7 @@
             </span>
         </p>
 
-        <div class="set change-password {% if form_errors(form.password) %}display{% else %}hide{% endif %}">
+        <div class="set change-password {% if form_errors(form.password) or user is not defined  %}display{% else %}hide{% endif %}">
             <p>
                 {{ form_label(form.password) }}
                 {{ form_widget(form.password, { 'attr' : { 'class' : 'input-password' } }) }}
@@ -91,10 +91,13 @@
                 {{ form_label(form.password_confirm) }}
                 {{ form_widget(form.password_confirm, { 'attr' : { 'class' : 'input-password' } }) }}
                 {{ form_errors(form.password_confirm) }}
-                <span>
-                    {% trans %} or {% endtrans %}
-                    <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
-                </span>
+
+                {% if user is defined  %}
+                    <span>
+                        {% trans %} or {% endtrans %}
+                        <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
+                    </span>
+                {% endif %}
             </p>
         </div>
 

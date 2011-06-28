@@ -153,8 +153,16 @@ class UserController extends Controller
                 
                 $em->persist($user);
                 $em->flush();
-
+                
+                // Set notice
+                $this->get('session')->setFlash('notice', sprintf('User "%s" has been created', $user->getName()));
+                
                 return $this->redirect($this->generateUrl('user_list'));
+            }
+            else
+            {
+                // Set error
+                $this->get('session')->setFlash('error', sprintf('Can not create user due some errors'));
             }
         }
 
@@ -186,8 +194,17 @@ class UserController extends Controller
             // Delete page
             $em->remove($user);
             $em->flush();
+
+            // Set notice
+            $this->get('session')->setFlash('notice', sprintf('User "%s" has been removed', $user->getName()));
             
             return $redirect = $this->redirect($this->generateUrl('user_list'));
+        }
+
+        // Set flash notice
+        if ($request->getMethod() == 'POST' && $user->getIsMainAdmin())
+        {
+            $this->get('session')->setFlash('error', 'Can not remove main admin');
         }
 
         return $this->render('SadiantCmsBundle:User:remove.html.twig', array(
@@ -257,10 +274,15 @@ class UserController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                // Set error
+                $this->get('session')->setFlash('notice', sprintf('Your preferences have been updated'));
+                
                 return $this->redirect($this->generateUrl('user_preferences'));
             }
             else
             {
+                // Set error
+                $this->get('session')->setFlash('error', sprintf('Can not update your preferences due some errors'));
                 $hasErrors = true;
             }
         }
@@ -312,7 +334,15 @@ class UserController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                // Set notice
+                $this->get('session')->setFlash('notice', sprintf('User "%s" has been updated', $user->getName()));
+                
                 return $this->redirect($this->generateUrl('user_edit', array('id' => $user->getId())));
+            }
+            else
+            {
+                // Set error
+                $this->get('session')->setFlash('error', sprintf('Can not update "%s" due some errors', $user->getName()));
             }
         }
 
