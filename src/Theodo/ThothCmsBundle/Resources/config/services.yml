@@ -1,0 +1,17 @@
+parameters:
+    thot_cms.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig_Loader_Database
+    thot_cms.caching.class: Theodo\ThothCmsBundle\Extensions\Twig_Cache_Database
+
+services:
+    thot_cms.twig.loader:
+        class: %thot_cms.twig.loader.class%
+        arguments: ['@doctrine.orm.entity_manager']
+    thot_cms.twig:
+        class: %twig.class%
+        arguments: ['@thot_cms.twig.loader', %twig.options%]
+    thot_cms.templating:
+        class: %templating.engine.twig.class%
+        arguments: ['@thot_cms.twig', '@templating.name_parser', '@templating.globals']
+    thot_cms.caching:
+        class: %thot_cms.caching.class%
+        arguments: ['@thot_cms.twig']

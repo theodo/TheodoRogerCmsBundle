@@ -1,7 +1,7 @@
 # Admin routing
 login:
     pattern:  /admin
-    defaults: { _controller: SadiantCmsBundle:User:login }
+    defaults: { _controller: TheodoThothCmsBundle:User:login }
 
 login_check:
     pattern:  /admin/login
@@ -12,100 +12,100 @@ logout:
 # User routing
 user_list:
     pattern:  /admin/users
-    defaults: { _controller: SadiantCmsBundle:User:list }
+    defaults: { _controller: TheodoThothCmsBundle:User:list }
 
 user_edit:
     pattern:  /admin/users/{id}/edit
-    defaults: { _controller: SadiantCmsBundle:User:edit }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit }
 
 user_new:
     pattern:  /admin/users/new
-    defaults: { _controller: SadiantCmsBundle:User:new }
+    defaults: { _controller: TheodoThothCmsBundle:User:new }
 
 user_remove:
     pattern:  /admin/users/{id}/remove
-    defaults: { _controller: SadiantCmsBundle:User:remove }
+    defaults: { _controller: TheodoThothCmsBundle:User:remove }
 
 user_preferences:
     pattern:  /admin/preferences/edit
-    defaults: { _controller: SadiantCmsBundle:User:preferences }
+    defaults: { _controller: TheodoThothCmsBundle:User:preferences }
 
 user_preferencesUpdate:
     pattern:  /admin/preferences/update
-    defaults: { _controller: SadiantCmsBundle:User:preferencesUpdate }
+    defaults: { _controller: TheodoThothCmsBundle:User:preferencesUpdate }
 
 user_update:
     pattern:  /admin/users/{id}/update
-    defaults: { _controller: SadiantCmsBundle:User:update }
+    defaults: { _controller: TheodoThothCmsBundle:User:update }
 
 # Page routing
 page_list:
     pattern:  /admin/pages
-    defaults: { _controller: SadiantCmsBundle:Page:index }
+    defaults: { _controller: TheodoThothCmsBundle:Page:index }
 
 page_new:
     pattern:  /admin/pages/{id}/new
-    defaults: { _controller: SadiantCmsBundle:Page:new }
+    defaults: { _controller: TheodoThothCmsBundle:Page:new }
 
 page_edit:
     pattern:  /admin/pages/{id}/edit
-    defaults: { _controller: SadiantCmsBundle:Page:edit }
+    defaults: { _controller: TheodoThothCmsBundle:Page:edit }
 
 page_update:
     pattern:  /admin/pages/{id}/update
-    defaults: { _controller: SadiantCmsBundle:Page:update }
+    defaults: { _controller: TheodoThothCmsBundle:Page:update }
 
 page_remove:
     pattern:  /admin/pages/{id}/remove
-    defaults: { _controller: SadiantCmsBundle:Page:remove }
+    defaults: { _controller: TheodoThothCmsBundle:Page:remove }
 
 page_expand:
     pattern:  /admin/pages/{id}/expand/{level}
-    defaults: { _controller: SadiantCmsBundle:Page:expand }
+    defaults: { _controller: TheodoThothCmsBundle:Page:expand }
 
 # Layout routing
 layout_new:
     pattern: /admin/layouts/new
-    defaults: { _controller: SadiantCmsBundle:Layout:new }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:new }
 
 layout_update:
     pattern: /admin/layouts/{id}
-    defaults: { _controller: SadiantCmsBundle:Layout:update }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:update }
 
 layout_edit:
     pattern: /admin/layouts/{id}/edit
-    defaults: { _controller: SadiantCmsBundle:Layout:edit }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:edit }
 
 layout_list:
     pattern: /admin/layouts
-    defaults: { _controller: SadiantCmsBundle:Layout:index }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:index }
 
 layout_remove:
     pattern: /admin/layouts/{id}/remove
-    defaults: { _controller: SadiantCmsBundle:Layout:remove }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:remove }
 
 # Snippet routing
 snippet_new:
     pattern: /admin/snippets/new
-    defaults: { _controller: SadiantCmsBundle:Snippet:new }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:new }
 
 snippet_update:
     pattern: /admin/snippets/{id}
-    defaults: { _controller: SadiantCmsBundle:Snippet:update }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:update }
 
 snippet_edit:
     pattern: /admin/snippets/{id}/edit
-    defaults: { _controller: SadiantCmsBundle:Snippet:edit }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:edit }
 
 snippet_list:
     pattern: /admin/snippets
-    defaults: { _controller: SadiantCmsBundle:Snippet:index }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:index }
 
 snippet_remove:
     pattern: /admin/snippets/{id}/remove
-    defaults: { _controller: SadiantCmsBundle:Snippet:remove }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:remove }
 
 # Frontend routing
 page:
     pattern: /{slug}
-    defaults: { _controller: SadiantCmsBundle:Frontend:page, slug: null }
+    defaults: { _controller: TheodoThothCmsBundle:Frontend:page, slug: null }

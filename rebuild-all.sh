@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "# Build entities";
-php app/console doctrine:generate:entities SadiantCmsBundle
+php app/console doctrine:generate:entities TheodoThothCmsBundle
 
 echo "# Load dev environnement";
 

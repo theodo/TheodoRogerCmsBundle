@@ -1,6 +1,6 @@
 security:
     encoders:
-        Sadiant\CmsBundle\Entity\User: sha512
+        Theodo\ThothCmsBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -8,7 +8,7 @@ security:
 
     providers:
         main:
-            entity: { class: Sadiant\CmsBundle\Entity\User, property: username }
+            entity: { class: Theodo\ThothCmsBundle\Entity\User, property: username }
 
     firewalls:
         profiler:

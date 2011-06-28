@@ -16,7 +16,7 @@ php checksamples.php ln
 #test database
 php dbtool.php
 
-php app/console doctrine:generate:entities SadiantCmsBundle
+php app/console doctrine:generate:entities TheodoThothCmsBundle
 
 php app/console doctrine:database:drop --force --connection=test
 php app/console doctrine:database:create --connection=test

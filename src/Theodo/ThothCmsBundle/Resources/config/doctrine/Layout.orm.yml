@@ -1,0 +1,19 @@
+Theodo\ThothCmsBundle\Entity\Layout:
+    type: entity
+    table: layout
+    repositoryClass: Theodo\ThothCmsBundle\Repository\LayoutRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        content:
+            type: text
+        content_type:
+            type: string
+            length: 255
+            nullable: true
