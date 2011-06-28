@@ -1,11 +1,11 @@
 <?php
 
-namespace Sadiant\CmsBundle\Tests\Controller;
+namespace Theodo\ThothCmsBundle\Tests\Controller;
 
 require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Sadiant\CmsBundle\Repository\UserRepository;
+use Theodo\ThothCmsBundle\Repository\UserRepository;
 
 class UserControllerTest extends WebTestCase
 {

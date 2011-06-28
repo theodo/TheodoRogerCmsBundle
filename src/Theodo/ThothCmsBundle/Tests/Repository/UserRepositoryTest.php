@@ -2,12 +2,12 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Sadiant\CmsBundle\Entity\User;
-use Sadiant\CmsBundle\Repository\UserRepository;
-use Sadiant\CmsBundle\Tests\Unit;
+use Theodo\ThothCmsBundle\Entity\User;
+use Theodo\ThothCmsBundle\Repository\UserRepository;
+use Theodo\ThothCmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Sadiant\CmsBundle\DataFixtures\ORM\UserData;
+use Theodo\ThothCmsBundle\DataFixtures\ORM\UserData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;

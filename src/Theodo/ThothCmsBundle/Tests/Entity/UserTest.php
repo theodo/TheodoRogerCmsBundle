@@ -2,10 +2,10 @@
 
 require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
-use Sadiant\CmsBundle\Entity\User;
-use Sadiant\CmsBundle\Tests\Unit;
+use Theodo\ThothCmsBundle\Entity\User;
+use Theodo\ThothCmsBundle\Tests\Unit;
 use Doctrine\Common\DataFixtures\Loader;
-use Sadiant\CmsBundle\DataFixtures\ORM\UserData;
+use Theodo\ThothCmsBundle\DataFixtures\ORM\UserData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
@@ -51,10 +51,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $user = $em->getRepository('SadiantCmsBundle:User')->findOneBy(array('username' => 'admin'));
+        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('username' => 'admin'));
 
         // Test user
-        $this->assertInstanceOf('Sadiant\CmsBundle\Entity\User', $user);
+        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\User', $user);
         $this->assertEquals('Theodore De Banville', $user->getName());
 
         // Test getRoles
@@ -76,10 +76,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $user = $em->getRepository('SadiantCmsBundle:User')->findOneBy(array('username' => 'admin'));
+        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('username' => 'admin'));
 
         // Test user
-        $this->assertInstanceOf('Sadiant\CmsBundle\Entity\User', $user);
+        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\User', $user);
         $this->assertEquals('Theodore De Banville', $user->getName());
 
         // Test getRoles
@@ -101,10 +101,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $user = $em->getRepository('SadiantCmsBundle:User')->findOneBy(array('username' => 'admin'));
+        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('username' => 'admin'));
 
         // Test user
-        $this->assertInstanceOf('Sadiant\CmsBundle\Entity\User', $user);
+        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\User', $user);
         $this->assertEquals('Theodore De Banville', $user->getName());
 
         // Test equals
@@ -125,10 +125,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $user = $em->getRepository('SadiantCmsBundle:User')->findOneBy(array('username' => 'admin'));
+        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('username' => 'admin'));
 
         // Test user
-        $this->assertInstanceOf('Sadiant\CmsBundle\Entity\User', $user);
+        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\User', $user);
         $this->assertEquals('Theodore De Banville', $user->getName());
 
         // Test equals
