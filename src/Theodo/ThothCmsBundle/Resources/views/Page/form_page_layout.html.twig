@@ -20,7 +20,7 @@
 {% spaceless %}
     {% set class = class|default('textarea large') %}
     {% set style = style|default('width: 100%;') %}
-    <textarea style="{{ style}}" {{ block('widget_attributes') }}>{{ value }}</textarea>
+    <textarea class="{{ class}}" style="{{ style}}" {{ block('widget_attributes') }}>{{ value }}</textarea>
 {% endspaceless %}
 {% endblock textarea_widget %}
 
