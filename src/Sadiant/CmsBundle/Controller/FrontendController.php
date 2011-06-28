@@ -30,12 +30,19 @@ class FrontendController extends Controller
     {
         if(!$slug)
         {
-            $slug = 'homepage';
-        }
-        $page = $this->getDoctrine()
+
+            $page = $this->getDoctrine()
                 ->getEntityManager()
                 ->getRepository('SadiantCmsBundle:Page')
-                ->findOneBySlug($slug);
+                ->getHomepage();
+        }
+        else
+        {
+            $page = $this->getDoctrine()
+                    ->getEntityManager()
+                    ->getRepository('SadiantCmsBundle:Page')
+                    ->findOneBySlug($slug);
+        }
 
         return $this->get('thot_cms.templating')->renderResponse('page:'.$page->getName());
     }
