@@ -12,8 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {    
-    const LANGUAGE_FR = 'fr';
-    const LANGUAGE_EN = 'en';
+    const LANGUAGE_FR      = 'fr';
+    const LANGUAGE_EN      = 'en';
+    const LANGUAGE_FR_NAME = 'french';
+    const LANGUAGE_EN_NAME = 'english';
 
     /**
      * Return available languages
@@ -25,8 +27,8 @@ class UserRepository extends EntityRepository
     public static function getAvailableLanguages()
     {
         return array(
-            self::LANGUAGE_FR => self::LANGUAGE_FR,
-            self::LANGUAGE_EN => self::LANGUAGE_EN,
+            self::LANGUAGE_FR => self::LANGUAGE_FR_NAME,
+            self::LANGUAGE_EN => self::LANGUAGE_EN_NAME,
         );
     }
 }

@@ -365,6 +365,6 @@ class User implements UserInterface
         $metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
 
         // Language validator: available
-        $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + UserRepository::getAvailableLanguages())));
+        $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + array_keys(UserRepository::getAvailableLanguages()))));
     }
 }

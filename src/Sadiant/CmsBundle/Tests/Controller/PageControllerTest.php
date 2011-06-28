@@ -2,7 +2,7 @@
 
 namespace Sadiant\CmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Sadiant\CmsBundle\Repository\PageRepository;
@@ -23,7 +23,7 @@ class PageControllerTest extends WebTestCase
         // Load "test" entity manager
         $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
     }
-    
+
     /**
      * User connection
      * 
@@ -41,12 +41,11 @@ class PageControllerTest extends WebTestCase
 
         // Submit the form with valid credentials
         $crawler = $client->submit(
-            $form,
-            array(
-                '_username'    => $username,
-                '_password'    => $password,
-                '_remember_me' => true
-            )
+                        $form, array(
+                    '_username' => $username,
+                    '_password' => $password,
+                    '_remember_me' => true
+                        )
         );
 
         // Response should be success
@@ -89,7 +88,7 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*About.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Theodo.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Published.*/', $client->getResponse()->getContent());
-        
+
         $this->logout($client);
     }
 
@@ -109,10 +108,10 @@ class PageControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
-        
+
         $this->logout($client);
     }
-    
+
     /**
      * Test edit action
      *
@@ -129,10 +128,10 @@ class PageControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
-        
+
         $this->logout($client);
     }
-    
+
     /**
      * Test update action
      *
@@ -142,14 +141,14 @@ class PageControllerTest extends WebTestCase
     public function testUpdate()
     {
         print_r("\n> Test page update action");
-        
+
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/pages/1/update');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
-        
+
         $this->logout($client);
     }
 
@@ -162,10 +161,10 @@ class PageControllerTest extends WebTestCase
     public function testWorkflow()
     {
         print_r("\n> Test page workflow");
-        
+
         // Start transaction
         $this->em->getConnection()->beginTransaction();
-        
+
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/admin/pages');
@@ -174,23 +173,23 @@ class PageControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         // Retrieve "Add child" link and click
-        $link = $crawler->filterXPath('//a[@id="new-'.PageRepository::SLUG_HOMEPAGE.'-child"]')->link();
+        $link = $crawler->filterXPath('//a[@id="new-' . PageRepository::SLUG_HOMEPAGE . '-child"]')->link();
         $crawler = $client->click($link);
-        
+
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        
+
         // Test page content
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
 
         // Retrieve form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
-        
+
         // Submit form with errors
         $crawler = $client->submit($form, array());
         $crawler = $client->request('POST', $form->getUri());
-        
+
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
@@ -198,15 +197,15 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
         // Submit valid form
-        $crawler = $client->submit($form, array( 
-            'page[parent_id]'  => $this->em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
-            'page[name]'       => 'Functional test',
-            'page[slug]'       => 'functional-test',
-            'page[breadcrumb]' => 'Functional test',
-            'page[content]'    => '<p>Functional test page content</p>',
-            'page[status]'     => PageRepository::STATUS_PUBLISH,
-            'save-and-edit'    => true
-        ));
+        $crawler = $client->submit($form, array(
+                    'page[parent_id]' => $this->em->getRepository('SadiantCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
+                    'page[name]' => 'Functional test',
+                    'page[slug]' => 'functional-test',
+                    'page[breadcrumb]' => 'Functional test',
+                    'page[content]' => '<p>Functional test page content</p>',
+                    'page[status]' => PageRepository::STATUS_PUBLISH,
+                    'save-and-edit' => true
+                ));
 
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -214,29 +213,29 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*admin\/pages\/.*\/edit$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
-        
+
         // Update Form
         $form = $crawler->filterXPath('//input[@type="submit"]')->form();
-        $form['page[published_at][year]']  = date('Y');
+        $form['page[published_at][year]'] = date('Y');
         $form['page[published_at][month]'] = date('m');
-        $form['page[published_at][day]']   = date('d');
+        $form['page[published_at][day]'] = date('d');
 
         // Submit the form
         $crawler = $client->submit($form);
-        
+
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertRegexp('/.*admin\/pages$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
-        
+
         // Back to admin homepage
         $crawler = $client->request('GET', '/admin/pages');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
         $this->em->getConnection()->rollBack();
-        
+
         $this->logout($client);
     }
 }

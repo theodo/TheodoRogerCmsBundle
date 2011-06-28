@@ -155,14 +155,14 @@ class UserController extends Controller
                 $em->flush();
                 
                 // Set notice
-                $this->get('session')->setFlash('notice', sprintf('User "%s" has been created', $user->getName()));
+                $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
                 
                 return $this->redirect($this->generateUrl('user_list'));
             }
             else
             {
                 // Set error
-                $this->get('session')->setFlash('error', sprintf('Can not create user due some errors'));
+                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not create user due some errors'));
             }
         }
 
@@ -196,7 +196,7 @@ class UserController extends Controller
             $em->flush();
 
             // Set notice
-            $this->get('session')->setFlash('notice', sprintf('User "%s" has been removed', $user->getName()));
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been removed', array('%user%' => $user->getName())));
             
             return $redirect = $this->redirect($this->generateUrl('user_list'));
         }
@@ -204,7 +204,7 @@ class UserController extends Controller
         // Set flash notice
         if ($request->getMethod() == 'POST' && $user->getIsMainAdmin())
         {
-            $this->get('session')->setFlash('error', 'Can not remove main admin');
+            $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not remove main admin'));
         }
 
         return $this->render('SadiantCmsBundle:User:remove.html.twig', array(
@@ -275,14 +275,14 @@ class UserController extends Controller
                 $em->flush();
 
                 // Set error
-                $this->get('session')->setFlash('notice', sprintf('Your preferences have been updated'));
+                $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
                 
                 return $this->redirect($this->generateUrl('user_preferences'));
             }
             else
             {
                 // Set error
-                $this->get('session')->setFlash('error', sprintf('Can not update your preferences due some errors'));
+                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update your preferences due some errors'));
                 $hasErrors = true;
             }
         }
@@ -335,14 +335,14 @@ class UserController extends Controller
                 $em->flush();
 
                 // Set notice
-                $this->get('session')->setFlash('notice', sprintf('User "%s" has been updated', $user->getName()));
+                $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));
                 
                 return $this->redirect($this->generateUrl('user_edit', array('id' => $user->getId())));
             }
             else
             {
                 // Set error
-                $this->get('session')->setFlash('error', sprintf('Can not update "%s" due some errors', $user->getName()));
+                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update "%user%" due some errors', array('%user%' => $user->getName())));
             }
         }
 

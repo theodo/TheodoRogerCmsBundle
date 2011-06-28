@@ -2,7 +2,7 @@
 
 namespace Sadiant\CmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Sadiant\CmsBundle\Repository\LayoutRepository;
