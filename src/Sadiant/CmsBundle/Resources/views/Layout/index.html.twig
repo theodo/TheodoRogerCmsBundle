@@ -22,7 +22,7 @@
                     <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
                 </td>
                 <td class="remove">
-                    <a href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
+                    <a id="remove-layout-{{ layout.id }}" href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
                 </td>
             </tr>
         {% endfor %}

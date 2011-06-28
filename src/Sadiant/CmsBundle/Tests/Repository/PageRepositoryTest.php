@@ -85,4 +85,25 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Homepage', $page->getName());
         $this->assertTrue(is_null($page->getParentId()));
     }
+
+    /**
+     *
+     * Test getHomepage
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function testGetHomepage()
+    {
+        print_r("\n> Test \"getHomepage\" function");
+
+        // Retrieve entity manager
+        $em = $this->getEntityManager();
+
+        // Retrieve the homepage
+        $page = $em->getRepository('SadiantCmsBundle:Page')->getHomepage();
+
+        // check page
+        $this->assertEquals('Homepage', $page->getName());
+    }
 }

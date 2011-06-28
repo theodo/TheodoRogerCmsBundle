@@ -10,6 +10,7 @@ Sadiant\CmsBundle\Entity\Layout:
         name:
             type: string
             length: 255
+            unique: true
         content:
             type: text
         content_type:

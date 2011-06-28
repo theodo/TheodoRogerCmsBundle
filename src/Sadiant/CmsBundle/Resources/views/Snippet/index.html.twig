@@ -24,7 +24,7 @@
                     </span>
                 </td>
                 <td class="remove">
-                    <a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
+                    <a id="remove-snippet-{{ snippet.id }}" href="{{ url('snippet_remove', { 'id': snippet.id }) }}">Remove</a>
                 </td>
             </tr>
         {% endfor %}

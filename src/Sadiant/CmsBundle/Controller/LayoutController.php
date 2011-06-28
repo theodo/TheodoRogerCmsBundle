@@ -59,6 +59,8 @@ class LayoutController extends Controller
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
+                
+                $this->get('thot_cms.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('layout_list'));
@@ -108,9 +110,16 @@ class LayoutController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
+
+                // remove twig cached file
+                $this->get('thot_cms.caching')->invalidate('layout:'.$layout->getName());
+
+                // save layout
                 $layout = $form->getData();
                 $this->getEM()->persist($layout);
                 $this->getEM()->flush();
+                
+                $this->get('thot_cms.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('layout_list'));

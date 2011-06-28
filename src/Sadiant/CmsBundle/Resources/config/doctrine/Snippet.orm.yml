@@ -10,5 +10,6 @@ Sadiant\CmsBundle\Entity\Snippet:
         name:
             type: string
             length: 255
+            unique: true
         content:
             type: text

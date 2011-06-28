@@ -52,17 +52,14 @@ class Twig_Loader_DatabaseTest extends \PHPUnit_Framework_TestCase
         
         $page = $this->getEntityManager()->getRepository('SadiantCmsBundle:Page')->findOneByName('theodo');
 
-        $this->assertEquals($twig_loader_database->getSource('theodo'), $page->getContent());
         $this->assertEquals($twig_loader_database->getSource('page:theodo'), $page->getContent());
         
         $layout = $this->getEntityManager()->getRepository('SadiantCmsBundle:Layout')->findOneByName('normal');
 
-        $this->assertEquals($twig_loader_database->getSource('normal'), $layout->getContent());
         $this->assertEquals($twig_loader_database->getSource('layout:normal'), $layout->getContent());
         
         $snippet = $this->getEntityManager()->getRepository('SadiantCmsBundle:Snippet')->findOneByName('bonsoir');
 
-        $this->assertEquals($twig_loader_database->getSource('bonsoir'), $snippet->getContent());
         $this->assertEquals($twig_loader_database->getSource('snippet:bonsoir'), $snippet->getContent());
 
         try {

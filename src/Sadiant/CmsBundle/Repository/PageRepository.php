@@ -61,4 +61,30 @@ EOF;
 
         return $query;
     }
+
+    /**
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function queryHomepage()
+    {
+        $query = $this->getEntityManager()->createQuery("SELECT p FROM SadiantCmsBundle:Page p WHERE p.parent_id IS NULL");
+
+        return $query;
+    }
+
+    /**
+     *
+     * Retrieve the homepage
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function getHomepage()
+    {
+      $query = $this->queryHomepage();
+
+      return $query->getSingleResult();
+    }
 }
