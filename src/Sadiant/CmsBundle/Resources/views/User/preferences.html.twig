@@ -10,6 +10,23 @@
 <script src="{{ asset('bundles/sadiantcms/js/user.js') }}" type="text/javascript"></script>
 {% endblock %}
 
+{% form_theme form _self %}
+{% block _userpreferences_name_widget %}
+    <input class="textbox activate" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endblock %}
+{% block _userpreferences_email_widget %}
+    <input class="textbox" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endblock %}
+{% block _userpreferences_username_widget %}
+    <input class="textbox" size="32" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endblock %}
+{% block _userpreferences_password_widget %}
+    <input class="textbox big" size="15" type="password" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endblock %}
+{% block _userpreferences_password_confirm_widget %}
+    <input class="textbox big" size="15" type="password" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endblock %}
+
 {% block content %}
     <h1>{% trans %}Personal Preferences{% endtrans %}</h1>
     
@@ -19,23 +36,23 @@
           <p class="caption">Avatar provided by Gravatar.com</p>
         </div>
       
-        <div>
+        <p>
             {{ form_label(form.name) }}
             {{ form_widget(form.name) }}
             {{ form_errors(form.name) }}
-        </div>
+        </p>
       
-        <div>
+        <p>
             {{ form_label(form.username) }}
             {{ form_widget(form.username) }}
             {{ form_errors(form.username) }}
-        </div>
+        </p>
       
-        <div>
+        <p>
             {{ form_label(form.email) }}
             {{ form_widget(form.email) }}
             {{ form_errors(form.email) }}
-        </div>
+        </p>
       
         <p id="display_password" class="{% if form_errors(form.password) %}hide{% else %}display{% endif %}">
             <label>{% trans %}Password{% endtrans %}</label>
@@ -46,34 +63,33 @@
             </span>
         </p>
 
-        <div class="change-password {% if form_errors(form.password) %}display{% else %}hide{% endif %}">
-            <span>
+        <div class="set change-password {% if form_errors(form.password) %}display{% else %}hide{% endif %}">
+            <p>
                 {{ form_label(form.password) }}
                 {{ form_widget(form.password) }}
                 {{ form_errors(form.password) }}
-            </span>
+            </p>
 
-            <span>
+            <p>
                 {{ form_label(form.password_confirm) }}
                 {{ form_widget(form.password_confirm) }}
                 {{ form_errors(form.password_confirm) }}
-            </span>
-          
-            <span>
-                {% trans %} or {% endtrans %}
-                <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
-            </span>
+                <span>
+                    {% trans %} or {% endtrans %}
+                    <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
+                </span>
+            </p>
         </div>
         
-        <div>
+        <p>
             {{ form_label(form.language) }}
             {{ form_widget(form.language) }}
             {{ form_errors(form.language) }}
-        </div>
+        </p>
 
         {{ form_rest(form) }}
       
-        <p class="buttons" style="clear: left;">
+        <p class="buttons">
             <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save" />
             {% trans %}or{% endtrans %}
             <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
