@@ -14,24 +14,7 @@
 
 {% block page_title "Pages" %}
 
-{% form_theme form _self %}
-{% block _page_name_widget %}
-    <input class="textbox" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _page_slug_widget %}
-    <input class="textbox" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _page_breadcrumb_widget %}
-    <input class="textbox" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _page_description_widget %}
-    <input class="textbox" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _page_content_widget %}
-{% spaceless %}
-    <textarea class="textarea large" style="width: 100%;" {{ block('widget_attributes') }}>{{ value }}</textarea>
-{% endspaceless %}
-{% endblock %}
+{% form_theme form 'TheodoThothCmsBundle:Page:form_page_layout.html.twig' %}
 
 {% block content %}
     {% if page is defined %} 
@@ -44,11 +27,9 @@
     <h1>{% trans %}New Page{% endtrans %}</h1>
     <form id="new_page" action="{{ url('page_new', { 'id': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
-        <p class="title">
-            {{ form_label(form.name) }}
-            {{ form_errors(form.name) }}
-            {{ form_widget(form.name) }}
-        </p>
+        <div class="title">
+            {{ form_row(form.name) }}
+        </div>
         <div class="drawer">
             <div class="toggle_wrapper">
                 <div id="extra-fields" class="drawer_contents {% if (hasErrors is defined) and hasErrors %}display{% else %}hide{% endif %}">
@@ -66,21 +47,21 @@
 
                             <tr>
                                 <th class="label">
-                              {{ form_label(form.breadcrumb) }}
+                                    {{ form_label(form.breadcrumb) }}
                                 </th>
                                 <td class="field">
-                              {{ form_widget(form.breadcrumb) }}
-                              {{ form_errors(form.breadcrumb) }}
+                                    {{ form_widget(form.breadcrumb) }}
+                                    {{ form_errors(form.breadcrumb) }}
                                 </td>
                             </tr>
 
                             <tr>
                                 <th class="label">
-                              {{ form_label(form.description) }}
+                                    {{ form_label(form.description) }}
                                 </th>
                                 <td class="field">
-                              {{ form_widget(form.description) }}
-                              {{ form_errors(form.description) }}
+                                    {{ form_widget(form.description) }}
+                                    {{ form_errors(form.description) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -125,9 +106,7 @@
         </div>
         <div class="set">
             <p>
-                {{ form_label(form.status) }}
-                {{ form_widget(form.status) }}
-                {{ form_errors(form.status) }}
+                {{ form_row(form.status) }}
             </p>
             {% if isNew is not defined or not isNew %}
                 <div>

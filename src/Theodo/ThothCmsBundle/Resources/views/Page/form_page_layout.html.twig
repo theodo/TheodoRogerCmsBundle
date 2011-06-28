@@ -1,0 +1,55 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block field_widget %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    {% set class = class|default('textbox') %}
+    <input class="{{ class }}" type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endspaceless %}
+{% endblock field_widget %}
+
+{% block text_widget %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    {% set class = class|default('textbox') %}
+    {{ block('field_widget') }}
+{% endspaceless %}
+{% endblock text_widget %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    {% set class = class|default('textarea large') %}
+    {% set style = style|default('width: 100%;') %}
+    <textarea style="{{ style}}" {{ block('widget_attributes') }}>{{ value }}</textarea>
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <span class="error-with-field">
+            {% for error in errors %}
+                <span class="error">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<a href="#" class="closer">x</a></span>
+            {% endfor %}
+        </span>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block field_row %}
+{% spaceless %}
+    <p class="title">
+    {% if errors|length > 0 %}
+        <span class="error-with-field">
+    {% endif %}
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    {% if errors|length > 0 %}
+            {% for error in errors %}
+                <span class="error">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<a href="#" class="closer">x</a></span>
+            {% endfor %}
+        </span>
+    {% endif %}
+    </p>
+{% endspaceless %}
+{% endblock field_row %}
