@@ -58,7 +58,7 @@ EOF
         $page2->setSlug('about');
         $page2->setBreadcrumb('About');
         $page2->setDescription("About page");
-        $page2->setStatus(PageRepository::STATUS_PUBLISH);
+        $page2->setStatus(PageRepository::STATUS_DRAFT);
         $page2->setParent($page1);
         $page2->setPublishedAt(new \DateTime('now'));
 
@@ -84,7 +84,7 @@ EOF
         $page3->setSlug('theodo');
         $page3->setBreadcrumb('Theodo');
         $page3->setDescription("Theodo page");
-        $page3->setStatus(PageRepository::STATUS_DRAFT);
+        $page3->setStatus(PageRepository::STATUS_PUBLISH);
         $page3->setParent($page1);
         $manager->persist($page3);
 

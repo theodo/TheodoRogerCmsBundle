@@ -43,6 +43,11 @@ class FrontendController extends Controller
                     ->findOneBySlug($slug);
         }
 
+        if (!$page || $page->getStatus() !== 'Published')
+        {
+          throw $this->createNotFoundException();
+        }
+
         return $this->get('thoth_frontend.templating')->renderResponse('page:'.$page->getName());
     }
 }
