@@ -6,7 +6,6 @@ editAreaLoader.load_syntax["twig"] = {
 	'DISPLAY_NAME' : 'twig'
 	,'COMMENT_SINGLE' : {}
 	,'COMMENT_MULTI' : {'<!--' : '-->', '{#' : '#}'}
-	,'QUOTEMARKS' : {1: "'", 2: '"'}
 	,'KEYWORD_CASE_SENSITIVE' : true
 	,'KEYWORDS' : {
             'statements' : [
