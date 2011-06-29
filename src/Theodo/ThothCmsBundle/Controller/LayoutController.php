@@ -140,14 +140,14 @@ class LayoutController extends Controller
             }
         }
 
-        return $this->render(
-            'TheodoThothCmsBundle:Layout:edit.html.twig',
-            array(
-                'form'      => $form->createView(),
-                'layout'      => $layout,
-                'hasErrors' => $hasErrors
-            )
-        );
+        return $this->render('TheodoThothCmsBundle:Layout:edit.html.twig',
+                array(
+                    'title' => 'Edit '.$layout->getName(),
+                    'layout' => $layout,
+                    'form' => $form->createView(),
+                    'hasErrors' => $hasErrors
+                  )
+                );
     }
 
     /**

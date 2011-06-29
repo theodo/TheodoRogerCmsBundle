@@ -1,6 +1,7 @@
 parameters:
     thoth_frontend.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig_Loader_Database
     thoth_frontend.caching.class: Theodo\ThothCmsBundle\Extensions\Twig_Cache_Database
+    validator.twig_syntax.class: Theodo\ThothCmsBundle\Validator\TwigSyntaxValidator
 
 services:
     thoth_frontend.twig.loader:
@@ -15,3 +16,9 @@ services:
     thoth_frontend.caching:
         class: %thoth_frontend.caching.class%
         arguments: ['@thoth_frontend.twig']
+
+    validator.twig_syntax:
+        class: %validator.twig_syntax.class%
+        arguments: ['@thoth_frontend.twig']
+        tags:
+            - { name: validator.constraint_validator, alias: validator.twig_syntax }
