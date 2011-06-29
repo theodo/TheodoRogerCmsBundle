@@ -175,8 +175,23 @@ class UserController extends Controller
             }
             else
             {
+                // Construct errors
+                $errors = array();
+                foreach ($form->getErrors() as $error)
+                {
+                    array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
+                }
+
                 // Set error
-                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not create user due some errors'));
+                $this->get('session')->setFlash(
+                    'error',
+                    $this->get('translator')->trans(
+                        'Can not create user due some errors%errors%',
+                         array(
+                            '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                         )
+                    )
+                );
             }
         }
 
@@ -382,8 +397,24 @@ class UserController extends Controller
             }
             else
             {
+                // Construct errors
+                $errors = array();
+                foreach ($form->getErrors() as $error)
+                {
+                    array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
+                }
+
                 // Set error
-                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update "%user%" due some errors', array('%user%' => $user->getName())));
+                $this->get('session')->setFlash(
+                    'error',
+                    $this->get('translator')->trans(
+                        'Can not update "%user%" due some errors%errors%',
+                         array(
+                            '%user%'   => $user->getName(),
+                            '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                         )
+                    )
+                );
             }
         }
 

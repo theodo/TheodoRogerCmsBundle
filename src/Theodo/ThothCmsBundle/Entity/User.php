@@ -393,7 +393,7 @@ class User implements UserInterface
         $metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
         
         // Role validator
-        $metadata->addGetterConstraint('validRole', new True(array('message' => 'This value should not be blank')));
+        $metadata->addGetterConstraint('validRole', new True(array('message' => 'The user must have at least one role')));
 
         // Language validator: available
         $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + array_keys(UserRepository::getAvailableLanguages()))));
