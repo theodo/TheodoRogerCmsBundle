@@ -112,4 +112,6 @@ snippet_remove:
 # Frontend routing
 page:
     pattern: /{slug}
-    defaults: { _controller: TheodoThothCmsBundle:Frontend:page, slug: null }
+    defaults: { _controller: TheodoThothCmsBundle:Frontend:page }
+    requirements:
+        slug: ".+"
