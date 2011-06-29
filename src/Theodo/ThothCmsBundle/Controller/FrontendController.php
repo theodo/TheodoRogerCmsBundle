@@ -41,7 +41,7 @@ class FrontendController extends Controller
 
         if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus())
         {
-            if (!$page = $repository->findOneBySlug('error404'))
+            if (!$page = $this->get('thoth.content_repository')->getPageBySlug('error404'))
             {
                 throw $this->createNotFoundException();
             }

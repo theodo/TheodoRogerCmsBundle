@@ -22,6 +22,6 @@ services:
         arguments: ['@thoth.twig']
     validator.twig_syntax:
         class: %validator.twig_syntax.class%
-        arguments: ['@thoth_frontend.twig']
+        arguments: ['@thoth.twig']
         tags:
             - { name: validator.constraint_validator, alias: validator.twig_syntax }
