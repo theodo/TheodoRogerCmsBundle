@@ -1,7 +1,6 @@
 Theodo\ThothCmsBundle\Entity\Snippet:
     type: entity
     table: snippet
-    repositoryClass: Theodo\ThothCmsBundle\Repository\SnippetRepository
     id:
         id:
             type: integer

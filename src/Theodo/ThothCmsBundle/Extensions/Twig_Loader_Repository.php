@@ -4,44 +4,29 @@ namespace Theodo\ThothCmsBundle\Extensions;
 
 use Twig_LoaderInterface;
 use Twig_Error_Loader;
-use Doctrine\ORM\EntityManager;
-/*
- * This file is part of Twig.
- *
- * (c) 2009 Fabien Potencier
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+use Theodo\ThothCmsBundle\Repository\ContentRepositoryInterface;
 
 /**
- * Loads a template from a string.
+ * Loads a template from a repository.
  *
- * When using this loader with a cache mechanism, you should know that a new cache
- * key is generated each time a template content "changes" (the cache key being the
- * source code of the template). If you don't want to see your cache grows out of
- * control, you need to take care of clearing the old cache file by yourself.
- *
- * @package    twig
- * @author     Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Loader_Database implements Twig_LoaderInterface
+class Twig_Loader_Repository implements Twig_LoaderInterface
 {
     /**
      *
-     * @var EntityManager 
+     * @var ContentRepositoryInterface
      */
-    protected $entity_manager = null;
+    protected $content_repository = null;
     
     /**
      *
-     * @param EntityManager $entity_manager 
+     * @param ContentRepositoryInterface $content_repository
      * @author fabriceb
      * @since 2001-06-22
      */
-    public function __construct(EntityManager $entity_manager)
+    public function __construct(ContentRepositoryInterface $content_repository)
     {
-        $this->entity_manager = $entity_manager;
+        $this->content_repository = $content_repository;
     }
     
     /**
@@ -50,20 +35,20 @@ class Twig_Loader_Database implements Twig_LoaderInterface
      * @author fabriceb
      * @since 2001-06-22 
      */
-    public function getEntityManager()
+    public function getContentRepository()
     {
-        return $this->entity_manager;
+        return $this->content_repository;
     }
 
     /**
      *
-     * @param EntityManager $entity_manager 
+     * @param ContentRepositoryInterface $content_repository
      * @author fabriceb
      * @since 2001-06-22
      */
-    public function setEntityManager(EntityManager $entity_manager)
+    public function setContentRepository(ContentRepositoryInterface $content_repository)
     {
-        $this->entity_manager = $entity_manager;
+        $this->content_repository = $content_repository;
     }
     
     /**
@@ -95,15 +80,16 @@ class Twig_Loader_Database implements Twig_LoaderInterface
             throw new Twig_Error_Loader('Type "'.$type.'" is not accepted. Accepted types are: '.implode(', ', $types));
         }
 
-        $template = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:'.ucfirst($type))
-                ->findOneByName($name);
-        if (!$template)
+        // Load source from content repository
+        $source = $this->getContentRepository()->getSourceByNameAndType($name, $type);
+
+        // Check source
+        if (!$source)
         {
             throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type(s): '.implode(', ', $types));
         }
 
-        return $template->getContent();
+        return $source;
     }
 
     /**

@@ -5,7 +5,6 @@ namespace Theodo\ThothCmsBundle\Tests\Controller;
 require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Theodo\ThothCmsBundle\Repository\SnippetRepository;
 
 class SnippetControllerTest extends WebTestCase
 {

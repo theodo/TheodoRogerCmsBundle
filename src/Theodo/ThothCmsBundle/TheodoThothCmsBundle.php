@@ -13,15 +13,14 @@ namespace Theodo\ThothCmsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Theodo\ThothCmsBundle\DependencyInjection\Compiler\ThothFrontendTwigEnvironmentPass;
+use Theodo\ThothCmsBundle\DependencyInjection\Compiler\ThothTwigEnvironmentPass;
 
 class TheodoThothCmsBundle extends Bundle
 {
-
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
 
-        $container->addCompilerPass(new ThothFrontendTwigEnvironmentPass());
+        $container->addCompilerPass(new ThothTwigEnvironmentPass());
     }
 }

@@ -1,22 +1,25 @@
 parameters:
-    thoth_frontend.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig_Loader_Database
-    thoth_frontend.caching.class: Theodo\ThothCmsBundle\Extensions\Twig_Cache_Database
+    thoth.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig_Loader_Repository
+    thoth.caching.class: Theodo\ThothCmsBundle\Extensions\Twig_Cache_Database
+    thoth.content_repository.class: Theodo\ThothCmsBundle\Repository\ContentEntityRepository
     validator.twig_syntax.class: Theodo\ThothCmsBundle\Validator\TwigSyntaxValidator
 
 services:
-    thoth_frontend.twig.loader:
-        class: %thoth_frontend.twig.loader.class%
+    thoth.content_repository:
+        class: %thoth.content_repository.class%
         arguments: ['@doctrine.orm.entity_manager']
-    thoth_frontend.twig:
+    thoth.twig.loader:
+        class: %thoth.twig.loader.class%
+        arguments: ['@thoth.content_repository']
+    thoth.twig:
         class: %twig.class%
-        arguments: ['@thoth_frontend.twig.loader', %twig.options%]
-    thoth_frontend.templating:
+        arguments: ['@thoth.twig.loader', %twig.options%]
+    thoth.templating:
         class: %templating.engine.twig.class%
-        arguments: ['@thoth_frontend.twig', '@templating.name_parser', '@templating.globals']
-    thoth_frontend.caching:
-        class: %thoth_frontend.caching.class%
-        arguments: ['@thoth_frontend.twig']
-
+        arguments: ['@thoth.twig', '@templating.name_parser', '@templating.globals']
+    thoth.caching:
+        class: %thoth.caching.class%
+        arguments: ['@thoth.twig']
     validator.twig_syntax:
         class: %validator.twig_syntax.class%
         arguments: ['@thoth_frontend.twig']

@@ -28,7 +28,7 @@ class PageController extends Controller
     public function indexAction()
     {
         // Retrieve pages
-        $pages = $this->getDoctrine()->getEntityManager()->getRepository('TheodoThothCmsBundle:Page')->queryForMainPages()->getResult();
+        $pages = $this->get('thoth.content_repository')->getFirstTwoLevelPages();
 
         return $this->render('TheodoThothCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
@@ -91,9 +91,9 @@ class PageController extends Controller
                 // Perform some action, such as save the object to the database
                 $page = $form->getData();
                 $em->persist($page);
-                $em->flush();
-
-                $this->get('thoth_frontend.caching')->warmup('page:'.$page->getName());
+                $em->flush(); 
+                
+                $this->get('thoth.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
@@ -191,13 +191,13 @@ class PageController extends Controller
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->get('thoth_frontend.caching')->invalidate('page:'.$page->getName());
+                $this->get('thoth.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();
-
-                $this->get('thoth_frontend.caching')->warmup('page:'.$page->getName());
+                
+                $this->get('thoth.caching')->warmup('page:'.$page->getName()/*, $this->get('thot_cms.twig.extension.routing')*/);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
@@ -285,41 +285,6 @@ class PageController extends Controller
                 'level' => $request->get('level')
             )
         );
-    }
-
-    /**
-     * Homepage action
-     *
-     * @return string
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
-     */
-    public function homepageAction()
-    {
-        // Update twig loader
-        $twigEnvironment = $this->get('twig');
-        $oldLoader = $twigEnvironment->getLoader();
-        $twigEngine = $this->get('templating');
-
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
-        // Retrieve page
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE));
-
-        $twigEnvironment->setLoader(new Twig_Loader_String());
-        try
-        {
-          $response = $twigEngine->renderResponse($page->getContent());
-          $twigEnvironment->setLoader($oldLoader);
-        }
-        catch (Twig_Error_Syntax $e)
-        {
-          $twigEnvironment->setLoader($oldLoader);
-          throw $e;
-        }
-
-        return $response;
     }
 
     /**

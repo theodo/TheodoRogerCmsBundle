@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
 
-class ThothCmsServicesExtension extends Extension
+class TheodoThothCmsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -16,10 +16,5 @@ class ThothCmsServicesExtension extends Extension
         
         // Load the services.yml file
         $loader->load('services.yml');
-    }
-
-    public function getAlias()
-    {
-        return 'cms_services';
     }
 }

@@ -61,7 +61,7 @@ class SnippetController extends Controller
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
                 
-                $this->get('thoth_frontend.caching')->warmup('snippet:'.$snippet->getName());
+                $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
@@ -106,13 +106,13 @@ class SnippetController extends Controller
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->get('thoth_frontend.caching')->invalidate('snippet:'.$snippet->getName());
+                $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
 
                 $snippet = $form->getData();
                 $this->getEM()->persist($snippet);
                 $this->getEM()->flush();
 
-                $this->get('thoth_frontend.caching')->warmup('snippet:'.$snippet->getName());
+                $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
                 if ($request->get('save-and-edit'))

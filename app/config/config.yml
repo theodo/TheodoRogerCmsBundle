@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
-    - { resource: '@TheodoThothCmsBundle/Resources/config/services.yml' }
 
 framework:
     secret:          %secret%
@@ -78,3 +77,6 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+# Load thoth cms service
+theodo_thoth_cms: ~

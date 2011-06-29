@@ -30,16 +30,13 @@ class FrontendController extends Controller
      */
     public function pageAction($slug)
     {
-        $repository = $this->getDoctrine()
-                ->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:Page');
         if(!$slug)
         {
-            $page = $repository->getHomepage();
+            $page = $this->get('thoth.content_repository')->getHomepage();
         }
         else
         {
-            $page = $repository->findOneBySlug($slug);
+            $page = $this->get('thoth.content_repository')->getPageBySlug($slug);
         }
 
         if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus())
@@ -50,6 +47,6 @@ class FrontendController extends Controller
             }
         }
 
-        return $this->get('thoth_frontend.templating')->renderResponse('page:'.$page->getName());
+        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page));
     }
 }
