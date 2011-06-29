@@ -16,18 +16,7 @@
 {% trans %}Edit Layout{% endtrans %}
 {% endblock %}
 
-{% form_theme form _self %}
-{% block _layout_name_widget %}
-    <input class="textbox" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _layout_content_type_widget %}
-    <input size="40" max-length="40" class="textbox" type="text" {{ block('widget_attributes') }} value="{{ value }}" />
-{% endblock %}
-{% block _layout_content_widget %}
-{% spaceless %}
-    <textarea class="textarea large" style="width: 100%;" {{ block('widget_attributes') }}>{{ value }}</textarea>
-{% endspaceless %}
-{% endblock %}
+{% form_theme form 'TheodoThothCmsBundle:Form:form_custom_layout.html.twig' %}
 
 {% block content %}
     {% if layout is defined %}
@@ -39,9 +28,7 @@
     {% endif %}
         <div class="form_area">
             <p class="title">
-                {{ form_label(form.name) }}
-                {{ form_errors(form.name) }}
-                {{ form_widget(form.name) }}
+                {{ form_row(form.name) }}
             </p>
             <div class="drawer">
                 <div class="toggle_wrapper">
@@ -53,8 +40,8 @@
                                         {{ form_label(form.content_type) }}
                                     </th>
                                     <td class="field">
-                                        {{ form_errors(form.content_type) }}
                                         {{ form_widget(form.content_type) }}
+                                        {{ form_errors(form.content_type) }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -71,15 +58,13 @@
                 </div>
             </div>
             <p class="content">
-                {{ form_label(form.content) }}
-                {{ form_errors(form.content) }}
-                {{ form_widget(form.content) }}
+                {{ form_row(form.content) }}
             </p>
             {{ form_rest(form) }}
         </div>
         <p class="buttons" style="clear: left;">
-            <input type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
-            <input type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
+            <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
+            <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
             {% trans %}or{% endtrans %}
             <a class="list-layout" href="{{ url('layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
             {# {% if layout is defined %}

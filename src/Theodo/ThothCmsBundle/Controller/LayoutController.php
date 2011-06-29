@@ -98,6 +98,7 @@ class LayoutController extends Controller
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
+     * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
      */
     public function updateAction($id)
     {
@@ -106,11 +107,14 @@ class LayoutController extends Controller
             ->findOneById($id);
         $form = $this->createForm(new LayoutType(), $layout);
         $request = $this->get('request');
+
+        // Initialize form hasErros
+        $hasErrors = false;
+
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-
                 // remove twig cached file
                 $this->get('thoth_frontend.caching')->invalidate('layout:'.$layout->getName());
 
@@ -130,9 +134,20 @@ class LayoutController extends Controller
 
                 return $redirect;
             }
+            else
+            {
+                $hasErrors = true;
+            }
         }
 
-        return $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+        return $this->render(
+            'TheodoThothCmsBundle:Layout:edit.html.twig',
+            array(
+                'form'      => $form->createView(),
+                'layout'      => $layout,
+                'hasErrors' => $hasErrors
+            )
+        );
     }
 
     /**
