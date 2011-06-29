@@ -54,6 +54,7 @@ class FrontendControllerTest extends WebTestCase
         $this->assertRegexp('/.*Lorem Ipsum.*/', $client->getResponse()->getContent());
 
         $crawler = $client->request('GET', '/lala');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertRegexp('/.*404.*/', $client->getResponse()->getContent());
     }
 }

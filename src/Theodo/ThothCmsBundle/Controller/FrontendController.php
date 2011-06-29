@@ -13,6 +13,8 @@ namespace Theodo\ThothCmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Theodo\ThothCmsBundle\Repository\PageRepository;
+
 use Theodo\ThothCmsBundle\Extensions\Twig_Loader_Database;
 use Twig_Error_Syntax;
 use Twig_Loader_Array;
@@ -28,24 +30,24 @@ class FrontendController extends Controller
      */
     public function pageAction($slug)
     {
+        $repository = $this->getDoctrine()
+                ->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:Page');
         if(!$slug)
         {
-            $page = $this->getDoctrine()
-                ->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:Page')
-                ->getHomepage();
+            $page = $repository->getHomepage();
         }
         else
         {
-            $page = $this->getDoctrine()
-                    ->getEntityManager()
-                    ->getRepository('TheodoThothCmsBundle:Page')
-                    ->findOneBySlug($slug);
+            $page = $repository->findOneBySlug($slug);
         }
 
-        if (!$page || $page->getStatus() !== 'Published')
+        if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus())
         {
-          throw $this->createNotFoundException();
+            if (!$page = $repository->findOneBySlug('error404'))
+            {
+                throw $this->createNotFoundException();
+            }
         }
 
         return $this->get('thoth_frontend.templating')->renderResponse('page:'.$page->getName());

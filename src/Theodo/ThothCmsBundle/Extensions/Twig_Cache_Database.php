@@ -65,11 +65,6 @@ class Twig_Cache_Database
      */
     public function warmup($name/*, $ext*/)
     {
-        /*if (!$this->getTwigEnvironment()->getFunction('url'))
-        {
-          $this->getTwigEnvironment()->addFunction('url', new \Twig_Function_Method($ext, 'getUrl'));
-        }*/
-
         $this->getTwigEnvironment()->loadTemplate($name);
     }
 }

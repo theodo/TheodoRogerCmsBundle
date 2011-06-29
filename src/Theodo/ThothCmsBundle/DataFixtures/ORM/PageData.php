@@ -104,6 +104,24 @@ EOF
         $page4->setParent($page3);
         $manager->persist($page4);
 
+        $page5 = new Page();
+        $page5->setName('Error 404');
+        $page5->setSlug('error404');
+        $page5->setBreadcrumb('error404');
+        $page5->setContent(<<<EOF
+{% extends 'layout:normal' %}
+{% block title %}Error 404{% endblock %}
+{% block content %}
+<h1>Error 404</h1>
+<br />
+<h3>Page not found</h3>
+{% endblock %}
+EOF
+);
+        $page5->setParent($page1);
+        $page5->setStatus(PageRepository::STATUS_PUBLISH);
+        $manager->persist($page5);
+
         // Save pages
         $manager->flush();
     }
