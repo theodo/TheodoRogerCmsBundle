@@ -312,6 +312,20 @@ class Page
     {
         return $this->published_at;
     }
+
+    /**
+     *
+     * Returns recursive slug
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-29
+     */
+    public function getFullSlug()
+    {
+        $s = $this->getParent() ? $this->getParent()->getFullSlug().'/'.$this->getSlug() : $this->getSlug();
+
+        return $s;
+    }
     
     /**
      * Page validator
