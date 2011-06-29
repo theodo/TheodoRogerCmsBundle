@@ -117,7 +117,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($page->getId(), $page2->getId());
     }
-    
+
     /**
      * Test getFirstTwoLevelPages
      * 
@@ -134,7 +134,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('homepage', $pages[0]->getSlug());
         $this->assertSame(4, count($pages[0]->getChildren()));
     }
-    
+
     /**
      * Test create
      * 
@@ -147,13 +147,13 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Retrieve entity manager
         $em = $this->getContentRepository()->getEntityManager();
-        
+
         // Start transaction
         $em->getConnection()->beginTransaction();
 
         // Test without parameter
         $this->assertSame(null, $this->getContentRepository()->create());
-        
+
         // Create a new page
         $page = new Page();
         $page->setName('Content Entity Repository');
@@ -169,11 +169,11 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
         // Test page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'content-entity-repository'));
         $this->assertInstanceOf('\Theodo\ThothCmsBundle\Entity\Page', $page);
-        
+
         // Rollback
         $em->getConnection()->rollback();
     }
-    
+
     /**
      * Test remove
      * 
@@ -186,7 +186,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Retrieve entity manager
         $em = $this->getContentRepository()->getEntityManager();
-        
+
         // Start transaction
         $em->getConnection()->beginTransaction();
 
@@ -199,11 +199,11 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Remove about page
         $this->getContentRepository()->remove($page);
-        
+
         // Try to retrieve about page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'about'));
         $this->assertSame(null, $page);
-        
+
         // Rollback
         $em->getConnection()->rollback();
     }

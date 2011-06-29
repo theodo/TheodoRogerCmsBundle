@@ -48,7 +48,7 @@
             </span>
         </p>
 
-        <div class="set change-password {% if form_errors(form.password) or user is not defined  %}display{% else %}hide{% endif %}">
+        <div class="set change-password {% if form_errors(form.password) or form_errors(form) or user is not defined  %}display{% else %}hide{% endif %}">
             <p>{{ form_row(form.password) }}</p>
             <p>
                 {{ form_row(form.password_confirm) }}
