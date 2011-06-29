@@ -128,14 +128,14 @@ class SnippetController extends Controller
             }
         }
 
-        return $this->render(
-            'TheodoThothCmsBundle:Snippet:edit.html.twig',
-            array(
-                'form'      => $form->createView(),
-                'snippet'      => $snippet,
-                'hasErrors' => $hasErrors
-            )
-        );
+        return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
+                array(
+                    'title' => 'Edition '.$snippet->getName(),
+                    'snippet' => $snippet,
+                    'form' => $form->createView(),
+                    'hasErrors' => $hasErrors
+                  )
+                );
     }
 
     /**

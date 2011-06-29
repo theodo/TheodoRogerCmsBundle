@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Theodo\ThothCmsBundle\Repository\PageRepository;
 use Theodo\ThothCmsBundle\Validator\Unique;
 use Theodo\ThothCmsBundle\Validator\Exists;
+use Theodo\ThothCmsBundle\Validator\TwigSyntax;
 
 /**
  * Theodo\ThothCmsBundle\Entity\Page
@@ -329,6 +330,7 @@ class Page
 
         // Content validator: not null
         $metadata->addPropertyConstraint('content', new NotBlank());
+        $metadata->addPropertyConstraint('content', new TwigSyntax());
 
         // Status validator: not null and available
         $metadata->addPropertyConstraint('status', new NotBlank());

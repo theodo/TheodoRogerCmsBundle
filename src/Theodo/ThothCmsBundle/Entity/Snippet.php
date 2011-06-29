@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+use Theodo\ThothCmsBundle\Validator\TwigSyntax;
+
 /**
  * Theodo\ThothCmsBundle\Entity\Snippet
  */
@@ -101,5 +103,6 @@ class Snippet
 
         // Content validator: not null
         $metadata->addPropertyConstraint('content', new NotBlank());
+        $metadata->addPropertyConstraint('content', new TwigSyntax());
     }
 }

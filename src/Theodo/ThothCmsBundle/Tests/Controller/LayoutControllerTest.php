@@ -156,8 +156,6 @@ class LayoutControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/cms/layouts/1');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
 

@@ -145,8 +145,6 @@ class SnippetControllerTest extends WebTestCase
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets/1');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
 
