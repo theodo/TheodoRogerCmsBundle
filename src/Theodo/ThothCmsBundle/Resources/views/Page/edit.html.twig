@@ -98,6 +98,10 @@
                         <p>
                             {{ form_label(form.content) }}
                             {{ form_errors(form.content) }}
+                          
+                            <span class="reference_links">
+                                <a href="http://www.twig-project.org/documentation" target="_blank">{% trans %}Twig documentation{% endtrans %}</a>
+                            </span>
                         </p>
                         <div>
                             {{ form_widget(form.content) }}
