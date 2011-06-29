@@ -32,14 +32,14 @@
                         </td>
 
                         <td class="roles">
-                          {{ user.roles|join(', ') }}
+                          {{ user.roles|join(', ')|trans }}
                         </td>
 
                         <td class="remove">
                             {% if user.isMainAdmin %}
                                 <span class="disabled">{% trans %}Remove{% endtrans %}</span>
                             {% else %}
-                                <a href="{{ url('user_remove', { 'id' : user.id }) }}">Remove</a>
+                                <a href="{{ url('user_remove', { 'id' : user.id }) }}">{% trans %}Remove{% endtrans %}</a>
                             {% endif %}
                         </td>
                     </tr>

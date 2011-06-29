@@ -23,7 +23,7 @@ class UserController extends Controller
 {
     /**
      * Access denied action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-28
      */
@@ -37,7 +37,7 @@ class UserController extends Controller
 
     /**
      * Login action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
      */
@@ -68,7 +68,7 @@ class UserController extends Controller
 
     /**
      * User box
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-24
      */
@@ -76,15 +76,15 @@ class UserController extends Controller
     {
         // Retrieve connected user
         $user = $this->get('security.context')->getToken()->getUser();
-        
+
         return $this->render('TheodoThothCmsBundle:User:box-component.html.twig', array(
             'user' => $user
         ));
     }
-    
+
     /**
      * List user action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
@@ -92,7 +92,7 @@ class UserController extends Controller
     {
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve users
         $users = $em->getRepository('TheodoThothCmsBundle:User')->findAll();
 
@@ -100,10 +100,10 @@ class UserController extends Controller
             'users' => $users,
         ));
     }
-    
+
     /**
      * Edit user action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
@@ -111,7 +111,7 @@ class UserController extends Controller
     {
         // Retrieve request
         $request = $this->get('request');
-        
+
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -126,10 +126,10 @@ class UserController extends Controller
             'form' => $form->createView()
         ));
     }
-    
+
     /**
      * New user action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         // Retrieve request
         $request = $this->get('request');
-        
+
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -147,7 +147,7 @@ class UserController extends Controller
 
         // Create form
         $form = $this->createForm(new UserType(), $user);
-        
+
         // Request is post, bind and save form
         if ($request->getMethod() == 'POST')
         {
@@ -167,10 +167,10 @@ class UserController extends Controller
 
                 $em->persist($user);
                 $em->flush();
-                
+
                 // Set notice
                 $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
-                
+
                 return $this->redirect($this->generateUrl('user_list'));
             }
             else
@@ -184,10 +184,10 @@ class UserController extends Controller
             'form' => $form->createView()
         ));
     }
-    
+
     /**
      * Remove user action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
@@ -195,13 +195,13 @@ class UserController extends Controller
     {
         // Retrieve request
         $request = $this->get('request');
-        
+
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve users
         $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
-        
+
         // Request is post
         if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin())
         {
@@ -211,7 +211,7 @@ class UserController extends Controller
 
             // Set notice
             $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been removed', array('%user%' => $user->getName())));
-            
+
             return $redirect = $this->redirect($this->generateUrl('user_list'));
         }
 
@@ -228,7 +228,7 @@ class UserController extends Controller
 
     /**
      * Edit user preferences
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-24
      */
@@ -239,7 +239,7 @@ class UserController extends Controller
 
         // Create form
         $form = $this->createForm(new UserPreferencesType(false), $user);
-        
+
         return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
@@ -248,39 +248,40 @@ class UserController extends Controller
 
     /**
      * Update user preferences
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-24
+     * @since 2011-06-29 cyrillej (setLocale)
      */
     public function preferencesUpdateAction()
     {
         // Retrieve request
         $request = $this->get('request');
-        
+
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve connected user
         $user = $this->get('security.context')->getToken()->getUser();
         $user_password = $user->getPassword();
-        
+
         // Create form
         $form = $this->createForm(new UserPreferencesType(false), $user);
-        
+
         // Initialize form hasErros
         $hasErrors = false;
-        
+
         // Request is post
         if ($request->getMethod() == 'POST')
         {
             // Bind form
             $form->bindRequest($request);
- 
+
             // Check form and save object
             if ($form->isValid())
             {
                 $user = $form->getData();
-                
+
                 // Check password update
                 if ($user->getPassword() && $user_password != $user->getPassword())
                 {
@@ -296,13 +297,16 @@ class UserController extends Controller
                 {
                     $user->setPassword($user_password);
                 }
-                
+
                 $em->persist($user);
                 $em->flush();
 
                 // Set error
                 $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
-                
+
+                // Set locale
+                $this->get('session')->setLocale($user->getLanguage());
+
                 return $this->redirect($this->generateUrl('user_preferences'));
             }
             else
@@ -312,17 +316,17 @@ class UserController extends Controller
                 $hasErrors = true;
             }
         }
-        
+
         return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
             'user'      => $user,
             'form'      => $form->createView(),
             'hasErrors' => $hasErrors
         ));
     }
-    
+
     /**
      * Update user action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
@@ -334,11 +338,11 @@ class UserController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve user
         $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
         $user_password = $user->getPassword();
-        
+
         // Create form
         $form = $this->createForm(new UserType(false), $user);
 
@@ -347,7 +351,7 @@ class UserController extends Controller
         {
             // Bind form
             $form->bindRequest($request);
- 
+
             // Check form and save object
             if ($form->isValid())
             {
@@ -373,7 +377,7 @@ class UserController extends Controller
 
                 // Set notice
                 $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));
-                
+
                 return $this->redirect($this->generateUrl('user_edit', array('id' => $user->getId())));
             }
             else

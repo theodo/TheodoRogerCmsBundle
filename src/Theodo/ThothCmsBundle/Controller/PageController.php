@@ -35,7 +35,7 @@ class PageController extends Controller
 
     /**
      * New page action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
@@ -47,18 +47,18 @@ class PageController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve parent page
         $parent_page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
 
         // Create new page
         $page = new Page();
-        
+
         // Create the homepage
         if ($parent_page)
         {
             $page->setParentId($parent_page->getId());
-            $page->setParent($parent_page);  
+            $page->setParent($parent_page);
         }
         else if ($request->getMethod() != 'POST')
         {
@@ -72,13 +72,13 @@ class PageController extends Controller
         {
             $parent_page = 'homepage';
         }
-        
+
         // Initialize form hasErros
         $hasErrors = false;
-        
+
         // Create form
         $form = $this->createForm(new PageType(), $page);
-        
+
         // Request is post, bind and save form
         if ($request->getMethod() == 'POST')
         {
@@ -91,8 +91,8 @@ class PageController extends Controller
                 // Perform some action, such as save the object to the database
                 $page = $form->getData();
                 $em->persist($page);
-                $em->flush(); 
-                
+                $em->flush();
+
                 $this->get('thoth_frontend.caching')->warmup('page:'.$page->getName());
 
                 // Set redirect route
@@ -120,10 +120,10 @@ class PageController extends Controller
             )
         );
     }
-    
+
     /**
      * Edit page action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
@@ -135,19 +135,19 @@ class PageController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
-        
+
         // Set published at
         if (!$page->getPublishedAt())
         {
             $page->setPublishedAt(new \DateTime('now'));
         }
-        
+
         // Create form
         $form = $this->createForm(new PageType(false), $page);
-        
+
         return $this->render(
             'TheodoThothCmsBundle:Page:edit.html.twig',
             array(
@@ -156,10 +156,10 @@ class PageController extends Controller
             )
         );
     }
-    
+
     /**
      * Update page action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
@@ -171,10 +171,10 @@ class PageController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
-        
+
         // Create form
         $form = $this->createForm(new PageType(false), $page);
 
@@ -186,7 +186,7 @@ class PageController extends Controller
         {
             // Bind form
             $form->bindRequest($request);
- 
+
             // Check form and save object
             if ($form->isValid())
             {
@@ -196,9 +196,9 @@ class PageController extends Controller
                 $page = $form->getData();
                 $em->persist($page);
                 $em->flush();
-                
+
                 $this->get('thoth_frontend.caching')->warmup('page:'.$page->getName());
-                
+
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
                 if ($request->get('save-and-edit'))
@@ -223,10 +223,10 @@ class PageController extends Controller
             )
         );
     }
-    
+
     /**
      * Remove page action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
@@ -238,7 +238,7 @@ class PageController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('id' => $request->get('id')));
 
@@ -248,10 +248,10 @@ class PageController extends Controller
             // Delete page
             $em->remove($page);
             $em->flush();
-            
+
             return $redirect = $this->redirect($this->generateUrl('page_list'));
         }
-        
+
         return $this->render(
             'TheodoThothCmsBundle:Page:remove.html.twig',
             array(
@@ -259,10 +259,10 @@ class PageController extends Controller
             )
         );
     }
-    
+
     /**
      * Expand page action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
@@ -274,10 +274,10 @@ class PageController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve page childrens
         $pages = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('id' => $request->get('id')))->getChildren();
-        
+
         return $this->render(
             'TheodoThothCmsBundle:Page:page-list.html.twig',
             array(
@@ -286,10 +286,10 @@ class PageController extends Controller
             )
         );
     }
-    
+
     /**
      * Homepage action
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
@@ -300,10 +300,10 @@ class PageController extends Controller
         $twigEnvironment = $this->get('twig');
         $oldLoader = $twigEnvironment->getLoader();
         $twigEngine = $this->get('templating');
-        
+
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE));
 
@@ -321,10 +321,10 @@ class PageController extends Controller
 
         return $response;
     }
-    
+
     /**
      * Site map action
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
      */
@@ -335,7 +335,7 @@ class PageController extends Controller
 
         // Retrieve EntityManager
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         // Retrieve page
         $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('id' => $request->get('from_id')));
 

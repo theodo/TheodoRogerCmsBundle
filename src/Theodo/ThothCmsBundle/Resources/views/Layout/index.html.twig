@@ -22,7 +22,7 @@
                     <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
                 </td>
                 <td class="remove">
-                    <a id="remove-layout-{{ layout.id }}" href="{{ url('layout_remove', { 'id': layout.id }) }}">Remove</a>
+                    <a id="remove-layout-{{ layout.id }}" href="{{ url('layout_remove', { 'id': layout.id }) }}">{% trans %}Remove{% endtrans %}</a>
                 </td>
             </tr>
         {% endfor %}
@@ -33,7 +33,7 @@
     <ul>
         <li>
           <a class="new-layout" href="{{ url('layout_new') }}">
-            <img alt="Plus" src="/bundles/theodothothcms/images/admin/plus.png" /> New Layout</a>
+            <img alt="Plus" src="/bundles/theodothothcms/images/admin/plus.png" />{% trans %}New Layout{% endtrans %}</a>
         </li>
     </ul>
 </div>

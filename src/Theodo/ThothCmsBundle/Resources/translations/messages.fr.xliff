@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Content</source>
+                <target>Contenu</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Design</source>
+                <target>Design</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Settings</source>
+                <target>Paramètres</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Logged in as</source>
+                <target>Connecté en tant que</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Logout</source>
+                <target>Déconnexion</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>View Site</source>
+                <target>Afficher le site</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Pages</source>
+                <target>Pages</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Page</source>
+                <target>Page</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Layouts</source>
+                <target>Layouts</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Layout</source>
+                <target>Layout</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Snippets</source>
+                <target>Snippets</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Snippet</source>
+                <target>Snippet</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Personal</source>
+                <target>Profil</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Personal Preferences</source>
+                <target>Préférences du profil</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Users</source>
+                <target>Utilisateurs</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>User</source>
+                <target>Utilisateur</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Extensions</source>
+                <target>Extensions</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Extension</source>
+                <target>Extension</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Status</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Modify</source>
+                <target>Modifier</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Roles</source>
+                <target>Rôles</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Role</source>
+                <target>Rôle</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Remove</source>
+                <target>Supprimer</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Add Child</source>
+                <target>Ajouter une page</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>Administrator</source>
+                <target>Administrateur</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Designer</source>
+                <target>Designer</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Client</source>
+                <target>Client</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>Published</source>
+                <target>Publié</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Reviewed</source>
+                <target>Révisé</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Draft</source>
+                <target>Brouillon</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>Hidden</source>
+                <target>Caché</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>Name / Username</source>
+                <target>Nom / Nom d'utilisateur</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
