@@ -36,6 +36,7 @@ class FrontendController extends Controller
         }
         else
         {
+            $slug = $slug[count($slug) - 1];
             $page = $this->get('thoth.content_repository')->getPageBySlug($slug);
         }
 
