@@ -132,7 +132,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
         $pages = $this->getContentRepository()->getFirstTwoLevelPages();
         $this->assertSame(1, count($pages));
         $this->assertSame('homepage', $pages[0]->getSlug());
-        $this->assertSame(4, count($pages[0]->getChildren()));
+        $this->assertTrue(0 < count($pages[0]->getChildren()));
     }
 
     /**
