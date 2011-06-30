@@ -14,7 +14,7 @@ editAreaLoader.load_syntax["twig"] = {
                         'endtrans'
 		]
              ,'reserved' : [
-			'{{', '}}', '{%', '%}', 'bonsoir'
+			'{{', '}}', '{%', '%}'
 			
 		]
 	}
