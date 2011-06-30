@@ -36,6 +36,23 @@ class UserController extends Controller
     }
 
     /**
+     * Check user language
+     *
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-06-28
+     */
+    public function checkSessionLocaleAction($redirect_route)
+    {
+        // Retrieve user
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        // Set locale
+        $this->get('session')->setLocale($user->getLanguage());
+
+        return $this->redirect($this->generateUrl($redirect_route));
+    }
+
+    /**
      * Login action
      *
      * @author Vincent Guillon <vincentg@theodo.fr>

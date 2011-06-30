@@ -42,6 +42,10 @@ user_update:
     pattern:  /cms/users/{id}/update
     defaults: { _controller: TheodoThothCmsBundle:User:update }
 
+user_checkSessionLocale:
+    pattern:  /cms/check-session/{redirect_route}
+    defaults: { _controller: TheodoThothCmsBundle:User:checkSessionLocale }
+
 # Page routing
 page_list:
     pattern:  /cms/pages
