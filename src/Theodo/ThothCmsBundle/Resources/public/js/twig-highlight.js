@@ -4,9 +4,9 @@ jQuery(document).ready(function ()
 			id: textarea_id	// id of the textarea to transform		
 			,start_highlight: true	// if start with highlight
 			,allow_resize: "both"
-			,allow_toggle: false
+			,allow_toggle: true
 			,word_wrap: true
 			,language: "en"
-			,syntax: "twig"	
+			,syntax: "php"	
 		});
 });
