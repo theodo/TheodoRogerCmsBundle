@@ -39,6 +39,16 @@ Theodo\ThothCmsBundle\Entity\User:
         is_main_admin:
             type: boolean
             nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
     manyToMany:
         user_roles:
             targetEntity: Role

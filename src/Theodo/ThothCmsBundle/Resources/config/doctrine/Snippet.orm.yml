@@ -12,3 +12,13 @@ Theodo\ThothCmsBundle\Entity\Snippet:
             unique: true
         content:
             type: text
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update

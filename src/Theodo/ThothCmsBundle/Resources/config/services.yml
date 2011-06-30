@@ -4,6 +4,9 @@ parameters:
     thoth.content_repository.class: Theodo\ThothCmsBundle\Repository\ContentEntityRepository
     validator.twig_syntax.class: Theodo\ThothCmsBundle\Validator\TwigSyntaxValidator
 
+    # Timestampable listener class
+    gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener
+
 services:
     thoth.content_repository:
         class: %thoth.content_repository.class%
@@ -25,3 +28,9 @@ services:
         arguments: ['@thoth.twig']
         tags:
             - { name: validator.constraint_validator, alias: validator.twig_syntax }
+
+    # Timestampable listener
+    gedmo.timestampable.listener:
+        class: %gedmo.timestampable.listener.class%
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }

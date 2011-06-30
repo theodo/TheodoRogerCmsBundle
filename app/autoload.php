@@ -4,6 +4,8 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
+    'Stof'             => __DIR__.'/../vendor/bundles',
+    'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
     'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
     'Theodo'           => __DIR__.'/../src',
     'Sensio'           => __DIR__.'/../vendor/bundles',

@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints\Min;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -393,9 +394,59 @@ class User implements UserInterface
         $metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
         
         // Role validator
-        $metadata->addGetterConstraint('validRole', new True(array('message' => 'The user must have at least one role')));
+        $metadata->addGetterConstraint('validRole', new Min(array('limit' => 1, 'message' => 'The user must have at least one role')));
 
         // Language validator: available
         $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + array_keys(UserRepository::getAvailableLanguages()))));
+    }
+    /**
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
+     * @var datetime $updated_at
+     */
+    private $updated_at;
+
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
     }
 }

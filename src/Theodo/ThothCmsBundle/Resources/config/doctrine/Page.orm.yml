@@ -32,6 +32,16 @@ Theodo\ThothCmsBundle\Entity\Page:
         published_at:
             type: date
             nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
     manyToOne:
         parent:
             targetEntity: Page

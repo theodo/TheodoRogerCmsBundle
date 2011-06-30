@@ -16,3 +16,4 @@ app/config/create_dbs.sql
 app/bootstrap_cache.php.cache
 src/Theodo/ThothCmsBundle/Entity/*.php~
 web/bundles/*
+deps.lock

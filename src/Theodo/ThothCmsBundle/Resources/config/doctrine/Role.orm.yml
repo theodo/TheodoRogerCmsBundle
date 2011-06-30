@@ -11,3 +11,13 @@ Theodo\ThothCmsBundle\Entity\Role:
             type: string
             length: 255
             nullable: false
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update

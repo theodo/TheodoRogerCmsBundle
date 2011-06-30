@@ -1,7 +1,6 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=v2.0.0-RC1
-    ;version=v2.0.0BETA5
+    version=v2.0.0-RC3
 
 [twig]
     git=http://github.com/fabpot/Twig.git
@@ -47,7 +46,6 @@
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
-    ;version=9215de810b64e14cecc4b4f1a9359b5fbd999358
 
 [doctrine-fixtures]
     git=http://github.com/doctrine/data-fixtures.git
@@ -57,3 +55,13 @@
     git=http://github.com/symfony/DoctrineFixturesBundle.git
     version=origin/master
     target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+
+[DoctrineExtensionsBundle]
+    git=http://github.com/stof/DoctrineExtensionsBundle.git
+    version=origin/master
+    target=/bundles/Stof/DoctrineExtensionsBundle
+
+[DoctrineExtensions]
+    git=http://github.com/l3pp4rd/DoctrineExtensions.git
+    version=origin/master
+    target=/gedmo-doctrine-extensions

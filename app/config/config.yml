@@ -53,7 +53,6 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-#        auto_mapping: true
 
         default_entity_manager: default
         entity_managers:
@@ -61,11 +60,12 @@ doctrine:
                 connection:   default
                 mappings:
                     TheodoThothCmsBundle: ~
+                    StofDoctrineExtensionsBundle: false # The mapping is only needed when using the Translatable or the Loggable behaviors
             test:
                 connection:   test
                 mappings:
                     TheodoThothCmsBundle: ~
-
+                    StofDoctrineExtensionsBundle: false # The mapping is only needed when using the Translatable or the Loggable behaviors
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -80,3 +80,19 @@ jms_security_extra:
 
 # Load thoth cms service
 theodo_thoth_cms: ~
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+            tree:          false
+            sluggable:     false
+            translatable:  false
+            loggable:      false
+        test:
+            timestampable: true
+            tree:          false
+            sluggable:     false
+            translatable:  false
+            loggable:      false

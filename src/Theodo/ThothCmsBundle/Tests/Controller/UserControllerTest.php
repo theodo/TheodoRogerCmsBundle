@@ -215,7 +215,6 @@ class UserControllerTest extends WebTestCase
 
         // Submit form with errors
         $crawler = $client->submit($form, array());
-        $crawler = $client->request('POST', $form->getUri());
 
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -225,15 +224,16 @@ class UserControllerTest extends WebTestCase
 
         // Submit valid form
         $crawler = $client->submit($form, array(
-                    'user[name]' => 'User de test',
-                    'user[username]' => 'userdetest',
-                    'user[email]' => 'userdetest@theodo.fr',
-                    'user[password]' => 'testpwd',
-                    'user[password_confirm]' => 'testpwd',
-                    'user[user_roles][1]' => true,
-                    'user[user_roles][2]' => true,
-                    'user[language]' => UserRepository::LANGUAGE_EN,
-                ));
+            'user[name]' => 'User de test',
+            'user[username]' => 'userdetest',
+            'user[email]' => 'userdetest@theodo.fr',
+            'user[password]' => 'testpwd',
+            'user[password_confirm]' => 'testpwd',
+            'user[user_roles][1]' => true,
+            'user[user_roles][2]' => true,
+            'user[user_roles][3]' => true,
+            'user[language]' => UserRepository::LANGUAGE_EN,
+        ));
 
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
