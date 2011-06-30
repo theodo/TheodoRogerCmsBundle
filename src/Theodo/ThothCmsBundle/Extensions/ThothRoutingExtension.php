@@ -28,7 +28,7 @@ class ThothRoutingExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'thurl'  => new \Twig_Function_Method($this, 'getFullUrl'),
+            'page_url'  => new \Twig_Function_Method($this, 'getFullUrl'),
         );
     }
 
