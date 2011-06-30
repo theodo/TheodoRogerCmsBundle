@@ -2,6 +2,7 @@ parameters:
     thoth.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig_Loader_Repository
     thoth.caching.class: Theodo\ThothCmsBundle\Extensions\Twig_Cache_Database
     thoth.content_repository.class: Theodo\ThothCmsBundle\Repository\ContentEntityRepository
+    thoth.routing.class: Theodo\ThothCmsBundle\Extensions\ThothRoutingExtension
     validator.twig_syntax.class: Theodo\ThothCmsBundle\Validator\TwigSyntaxValidator
 
     # Timestampable listener class
@@ -23,6 +24,11 @@ services:
     thoth.caching:
         class: %thoth.caching.class%
         arguments: ['@thoth.twig']
+    thoth.routing:
+        class: %thoth.routing.class%
+        arguments: ['@router', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: thoth.twig.extension }
     validator.twig_syntax:
         class: %validator.twig_syntax.class%
         arguments: ['@thoth.twig']
