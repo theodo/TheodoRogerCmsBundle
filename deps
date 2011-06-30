@@ -57,7 +57,7 @@
     target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
 
 [DoctrineExtensionsBundle]
-    git=http://github.com/stof/DoctrineExtensionsBundle.git
+    git=https://github.com/stof/StofDoctrineExtensionsBundle.git
     version=origin/master
     target=/bundles/Stof/DoctrineExtensionsBundle
 
