@@ -113,6 +113,27 @@ snippet_remove:
     pattern: /cms/snippets/{id}/remove
     defaults: { _controller: TheodoThothCmsBundle:Snippet:remove }
 
+# Media routing
+media_new:
+    pattern: /cms/medias/new
+    defaults: { _controller: TheodoThothCmsBundle:Media:new }
+
+media_update:
+    pattern: /cms/medias/{id}
+    defaults: { _controller: TheodoThothCmsBundle:Media:update }
+
+media_edit:
+    pattern: /cms/medias/{id}/edit
+    defaults: { _controller: TheodoThothCmsBundle:Media:edit }
+
+media_list:
+    pattern: /cms/medias
+    defaults: { _controller: TheodoThothCmsBundle:Media:index }
+
+media_remove:
+    pattern: /cms/medias/{id}/remove
+    defaults: { _controller: TheodoThothCmsBundle:Media:remove }
+
 # Frontend routing
 page:
     pattern: /{slug}

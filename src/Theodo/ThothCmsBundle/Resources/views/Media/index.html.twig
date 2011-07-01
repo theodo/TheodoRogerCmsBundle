@@ -1,0 +1,16 @@
+{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+
+{% set tab = 'design' %}
+{% set nav = 'layouts' %}
+
+{% block page_title "Layouts" %}
+
+{% block content %}
+<ul>
+{% for media in medias %}
+    <li>
+        {{ media.name }}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

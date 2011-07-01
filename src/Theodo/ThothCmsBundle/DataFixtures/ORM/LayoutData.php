@@ -9,7 +9,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 class LayoutData implements FixtureInterface
 {
     /**
-     * Load page fixtures
+     * Load layout fixtures
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
