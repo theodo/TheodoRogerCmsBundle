@@ -165,7 +165,7 @@ class Media
     public function preUpload()
     {
         if ($this->file) {
-            $this->setPath(md5($this->name).$this->file->guessExtension());
+            $this->setPath(md5($this->name).'.'.$this->file->guessExtension());
         }
     }
 
