@@ -1,5 +1,12 @@
 {% extends 'form_div_layout.html.twig' %}
 
+{% block file_widget %}
+{% spaceless %}
+    {% set type = type|default('file') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endspaceless %}
+{% endblock file_widget %}
+
 {% block field_widget %}
 {% spaceless %}
     {% set type = type|default('text') %}

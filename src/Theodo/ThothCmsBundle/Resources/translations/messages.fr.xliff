@@ -374,6 +374,26 @@
               <source>The presented password is invalid.</source>
               <target>Mot de passe invalide</target>
           </trans-unit>
+          <trans-unit id="94">
+              <source>Edit Media</source>
+              <target>Modifier le media</target>
+          </trans-unit>
+          <trans-unit id="95">
+              <source>Remove Media</source>
+              <target>Supprimer un media</target>
+          </trans-unit>
+          <trans-unit id="96">
+              <source>File</source>
+              <target>Fichier</target>
+          </trans-unit>
+          <trans-unit id="97">
+              <source>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following media?</source>
+              <target>Êtes-vous sûr de vouloir  &lt;strong class="warning"&gt;supprimer définitivement&lt;/strong&gt; le media suivant ?</target>
+          </trans-unit>
+          <trans-unit id="98">
+              <source>Delete Media</source>
+              <target>Supprimer ce media</target>
+          </trans-unit>
         </body>
     </file>
 </xliff>

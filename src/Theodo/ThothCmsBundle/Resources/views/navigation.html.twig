@@ -9,6 +9,11 @@
                     <span>{% trans %}Pages{% endtrans %}</span>
                 </a>
             </li>
+            <li>
+                <a{% if current_nav == 'medias' %} class="current"{% endif %} href="{{ url('media_list') }}">
+                    <span>{% trans %}Medias{% endtrans %}</span>
+                </a>
+            </li>
         </ul>
     </li>
     

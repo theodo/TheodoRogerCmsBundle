@@ -1,7 +1,7 @@
 {% extends "TheodoThothCmsBundle::layout.html.twig" %}
 
 {% set body_class = 'reversed' %}
-{% set tab = 'design' %}
+{% set tab = 'content' %}
 {% set nav = 'medias' %}
 
 {% block javascripts_assets %}
@@ -33,9 +33,9 @@
             <p class="title">
                 {{ form_row(form.name) }}
             </p>
-            <p class="content">
+            <div class="content">
                 {{ form_row(form.file) }}
-            </p>
+            </div>
             {{ form_rest(form) }}
         </div>
         <p class="buttons" style="clear: left;">
