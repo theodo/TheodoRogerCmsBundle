@@ -29,14 +29,26 @@ class ThothRoutingExtension extends \Twig_Extension
     {
         return array(
             'page_url'  => new \Twig_Function_Method($this, 'getFullUrl'),
+            'media_url' => new \Twig_Function_Method($this, 'getMediaUrl'),
         );
     }
 
-    public function getFullUrl($slug = '')
+    public function getFullUrl($slug)
     {
         $page = $this->em->getRepository('TheodoThothCmsBundle:Page')->findOneBySlug($slug);
 
         return $this->generator->generate('page', array('slug' => $page->getFullSlug()), true);
+    }
+
+    public function getMediaUrl($name)
+    {
+        $media = $this->em->getRepository('TheodoThothCmsBundle:Media')->findOneByName($name);
+        if ($media)
+        {
+            return '/uploads/'.$media->getPath();
+        }
+
+        return '';
     }
 
     /**

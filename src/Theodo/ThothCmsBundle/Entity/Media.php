@@ -1,6 +1,7 @@
 <?php
 
 namespace Theodo\ThothCmsBundle\Entity;
+
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -152,7 +153,57 @@ class Media
         $metadata->addPropertyConstraint('name', new NotBlank());
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
 
-        // Content validator: not null
+        // file validator: not null
         $metadata->addPropertyConstraint('file', new File());
+        $metadata->addPropertyConstraint('file', new NotBlank());
+    }
+
+    /**
+     * @ORM\prePersist
+     * @ORM\preUpdate
+     */
+    public function preUpload()
+    {
+        if ($this->file) {
+            $this->setPath(md5($this->name).$this->file->guessExtension());
+        }
+    }
+
+    /**
+     * @ORM\postPersist
+     * @ORM\postUpdate
+     */
+    public function upload()
+    {
+        if ($this->file == null) {
+            return;
+        }
+
+        // you must throw an exception here if the file cannot be moved
+        // so that the entity is not persisted to the database
+        // which the UploadedFile move() method does automatically
+        $this->file->move(self::getUploadRootDir(), $this->path);
+
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\postRemove
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getFullPath()) {
+            unlink($file);
+        }
+    }
+    
+    public function getFullPath()
+    {
+        return self::getUploadRootDir().'/'.$this->path;
+    }
+
+    public static function getUploadRootDir()
+    {
+      return 'uploads/';
     }
 }

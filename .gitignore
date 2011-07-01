@@ -17,3 +17,4 @@ app/bootstrap_cache.php.cache
 *.php~
 web/bundles/*
 deps.lock
+web/uploads/*

@@ -1,0 +1,21 @@
+{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+
+{% set tab = 'design' %}
+{% set nav = 'layouts' %}
+
+{% block page_title %}
+{% trans %}Remove Layout{% endtrans %}
+{% endblock %}
+
+{% block content %}
+<h1>{% trans %}Remove Layout{% endtrans %}</h1>
+<p>{% trans %}Are you sure you want to <strong class="warning">permanently remove</strong> this media?{% endtrans %}</p>
+
+<form action="{{ url('media_remove', { 'id': media.id }) }}" method="post" class="edit_mediat">
+    <p class="buttons">
+        <input class="button" type="submit" value="{% trans %}Delete Media{% endtrans %}" />
+        {% trans %}or{% endtrans %}
+        <a href="{{ url('media_list') }}">{% trans %}Cancel{% endtrans %}</a>
+    </p>
+</form>
+{% endblock %}

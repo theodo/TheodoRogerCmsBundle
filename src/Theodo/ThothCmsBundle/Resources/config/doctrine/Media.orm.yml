@@ -23,3 +23,9 @@ Theodo\ThothCmsBundle\Entity\Media:
             gedmo:
                 timestampable:
                     on: update
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        postPersist: [ upload ]
+        preUpdate: [ preUpload ]
+        postUpdate: [ upload ]
+        postRemove: [ removeUpload ]
