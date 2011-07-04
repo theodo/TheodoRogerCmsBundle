@@ -50,10 +50,22 @@ class FrontendController extends Controller
             }
         }
 
-        // Initialize new response and set content type
+        $date = $page->getUpdatedAt();
+        // Initialize new response
         $response = new Response();
-        $response->headers->set('Content-Type', $page->getContentType());
+        // Set cache settings in one call
+        $response->setCache(array(
+            'last_modified' => $date,
+            'public'        => true,
+        ));
 
-        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
+        if ($response->isNotModified($this->get('request'))) {
+            // return the 304 Response immediately
+            return $response;
+        } else {
+            // Set content type
+            $response->headers->set('Content-Type', $page->getContentType());
+            return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
+        }
     }
 }
