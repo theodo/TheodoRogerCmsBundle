@@ -38,7 +38,7 @@
                 <p>
                     {% trans %}Current file{% endtrans %}
                     <br />
-                    <img src="/uploads/{{ media.path }}" alt="" />
+                    <a href="{{ media_url(media.name) }}" title="{% trans %}Click to open this file{% endtrans %}">{{ media.name }}</a>
                 </p>
                 {% endif %}
                 {{ form_row(form.file) }}

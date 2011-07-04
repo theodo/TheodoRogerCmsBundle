@@ -394,6 +394,14 @@
               <source>Delete Media</source>
               <target>Supprimer ce media</target>
           </trans-unit>
+          <trans-unit id="99">
+              <source>Current file</source>
+              <target>Fichier associé</target>
+          </trans-unit>
+          <trans-unit id="100">
+              <source>Click to open this file</source>
+              <target>Cliquez pour ouvrir le fichier</target>
+          </trans-unit>
         </body>
     </file>
 </xliff>
