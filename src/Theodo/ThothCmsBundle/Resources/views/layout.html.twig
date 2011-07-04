@@ -12,7 +12,7 @@
     </head>
     {% set body_class = body_class|default('') %}
     <body{% if body_class != '' %} class="{{ body_class }}"{% endif %}>
-        <div id="page">
+        <div id="page" class="thoth">
             <div id="header">
                 {% render "TheodoThothCmsBundle:User:boxComponent" %}
                 {% include "TheodoThothCmsBundle::navigation.html.twig" %}
@@ -41,6 +41,7 @@
                     {% block content %}{% endblock %}
                 </div>
             </div>
+            <div class="clear"></div>
          </div>
 
         {% block javascripts %}{% endblock %}

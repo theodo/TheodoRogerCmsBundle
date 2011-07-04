@@ -56,6 +56,12 @@ table
   border-spacing: 0;
 }
 
+html,
+body
+{
+  height: 100%;
+}
+
 body
 {
   font-size: 95%;
@@ -172,6 +178,17 @@ body.reversed
   color: white;
 }
 
+#page.thoth
+{
+  height: 100%;
+  background: url(/bundles/theodothothcms/images/admin/thoth_bg_right_white.png) no-repeat 99% 100%;
+}
+
+body.reversed #page.thoth
+{
+  background-image: url(/bundles/theodothothcms/images/admin/thoth_bg_right_gray.png);
+}
+
 body.single_form #content
 {
   text-align: center;
@@ -235,6 +252,8 @@ ul#navigation
   float: left;
   margin-top: 6px;
   /*position: relative;*/
+  padding-left: 34px;
+  background: url(/bundles/theodothothcms/images/admin/thoth_small.png) no-repeat 12px 5px;
 }
 
 ul#navigation li
