@@ -54,12 +54,13 @@ class FrontendController extends Controller
         // Initialize new response
         $response = new Response();
         // Set cache settings in one call
+        // TODO user defined ?
         $response->setCache(array(
             'last_modified' => $date,
             'public'        => true,
         ));
 
-        if ($response->isNotModified($this->get('request'))) {
+        if ($page->getCacheable() && $response->isNotModified($this->get('request'))) {
             // return the 304 Response immediately
             return $response;
         } else {

@@ -46,6 +46,7 @@ class PageType extends AbstractType
             'choices'   => PageRepository::getAvailableContentTypes(),
             'required'  => true
         ));
+        $builder->add('cacheable', 'checkbox', array('required' => false));
         
         // Display published_at date only in edition
         if (!$this->is_new)

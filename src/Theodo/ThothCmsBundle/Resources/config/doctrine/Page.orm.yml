@@ -32,6 +32,9 @@ Theodo\ThothCmsBundle\Entity\Page:
         content_type:
             type: string
             length: 127
+        cacheable:
+            type: boolean
+            default: false
         published_at:
             type: date
             nullable: true

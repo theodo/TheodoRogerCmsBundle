@@ -77,6 +77,16 @@
                                     {{ form_errors(form.content_type) }}
                                 </td>
                             </tr>
+ 
+                            <tr>
+                                <th class="label">
+                                    {{ form_label(form.cacheable) }}
+                                </th>
+                                <td class="field">
+                                    {{ form_widget(form.cacheable) }}
+                                    {{ form_errors(form.cacheable) }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -425,4 +425,29 @@ class Page
     {
         return $this->content_type;
     }
+    /**
+     * @var boolean $cacheable
+     */
+    private $cacheable;
+
+
+    /**
+     * Set cacheable
+     *
+     * @param boolean $cacheable
+     */
+    public function setCacheable($cacheable)
+    {
+        $this->cacheable = $cacheable;
+    }
+
+    /**
+     * Get cacheable
+     *
+     * @return boolean 
+     */
+    public function getCacheable()
+    {
+        return $this->cacheable;
+    }
 }

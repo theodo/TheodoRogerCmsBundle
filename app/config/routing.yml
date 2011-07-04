@@ -134,6 +134,11 @@ media_remove:
     pattern: /cms/medias/{id}/remove
     defaults: { _controller: TheodoThothCmsBundle:Media:remove }
 
+# ESI routing
+_internal:
+    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+    prefix:   /_internal
+
 # Frontend routing
 page:
     pattern: /{slug}

@@ -14,6 +14,7 @@ framework:
         default_locale: %locale%
         auto_start:     true
     translator: { fallback: en }
+    esi: { enabled: true }
 
 # Twig Configuration
 twig:
