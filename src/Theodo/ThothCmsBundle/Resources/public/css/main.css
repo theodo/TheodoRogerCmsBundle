@@ -1050,7 +1050,8 @@ body.edit_personal_preferences #avatar p.caption
 #content table.index td.user,
 #content table.index td.extension,
 #content table.index td.image,
-#content table.index td.file
+#content table.index td.file,
+#content table.index td.media
 {
   padding-left: 9px;
 }
@@ -1085,7 +1086,8 @@ body.edit_personal_preferences #avatar p.caption
 #content table.index th.user,
 #content table.index th.extension,
 #content table.index th.image,
-#content table.index th.file
+#content table.index th.file,
+#content table.index th.media
 {
   padding-left: 9px;
 }
@@ -1237,7 +1239,8 @@ table.index .node .user,
 table.index .node .stylesheet,
 table.index .node .javascript,
 table.index .node .image,
-table.index .node .file
+table.index .node .file,
+table.index .node .media
 {
   font-size: 115%;
   font-weight: bold;
@@ -1248,7 +1251,8 @@ table.index .node .user a,
 table.index .node .stylesheet a,
 table.index .node .javascript a,
 table.index .node .image a,
-table.index .node .file a
+table.index .node .file a,
+table.index .node .media a
 {
   color: black;
   text-decoration: none;
@@ -1259,7 +1263,8 @@ table.index .node .user a:visited,
 table.index .node .stylesheet a:visited,
 table.index .node .javascript a:visited,
 table.index .node .image a:visited,
-table.index .node .file a:visited
+table.index .node .file a:visited,
+table.index .node .media a:visited
 {
   color: black;
   text-decoration: none;
@@ -1270,7 +1275,8 @@ table.index .node .user a:visited:hover,
 table.index .node .stylesheet a:visited:hover,
 table.index .node .javascript a:visited:hover,
 table.index .node .image a:visited:hover,
-table.index .node .file a:visited:hover
+table.index .node .file a:visited:hover,
+table.index .node .media a:visited:hover
 {
   color: #0066cc;
   text-decoration: underline;
@@ -1281,7 +1287,8 @@ table.index .node .user a:hover,
 table.index .node .stylesheet a:hover,
 table.index .node .javascript a:hover,
 table.index .node .image a:hover,
-table.index .node .file a:hover
+table.index .node .file a:hover,
+table.index .node .media a:hover
 {
   color: #0066cc;
   text-decoration: underline;
