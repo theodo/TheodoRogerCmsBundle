@@ -6,7 +6,7 @@ use Theodo\ThothCmsBundle\Entity\Media;
 use Theodo\ThothCmsBundle\Repository\MediaRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
-class MEdiaData implements FixtureInterface
+class MediaData implements FixtureInterface
 {
     /**
      * Load media fixtures
