@@ -34,6 +34,13 @@
                 {{ form_row(form.name) }}
             </p>
             <div class="content">
+                {% if media is defined %}
+                <p>
+                    {% trans %}Current file{% endtrans %}
+                    <br />
+                    <img src="/uploads/{{ media.path }}" alt="" />
+                </p>
+                {% endif %}
                 {{ form_row(form.file) }}
             </div>
             {{ form_rest(form) }}
