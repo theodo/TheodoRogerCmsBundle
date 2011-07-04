@@ -400,4 +400,29 @@ class Page
     {
         return $this->updated_at;
     }
+    /**
+     * @var string $content_type
+     */
+    private $content_type;
+
+
+    /**
+     * Set content_type
+     *
+     * @param string $contentType
+     */
+    public function setContentType($contentType)
+    {
+        $this->content_type = $contentType;
+    }
+
+    /**
+     * Get content_type
+     *
+     * @return string 
+     */
+    public function getContentType()
+    {
+        return $this->content_type;
+    }
 }

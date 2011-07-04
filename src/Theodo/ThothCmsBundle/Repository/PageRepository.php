@@ -20,6 +20,11 @@ class PageRepository extends EntityRepository
     const STATUS_REVIEWED = 'Reviewed';
     const STATUS_PUBLISH  = 'Published';
     const STATUS_HIDDEN   = 'Hidden';
+    
+    // Content types
+    const TYPE_TEXT_HTML       = 'text/html';
+    const TYPE_TEXT_CSS        = 'text/css';
+    const TYPE_TEXT_JAVASCRIPT = 'text/javasript';
 
     /**
      * Return list of available status
@@ -35,6 +40,22 @@ class PageRepository extends EntityRepository
             self::STATUS_REVIEWED => self::STATUS_REVIEWED,
             self::STATUS_PUBLISH  => self::STATUS_PUBLISH,
             self::STATUS_HIDDEN   => self::STATUS_HIDDEN
+        );
+    }
+    
+    /**
+     * Return list of available content typess
+     *
+     * @return array
+     * @author Vincent Guillon <vincentg@theodo.fr>
+     * @since 2011-07-04
+     */
+    public static function getAvailableContentTypes()
+    {
+        return array(
+            self::TYPE_TEXT_HTML       => self::TYPE_TEXT_HTML,
+            self::TYPE_TEXT_CSS        => self::TYPE_TEXT_CSS,
+            self::TYPE_TEXT_JAVASCRIPT => self::TYPE_TEXT_JAVASCRIPT
         );
     }
 

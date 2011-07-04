@@ -12,6 +12,7 @@
 namespace Theodo\ThothCmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 use Theodo\ThothCmsBundle\Repository\PageRepository;
 
@@ -49,6 +50,10 @@ class FrontendController extends Controller
             }
         }
 
-        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page));
+        // Initialize new response and set content type
+        $response = new Response();
+        $response->headers->set('Content-Type', $page->getContentType());
+
+        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
     }
 }

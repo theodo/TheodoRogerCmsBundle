@@ -67,6 +67,16 @@
                                     {{ form_errors(form.description) }}
                                 </td>
                             </tr>
+
+                            <tr>
+                                <th class="label">
+                                    {{ form_label(form.content_type) }}
+                                </th>
+                                <td class="field">
+                                    {{ form_widget(form.content_type) }}
+                                    {{ form_errors(form.content_type) }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

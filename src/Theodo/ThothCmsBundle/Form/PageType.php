@@ -42,6 +42,10 @@ class PageType extends AbstractType
             'choices'   => PageRepository::getAvailableStatus(),
             'required'  => true
         ));
+        $builder->add('content_type', 'choice', array(
+            'choices'   => PageRepository::getAvailableContentTypes(),
+            'required'  => true
+        ));
         
         // Display published_at date only in edition
         if (!$this->is_new)

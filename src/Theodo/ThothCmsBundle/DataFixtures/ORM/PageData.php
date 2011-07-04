@@ -37,6 +37,7 @@ EOF
         $page1->setDescription("Cms homepage");
         $page1->setStatus(PageRepository::STATUS_PUBLISH);
         $page1->setPublishedAt(new \DateTime('now'));
+        $page1->setContentType(PageRepository::TYPE_TEXT_HTML);
 
         $manager->persist($page1);
 
@@ -59,6 +60,7 @@ EOF
         $page2->setStatus(PageRepository::STATUS_DRAFT);
         $page2->setParent($page1);
         $page2->setPublishedAt(new \DateTime('now'));
+        $page2->setContentType(PageRepository::TYPE_TEXT_HTML);
 
         $manager->persist($page2);
 
@@ -84,6 +86,7 @@ EOF
         $page3->setDescription("Theodo page");
         $page3->setStatus(PageRepository::STATUS_PUBLISH);
         $page3->setParent($page1);
+        $page3->setContentType(PageRepository::TYPE_TEXT_HTML);
         $manager->persist($page3);
 
         // Create new page (Theodo team)
@@ -100,6 +103,7 @@ EOF
         $page4->setDescription("Theodo team page");
         $page4->setStatus(PageRepository::STATUS_DRAFT);
         $page4->setParent($page3);
+        $page4->setContentType(PageRepository::TYPE_TEXT_HTML);
         $manager->persist($page4);
 
         $page5 = new Page();
@@ -118,6 +122,7 @@ EOF
 );
         $page5->setParent($page1);
         $page5->setStatus(PageRepository::STATUS_PUBLISH);
+        $page5->setContentType(PageRepository::TYPE_TEXT_HTML);
         $manager->persist($page5);
 
         // Save pages

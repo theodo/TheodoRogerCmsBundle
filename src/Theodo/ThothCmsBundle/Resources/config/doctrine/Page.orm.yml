@@ -29,6 +29,9 @@ Theodo\ThothCmsBundle\Entity\Page:
         parent_id:
             type: integer
             nullable: true
+        content_type:
+            type: string
+            length: 127
         published_at:
             type: date
             nullable: true
