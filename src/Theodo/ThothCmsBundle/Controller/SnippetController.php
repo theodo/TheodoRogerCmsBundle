@@ -16,14 +16,6 @@ use Theodo\ThothCmsBundle\Form\SnippetType;
 
 class SnippetController extends Controller
 {
-    /**
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEM()
-    {
-        return $this->get('doctrine')->getEntityManager();
-    }
 
     /**
      * Liste des Snippets
@@ -33,9 +25,7 @@ class SnippetController extends Controller
      */
     public function indexAction()
     {
-        $snippets = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Snippet')
-            ->findAll();
+        $snippets = $this->get('thoth.content_repository')->findAll('snippet');
 
         return $this->render('TheodoThothCmsBundle:Snippet:index.html.twig',
                 array('snippets' => $snippets)
@@ -58,8 +48,7 @@ class SnippetController extends Controller
             if ($form->isValid())
             {
                 $snippet = $form->getData();
-                $this->getEM()->persist($snippet);
-                $this->getEM()->flush();
+                $this->get('thoth.content_repository')->save($snippet);
                 
                 $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
 
@@ -91,9 +80,7 @@ class SnippetController extends Controller
      */
     public function updateAction($id)
     {
-        $snippet = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Snippet')
-            ->findOneById($id);
+        $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
 
@@ -109,8 +96,7 @@ class SnippetController extends Controller
                 $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
 
                 $snippet = $form->getData();
-                $this->getEM()->persist($snippet);
-                $this->getEM()->flush();
+                $this->get('thoth.content_repository')->save($snippet);
 
                 $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
                 // Set redirect route
@@ -147,9 +133,7 @@ class SnippetController extends Controller
      */
     public function editAction($id)
     {
-        $snippet = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Snippet')
-            ->findOneById($id);
+        $snippet = $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
 
         $form = $this->createForm(new SnippetType(), $snippet);
 
@@ -171,14 +155,11 @@ class SnippetController extends Controller
      */
     public function removeAction($id)
     {
-        $snippet = $this->getEM()
-            ->getRepository('Theodo\ThothCmsBundle\Entity\Snippet')
-            ->findOneById($id);
+        $snippet = $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->getEM()->remove($snippet);
-            $this->getEM()->flush();
+            $snippet = $this->get('thoth.content_repository')->remove($snippet);
 
             return $this->redirect($this->generateUrl('snippet_list'));
         }
