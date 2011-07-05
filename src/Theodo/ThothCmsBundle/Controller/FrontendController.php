@@ -55,10 +55,12 @@ class FrontendController extends Controller
         $response = new Response();
         // Set cache settings in one call
         // TODO user defined ?
-        $response->setCache(array(
+        /*$response->setCache(array(
             'last_modified' => $date,
             'public'        => true,
-        ));
+        ));*/
+        // esi test
+        $response->setSharedMaxAge(60);
 
         if ($page->getCacheable() && $response->isNotModified($this->get('request'))) {
             // return the 304 Response immediately
@@ -67,6 +69,35 @@ class FrontendController extends Controller
             // Set content type
             $response->headers->set('Content-Type', $page->getContentType());
             return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
+        }
+    }
+
+    public function snippetAction($name)
+    {
+        $snippet = $this->get('thoth.content_repository')->getSnippetByName($name);
+
+        if (!$snippet)
+        {
+              throw $this->createNotFoundException();
+        }
+
+        $date = $snippet->getUpdatedAt();
+        // Initialize new response
+        $response = new Response();
+        // Set cache settings in one call
+        // TODO user defined ?
+        /*$response->setCache(array(
+            'last_modified' => $date,
+            'public'        => true,
+        ));*/
+        // esi test
+        $response->setSharedMaxAge(30);
+
+        if ($response->isNotModified($this->get('request'))) {
+            // return the 304 Response immediately
+            return $response;
+        } else {
+            return $this->get('thoth.templating')->renderResponse('snippet:'.$snippet->getName(), array('snippet' => $snippet), $response);
         }
     }
 }

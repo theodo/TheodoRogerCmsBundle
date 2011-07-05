@@ -137,4 +137,19 @@ class ContentEntityRepository implements ContentRepositoryInterface
         $this->getEntityManager()->persist($object);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * Retrieve snippet
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-05
+     */
+    public function getSnippetByName($name)
+    {
+        $snippet = $this->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:Snippet')
+                ->findOneByName($name);
+
+        return $snippet;
+    }
 }
