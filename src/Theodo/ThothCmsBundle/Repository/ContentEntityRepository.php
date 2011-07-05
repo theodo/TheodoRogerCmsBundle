@@ -137,4 +137,39 @@ class ContentEntityRepository implements ContentRepositoryInterface
         $this->getEntityManager()->persist($object);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * Save object
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-05
+     */
+    public function save($object = null)
+    {
+        // Check object
+        if (!$object)
+        {
+            return null;
+        }
+
+        // save the object
+        $this->getEntityManager()->persist($object);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * Retrieve object
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-05
+     */
+    public function findOneById($id, $type = 'page')
+    {
+        // Retrieve the object
+        $object = $this->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
+                ->findOneById($id);
+
+        return $object;
+    }
 }

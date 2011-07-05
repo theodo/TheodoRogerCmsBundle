@@ -57,8 +57,7 @@ class LayoutController extends Controller
 
             if ($form->isValid()) {
                 $layout = $form->getData();
-                $this->getEM()->persist($layout);
-                $this->getEM()->flush();
+                $this->get('thoth.content_repository')->save($layout);
                 
                 $this->get('thoth.caching')->warmup('layout:'.$layout->getName());
 
@@ -120,8 +119,7 @@ class LayoutController extends Controller
 
                 // save layout
                 $layout = $form->getData();
-                $this->getEM()->persist($layout);
-                $this->getEM()->flush();
+                $this->get('thoth.content_repository')->save($layout);
                 
                 $this->get('thoth.caching')->warmup('layout:'.$layout->getName());
 

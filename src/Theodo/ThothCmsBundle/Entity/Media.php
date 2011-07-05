@@ -158,10 +158,7 @@ class Media
         $metadata->addPropertyConstraint('file', new NotBlank());
     }
 
-    /**
-     * @ORM\prePersist
-     * @ORM\preUpdate
-     */
+
     public function preUpload()
     {
         if ($this->file) {
@@ -169,10 +166,7 @@ class Media
         }
     }
 
-    /**
-     * @ORM\postPersist
-     * @ORM\postUpdate
-     */
+
     public function upload()
     {
         if ($this->file == null) {
