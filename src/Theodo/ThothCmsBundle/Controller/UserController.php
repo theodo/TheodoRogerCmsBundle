@@ -107,11 +107,9 @@ class UserController extends Controller
      */
     public function listAction()
     {
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
 
         // Retrieve users
-        $users = $em->getRepository('TheodoThothCmsBundle:User')->findAll();
+        $users = $this->get('thoth.content_repository')->findAll('user');
 
         return $this->render('TheodoThothCmsBundle:User:list.html.twig', array(
             'users' => $users,
@@ -124,16 +122,13 @@ class UserController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
-    public function editAction()
+    public function editAction($id)
     {
         // Retrieve request
         $request = $this->get('request');
 
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve user
-        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
+        $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
 
         // Create form
         $form = $this->createForm(new UserType(false), $user);
@@ -154,9 +149,6 @@ class UserController extends Controller
     {
         // Retrieve request
         $request = $this->get('request');
-
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
 
         // Retrieve user
         $user = new User();
@@ -182,8 +174,7 @@ class UserController extends Controller
                 $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                 $user->setPassword($password);
 
-                $em->persist($user);
-                $em->flush();
+                $this->get('thoth.content_repository')->save($user);
 
                 // Set notice
                 $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
@@ -223,23 +214,19 @@ class UserController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
-    public function removeAction()
+    public function removeAction($id)
     {
         // Retrieve request
         $request = $this->get('request');
 
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve users
-        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
+        $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
 
         // Request is post
         if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin())
         {
             // Delete page
-            $em->remove($user);
-            $em->flush();
+            $this->get('thoth.content_repository')->remove($user);
 
             // Set notice
             $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been removed', array('%user%' => $user->getName())));
@@ -290,9 +277,6 @@ class UserController extends Controller
         // Retrieve request
         $request = $this->get('request');
 
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve connected user
         $user = $this->get('security.context')->getToken()->getUser();
         $user_password = $user->getPassword();
@@ -330,8 +314,7 @@ class UserController extends Controller
                     $user->setPassword($user_password);
                 }
 
-                $em->persist($user);
-                $em->flush();
+                $this->get('thoth.content_repository')->save($user);
 
                 // Set error
                 $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
@@ -363,16 +346,13 @@ class UserController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
-    public function updateAction()
+    public function updateAction($id)
     {
         // Retrieve request
         $request = $this->get('request');
 
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve user
-        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
+        $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
         $user_password = $user->getPassword();
 
         // Create form
@@ -404,8 +384,7 @@ class UserController extends Controller
                 {
                     $user->setPassword($user_password);
                 }
-                $em->persist($user);
-                $em->flush();
+                $this->get('thoth.content_repository')->save($user);
 
                 // Set notice
                 $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));

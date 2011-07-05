@@ -17,15 +17,6 @@ use Theodo\ThothCmsBundle\Form\MediaType;
 class MediaController extends Controller
 {
     /**
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEM()
-    {
-        return $this->get('doctrine')->getEntityManager();
-    }
-
-    /**
      * Liste des Medias
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
@@ -33,9 +24,7 @@ class MediaController extends Controller
      */
     public function indexAction()
     {
-        $medias = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Media')
-            ->findAll();
+        $medias = $this->get('thoth.content_repository')->findAll('media');
 
         return $this->render('TheodoThothCmsBundle:Media:index.html.twig',
                 array('medias' => $medias)
@@ -57,8 +46,7 @@ class MediaController extends Controller
 
             if ($form->isValid()) {
                 $media = $form->getData();
-                $this->getEM()->persist($media);
-                $this->getEM()->flush();
+                $this->get('thoth.content_repository')->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('media_list'));
@@ -100,9 +88,7 @@ class MediaController extends Controller
      */
     public function updateAction($id)
     {
-        $media = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Media')
-            ->findOneById($id);
+        $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
         $form = $this->createForm(new MediaType(), $media);
         $request = $this->get('request');
 
@@ -116,8 +102,7 @@ class MediaController extends Controller
 
                 // save media
                 $media = $form->getData();
-                $this->getEM()->persist($media);
-                $this->getEM()->flush();
+                $media = $this->get('thoth.content_repository')->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('media_list'));
@@ -153,9 +138,7 @@ class MediaController extends Controller
      */
     public function editAction($id)
     {
-        $media = $this->getEM()
-            ->getRepository('Theodo\ThothCmsBundle\Entity\Media')
-            ->findOneById($id);
+        $media = $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
 
         $form = $this->createForm(new MediaType(), $media);
 
@@ -177,14 +160,11 @@ class MediaController extends Controller
      */
     public function removeAction($id)
     {
-        $media = $this->getEM()
-            ->getRepository('Theodo\ThothCmsBundle\Entity\Media')
-            ->findOneById($id);
+        $media = $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->getEM()->remove($media);
-            $this->getEM()->flush();
+            $media = $this->get('thoth.content_repository')->remove($media);
 
             return $this->redirect($this->generateUrl('media_list'));
         }
