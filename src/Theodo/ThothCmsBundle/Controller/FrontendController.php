@@ -53,13 +53,7 @@ class FrontendController extends Controller
         $date = $page->getUpdatedAt();
         // Initialize new response
         $response = new Response();
-        // Set cache settings in one call
-        // TODO user defined ?
-        /*$response->setCache(array(
-            'last_modified' => $date,
-            'public'        => true,
-        ));*/
-        // esi test
+        // Set cache settings
         if ($page->getPublic())
         {
             $response->setPublic();
