@@ -33,33 +33,6 @@
             <p class="title">
                 {{ form_row(form.name) }}
             </p>
-            <div class="drawer">
-                <div class="toggle_wrapper">
-                    <div id="extra-fields" class="drawer_contents {% if (hasErrors is defined) and hasErrors %}display{% else %}hide{% endif %}">
-                        <table class="fieldset">
-                            <tbody>
-                                <tr>
-                                    <th class="label">
-                                        {{ form_label(form.content_type) }}
-                                    </th>
-                                    <td class="field">
-                                        {{ form_widget(form.content_type) }}
-                                        {{ form_errors(form.content_type) }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="drawer_handle">
-                    <a id="link-more-fields" class="toggle more extra-fields-link {% if (hasErrors is not defined) or not hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
-                      {% trans %}More{% endtrans %}
-                    </a>
-                    <a id="link-less-fields" class="toggle less extra-fields-link {% if (hasErrors is defined) and hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
-                      {% trans %}Less{% endtrans %}
-                    </a>
-                </div>
-            </div>
             <p class="content">
                 {{ form_row(form.content) }}
               
