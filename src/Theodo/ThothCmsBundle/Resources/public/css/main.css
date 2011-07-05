@@ -167,6 +167,11 @@ span.info, span.error
   color: red;
 }
 
+.display-ib
+{
+  display: inline-block;
+}
+
 table
 {
   border-collapse: collapse;
