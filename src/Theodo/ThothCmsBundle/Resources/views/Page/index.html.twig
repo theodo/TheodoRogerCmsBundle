@@ -14,35 +14,34 @@
 {% block page_title "Pages" %}
 
 {% block content %}
-    <div class="outset">
-        <table class="index" id="site_map" summary="{% trans %}Page hierarchy of the current site{% endtrans %}">
-            <thead>
-                <tr>
-                    <th class="page">{% trans %}Page{% endtrans %}</th>
-                    <th class="status">{% trans %}Status{% endtrans %}</th>
-                    <th class="modify" colspan="2">{% trans %}Modify{% endtrans %}</th>
-                </tr>
-            </thead>
-            <tbody>
-              {% if pages|length == 0 %}
-                <td colspan="4" class="empty">{% trans %}No pages{% endtrans %}</td>
-              {% else %}
-                {% include "TheodoThothCmsBundle:Page:page-list.html.twig" with {'pages': pages, 'level' : 0} %}
-              {% endif %}
-            </tbody>
-        </table>
-    </div>
-
-    {% if pages|length == 0 %}
-      <div id="actions">
+{% if pages|length == 0 %}
+    <div id="actions">
         <ul>
-          <li>
-            <a href="{{ url('page_new', {'id' : 'homepage'}) }}">
-              <img src="/bundles/theodothothcms/images/admin/plus.png" alt="">
-              {% trans %}New Homepage{% endtrans %}
-            </a>
-          </li>
+            <li>
+              <a href="{{ url('page_new', {'id' : 'homepage'}) }}">
+                  <img src="/bundles/theodothothcms/images/admin/plus.png" alt="">
+                  {% trans %}New Homepage{% endtrans %}
+              </a>
+            </li>
         </ul>
-      </div>
-    {% endif %}
+    </div>
+{% endif %}
+<div class="outset">
+    <table class="index" id="site_map" summary="{% trans %}Page hierarchy of the current site{% endtrans %}">
+        <thead>
+            <tr>
+                <th class="page">{% trans %}Page{% endtrans %}</th>
+                <th class="status">{% trans %}Status{% endtrans %}</th>
+                <th class="modify" colspan="2">{% trans %}Modify{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% if pages|length == 0 %}
+            <td colspan="4" class="empty">{% trans %}No pages{% endtrans %}</td>
+          {% else %}
+            {% include "TheodoThothCmsBundle:Page:page-list.html.twig" with {'pages': pages, 'level' : 0} %}
+          {% endif %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

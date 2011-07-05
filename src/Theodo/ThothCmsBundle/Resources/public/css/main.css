@@ -1370,10 +1370,9 @@ body.reversed #content h1
 
 #actions
 {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  margin: -20px;
+  margin-bottom: 20px;
+  text-align: right;
   background: #777 url(/bundles/theodothothcms/images/admin/shadow_grey.png) repeat-x;
 }
 

@@ -6,6 +6,14 @@
 {% block page_title "Snippets" %}
 
 {% block content %}
+<div id="actions">
+    <ul>
+        <li>
+          <a id="new-snippet" href="{{ url('snippet_new') }}">
+            <img alt="Plus" src="/bundles/theodothothcms/images/admin/plus.png" />{% trans %}New Snippet{% endtrans %}</a>
+        </li>
+    </ul>
+</div>
 <div class="outset">
     <table class="index" id="snippets">
         <thead>
@@ -30,13 +38,5 @@
         {% endfor %}
         </tbody>
     </table>
-</div>
-<div id="actions">
-    <ul>
-        <li>
-          <a id="new-snippet" href="{{ url('snippet_new') }}">
-            <img alt="Plus" src="/bundles/theodothothcms/images/admin/plus.png" />{% trans %}New Snippet{% endtrans %}</a>
-        </li>
-    </ul>
 </div>
 {% endblock %}
