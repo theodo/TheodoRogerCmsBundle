@@ -581,7 +581,7 @@ img.avatar.avatar_32x32
   font-size: 85%;
   padding: 0 15px 0 10px !important;
   whitespace: nowrap;
-  width: 1%;
+  width: 7%;
   vertical-align: middle;
   text-align: left;
 }
@@ -590,14 +590,20 @@ img.avatar.avatar_32x32
 {
   padding-left: 0px;
   padding-right: 10px;
-  text-align: right;
+  text-align: left;
   width: auto;
 }
 
-.drawer_contents table.fieldset td.field input.textbox
+.drawer_contents table.fieldset td.field input.textbox,
+.drawer_contents table.fieldset td.field select
 {
   font-size: 110%;
   width: 99.5%;
+}
+
+.drawer_contents table.fieldset td.field select
+{
+  width: 19.5%;
 }
 
 .drawer_contents table.fieldset td.actions
