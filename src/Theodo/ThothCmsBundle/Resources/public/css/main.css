@@ -1067,6 +1067,18 @@ body.edit_personal_preferences #avatar p.caption
   padding-left: 9px;
 }
 
+#content table.index .page .content_type
+{
+  font-size: 8px;
+  color: #000;
+  position: absolute;
+  width: 25px;
+  height:10px;
+  top: 3px;
+  text-align: center;
+  color: #11649e;
+}
+
 #content table.index td.user
 {
   padding-top: 8px;

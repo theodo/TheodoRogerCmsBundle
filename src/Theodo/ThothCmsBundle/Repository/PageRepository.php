@@ -14,17 +14,22 @@ class PageRepository extends EntityRepository
 {
     // Homepage slug
     const SLUG_HOMEPAGE   = 'homepage';
-    
+
     // Page status
     const STATUS_DRAFT    = 'Draft';
     const STATUS_REVIEWED = 'Reviewed';
     const STATUS_PUBLISH  = 'Published';
     const STATUS_HIDDEN   = 'Hidden';
-    
+
     // Content types
     const TYPE_TEXT_HTML       = 'text/html';
     const TYPE_TEXT_CSS        = 'text/css';
     const TYPE_TEXT_JAVASCRIPT = 'text/javasript';
+
+    // Content subtypes
+    const SUBTYPE_TEXT_HTML       = 'html';
+    const SUBTYPE_TEXT_CSS        = 'css';
+    const SUBTYPE_TEXT_JAVASCRIPT = 'js';
 
     /**
      * Return list of available status
@@ -42,9 +47,9 @@ class PageRepository extends EntityRepository
             self::STATUS_HIDDEN   => self::STATUS_HIDDEN
         );
     }
-    
+
     /**
-     * Return list of available content typess
+     * Return list of available content types
      *
      * @return array
      * @author Vincent Guillon <vincentg@theodo.fr>
@@ -56,6 +61,22 @@ class PageRepository extends EntityRepository
             self::TYPE_TEXT_HTML       => self::TYPE_TEXT_HTML,
             self::TYPE_TEXT_CSS        => self::TYPE_TEXT_CSS,
             self::TYPE_TEXT_JAVASCRIPT => self::TYPE_TEXT_JAVASCRIPT
+        );
+    }
+
+    /**
+     * Return list of available content subtypes
+     *
+     * @return array
+     * @author cyrillej
+     * @since 2011-07-05
+     */
+    public static function getAvailableContentSubtypes()
+    {
+        return array(
+            self::TYPE_TEXT_HTML       => self::SUBTYPE_TEXT_HTML,
+            self::TYPE_TEXT_CSS        => self::SUBTYPE_TEXT_CSS,
+            self::TYPE_TEXT_JAVASCRIPT => self::SUBTYPE_TEXT_JAVASCRIPT
         );
     }
 
