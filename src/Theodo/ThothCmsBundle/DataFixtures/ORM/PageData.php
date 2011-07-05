@@ -39,6 +39,7 @@ EOF
         $page1->setPublishedAt(new \DateTime('now'));
         $page1->setContentType(PageRepository::TYPE_TEXT_HTML);
         $page1->setCacheable(true);
+        $page1->setPublic(false);
 
         $manager->persist($page1);
 
@@ -63,6 +64,7 @@ EOF
         $page2->setPublishedAt(new \DateTime('now'));
         $page2->setContentType(PageRepository::TYPE_TEXT_HTML);
         $page2->setCacheable(false);
+        $page2->setPublic(false);
 
         $manager->persist($page2);
 
@@ -91,6 +93,7 @@ EOF
         $page3->setContentType(PageRepository::TYPE_TEXT_HTML);
         $manager->persist($page3);
         $page3->setCacheable(true);
+        $page3->setPublic(false);
 
         // Create new page (Theodo team)
         $page4 = new Page();
@@ -109,6 +112,7 @@ EOF
         $page4->setContentType(PageRepository::TYPE_TEXT_HTML);
         $manager->persist($page4);
         $page4->setCacheable(false);
+        $page4->setPublic(false);
 
         $page5 = new Page();
         $page5->setName('Error 404');
@@ -129,6 +133,7 @@ EOF
         $page5->setContentType(PageRepository::TYPE_TEXT_HTML);
         $manager->persist($page5);
         $page5->setCacheable(false);
+        $page5->setPublic(false);
 
         // Save pages
         $manager->flush();

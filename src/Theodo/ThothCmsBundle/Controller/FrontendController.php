@@ -60,7 +60,17 @@ class FrontendController extends Controller
             'public'        => true,
         ));*/
         // esi test
-        $response->setSharedMaxAge(60);
+        if ($page->getPublic())
+        {
+            $response->setPublic();
+            $response->setSharedMaxAge($page->getLifeTime());
+        }
+        // TODO before dbrequest
+        if ($page->getCacheable())
+        {
+            $response->setLastModified($date);
+        }
+        $response->setMaxAge($page->getLifeTime());
 
         if ($page->getCacheable() && $response->isNotModified($this->get('request'))) {
             // return the 304 Response immediately

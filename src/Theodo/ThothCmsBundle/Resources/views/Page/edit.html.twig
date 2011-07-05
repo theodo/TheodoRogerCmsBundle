@@ -87,6 +87,26 @@
                                     {{ form_errors(form.cacheable) }}
                                 </td>
                             </tr>
+ 
+                            <tr>
+                                <th class="label">
+                                    {{ form_label(form.public) }}
+                                </th>
+                                <td class="field">
+                                    {{ form_widget(form.public) }}
+                                    {{ form_errors(form.public) }}
+                                </td>
+                            </tr>
+ 
+                            <tr>
+                                <th class="label">
+                                    {{ form_label(form.lifetime) }}
+                                </th>
+                                <td class="field">
+                                    {{ form_widget(form.lifetime) }}
+                                    {{ form_errors(form.lifetime) }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

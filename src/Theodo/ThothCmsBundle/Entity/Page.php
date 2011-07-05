@@ -450,4 +450,55 @@ class Page
     {
         return $this->cacheable;
     }
+
+    /**
+     * @var integer $lifetime
+     */
+    private $lifetime;
+
+    /**
+     * Set lifetime
+     *
+     * @param integer $lifetime
+     */
+    public function setLifetime($lifetime)
+    {
+        $this->lifetime = $lifetime;
+    }
+
+    /**
+     * Get lifetime
+     *
+     * @return integer 
+     */
+    public function getLifetime()
+    {
+        return $this->lifetime;
+    }
+
+    /**
+     * @var boolean $public
+     */
+    private $public;
+
+
+    /**
+     * Set public
+     *
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * Get public
+     *
+     * @return boolean 
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
 }

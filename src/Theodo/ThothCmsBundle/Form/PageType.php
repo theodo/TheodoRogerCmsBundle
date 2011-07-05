@@ -47,6 +47,8 @@ class PageType extends AbstractType
             'required'  => true
         ));
         $builder->add('cacheable', 'checkbox', array('required' => false));
+        $builder->add('public', 'checkbox', array('required' => false));
+        $builder->add('lifetime', 'text', array('required' => false));
         
         // Display published_at date only in edition
         if (!$this->is_new)
