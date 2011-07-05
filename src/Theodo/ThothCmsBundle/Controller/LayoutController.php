@@ -16,14 +16,6 @@ use Theodo\ThothCmsBundle\Form\LayoutType;
 
 class LayoutController extends Controller
 {
-    /**
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEM()
-    {
-        return $this->get('doctrine')->getEntityManager();
-    }
 
     /**
      * Liste des Layouts
@@ -33,9 +25,7 @@ class LayoutController extends Controller
      */
     public function indexAction()
     {
-        $layouts = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Layout')
-            ->findAll();
+        $layouts = $this->get('thoth.content_repository')->findAll('layout');
 
         return $this->render('TheodoThothCmsBundle:Layout:index.html.twig',
                 array('layouts' => $layouts)
@@ -101,9 +91,7 @@ class LayoutController extends Controller
      */
     public function updateAction($id)
     {
-        $layout = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Layout')
-            ->findOneById($id);
+        $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
         $form = $this->createForm(new LayoutType(), $layout);
         $request = $this->get('request');
 
@@ -157,9 +145,7 @@ class LayoutController extends Controller
      */
     public function editAction($id)
     {
-        $layout = $this->getEM()
-            ->getRepository('Theodo\ThothCmsBundle\Entity\Layout')
-            ->findOneById($id);
+        $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
 
         $form = $this->createForm(new LayoutType(), $layout);
 
@@ -181,14 +167,11 @@ class LayoutController extends Controller
      */
     public function removeAction($id)
     {
-        $layout = $this->getEM()
-            ->getRepository('Theodo\ThothCmsBundle\Entity\Layout')
-            ->findOneById($id);
+        $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->getEM()->remove($layout);
-            $this->getEM()->flush();
+            $this->get('thoth.content_repository')->remove($layout);
 
             return $this->redirect($this->generateUrl('layout_list'));
         }

@@ -172,4 +172,19 @@ class ContentEntityRepository implements ContentRepositoryInterface
 
         return $object;
     }
+
+    /**
+     * Retrieve all objects
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-05
+     */
+    public function findAll($type = 'page')
+    {
+        $objects = $this->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
+                ->findAll();
+
+        return $objects;
+    }
 }
