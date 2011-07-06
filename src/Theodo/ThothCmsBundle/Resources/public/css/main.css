@@ -851,9 +851,9 @@ body.reversed #content .box
 
 body.single_form #content #single_form
 {
-  background: #f5f1e2 url(/bundles/theodothothcms/images/admin/vertical_tan_gradient.png) center -15px repeat-x;
-  border: 0.35em solid #efead3;
-  padding: 0.5em 1.5em;
+  background: #fff url(/bundles/theodothothcms/images/admin/thoth_bg_right_white.png) no-repeat 98% 100%;
+  border: 0.35em solid #cfe0ec;
+  padding: 1em 2em 2em;
   padding-right: 22px;
   position: relative;
   width: 28em;
@@ -865,7 +865,8 @@ body.single_form #content #single_form
 body.single_form #content #single_form h1
 {
   font-size: 140%;
-  margin: 0.75em 0 1.25em;
+  margin: 0.75em 0 2em;
+  color: #11649e;
 }
 
 body.single_form #content #single_form p
@@ -957,7 +958,7 @@ body.single_form #content #single_form span.forgot_password a:hover
 
 body.single_form #content #single_form .buttons
 {
-  margin: 1.75em 0 1em;
+  margin: 3em 0 1em;
 }
 
 body.single_form #content p.version
