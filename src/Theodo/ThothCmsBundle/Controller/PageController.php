@@ -57,15 +57,7 @@ class PageController extends Controller
             $page->setParentId($parent_page->getId());
             $page->setParent($parent_page);
         }
-        else if ($request->getMethod() != 'POST')
-        {
-            $page->setName('Homepage');
-            $page->setBreadcrumb('Homepage');
-            $page->setSlug('homepage');
-
-            $parent_page = 'homepage';
-        }
-        else if ($request->getMethod() == 'POST')
+        else
         {
             $parent_page = 'homepage';
         }
