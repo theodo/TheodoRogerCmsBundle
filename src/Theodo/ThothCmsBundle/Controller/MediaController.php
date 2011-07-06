@@ -102,7 +102,7 @@ class MediaController extends Controller
 
                 // save media
                 $media = $form->getData();
-                $media = $this->get('thoth.content_repository')->save($media);
+                $this->get('thoth.content_repository')->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('media_list'));
