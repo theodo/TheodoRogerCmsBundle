@@ -99,9 +99,13 @@ class MediaController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-
                 // save media
                 $media = $form->getData();
+                // TODO find way to force update without modifying the media
+                if (null !== $media->file)
+                {
+                    $media->setPath(null);
+                }
                 $this->get('thoth.content_repository')->save($media);
 
                 // Set redirect route
