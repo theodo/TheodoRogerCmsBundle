@@ -8,7 +8,7 @@
 {% set tab = 'settings' %}
 {% set nav = 'users' %}
 
-{% if user is defined %}
+{% if user.id is not null %}
   {% set title %}Edit User{% endset %}
   {% set gravatarHash %}{{ user.gravatarEmailHash }}{% endset %}
 {% else %}
@@ -53,7 +53,7 @@
             <p>
                 {{ form_row(form.password_confirm) }}
 
-                {% if user is defined  %}
+                {% if user.id is not null  %}
                     <span>
                         {% trans %} or {% endtrans %}
                         <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
