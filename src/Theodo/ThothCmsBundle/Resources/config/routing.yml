@@ -52,8 +52,8 @@ page_list:
     defaults: { _controller: TheodoThothCmsBundle:Page:index }
 
 page_new:
-    pattern:  /cms/pages/{id}/new
-    defaults: { _controller: TheodoThothCmsBundle:Page:new }
+    pattern:  /cms/pages/{parent_id}/new
+    defaults: { _controller: TheodoThothCmsBundle:Page:edit, id: null }
 
 page_edit:
     pattern:  /cms/pages/{id}/edit
@@ -61,7 +61,7 @@ page_edit:
 
 page_update:
     pattern:  /cms/pages/{id}/update
-    defaults: { _controller: TheodoThothCmsBundle:Page:update }
+    defaults: { _controller: TheodoThothCmsBundle:Page:edit }
 
 page_remove:
     pattern:  /cms/pages/{id}/remove

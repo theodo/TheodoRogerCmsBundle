@@ -116,49 +116,33 @@ class PageController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
      */
-    public function editAction($id)
+    public function editAction($id = null, $parent_id = null)
     {
-        // Retrieve request
-        $request = $this->getRequest();
-
         // Retrieve page
-        $page = $this->get('thoth.content_repository')->findOneById($id);
-
-        // Set published at
-        if (!$page->getPublishedAt())
-        {
-            $page->setPublishedAt(new \DateTime('now'));
+        // create page
+        if ($id == null) {
+            $page = new Page();
+            $parent_page = $this->get('thoth.content_repository')->findOneById($parent_id);
+            // Create the homepage
+            if ($parent_page) {
+                $page->setParentId($parent_page->getId());
+                $page->setParent($parent_page);
+            }
+            else {
+                $parent_page = 'homepage';
+            }
+        }
+        // update page
+        else {
+            $page = $this->get('thoth.content_repository')->findOneById($id);
+            $parent_page = $page->getParent();
         }
 
         // Create form
-        $form = $this->createForm(new PageType(false), $page);
+        $form = $this->createForm(new PageType(), $page);
 
-        return $this->render(
-            'TheodoThothCmsBundle:Page:edit.html.twig',
-            array(
-                'form' => $form->createView(),
-                'page' => $page
-            )
-        );
-    }
-
-    /**
-     * Update page action
-     *
-     * @return string
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
-     */
-    public function updateAction($id = null)
-    {
         // Retrieve request
         $request = $this->getRequest();
-
-        // Retrieve page
-        $page = $this->get('thoth.content_repository')->findOneById($id);
-
-        // Create form
-        $form = $this->createForm(new PageType(false), $page);
 
         // Initialize form hasErros
         $hasErrors = false;
@@ -198,9 +182,10 @@ class PageController extends Controller
         return $this->render(
             'TheodoThothCmsBundle:Page:edit.html.twig',
             array(
-                'form'      => $form->createView(),
-                'page'      => $page,
-                'hasErrors' => $hasErrors
+                'form'        => $form->createView(),
+                'page'        => $page,
+                'hasErrors'   => $hasErrors,
+                'parent_page' => $parent_page
             )
         );
     }
