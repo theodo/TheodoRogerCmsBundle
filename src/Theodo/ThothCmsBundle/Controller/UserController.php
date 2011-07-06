@@ -191,16 +191,16 @@ class UserController extends Controller
 
                 $this->get('thoth.content_repository')->save($user);
 
-                // Set error
-                $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
-
                 // Set locale
                 $this->get('session')->setLocale($user->getLanguage());
+                
+                // Set success message
+                $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
 
                 return $this->redirect($this->generateUrl('user_preferences'));
             }
             else {
-                // Set error
+                // Set error message
                 $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update your preferences due some errors'));
             }
         }
