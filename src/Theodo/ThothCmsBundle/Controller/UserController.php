@@ -61,18 +61,15 @@ class UserController extends Controller
     public function loginAction()
     {
         // User already authenticated, redirect to page list
-        if($this->get('session')->has('_security_main'))
-        {
+        if($this->get('session')->has('_security_main')) {
             return $this->redirect($this->generateUrl('page_list'));
         }
 
         // Get the login error if there is one
-        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
-        {
+        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         }
-        else
-        {
+        else {
             $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
         }
 
@@ -107,7 +104,6 @@ class UserController extends Controller
      */
     public function listAction()
     {
-
         // Retrieve users
         $users = $this->get('thoth.content_repository')->findAll('user');
 
@@ -131,8 +127,7 @@ class UserController extends Controller
         $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
 
         // Request is post
-        if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin())
-        {
+        if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin()) {
             // Delete page
             $this->get('thoth.content_repository')->remove($user);
 
@@ -143,8 +138,7 @@ class UserController extends Controller
         }
 
         // Set flash notice
-        if ($request->getMethod() == 'POST' && $user->getIsMainAdmin())
-        {
+        if ($request->getMethod() == 'POST' && $user->getIsMainAdmin()) {
             $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not remove main admin'));
         }
 
@@ -158,34 +152,11 @@ class UserController extends Controller
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-24
-     */
-    public function preferencesAction()
-    {
-        // Retrieve connected user
-        $user = $this->get('security.context')->getToken()->getUser();
-
-        // Create form
-        $form = $this->createForm(new UserPreferencesType(false), $user);
-
-        return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Update user preferences
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date 2011-06-24
      * @since 2011-06-29 cyrillej (setLocale)
-     * @since 2011-07-06 mathieud ($hasErrors deleted)
+     * @since 2011-07-06 mathieud ($hasErrors deleted + refactoring)
      */
-    public function preferencesUpdateAction()
+    public function preferencesEditAction()
     {
-        // Retrieve request
-        $request = $this->get('request');
-
         // Retrieve connected user
         $user = $this->get('security.context')->getToken()->getUser();
         $user_password = $user->getPassword();
@@ -193,30 +164,28 @@ class UserController extends Controller
         // Create form
         $form = $this->createForm(new UserPreferencesType(false), $user);
 
+        // Retrieve request
+        $request = $this->get('request');
+
         // Request is post
-        if ($request->getMethod() == 'POST')
-        {
+        if ($request->getMethod() == 'POST') {
             // Bind form
             $form->bindRequest($request);
 
             // Check form and save object
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $user = $form->getData();
 
                 // Check password update
-                if ($user->getPassword() && $user_password != $user->getPassword())
-                {
+                if ($user->getPassword() && $user_password != $user->getPassword()) {
                     // Encode password
-                    if ($user->getPassword() && $user->getPasswordConfirm())
-                    {
+                    if ($user->getPassword() && $user->getPasswordConfirm()) {
                         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                         $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                         $user->setPassword($password);
                     }
                 }
-                else
-                {
+                else {
                     $user->setPassword($user_password);
                 }
 
@@ -230,8 +199,7 @@ class UserController extends Controller
 
                 return $this->redirect($this->generateUrl('user_preferences'));
             }
-            else
-            {
+            else {
                 // Set error
                 $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update your preferences due some errors'));
             }
@@ -269,31 +237,27 @@ class UserController extends Controller
         $request = $this->get('request');
 
         // Request is post
-        if ($request->getMethod() == 'POST')
-        {
+        if ($request->getMethod() == 'POST') {
             // Bind form
             $form->bindRequest($request);
 
             // Check form and save object
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $user = $form->getData();
 
                 // Check password update
-                if ($user->getPassword() && $old_password != $user->getPassword())
-                {
+                if ($user->getPassword() && $old_password != $user->getPassword()) {
                     // Encode password
-                    if ($user->getPassword() && $user->getPasswordConfirm())
-                    {
+                    if ($user->getPassword() && $user->getPasswordConfirm()) {
                         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                         $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                         $user->setPassword($password);
                     }
                 }
-                else
-                {
+                else {
                     $user->setPassword($old_password);
                 }
+
                 $this->get('thoth.content_repository')->save($user);
 
                 // Set notice
@@ -306,15 +270,14 @@ class UserController extends Controller
 
                 return $this->redirect($this->generateUrl('user_edit', array('id' => $user->getId())));
             }
-            else
-            {
+            else {
                 // Construct errors
                 $errors = array();
-                foreach ($form->getErrors() as $error)
-                {
+                foreach ($form->getErrors() as $error) {
                     array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
                 }
 
+                // Set error
                 if ($old_password == null) {
                     $this->get('session')->setFlash(
                         'error',
@@ -338,8 +301,6 @@ class UserController extends Controller
                         )
                     );
                 }
-                // Set error
-                
             }
         }
 

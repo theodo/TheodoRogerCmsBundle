@@ -32,11 +32,11 @@ user_remove:
 
 user_preferences:
     pattern:  /cms/preferences/edit
-    defaults: { _controller: TheodoThothCmsBundle:User:preferences }
+    defaults: { _controller: TheodoThothCmsBundle:User:preferencesEdit }
 
 user_preferencesUpdate:
     pattern:  /cms/preferences/update
-    defaults: { _controller: TheodoThothCmsBundle:User:preferencesUpdate }
+    defaults: { _controller: TheodoThothCmsBundle:User:preferencesEdit }
 
 user_update:
     pattern:  /cms/users/{id}/update
