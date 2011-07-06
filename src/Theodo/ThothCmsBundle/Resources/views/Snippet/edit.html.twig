@@ -18,7 +18,7 @@
 {% form_theme form 'TheodoThothCmsBundle:Form:form_custom_layout.html.twig' %}
 
 {% block content %}
-    {% if snippet is defined %}
+    {% if snippet is not null %}
     <h1>{% trans %}Edit Snippet{% endtrans %}</h1>
     <form class="edit_snippet" action="{{ url('snippet_update', { 'id': snippet.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}

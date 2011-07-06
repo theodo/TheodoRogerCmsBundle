@@ -18,7 +18,7 @@
 {% form_theme form 'TheodoThothCmsBundle:Form:form_custom_layout.html.twig' %}
 
 {% block content %}
-    {% if layout is defined %}
+    {% if layout is not null %}
     <h1>{% trans %}Edit Layout{% endtrans %}</h1>
     <form class="edit_layout" action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}

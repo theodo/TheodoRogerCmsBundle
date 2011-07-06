@@ -220,7 +220,7 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*cms\/users\/new$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*New User.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*Can not create user due some errors*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Can not save user due some errors*/', $client->getResponse()->getContent());
 
         // Submit valid form
         $crawler = $client->submit($form, array(
@@ -238,6 +238,7 @@ class UserControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
+        var_dump($client->getResponse()->getContent());doe;
         $this->assertRegexp('/.*cms\/users/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*has been created.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Administrator, Designer*/', $client->getResponse()->getContent());

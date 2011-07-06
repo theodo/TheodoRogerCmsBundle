@@ -15,7 +15,7 @@
 {% form_theme form 'TheodoThothCmsBundle:Form:form_custom_layout.html.twig' %}
 
 {% block content %}
-    {% if media is defined %}
+    {% if media is not null %}
     <h1>{% trans %}Edit Media{% endtrans %}</h1>
     <form class="edit_media" action="{{ url('media_update', { 'id': media.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
@@ -27,7 +27,7 @@
                 {{ form_row(form.name) }}
             </p>
             <div class="content">
-                {% if media is defined %}
+                {% if media is not null %}
                 <p>
                     {% trans %}Current file:{% endtrans %}
                     <a href="{{ media_url(media.name) }}" title="{% trans %}Click to open this file{% endtrans %}">{{ media.name }}</a>

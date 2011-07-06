@@ -18,7 +18,7 @@ class LayoutController extends Controller
 {
 
     /**
-     * Liste des Layouts
+     * Layout list
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -33,66 +33,19 @@ class LayoutController extends Controller
     }
 
     /**
-     * Nouveau Layout
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     */
-    public function newAction()
-    {
-        $form = $this->createForm(new LayoutType());
-        $request = $this->get('request');
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-
-            if ($form->isValid()) {
-                $layout = $form->getData();
-                $this->get('thoth.content_repository')->save($layout);
-                
-                $this->get('thoth.caching')->warmup('layout:'.$layout->getName());
-
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('layout_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
-                }
-
-                return $redirect;
-            }
-        }
-
-        return $this->render('TheodoThothCmsBundle:Layout:edit.html.twig',
-                array(
-                    'title' => 'New layout',
-                    'form' => $form->createView()
-                  )
-                );
-    }
-
-    /**
-     * TODO
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-22
-     * @param type $form
-     * @param type $request
-     */
-    public function processForm($form, $request)
-    {
-    }
-
-    /**
-     * Update un Layout
+     * Layout edit
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
      * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
-    public function updateAction($id)
+    public function editAction($id)
     {
-        $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
+        $layout = null;
+        if ($id) {
+            $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
+        }
         $form = $this->createForm(new LayoutType(), $layout);
         $request = $this->get('request');
 
@@ -101,18 +54,19 @@ class LayoutController extends Controller
 
             if ($form->isValid()) {
                 // remove twig cached file
-                $this->get('thoth.caching')->invalidate('layout:'.$layout->getName());
+                if ($layout) {
+                    $this->get('thoth.caching')->invalidate('layout:'.$layout->getName());
+                }
 
                 // save layout
                 $layout = $form->getData();
                 $this->get('thoth.content_repository')->save($layout);
-                
+
                 $this->get('thoth.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('layout_list'));
-                if ($request->get('save-and-edit'))
-                {
+                if ($request->get('save-and-edit')) {
                     $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
                 }
 
@@ -122,31 +76,8 @@ class LayoutController extends Controller
 
         return $this->render('TheodoThothCmsBundle:Layout:edit.html.twig',
                 array(
-                    'title' => 'Edit '.$layout->getName(),
                     'layout' => $layout,
                     'form' => $form->createView(),
-                  )
-                );
-    }
-
-    /**
-     * Edition d'un layout
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @param Int $id
-     */
-    public function editAction($id)
-    {
-        $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
-
-        $form = $this->createForm(new LayoutType(), $layout);
-
-        return $this->render('TheodoThothCmsBundle:Layout:edit.html.twig',
-                array(
-                    'title' => 'Edit '.$layout->getName(),
-                    'layout' => $layout,
-                    'form' => $form->createView()
                   )
                 );
     }

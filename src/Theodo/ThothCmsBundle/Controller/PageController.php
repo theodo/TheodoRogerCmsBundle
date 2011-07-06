@@ -149,7 +149,7 @@ class PageController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
      */
-    public function updateAction($id)
+    public function updateAction($id = null)
     {
         // Retrieve request
         $request = $this->getRequest();

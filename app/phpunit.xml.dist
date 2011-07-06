@@ -36,8 +36,10 @@
     </filter>
 
     <logging>
+<!--
         <log type="coverage-html" target="../clover.html"/>
         <log type="coverage-clover" target="../clover.xml"/>
+-->
         <log type="junit" target="../undercontrol.xml" logIncompleteSkipped="false"/>
     </logging>
 

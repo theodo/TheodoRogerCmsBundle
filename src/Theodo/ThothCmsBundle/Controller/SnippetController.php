@@ -18,7 +18,7 @@ class SnippetController extends Controller
 {
 
     /**
-     * Liste des Snippets
+     * Snippet list
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -33,55 +33,19 @@ class SnippetController extends Controller
     }
 
     /**
-     * Nouveau Snippet
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     */
-    public function newAction()
-    {
-        $form = $this->createForm(new SnippetType());
-        $request = $this->get('request');
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-
-            if ($form->isValid())
-            {
-                $snippet = $form->getData();
-                $this->get('thoth.content_repository')->save($snippet);
-                
-                $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
-
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('snippet_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
-                }
-
-                return $redirect;
-            }
-        }
-
-        return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
-                array(
-                    'title' => 'New snippet',
-                    'form' => $form->createView()
-                  )
-                );
-    }
-
-    /**
-     * Update un Snippet
+     * Snippet edit
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
      * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
-    public function updateAction($id)
+    public function editAction($id)
     {
-        $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
+        $snippet = null;
+        if ($id) {
+            $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
+        }
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
 
@@ -91,12 +55,16 @@ class SnippetController extends Controller
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
+                if ($snippet) {
+                    $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
+                }
 
+                //save snippet
                 $snippet = $form->getData();
                 $this->get('thoth.content_repository')->save($snippet);
 
                 $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
+
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
                 if ($request->get('save-and-edit'))
@@ -110,31 +78,8 @@ class SnippetController extends Controller
 
         return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
                 array(
-                    'title' => 'Edition '.$snippet->getName(),
                     'snippet' => $snippet,
                     'form' => $form->createView(),
-                  )
-                );
-    }
-
-    /**
-     * Edition d'un Snippet
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @param Int $id
-     */
-    public function editAction($id)
-    {
-        $snippet = $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
-
-        $form = $this->createForm(new SnippetType(), $snippet);
-
-        return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
-                array(
-                    'title' => 'Edition '.$snippet->getName(),
-                    'snippet' => $snippet,
-                    'form' => $form->createView()
                   )
                 );
     }

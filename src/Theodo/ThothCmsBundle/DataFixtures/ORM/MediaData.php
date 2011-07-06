@@ -19,12 +19,12 @@ class MediaData implements FixtureInterface
         // Create new page (homepage)
         $media1 = new Media();
         $media1->setName('image1');
-        $media1->setPath('edjhgqerh.jpg');
+        $media1->setPath('picture.jpg');
         $manager->persist($media1);
 
         $media2 = new Media();
-        $media2->setName('normaljs');
-        $media2->setPath('drfigusdni.jpg');
+        $media2->setName('image2');
+        $media2->setPath('picture2.jpg');
         $manager->persist($media2);
 
         // Save pages

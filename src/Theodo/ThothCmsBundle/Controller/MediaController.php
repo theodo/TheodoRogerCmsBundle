@@ -17,7 +17,7 @@ use Theodo\ThothCmsBundle\Form\MediaType;
 class MediaController extends Controller
 {
     /**
-     * Liste des Medias
+     * Media list
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-01
@@ -32,64 +32,19 @@ class MediaController extends Controller
     }
 
     /**
-     * Nouveau Media
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     */
-    public function newAction()
-    {
-        $form = $this->createForm(new MediaType());
-        $request = $this->get('request');
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-
-            if ($form->isValid()) {
-                $media = $form->getData();
-                $this->get('thoth.content_repository')->save($media);
-
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('media_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('media_edit', array('id' => $media->getId())));
-                }
-
-                return $redirect;
-            }
-        }
-
-        return $this->render('TheodoThothCmsBundle:Media:edit.html.twig',
-                array(
-                    'title' => 'New media',
-                    'form' => $form->createView()
-                  )
-                );
-    }
-
-    /**
-     * TODO
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-22
-     * @param type $form
-     * @param type $request
-     */
-    public function processForm($form, $request)
-    {
-    }
-
-    /**
-     * Update un Media
+     * Media edit
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
      * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
-    public function updateAction($id)
+    public function editAction($id)
     {
-        $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
+        $media = null;
+        if ($id) {
+            $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
+        }
         $form = $this->createForm(new MediaType(), $media);
         $request = $this->get('request');
 
@@ -119,31 +74,8 @@ class MediaController extends Controller
 
         return $this->render('TheodoThothCmsBundle:Media:edit.html.twig',
                 array(
-                    'title' => 'Edit '.$media->getName(),
                     'media' => $media,
                     'form' => $form->createView(),
-                  )
-                );
-    }
-
-    /**
-     * Edition d'un media
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @param Int $id
-     */
-    public function editAction($id)
-    {
-        $media = $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
-
-        $form = $this->createForm(new MediaType(), $media);
-
-        return $this->render('TheodoThothCmsBundle:Media:edit.html.twig',
-                array(
-                    'title' => 'Edit '.$media->getName(),
-                    'media' => $media,
-                    'form' => $form->createView()
                   )
                 );
     }

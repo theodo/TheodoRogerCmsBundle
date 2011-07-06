@@ -24,7 +24,7 @@ user_edit:
 
 user_new:
     pattern:  /cms/users/new
-    defaults: { _controller: TheodoThothCmsBundle:User:new }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit, id: null }
 
 user_remove:
     pattern:  /cms/users/{id}/remove
@@ -40,7 +40,7 @@ user_preferencesUpdate:
 
 user_update:
     pattern:  /cms/users/{id}/update
-    defaults: { _controller: TheodoThothCmsBundle:User:update }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit }
 
 user_checkSessionLocale:
     pattern:  /cms/check-session/{redirect_route}
@@ -74,11 +74,11 @@ page_expand:
 # Layout routing
 layout_new:
     pattern: /cms/layouts/new
-    defaults: { _controller: TheodoThothCmsBundle:Layout:new }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:edit, id: null }
 
 layout_update:
     pattern: /cms/layouts/{id}
-    defaults: { _controller: TheodoThothCmsBundle:Layout:update }
+    defaults: { _controller: TheodoThothCmsBundle:Layout:edit }
 
 layout_edit:
     pattern: /cms/layouts/{id}/edit
@@ -95,11 +95,11 @@ layout_remove:
 # Snippet routing
 snippet_new:
     pattern: /cms/snippets/new
-    defaults: { _controller: TheodoThothCmsBundle:Snippet:new }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:edit, id: null }
 
 snippet_update:
     pattern: /cms/snippets/{id}
-    defaults: { _controller: TheodoThothCmsBundle:Snippet:update }
+    defaults: { _controller: TheodoThothCmsBundle:Snippet:edit }
 
 snippet_edit:
     pattern: /cms/snippets/{id}/edit
@@ -116,11 +116,11 @@ snippet_remove:
 # Media routing
 media_new:
     pattern: /cms/medias/new
-    defaults: { _controller: TheodoThothCmsBundle:Media:new }
+    defaults: { _controller: TheodoThothCmsBundle:Media:edit, id: null }
 
 media_update:
     pattern: /cms/medias/{id}
-    defaults: { _controller: TheodoThothCmsBundle:Media:update }
+    defaults: { _controller: TheodoThothCmsBundle:Media:edit }
 
 media_edit:
     pattern: /cms/medias/{id}/edit

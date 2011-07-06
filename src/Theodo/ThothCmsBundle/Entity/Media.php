@@ -206,6 +206,6 @@ class Media
 
     public static function getUploadRootDir()
     {
-      return 'uploads/';
+      return 'uploads';
     }
 }
