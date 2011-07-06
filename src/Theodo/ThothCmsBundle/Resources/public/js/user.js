@@ -15,14 +15,14 @@ var initChangePassswordListener = function ()
   jQuery('#change-password-link').bind('click', function (event)
   {
     event.preventDefault();
-    
+
     showPassword();
   });
-  
+
   jQuery('#cancel-change-password-link').bind('click', function (event)
   {
     event.preventDefault();
-    
+
     hidePassword();
   });
 }
@@ -38,7 +38,7 @@ var showPassword = function ()
   // Hide change password link
   jQuery('#display_password').removeClass('display');
   jQuery('#display_password').addClass('hide');
-  
+
   // Show password inputs
   jQuery('.change-password').removeClass('hide');
   jQuery('.change-password').addClass('display');
