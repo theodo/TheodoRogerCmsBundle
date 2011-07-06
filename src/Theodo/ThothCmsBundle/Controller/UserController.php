@@ -271,6 +271,7 @@ class UserController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-24
      * @since 2011-06-29 cyrillej (setLocale)
+     * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
     public function preferencesUpdateAction()
     {
@@ -283,9 +284,6 @@ class UserController extends Controller
 
         // Create form
         $form = $this->createForm(new UserPreferencesType(false), $user);
-
-        // Initialize form hasErros
-        $hasErrors = false;
 
         // Request is post
         if ($request->getMethod() == 'POST')
@@ -328,14 +326,12 @@ class UserController extends Controller
             {
                 // Set error
                 $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update your preferences due some errors'));
-                $hasErrors = true;
             }
         }
 
         return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
             'user'      => $user,
             'form'      => $form->createView(),
-            'hasErrors' => $hasErrors
         ));
     }
 

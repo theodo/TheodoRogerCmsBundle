@@ -16,7 +16,7 @@
 {% form_theme form 'TheodoThothCmsBundle:Form:form_custom_layout.html.twig' %}
 
 {% block content %}
-    {% if page is defined %} 
+    {% if page is defined %}
     <h1>{% trans %}Edit Page{% endtrans %}</h1>
     <form id="new_page" action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% elseif parent_page == 'homepage' %}

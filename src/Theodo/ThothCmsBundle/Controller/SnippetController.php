@@ -77,15 +77,13 @@ class SnippetController extends Controller
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
+     * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
     public function updateAction($id)
     {
         $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
-
-        // Initialize form hasErros
-        $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -108,10 +106,6 @@ class SnippetController extends Controller
 
                 return $redirect;
             }
-            else
-            {
-                $hasErrors = true;
-            }
         }
 
         return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
@@ -119,7 +113,6 @@ class SnippetController extends Controller
                     'title' => 'Edition '.$snippet->getName(),
                     'snippet' => $snippet,
                     'form' => $form->createView(),
-                    'hasErrors' => $hasErrors
                   )
                 );
     }

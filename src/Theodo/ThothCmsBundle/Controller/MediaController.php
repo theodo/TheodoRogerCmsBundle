@@ -85,15 +85,13 @@ class MediaController extends Controller
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
+     * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
     public function updateAction($id)
     {
         $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
         $form = $this->createForm(new MediaType(), $media);
         $request = $this->get('request');
-
-        // Initialize form hasErros
-        $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -117,10 +115,6 @@ class MediaController extends Controller
 
                 return $redirect;
             }
-            else
-            {
-                $hasErrors = true;
-            }
         }
 
         return $this->render('TheodoThothCmsBundle:Media:edit.html.twig',
@@ -128,7 +122,6 @@ class MediaController extends Controller
                     'title' => 'Edit '.$media->getName(),
                     'media' => $media,
                     'form' => $form->createView(),
-                    'hasErrors' => $hasErrors
                   )
                 );
     }
