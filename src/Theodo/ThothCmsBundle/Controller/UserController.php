@@ -22,6 +22,17 @@ use Theodo\ThothCmsBundle\Entity\User;
 class UserController extends Controller
 {
     /**
+     *
+     * @return UserRepository
+     * @author fabricbe
+     * @since 2011-07-08
+     */
+    public function getUserRepository()
+    {
+        return $this->getEntityManager()->getRepository('TheodoThothCmsBundle:User');
+    }
+
+    /**
      * Access denied action
      *
      * @return Response
@@ -115,7 +126,7 @@ class UserController extends Controller
     public function listAction()
     {
         // Retrieve users
-        $users = $this->get('thoth.content_repository')->findAll('user');
+        $users = $this->getUserRepository()->findAll('user');
 
         return $this->render('TheodoThothCmsBundle:User:list.html.twig', array(
             'users' => $users,
@@ -137,12 +148,14 @@ class UserController extends Controller
         $request = $this->get('request');
 
         // Retrieve users
-        $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
+        $user = $this->getUserRepository()->findOneById($id, 'user');
 
         // Request is post
         if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin()) {
             // Delete page
-            $this->get('thoth.content_repository')->remove($user);
+
+            $this->getEntityManager()->remove($user);
+            $this->getEntityManager()->flush();
 
             // Set notice
             $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been removed', array('%user%' => $user->getName())));
@@ -178,7 +191,7 @@ class UserController extends Controller
             $user = $this->get('security.context')->getToken()->getUser();
         }
         else if ($id) {
-            $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
+            $user = $this->getUserRepository()->findOneById($id, 'user');
         }
 
         return $user;
@@ -308,7 +321,8 @@ class UserController extends Controller
                     $user->setPassword($old_password);
                 }
 
-                $this->get('thoth.content_repository')->save($user);
+                $this->getEntityManager()->persist($user);
+                $this->getEntityManager()->flush();
 
                 // Set locale
                 if ($self) {
