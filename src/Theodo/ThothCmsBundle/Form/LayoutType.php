@@ -14,7 +14,7 @@ class LayoutType extends AbstractType
     {
         $builder->add('id', 'hidden');
         $builder->add('name', 'text', array('required' => true));
-        $builder->add('content', 'textarea', array('required' => true));
+        $builder->add('content', 'textarea', array('required' => false));
     }
 
     public function getDefaultOptions(array $options)

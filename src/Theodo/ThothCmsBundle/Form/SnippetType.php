@@ -14,7 +14,7 @@ class SnippetType extends AbstractType
     {
         $builder->add('id', 'hidden');
         $builder->add('name', 'text', array('required' => true));
-        $builder->add('content', 'textarea', array('required' => true));
+        $builder->add('content', 'textarea', array('required' => false));
         $builder->add('cacheable', 'checkbox', array('required' => false));
         $builder->add('public', 'checkbox', array('required' => false));
         $builder->add('lifetime', 'text', array('required' => false));
