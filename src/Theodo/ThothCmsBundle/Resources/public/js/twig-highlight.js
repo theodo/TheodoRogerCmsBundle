@@ -9,11 +9,4 @@ jQuery(document).ready(function ()
 			,language: "en"
 			,syntax: "php"
 		});
-
-  // hack to bypass a strange bug with editArea on some versions of Chrome
-  jQuery('#' + form_id).submit(function() {
-    jQuery('#' + textarea_id).val(editAreaLoader.getValue(textarea_id));
-    return true;
-  });
-
 });
