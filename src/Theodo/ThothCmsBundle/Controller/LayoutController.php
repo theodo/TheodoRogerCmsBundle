@@ -20,6 +20,8 @@ class LayoutController extends Controller
     /**
      * Layout list
      *
+     * @return Response
+     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
@@ -35,6 +37,9 @@ class LayoutController extends Controller
     /**
      * Layout edit
      *
+     * @param integer $id
+     * @return Response
+     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
@@ -46,6 +51,7 @@ class LayoutController extends Controller
         if ($id) {
             $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
         }
+
         $form = $this->createForm(new LayoutType(), $layout);
         $request = $this->get('request');
 
@@ -83,11 +89,13 @@ class LayoutController extends Controller
     }
 
     /**
-     * Supprime un layout
+     * Layout remove
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
-     * @param integer $id
      */
     public function removeAction($id)
     {
