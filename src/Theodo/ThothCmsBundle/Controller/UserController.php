@@ -24,6 +24,8 @@ class UserController extends Controller
     /**
      * Access denied action
      *
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-28
      */
@@ -37,6 +39,8 @@ class UserController extends Controller
 
     /**
      * Check user language
+     *
+     * @return Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-28
@@ -54,6 +58,8 @@ class UserController extends Controller
 
     /**
      * Login action
+     *
+     * @return Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
@@ -83,6 +89,8 @@ class UserController extends Controller
     /**
      * User box
      *
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-24
      */
@@ -99,6 +107,8 @@ class UserController extends Controller
     /**
      * List user action
      *
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
@@ -114,6 +124,9 @@ class UserController extends Controller
 
     /**
      * Remove user action
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
@@ -150,6 +163,10 @@ class UserController extends Controller
     /**
      * Retrieve user
      *
+     * @param integer $id
+     * @param boolean $self
+     * @return User
+     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-07
      */
@@ -161,7 +178,7 @@ class UserController extends Controller
             $user = $this->get('security.context')->getToken()->getUser();
         }
         else if ($id) {
-            $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
+            $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
         }
 
         return $user;
@@ -169,6 +186,10 @@ class UserController extends Controller
 
     /**
      * Set the success flash message
+     *
+     * @param integer $id
+     * @param boolean $self
+     * @param User $user
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-07
@@ -191,6 +212,10 @@ class UserController extends Controller
     /**
      * Set the error flash message
      *
+     * @param integer $id
+     * @param boolean $self
+     * @param Form $form
+     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-07
      */
@@ -205,13 +230,13 @@ class UserController extends Controller
         // Set error
         if ($self) {
             $message = $this->get('translator')->trans(
-                    'Can not update your preferences due some errors%errors%',
+                    'Can not update your preferences due to some errors%errors%',
                     array(
                         '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
                      )
               );
         }
-        else if ($id == null) {
+        else if (!$id) {
             $message = $this->get('translator')->trans(
                     'Can not save user due to some errors%errors%',
                      array(
@@ -235,7 +260,10 @@ class UserController extends Controller
     /**
      * Edit user
      *
-     * @return string
+     * @param integer $id
+     * @param boolean $self
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      * @since 2011-07-06 mathieud (refactoring)
