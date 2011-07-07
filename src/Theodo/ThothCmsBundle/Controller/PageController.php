@@ -18,10 +18,12 @@ use Theodo\ThothCmsBundle\Entity\Page;
 
 class PageController extends Controller
 {
+
     /**
      * List pages
      *
-     * @return string
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
@@ -33,94 +35,22 @@ class PageController extends Controller
         return $this->render('TheodoThothCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
 
-    /**
-     * New page action
-     *
-     * @return string
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
-     */
-    public function newAction($id)
-    {
-        // Retrieve request
-        $request = $this->getRequest();
-
-        // Retrieve parent page
-        $parent_page = $this->get('thoth.content_repository')->findOneById($id);
-
-        // Create new page
-        $page = new Page();
-
-        // Create the homepage
-        if ($parent_page)
-        {
-            $page->setParentId($parent_page->getId());
-            $page->setParent($parent_page);
-        }
-        else
-        {
-            $parent_page = 'homepage';
-        }
-
-        // Initialize form hasErros
-        $hasErrors = false;
-
-        // Create form
-        $form = $this->createForm(new PageType(), $page);
-
-        // Request is post, bind and save form
-        if ($request->getMethod() == 'POST')
-        {
-            // Bind form
-            $form->bindRequest($request);
-
-            // Check form
-            if ($form->isValid())
-            {
-                // Perform some action, such as save the object to the database
-                $page = $form->getData();
-                $this->get('thoth.content_repository')->save($page);
-                
-                $this->get('thoth.caching')->warmup('page:'.$page->getName());
-
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('page_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
-                }
-
-                return $redirect;
-            }
-            else
-            {
-                $hasErrors = true;
-            }
-        }
-
-        return $this->render(
-            'TheodoThothCmsBundle:Page:edit.html.twig',
-            array(
-                'form'        => $form->createView(),
-                'parent_page' => $parent_page,
-                'hasErrors'   => $hasErrors,
-                'isNew'       => true
-            )
-        );
-    }
 
     /**
      * Edit page action
      *
-     * @return string
+     * @param integer $id
+     * @param integer $parent_id
+     *
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
      */
     public function editAction($id = null, $parent_id = null)
     {
-        // Retrieve page
-        // create page
-        if ($id == null) {
+        // new page
+        if (!$id) {
             $page = new Page();
             $parent_page = $this->get('thoth.content_repository')->findOneById($parent_id);
             // Create the homepage
@@ -148,8 +78,7 @@ class PageController extends Controller
         $hasErrors = false;
 
         // Request is post
-        if ($request->getMethod() == 'POST')
-        {
+        if ($request->getMethod() == 'POST') {
             // Bind form
             $form->bindRequest($request);
 
@@ -161,7 +90,7 @@ class PageController extends Controller
 
                 $page = $form->getData();
                 $this->get('thoth.content_repository')->save($page);
-                
+
                 $this->get('thoth.caching')->warmup('page:'.$page->getName());
 
                 // Set redirect route
@@ -193,7 +122,9 @@ class PageController extends Controller
     /**
      * Remove page action
      *
-     * @return string
+     * @param integer $id
+     * @return Response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
      */
@@ -206,12 +137,11 @@ class PageController extends Controller
         $page = $this->get('thoth.content_repository')->findOneById($id);
 
         // Request is post
-        if ($request->getMethod() == 'POST')
-        {
+        if ($request->getMethod() == 'POST') {
             // Delete page
             $this->get('thoth.content_repository')->remove($page);
 
-            return $redirect = $this->redirect($this->generateUrl('page_list'));
+            return $this->redirect($this->generateUrl('page_list'));
         }
 
         return $this->render(
@@ -225,7 +155,9 @@ class PageController extends Controller
     /**
      * Expand page action
      *
-     * @return string
+     * @param integer $id
+     * @return response
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
      */
@@ -248,6 +180,9 @@ class PageController extends Controller
 
     /**
      * Site map action
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
