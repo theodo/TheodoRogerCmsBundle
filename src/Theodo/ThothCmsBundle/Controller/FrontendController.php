@@ -103,7 +103,11 @@ class FrontendController extends Controller
             // return the 304 Response immediately
             return $response;
         } else {
-            return $this->get('thoth.templating')->renderResponse('snippet:'.$snippet->getName(), array('snippet' => $snippet), $response);
+            $args = array_merge(array('snippet' => $snippet), $attributes);
+            return $this->get('thoth.templating')->renderResponse(
+                    'snippet:'.$snippet->getName(),
+                    $args,
+                    $response);
         }
     }
 }
