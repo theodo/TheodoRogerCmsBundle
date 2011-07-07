@@ -19,6 +19,8 @@ class MediaController extends Controller
     /**
      * Media list
      *
+     * @return Response
+     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-01
      */
@@ -33,6 +35,9 @@ class MediaController extends Controller
 
     /**
      * Media edit
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -81,11 +86,13 @@ class MediaController extends Controller
     }
 
     /**
-     * Supprime un media
+     * Media remove
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
-     * @param integer $id
      */
     public function removeAction($id)
     {
