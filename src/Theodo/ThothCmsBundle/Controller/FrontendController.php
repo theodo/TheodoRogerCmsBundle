@@ -23,31 +23,37 @@ use Twig_Loader_Array;
 
 class FrontendController extends Controller
 {
+
     /**
-     * Create and configure the response
+     * Configures the caching settings of the response
+     *
+     * @param object $object
+     * @param Response $response
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-07
      */
-  public function configureCache($object, $response)
-  {
-        // Handle HTTP Cache
-        $date = $object->getUpdatedAt();
-
+    public function configureCache($object, Response $response)
+    {
         if ($object->getPublic()) {
             $response->setPublic();
             $response->setSharedMaxAge($object->getLifeTime());
         }
         if ($object->getCacheable()) {
-            $response->setLastModified($date);
+            $response->setLastModified($object->getUpdatedAt());
         }
         $response->setMaxAge($object->getLifeTime());
 
         return $response;
-  }
+    }
+
 
     /**
-     * Page display
+     * Displays a Thoth page
+     *
+     * @param string $slug
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
@@ -78,22 +84,31 @@ class FrontendController extends Controller
 
         $response = $this->configureCache($page, $response);
 
-        if ($page->getCacheable() && $response->isNotModified($this->get('request'))) {
+        if ($response->isNotModified($this->get('request'))) {
             // return the 304 Response immediately
             return $response;
         }
 
         $response->headers->set('Content-Type', $page->getContentType());
 
-        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array(), $response);
+        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
     }
 
+    /**
+     * Displays a Thoth snippet to support ESI
+     *
+     * @param string $name
+     * @param array $attributes
+     * @return Response
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-06-21
+     */
     public function snippetAction($name, $attributes = array())
     {
         $snippet = $this->get('thoth.content_repository')->findOneByName($name, 'snippet');
 
-        if (!$snippet)
-        {
+        if (!$snippet) {
               throw $this->createNotFoundException();
         }
 
