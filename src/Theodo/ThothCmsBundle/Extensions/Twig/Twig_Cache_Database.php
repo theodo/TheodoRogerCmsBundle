@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions;
+namespace Theodo\ThothCmsBundle\Extensions\Twig;
 
 use Twig_Environment;
 use Twig_Function_Method;

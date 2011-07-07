@@ -164,6 +164,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
         $page->setSlug('content-entity-repository');
         $page->setContentType('text/html');
         $page->setCacheable(true);
+        $page->setPublic(false);
 
         // Save the page
         $this->getContentRepository()->create($page);

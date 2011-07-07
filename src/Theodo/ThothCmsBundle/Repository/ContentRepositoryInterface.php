@@ -12,5 +12,6 @@ interface ContentRepositoryInterface
     public function create($object = null);
     public function save($object = null);
     public function findOneById($id, $type = 'page');
+    public function findOneByName($id, $type);
     public function findAll($type = 'page');
 }

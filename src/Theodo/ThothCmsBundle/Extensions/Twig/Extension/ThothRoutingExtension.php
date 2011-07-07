@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions;
+namespace Theodo\ThothCmsBundle\Extensions\Twig\Extension;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\EntityManager;

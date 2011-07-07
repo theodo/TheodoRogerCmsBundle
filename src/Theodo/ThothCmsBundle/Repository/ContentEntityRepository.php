@@ -144,6 +144,21 @@ class ContentEntityRepository implements ContentRepositoryInterface
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-05
      */
+    public function getSnippetByName($name)
+    {
+        $snippet = $this->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:Snippet')
+                ->findOneByName($name);
+
+        return $snippet;
+    }
+
+    /**
+     * Save object
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-05
+     */
     public function save($object = null)
     {
         // Check object
@@ -158,7 +173,23 @@ class ContentEntityRepository implements ContentRepositoryInterface
     }
 
     /**
-     * Retrieve object
+     * Retrieve object by name
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
+     */
+    public function findOneByName($name, $type)
+    {
+        // Retrieve the object
+        $object = $this->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
+                ->findOneByName($name);
+
+        return $object;
+    }
+
+    /**
+     * Retrieve object by id
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-07-05

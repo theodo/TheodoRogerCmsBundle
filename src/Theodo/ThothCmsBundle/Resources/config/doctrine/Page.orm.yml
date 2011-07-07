@@ -34,7 +34,11 @@ Theodo\ThothCmsBundle\Entity\Page:
             length: 127
         cacheable:
             type: boolean
-            default: false
+        public:
+            type: boolean
+        lifetime:
+            type: integer
+            nullable: true
         published_at:
             type: date
             nullable: true
