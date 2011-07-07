@@ -85,7 +85,7 @@ class FrontendController extends Controller
 
         $response->headers->set('Content-Type', $page->getContentType());
 
-        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
+        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array(), $response);
     }
 
     public function snippetAction($name, $attributes = array())
@@ -103,10 +103,9 @@ class FrontendController extends Controller
             // return the 304 Response immediately
             return $response;
         } else {
-            $args = array_merge(array('snippet' => $snippet), $attributes);
             return $this->get('thoth.templating')->renderResponse(
                     'snippet:'.$snippet->getName(),
-                    $args,
+                    $attributes,
                     $response);
         }
     }
