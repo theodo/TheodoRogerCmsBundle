@@ -220,15 +220,15 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*cms\/users\/new$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*New User.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*Can not save user due some errors*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Can not save user due to some errors*/', $client->getResponse()->getContent());
 
         // Submit valid form
         $crawler = $client->submit($form, array(
             'user[name]' => 'User de test',
             'user[username]' => 'userdetest',
             'user[email]' => 'userdetest@theodo.fr',
-            'user[password]' => 'testpwd',
-            'user[password_confirm]' => 'testpwd',
+            'user[password][first]' => 'testpwd',
+            'user[password][second]' => 'testpwd',
             'user[user_roles][1]' => true,
             'user[user_roles][2]' => true,
             'user[user_roles][3]' => true,

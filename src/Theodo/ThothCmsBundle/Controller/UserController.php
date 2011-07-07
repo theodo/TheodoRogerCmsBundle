@@ -148,67 +148,88 @@ class UserController extends Controller
     }
 
     /**
-     * Edit user preferences
+     * Retrieve user
      *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date 2011-06-24
-     * @since 2011-06-29 cyrillej (setLocale)
-     * @since 2011-07-06 mathieud ($hasErrors deleted + refactoring)
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
      */
-    public function preferencesEditAction()
+    public function retrieveUser($id, $self)
     {
-        // Retrieve connected user
-        $user = $this->get('security.context')->getToken()->getUser();
-        $user_password = $user->getPassword();
-
-        // Create form
-        $form = $this->createForm(new UserPreferencesType(false), $user);
-
-        // Retrieve request
-        $request = $this->get('request');
-
-        // Request is post
-        if ($request->getMethod() == 'POST') {
-            // Bind form
-            $form->bindRequest($request);
-
-            // Check form and save object
-            if ($form->isValid()) {
-                $user = $form->getData();
-
-                // Check password update
-                if ($user->getPassword() && $user_password != $user->getPassword()) {
-                    // Encode password
-                    if ($user->getPassword() && $user->getPasswordConfirm()) {
-                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                        $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                        $user->setPassword($password);
-                    }
-                }
-                else {
-                    $user->setPassword($user_password);
-                }
-
-                $this->get('thoth.content_repository')->save($user);
-
-                // Set locale
-                $this->get('session')->setLocale($user->getLanguage());
-                
-                // Set success message
-                $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
-
-                return $this->redirect($this->generateUrl('user_preferences'));
-            }
-            else {
-                // Set error message
-                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update your preferences due some errors'));
-            }
+        $user = new User();
+        $user->setSalt(md5(time()));
+        if ($self) {
+            $user = $this->get('security.context')->getToken()->getUser();
+        }
+        else if ($id) {
+            $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
         }
 
-        return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
-            'user'      => $user,
-            'form'      => $form->createView(),
-        ));
+        return $user;
+    }
+
+    /**
+     * Set the success flash message
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
+     */
+    public function setEditSuccessSession($id, $self, $user)
+    {
+        if ($self) {
+            // Set success message
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
+        }
+        // Set notice
+        else if ($id == null) {
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
+        }
+        else {
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));
+        }
+    }
+
+    /**
+     * Set the error flash message
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
+     */
+    public function setEditErrorMessage($id, $self, $form)
+    {
+        // Construct errors
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
+        }
+
+        // Set error
+        if ($self) {
+            $message = $this->get('translator')->trans(
+                    'Can not update your preferences due some errors%errors%',
+                    array(
+                        '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                     )
+              );
+        }
+        else if ($id == null) {
+            $message = $this->get('translator')->trans(
+                    'Can not save user due to some errors%errors%',
+                     array(
+                        '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                     )
+                );
+        }
+        else {
+            $message = $this->get('translator')->trans(
+                    'Can not save user %user% due to some errors%errors%',
+                     array(
+                        '%user' => $user->getName(),
+                        '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                     )
+                );
+        }
+
+        $this->get('session')->setFlash('error', $message);
     }
 
     /**
@@ -219,15 +240,15 @@ class UserController extends Controller
      * @since 2011-06-27
      * @since 2011-07-06 mathieud (refactoring)
      */
-    public function editAction($id)
+    public function editAction($id, $self)
     {
         // Retrieve user
-        $user = new User();
-        $user->setSalt(md5(time()));
-        $old_password = null;
-        if ($id) {
-            $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
-            $old_password = $user->getPassword();
+        $user = $this->retrieveUser($id, $self);
+        $old_password = $user->getPassword();
+
+        $action = 'edit';
+        if ($self) {
+            $action = 'preferences';
         }
 
         // Create form
@@ -245,10 +266,11 @@ class UserController extends Controller
             if ($form->isValid()) {
                 $user = $form->getData();
 
+                // TODO FOSUserBundle
                 // Check password update
                 if ($user->getPassword() && $old_password != $user->getPassword()) {
                     // Encode password
-                    if ($user->getPassword() && $user->getPasswordConfirm()) {
+                    if ($user->getPassword()) {
                         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                         $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                         $user->setPassword($password);
@@ -260,52 +282,24 @@ class UserController extends Controller
 
                 $this->get('thoth.content_repository')->save($user);
 
-                // Set notice
-                if ($old_password == null) {
-                    $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
-                }
-                else {
-                    $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));
+                // Set locale
+                if ($self) {
+                    $this->get('session')->setLocale($user->getLanguage());
                 }
 
-                return $this->redirect($this->generateUrl('user_edit', array('id' => $user->getId())));
+                // Set success flash message
+                $this->setEditSuccessSession($id, $self, $user);
+
+                return $this->redirect($this->generateUrl('user_'.$action, array('id' => $user->getId())));
             }
             else {
-                // Construct errors
-                $errors = array();
-                foreach ($form->getErrors() as $error) {
-                    array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
-                }
-
-                // Set error
-                if ($old_password == null) {
-                    $this->get('session')->setFlash(
-                        'error',
-                        $this->get('translator')->trans(
-                            'Can not save user due some errors%errors%',
-                             array(
-                                '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
-                             )
-                        )
-                    );
-                }
-                else {
-                    $this->get('session')->setFlash(
-                        'error',
-                        $this->get('translator')->trans(
-                            'Can not save user %user% due some errors%errors%',
-                             array(
-                                '%user' => $user->getName(),
-                                '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
-                             )
-                        )
-                    );
-                }
+                // Set error flash message
+                $this->setEditErrorMessage($id, $self, $form);
             }
         }
 
         return $this->render(
-            'TheodoThothCmsBundle:User:edit.html.twig',
+            'TheodoThothCmsBundle:User:'.$action.'.html.twig',
             array(
                 'form'      => $form->createView(),
                 'user'      => $user

@@ -20,11 +20,11 @@ user_list:
 
 user_edit:
     pattern:  /cms/users/{id}/edit
-    defaults: { _controller: TheodoThothCmsBundle:User:edit }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit, self: false }
 
 user_new:
     pattern:  /cms/users/new
-    defaults: { _controller: TheodoThothCmsBundle:User:edit, id: null }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit, id: null, self: false }
 
 user_remove:
     pattern:  /cms/users/{id}/remove
@@ -32,15 +32,15 @@ user_remove:
 
 user_preferences:
     pattern:  /cms/preferences/edit
-    defaults: { _controller: TheodoThothCmsBundle:User:preferencesEdit }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit, id: null, self: true }
 
 user_preferencesUpdate:
     pattern:  /cms/preferences/update
-    defaults: { _controller: TheodoThothCmsBundle:User:preferencesEdit }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit, id: null, self: true }
 
 user_update:
     pattern:  /cms/users/{id}/update
-    defaults: { _controller: TheodoThothCmsBundle:User:edit }
+    defaults: { _controller: TheodoThothCmsBundle:User:edit, self: false }
 
 user_checkSessionLocale:
     pattern:  /cms/check-session/{redirect_route}

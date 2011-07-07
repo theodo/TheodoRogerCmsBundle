@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Thoth CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Theodo\ThothCmsBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Reference;

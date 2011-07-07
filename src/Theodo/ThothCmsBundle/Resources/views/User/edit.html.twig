@@ -51,7 +51,7 @@
         <div class="set change-password {% if form_errors(form.password) or form_errors(form) or user.id is null  %}display{% else %}hide{% endif %}">
             <p>{{ form_row(form.password) }}</p>
             <p>
-                {{ form_row(form.password_confirm) }}
+                {#{{ form_row(form.password_confirm) }}#}
 
                 {% if user.id is not null  %}
                     <span>

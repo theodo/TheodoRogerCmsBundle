@@ -38,12 +38,12 @@
 
         <div class="set change-password {% if form_errors(form.password) or form_errors(form) %}display{% else %}hide{% endif %}">
             <p>{{ form_row(form.password) }}</p>
-            <p>
+            {#<p>
                 {{ form_row(form.password_confirm) }}
                 <span>
                     {% trans %} or {% endtrans %}
                     <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
-                </span>
+                </span>#}
             </p>
         </div>
         

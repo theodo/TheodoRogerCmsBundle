@@ -390,8 +390,8 @@ class User implements UserInterface
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('email'))));
 
         // Password validator : not blank and match to confirmation
-        $metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
-        $metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
+        //$metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
+        //$metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
         
         // Role validator
         $metadata->addGetterConstraint('validRole', new Min(array('limit' => 1, 'message' => 'The user must have at least one role')));
