@@ -74,7 +74,7 @@ var hideChildren = function (node)
 
   // Update expand picture
   node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/expand.png" />');
-  
+
   // remove expanded class
   node.removeClass('expanded');
 
@@ -149,7 +149,7 @@ var loadInputNameListener = function ()
 {
   // Set listener on input
   jQuery('#page_name').bind('keyup', function ()
-  {    
+  {
     // Update breadcrumb value
     updateBreadcrumbValue();
 
@@ -199,3 +199,4 @@ var updateSlugValue = function ()
   // Update breadcrumb value
   jQuery('#page_slug').val(string_to_slug(jQuery('#page_name').val()));
 }
+
