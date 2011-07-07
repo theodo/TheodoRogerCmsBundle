@@ -24,78 +24,80 @@ use Twig_Loader_Array;
 class FrontendController extends Controller
 {
     /**
-     * Test for page display
+     * Create and configure the response
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
+     */
+  public function configureCache($object, $response)
+  {
+        // Handle HTTP Cache
+        $date = $object->getUpdatedAt();
+
+        if ($object->getPublic()) {
+            $response->setPublic();
+            $response->setSharedMaxAge($object->getLifeTime());
+        }
+        if ($object->getCacheable()) {
+            $response->setLastModified($date);
+        }
+        $response->setMaxAge($object->getLifeTime());
+
+        return $response;
+  }
+
+    /**
+     * Page display
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
      */
     public function pageAction($slug)
     {
-        if(!$slug)
-        {
+        // Get corresponding page
+        if(!$slug) {
             $page = $this->get('thoth.content_repository')->getHomepage();
         }
-        else
-        {
+        else {
             $slug = explode('/', $slug);
             $slug = $slug[count($slug) - 1];
             $page = $this->get('thoth.content_repository')->getPageBySlug($slug);
         }
 
-        if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus())
-        {
-            if (!$page = $this->get('thoth.content_repository')->getPageBySlug('error404'))
-            {
-                throw $this->createNotFoundException();
-            }
-        }
-
-        $date = $page->getUpdatedAt();
         // Initialize new response
         $response = new Response();
-        // Set cache settings
-        if ($page->getPublic())
-        {
-            $response->setPublic();
-            $response->setSharedMaxAge($page->getLifeTime());
+
+        // Handle 404
+        if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus()) {
+            $page = $this->get('thoth.content_repository')->getPageBySlug('error404');
+            if (!$page) {
+                throw $this->createNotFoundException();
+            }
+            $response->setStatusCode(404);
         }
-        // TODO before dbrequest
-        if ($page->getCacheable())
-        {
-            $response->setLastModified($date);
-        }
-        $response->setMaxAge($page->getLifeTime());
+
+        $response = $this->configureCache($page, $response);
 
         if ($page->getCacheable() && $response->isNotModified($this->get('request'))) {
             // return the 304 Response immediately
             return $response;
-        } else {
-            // Set content type
-            $response->headers->set('Content-Type', $page->getContentType());
-            return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
         }
+
+        $response->headers->set('Content-Type', $page->getContentType());
+
+        return $this->get('thoth.templating')->renderResponse('page:'.$page->getName(), array('page' => $page), $response);
     }
 
-    public function snippetAction($name)
+    public function snippetAction($name, $attributes = array())
     {
-        $snippet = $this->get('thoth.content_repository')->getSnippetByName($name);
+        $snippet = $this->get('thoth.content_repository')->findOneByName($name, 'snippet');
 
         if (!$snippet)
         {
               throw $this->createNotFoundException();
         }
 
-        $date = $snippet->getUpdatedAt();
-        // Initialize new response
-        $response = new Response();
-        // Set cache settings in one call
-        // TODO user defined ?
-        /*$response->setCache(array(
-            'last_modified' => $date,
-            'public'        => true,
-        ));*/
-        // esi test
-        $response->setSharedMaxAge(30);
+        $response = $this->configureCache($snippet, new Response());
 
         if ($response->isNotModified($this->get('request'))) {
             // return the 304 Response immediately

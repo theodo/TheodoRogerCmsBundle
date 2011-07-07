@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Min;
 
 use Theodo\ThothCmsBundle\Validator\TwigSyntax;
 
@@ -91,21 +93,6 @@ class Snippet
     }
 
     /**
-     * Snippet validator
-     *
-     * 
-     */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {        
-        // Name validator: not null
-        $metadata->addPropertyConstraint('name', new NotBlank());
-        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
-
-        // Content validator: not null
-        $metadata->addPropertyConstraint('content', new NotBlank());
-        $metadata->addPropertyConstraint('content', new TwigSyntax());
-    }
-    /**
      * @var datetime $created_at
      */
     private $created_at;
@@ -154,5 +141,99 @@ class Snippet
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+    /**
+     * @var boolean $cacheable
+     */
+    private $cacheable;
+
+    /**
+     * @var boolean $public
+     */
+    private $public;
+
+    /**
+     * @var integer $lifetime
+     */
+    private $lifetime;
+
+
+    /**
+     * Set cacheable
+     *
+     * @param boolean $cacheable
+     */
+    public function setCacheable($cacheable)
+    {
+        $this->cacheable = $cacheable;
+    }
+
+    /**
+     * Get cacheable
+     *
+     * @return boolean 
+     */
+    public function getCacheable()
+    {
+        return $this->cacheable;
+    }
+
+    /**
+     * Set public
+     *
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * Get public
+     *
+     * @return boolean 
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Set lifetime
+     *
+     * @param integer $lifetime
+     */
+    public function setLifetime($lifetime)
+    {
+        $this->lifetime = $lifetime;
+    }
+
+    /**
+     * Get lifetime
+     *
+     * @return integer 
+     */
+    public function getLifetime()
+    {
+        return $this->lifetime;
+    }
+
+        /**
+     * Snippet validator
+     *
+     * 
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
+
+        // Content validator: not null
+        $metadata->addPropertyConstraint('content', new NotBlank());
+        $metadata->addPropertyConstraint('content', new TwigSyntax());
+
+        //$metadata->addPropertyConstraint('lifetime', new Type(array('type' => 'Numeric')));
+        //$metadata->addPropertyConstraint('lifetime', new Min(array('limit' => 0)));
     }
 }

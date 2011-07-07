@@ -18,6 +18,8 @@ class SnippetData implements FixtureInterface
 Bonsoir !
 EOF
 );
+        $snippet1->setCacheable(true);
+        $snippet1->setPublic(false);
         $manager->persist($snippet1);
 
         $snippet2 = new Snippet();
@@ -26,6 +28,8 @@ EOF
  <a id="theodo-link" href="http://localhost:4042/theodo">Theodo</a>
 EOF
 );
+        $snippet2->setCacheable(false);
+        $snippet2->setPublic(false);
         $manager->persist($snippet2);
 
         // Save snippet

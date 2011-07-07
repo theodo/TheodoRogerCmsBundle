@@ -12,6 +12,13 @@ Theodo\ThothCmsBundle\Entity\Snippet:
             unique: true
         content:
             type: text
+        cacheable:
+            type: boolean
+        public:
+            type: boolean
+        lifetime:
+            type: integer
+            nullable: true
         created_at:
             type: datetime
             gedmo:

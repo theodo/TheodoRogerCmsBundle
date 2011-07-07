@@ -452,7 +452,6 @@ class Page
     }
 
     /**
-<<<<<<< HEAD
      * @var integer $lifetime
      */
     private $lifetime;
