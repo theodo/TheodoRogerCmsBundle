@@ -20,6 +20,8 @@ class SnippetController extends Controller
     /**
      * Snippet list
      *
+     * @return Response
+     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
@@ -34,6 +36,9 @@ class SnippetController extends Controller
 
     /**
      * Snippet edit
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -52,8 +57,7 @@ class SnippetController extends Controller
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
 
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 // remove twig cached file
                 if ($snippet) {
                     $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
@@ -67,8 +71,7 @@ class SnippetController extends Controller
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
-                if ($request->get('save-and-edit'))
-                {
+                if ($request->get('save-and-edit')) {
                     $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
                 }
 
@@ -85,11 +88,13 @@ class SnippetController extends Controller
     }
 
     /**
-     * Supprime un snippet
+     * Snippet delete
+     *
+     * @param integer $id
+     * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
-     * @param integer $id
      */
     public function removeAction($id)
     {
