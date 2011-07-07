@@ -12,10 +12,6 @@ Theodo\ThothCmsBundle\Entity\Layout:
             unique: true
         content:
             type: text
-        content_type:
-            type: string
-            length: 255
-            nullable: true
         created_at:
             type: datetime
             gedmo:

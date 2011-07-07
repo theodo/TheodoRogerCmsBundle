@@ -167,6 +167,11 @@ span.info, span.error
   color: red;
 }
 
+.display-ib
+{
+  display: inline-block;
+}
+
 table
 {
   border-collapse: collapse;
@@ -581,7 +586,7 @@ img.avatar.avatar_32x32
   font-size: 85%;
   padding: 0 15px 0 10px !important;
   whitespace: nowrap;
-  width: 1%;
+  width: 7%;
   vertical-align: middle;
   text-align: left;
 }
@@ -590,14 +595,20 @@ img.avatar.avatar_32x32
 {
   padding-left: 0px;
   padding-right: 10px;
-  text-align: right;
+  text-align: left;
   width: auto;
 }
 
-.drawer_contents table.fieldset td.field input.textbox
+.drawer_contents table.fieldset td.field input.textbox,
+.drawer_contents table.fieldset td.field select
 {
   font-size: 110%;
   width: 99.5%;
+}
+
+.drawer_contents table.fieldset td.field select
+{
+  width: 19.5%;
 }
 
 .drawer_contents table.fieldset td.actions
@@ -840,9 +851,9 @@ body.reversed #content .box
 
 body.single_form #content #single_form
 {
-  background: #f5f1e2 url(/bundles/theodothothcms/images/admin/vertical_tan_gradient.png) center -15px repeat-x;
-  border: 0.35em solid #efead3;
-  padding: 0.5em 1.5em;
+  background: #fff url(/bundles/theodothothcms/images/admin/thoth_bg_right_white.png) no-repeat 98% 100%;
+  border: 0.35em solid #cfe0ec;
+  padding: 1em 2em 2em;
   padding-right: 22px;
   position: relative;
   width: 28em;
@@ -854,7 +865,8 @@ body.single_form #content #single_form
 body.single_form #content #single_form h1
 {
   font-size: 140%;
-  margin: 0.75em 0 1.25em;
+  margin: 0.75em 0 2em;
+  color: #11649e;
 }
 
 body.single_form #content #single_form p
@@ -946,7 +958,7 @@ body.single_form #content #single_form span.forgot_password a:hover
 
 body.single_form #content #single_form .buttons
 {
-  margin: 1.75em 0 1em;
+  margin: 3em 0 1em;
 }
 
 body.single_form #content p.version
@@ -1054,6 +1066,18 @@ body.edit_personal_preferences #avatar p.caption
 #content table.index td.media
 {
   padding-left: 9px;
+}
+
+#content table.index .page .content_type
+{
+  font-size: 8px;
+  color: #000;
+  position: absolute;
+  width: 25px;
+  height:10px;
+  top: 3px;
+  text-align: center;
+  color: #11649e;
 }
 
 #content table.index td.user
@@ -1370,10 +1394,9 @@ body.reversed #content h1
 
 #actions
 {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  margin: -20px;
+  margin-bottom: 20px;
+  text-align: right;
   background: #777 url(/bundles/theodothothcms/images/admin/shadow_grey.png) repeat-x;
 }
 

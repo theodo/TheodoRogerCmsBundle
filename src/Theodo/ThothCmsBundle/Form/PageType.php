@@ -9,20 +9,7 @@ use Theodo\ThothCmsBundle\Entity\Page;
 use Theodo\ThothCmsBundle\Repository\PageRepository;
 
 class PageType extends AbstractType
-{
-    protected $is_new;
-
-    /**
-     * Form constructor
-     * 
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
-     */
-    public function __construct($is_new = true)
-    {
-        $this->is_new = $is_new;
-    }
-    
+{   
     /**
      * Form builder
      * 
@@ -51,7 +38,7 @@ class PageType extends AbstractType
         $builder->add('lifetime', 'text', array('required' => false));
         
         // Display published_at date only in edition
-        if (!$this->is_new)
+        if (null !== $options['data']->getId())
         {
             $builder->add('published_at', 'date', array('required' => false));
         }

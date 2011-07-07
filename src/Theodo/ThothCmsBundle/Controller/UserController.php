@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Symfony framework.
+ * This file is part of the Thoth CMS Bundle
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Theodo <contact@theodo.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -61,18 +61,15 @@ class UserController extends Controller
     public function loginAction()
     {
         // User already authenticated, redirect to page list
-        if($this->get('session')->has('_security_main'))
-        {
+        if($this->get('session')->has('_security_main')) {
             return $this->redirect($this->generateUrl('page_list'));
         }
 
         // Get the login error if there is one
-        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
-        {
+        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         }
-        else
-        {
+        else {
             $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
         }
 
@@ -107,113 +104,11 @@ class UserController extends Controller
      */
     public function listAction()
     {
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve users
-        $users = $em->getRepository('TheodoThothCmsBundle:User')->findAll();
+        $users = $this->get('thoth.content_repository')->findAll('user');
 
         return $this->render('TheodoThothCmsBundle:User:list.html.twig', array(
             'users' => $users,
-        ));
-    }
-
-    /**
-     * Edit user action
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date 2011-06-27
-     */
-    public function editAction()
-    {
-        // Retrieve request
-        $request = $this->get('request');
-
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
-        // Retrieve user
-        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
-
-        // Create form
-        $form = $this->createForm(new UserType(false), $user);
-
-        return $this->render('TheodoThothCmsBundle:User:edit.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView()
-        ));
-    }
-
-    /**
-     * New user action
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date 2011-06-27
-     */
-    public function newAction()
-    {
-        // Retrieve request
-        $request = $this->get('request');
-
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
-        // Retrieve user
-        $user = new User();
-        $user->setSalt(md5(time()));
-
-        // Create form
-        $form = $this->createForm(new UserType(), $user);
-
-        // Request is post, bind and save form
-        if ($request->getMethod() == 'POST')
-        {
-            // Bind form
-            $form->bindRequest($request);
-
-            // Check form
-            if ($form->isValid())
-            {
-                // Perform some action, such as save the object to the database
-                $user = $form->getData();
-
-                // Check password update
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                $user->setPassword($password);
-
-                $em->persist($user);
-                $em->flush();
-
-                // Set notice
-                $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
-
-                return $this->redirect($this->generateUrl('user_list'));
-            }
-            else
-            {
-                // Construct errors
-                $errors = array();
-                foreach ($form->getErrors() as $error)
-                {
-                    array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
-                }
-
-                // Set error
-                $this->get('session')->setFlash(
-                    'error',
-                    $this->get('translator')->trans(
-                        'Can not create user due some errors%errors%',
-                         array(
-                            '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
-                         )
-                    )
-                );
-            }
-        }
-
-        return $this->render('TheodoThothCmsBundle:User:edit.html.twig', array(
-            'form' => $form->createView()
         ));
     }
 
@@ -223,23 +118,18 @@ class UserController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date 2011-06-27
      */
-    public function removeAction()
+    public function removeAction($id)
     {
         // Retrieve request
         $request = $this->get('request');
 
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve users
-        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
+        $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
 
         // Request is post
-        if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin())
-        {
+        if ($request->getMethod() == 'POST' && !$user->getIsMainAdmin()) {
             // Delete page
-            $em->remove($user);
-            $em->flush();
+            $this->get('thoth.content_repository')->remove($user);
 
             // Set notice
             $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been removed', array('%user%' => $user->getName())));
@@ -248,8 +138,7 @@ class UserController extends Controller
         }
 
         // Set flash notice
-        if ($request->getMethod() == 'POST' && $user->getIsMainAdmin())
-        {
+        if ($request->getMethod() == 'POST' && $user->getIsMainAdmin()) {
             $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not remove main admin'));
         }
 
@@ -259,184 +148,158 @@ class UserController extends Controller
     }
 
     /**
-     * Edit user preferences
+     * Retrieve user
      *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date 2011-06-24
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
      */
-    public function preferencesAction()
+    public function retrieveUser($id, $self)
     {
-        // Retrieve connected user
-        $user = $this->get('security.context')->getToken()->getUser();
-
-        // Create form
-        $form = $this->createForm(new UserPreferencesType(false), $user);
-
-        return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Update user preferences
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since date 2011-06-24
-     * @since 2011-06-29 cyrillej (setLocale)
-     */
-    public function preferencesUpdateAction()
-    {
-        // Retrieve request
-        $request = $this->get('request');
-
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
-        // Retrieve connected user
-        $user = $this->get('security.context')->getToken()->getUser();
-        $user_password = $user->getPassword();
-
-        // Create form
-        $form = $this->createForm(new UserPreferencesType(false), $user);
-
-        // Initialize form hasErros
-        $hasErrors = false;
-
-        // Request is post
-        if ($request->getMethod() == 'POST')
-        {
-            // Bind form
-            $form->bindRequest($request);
-
-            // Check form and save object
-            if ($form->isValid())
-            {
-                $user = $form->getData();
-
-                // Check password update
-                if ($user->getPassword() && $user_password != $user->getPassword())
-                {
-                    // Encode password
-                    if ($user->getPassword() && $user->getPasswordConfirm())
-                    {
-                        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-                        $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                        $user->setPassword($password);
-                    }
-                }
-                else
-                {
-                    $user->setPassword($user_password);
-                }
-
-                $em->persist($user);
-                $em->flush();
-
-                // Set error
-                $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
-
-                // Set locale
-                $this->get('session')->setLocale($user->getLanguage());
-
-                return $this->redirect($this->generateUrl('user_preferences'));
-            }
-            else
-            {
-                // Set error
-                $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not update your preferences due some errors'));
-                $hasErrors = true;
-            }
+        $user = new User();
+        $user->setSalt(md5(time()));
+        if ($self) {
+            $user = $this->get('security.context')->getToken()->getUser();
+        }
+        else if ($id) {
+            $user = $user = $this->get('thoth.content_repository')->findOneById($id, 'user');
         }
 
-        return $this->render('TheodoThothCmsBundle:User:preferences.html.twig', array(
-            'user'      => $user,
-            'form'      => $form->createView(),
-            'hasErrors' => $hasErrors
-        ));
+        return $user;
     }
 
     /**
-     * Update user action
+     * Set the success flash message
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
+     */
+    public function setEditSuccessSession($id, $self, $user)
+    {
+        if ($self) {
+            // Set success message
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('Your preferences have been updated'));
+        }
+        // Set notice
+        else if ($id == null) {
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been created', array('%user%' => $user->getName())));
+        }
+        else {
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));
+        }
+    }
+
+    /**
+     * Set the error flash message
+     *
+     * @author Mathieu Dähne <mathieud@theodo.fr>
+     * @since 2011-07-07
+     */
+    public function setEditErrorMessage($id, $self, $form)
+    {
+        // Construct errors
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
+        }
+
+        // Set error
+        if ($self) {
+            $message = $this->get('translator')->trans(
+                    'Can not update your preferences due some errors%errors%',
+                    array(
+                        '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                     )
+              );
+        }
+        else if ($id == null) {
+            $message = $this->get('translator')->trans(
+                    'Can not save user due to some errors%errors%',
+                     array(
+                        '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                     )
+                );
+        }
+        else {
+            $message = $this->get('translator')->trans(
+                    'Can not save user %user% due to some errors%errors%',
+                     array(
+                        '%user' => $user->getName(),
+                        '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
+                     )
+                );
+        }
+
+        $this->get('session')->setFlash('error', $message);
+    }
+
+    /**
+     * Edit user
      *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
+     * @since 2011-07-06 mathieud (refactoring)
      */
-    public function updateAction()
+    public function editAction($id, $self)
     {
-        // Retrieve request
-        $request = $this->get('request');
-
-        // Retrieve EntityManager
-        $em = $this->getDoctrine()->getEntityManager();
-
         // Retrieve user
-        $user = $em->getRepository('TheodoThothCmsBundle:User')->findOneBy(array('id' => $request->get('id')));
-        $user_password = $user->getPassword();
+        $user = $this->retrieveUser($id, $self);
+        $old_password = $user->getPassword();
+
+        $action = 'edit';
+        if ($self) {
+            $action = 'preferences';
+        }
 
         // Create form
         $form = $this->createForm(new UserType(false), $user);
 
+        // Retrieve request
+        $request = $this->get('request');
+
         // Request is post
-        if ($request->getMethod() == 'POST')
-        {
+        if ($request->getMethod() == 'POST') {
             // Bind form
             $form->bindRequest($request);
 
             // Check form and save object
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $user = $form->getData();
 
+                // TODO FOSUserBundle
                 // Check password update
-                if ($user->getPassword() && $user_password != $user->getPassword())
-                {
+                if ($user->getPassword() && $old_password != $user->getPassword()) {
                     // Encode password
-                    if ($user->getPassword() && $user->getPasswordConfirm())
-                    {
+                    if ($user->getPassword()) {
                         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
                         $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                         $user->setPassword($password);
                     }
                 }
-                else
-                {
-                    $user->setPassword($user_password);
+                else {
+                    $user->setPassword($old_password);
                 }
-                $em->persist($user);
-                $em->flush();
 
-                // Set notice
-                $this->get('session')->setFlash('notice', $this->get('translator')->trans('User "%user%" has been updated', array('%user%' => $user->getName())));
+                $this->get('thoth.content_repository')->save($user);
 
-                return $this->redirect($this->generateUrl('user_edit', array('id' => $user->getId())));
+                // Set locale
+                if ($self) {
+                    $this->get('session')->setLocale($user->getLanguage());
+                }
+
+                // Set success flash message
+                $this->setEditSuccessSession($id, $self, $user);
+
+                return $this->redirect($this->generateUrl('user_'.$action, array('id' => $user->getId())));
             }
-            else
-            {
-                // Construct errors
-                $errors = array();
-                foreach ($form->getErrors() as $error)
-                {
-                    array_push($errors, $this->get('translator')->trans($error->getMessageTemplate()));
-                }
-
-                // Set error
-                $this->get('session')->setFlash(
-                    'error',
-                    $this->get('translator')->trans(
-                        'Can not update "%user%" due some errors%errors%',
-                         array(
-                            '%user%'   => $user->getName(),
-                            '%errors%' => count($errors) ? ': '.implode(', ', $errors).'.' : ''
-                         )
-                    )
-                );
+            else {
+                // Set error flash message
+                $this->setEditErrorMessage($id, $self, $form);
             }
         }
 
         return $this->render(
-            'TheodoThothCmsBundle:User:edit.html.twig',
+            'TheodoThothCmsBundle:User:'.$action.'.html.twig',
             array(
                 'form'      => $form->createView(),
                 'user'      => $user

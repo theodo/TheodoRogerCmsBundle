@@ -14,7 +14,7 @@ class MediaType extends AbstractType
     {
         $builder->add('id', 'hidden');
         $builder->add('name', 'text', array('required' => true));
-        $builder->add('file', null, array('required' => false));
+        $builder->add('file', 'file', array('required' => false));
     }
 
     public function getDefaultOptions(array $options)

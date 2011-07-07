@@ -9,7 +9,10 @@ use Symfony\Component\Validator\Constraints\File;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ */
 class Media
 {    /**
      * @var integer $id
@@ -155,7 +158,6 @@ class Media
 
         // file validator: not null
         $metadata->addPropertyConstraint('file', new File());
-        $metadata->addPropertyConstraint('file', new NotBlank());
     }
 
     /**
@@ -204,6 +206,6 @@ class Media
 
     public static function getUploadRootDir()
     {
-      return 'uploads/';
+      return 'uploads';
     }
 }

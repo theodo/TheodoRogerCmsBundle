@@ -22,6 +22,7 @@
                 </a>
             {% endif %}
             <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
+                <span class="content_type">{{ page.contentSubtype }}</span>
                 <img alt="" class="icon" src="/bundles/theodothothcms/images/admin/thoth_page.png" />
                 <span class="title">{{ page.name }}</span>
             </a>
@@ -32,7 +33,7 @@
         {{ page.status|trans }}
     </td>
     <td class="add_child">
-        <a id="new-{{ page.slug }}-child" href="{{ url('page_new', {'id' : page.id}) }}">
+        <a id="new-{{ page.slug }}-child" href="{{ url('page_new', {'parent_id' : page.id}) }}">
           {% trans %}Add Child{% endtrans %}
         </a>
     </td>

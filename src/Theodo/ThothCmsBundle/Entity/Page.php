@@ -77,7 +77,7 @@ class Page
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -326,15 +326,15 @@ class Page
 
         return $s;
     }
-    
+
     /**
      * Page validator
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-22
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {        
+    {
         // Name validator: not null
         $metadata->addPropertyConstraint('name', new NotBlank());
 
@@ -374,7 +374,7 @@ class Page
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -394,7 +394,7 @@ class Page
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -419,7 +419,7 @@ class Page
     /**
      * Get content_type
      *
-     * @return string 
+     * @return string
      */
     public function getContentType()
     {
@@ -444,7 +444,7 @@ class Page
     /**
      * Get cacheable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCacheable()
     {
@@ -452,6 +452,7 @@ class Page
     }
 
     /**
+<<<<<<< HEAD
      * @var integer $lifetime
      */
     private $lifetime;
@@ -500,5 +501,19 @@ class Page
     public function getPublic()
     {
         return $this->public;
+    }
+
+    /**
+     * Retrieve the subtype part of the Content-type declaration
+     *
+     * @return string
+     * @author cyrillej
+     * @since 2011-07-05
+     */
+    public function getContentSubtype()
+    {
+        $subtypes = PageRepository::getAvailableContentSubtypes();
+
+        return $subtypes[$this->content_type];
     }
 }

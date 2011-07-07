@@ -168,7 +168,7 @@
           </trans-unit>
           <trans-unit id="42">
               <source>Breadcrumb</source>
-              <target>Fil d'arianne</target>
+              <target>Fil d'Ariane</target>
           </trans-unit>
           <trans-unit id="43">
               <source>Description</source>
@@ -395,8 +395,8 @@
               <target>Supprimer ce media</target>
           </trans-unit>
           <trans-unit id="99">
-              <source>Current file</source>
-              <target>Fichier associé</target>
+              <source>Current file:</source>
+              <target>Fichier associé :</target>
           </trans-unit>
           <trans-unit id="100">
               <source>Click to open this file</source>

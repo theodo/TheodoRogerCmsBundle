@@ -5,14 +5,7 @@
 {% set nav = 'medias' %}
 
 {% block javascripts_assets %}
-<script type="text/javascript"> textarea_id = 'media_content' </script>
-<script src="{{ asset('bundles/theodothothcms/js/page.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/theodothothcms/js/edit_area/edit_area_full.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/theodothothcms/js/twig-highlight.js') }}" type="text/javascript"></script>
-{% endblock %}
-
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('bundles/theodothothcms/css/page.css') }}" type="text/css" media="all" />
+<script src="{{ asset('bundles/theodothothcms/js/media.js') }}" type="text/javascript"></script>
 {% endblock %}
 
 {% block page_title %}
@@ -22,7 +15,7 @@
 {% form_theme form 'TheodoThothCmsBundle:Form:form_custom_layout.html.twig' %}
 
 {% block content %}
-    {% if media is defined %}
+    {% if media is not null %}
     <h1>{% trans %}Edit Media{% endtrans %}</h1>
     <form class="edit_media" action="{{ url('media_update', { 'id': media.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
@@ -34,14 +27,19 @@
                 {{ form_row(form.name) }}
             </p>
             <div class="content">
-                {% if media is defined %}
+                {% if media is not null %}
                 <p>
-                    {% trans %}Current file{% endtrans %}
-                    <br />
+                    {% trans %}Current file:{% endtrans %}
                     <a href="{{ media_url(media.name) }}" title="{% trans %}Click to open this file{% endtrans %}">{{ media.name }}</a>
+                    <span id="upload-links">
+                        <a id="show-upload-link" href="#" class="action display-ib">{% trans %}Change{% endtrans %}</a>
+                        <a id="cancel-upload-link" href="#" class="action hide">{% trans %}Cancel{% endtrans %}</a>
+                    </span>
                 </p>
                 {% endif %}
-                {{ form_row(form.file) }}
+                <div id="upload-file" class="{% if form_errors(form.file) or form_errors(form) or media is not defined  %}display{% else %}hide{% endif %}">
+                    {{ form_row(form.file) }}
+                </div>
             </div>
             {{ form_rest(form) }}
         </div>

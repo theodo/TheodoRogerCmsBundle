@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
@@ -35,3 +36,9 @@ $loader->register();
 // the lazy loading of the init file (which is expensive)
 require_once __DIR__.'/../vendor/swiftmailer/lib/classes/Swift.php';
 Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/lib/swift_init.php');
+
+AnnotationRegistry::registerLoader(function($class) use ($loader) {
+    $loader->loadClass($class);
+    return class_exists($class, false);
+});
+AnnotationRegistry::registerFile(__DIR__.'/../vendor/doctrine/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php');

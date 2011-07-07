@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Symfony framework.
+ * This file is part of the Thoth CMS Bundle
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Theodo <contact@theodo.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -16,26 +16,16 @@ use Theodo\ThothCmsBundle\Form\SnippetType;
 
 class SnippetController extends Controller
 {
-    /**
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEM()
-    {
-        return $this->get('doctrine')->getEntityManager();
-    }
 
     /**
-     * Liste des Snippets
+     * Snippet list
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      */
     public function indexAction()
     {
-        $snippets = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Snippet')
-            ->findAll();
+        $snippets = $this->get('thoth.content_repository')->findAll('snippet');
 
         return $this->render('TheodoThothCmsBundle:Snippet:index.html.twig',
                 array('snippets' => $snippets)
@@ -43,62 +33,21 @@ class SnippetController extends Controller
     }
 
     /**
-     * Nouveau Snippet
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     */
-    public function newAction()
-    {
-        $form = $this->createForm(new SnippetType());
-        $request = $this->get('request');
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-
-            if ($form->isValid())
-            {
-                $snippet = $form->getData();
-                $this->getEM()->persist($snippet);
-                $this->getEM()->flush();
-                
-                $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
-
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('snippet_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
-                }
-
-                return $redirect;
-            }
-        }
-
-        return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
-                array(
-                    'title' => 'New snippet',
-                    'form' => $form->createView()
-                  )
-                );
-    }
-
-    /**
-     * Update un Snippet
+     * Snippet edit
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
+     * @since 2011-07-06 mathieud ($hasErrors deleted)
      */
-    public function updateAction($id)
+    public function editAction($id)
     {
-        $snippet = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Snippet')
-            ->findOneById($id);
+        $snippet = null;
+        if ($id) {
+            $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
+        }
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
-
-        // Initialize form hasErros
-        $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -106,13 +55,16 @@ class SnippetController extends Controller
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
+                if ($snippet) {
+                    $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
+                }
 
+                //save snippet
                 $snippet = $form->getData();
-                $this->getEM()->persist($snippet);
-                $this->getEM()->flush();
+                $this->get('thoth.content_repository')->save($snippet);
 
                 $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
+
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
                 if ($request->get('save-and-edit'))
@@ -122,42 +74,12 @@ class SnippetController extends Controller
 
                 return $redirect;
             }
-            else
-            {
-                $hasErrors = true;
-            }
         }
 
         return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
                 array(
-                    'title' => 'Edition '.$snippet->getName(),
                     'snippet' => $snippet,
                     'form' => $form->createView(),
-                    'hasErrors' => $hasErrors
-                  )
-                );
-    }
-
-    /**
-     * Edition d'un Snippet
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @param Int $id
-     */
-    public function editAction($id)
-    {
-        $snippet = $this->getEM()
-            ->getRepository('TheodoThothCmsBundle:Snippet')
-            ->findOneById($id);
-
-        $form = $this->createForm(new SnippetType(), $snippet);
-
-        return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
-                array(
-                    'title' => 'Edition '.$snippet->getName(),
-                    'snippet' => $snippet,
-                    'form' => $form->createView()
                   )
                 );
     }
@@ -171,14 +93,11 @@ class SnippetController extends Controller
      */
     public function removeAction($id)
     {
-        $snippet = $this->getEM()
-            ->getRepository('Theodo\ThothCmsBundle\Entity\Snippet')
-            ->findOneById($id);
+        $snippet = $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->getEM()->remove($snippet);
-            $this->getEM()->flush();
+            $snippet = $this->get('thoth.content_repository')->remove($snippet);
 
             return $this->redirect($this->generateUrl('snippet_list'));
         }

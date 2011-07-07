@@ -244,7 +244,6 @@ class LayoutControllerTest extends WebTestCase
 
         // Update Form
         $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
-        $form['layout[content_type]'] = 'text/html';
 
         // Submit the form
         $crawler = $client->submit($form);
