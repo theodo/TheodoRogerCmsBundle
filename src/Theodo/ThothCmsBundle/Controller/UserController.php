@@ -21,6 +21,19 @@ use Theodo\ThothCmsBundle\Entity\User;
 
 class UserController extends Controller
 {
+
+    /**
+     *
+     * @return EntityManager
+     *
+     * @author fabricbe
+     * @since 2011-07-08
+     */
+    public function getEntityManager()
+    {
+
+        return $this->get('doctrine.orm.entity_manager');
+    }
     /**
      *
      * @return UserRepository
