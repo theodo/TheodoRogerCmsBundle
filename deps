@@ -1,5 +1,6 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
+    version=v2.0.0-RC4
 
 [twig]
     git=http://github.com/fabpot/Twig.git
@@ -10,6 +11,7 @@
 [doctrine-common]
     git=http://github.com/doctrine/common.git
     version=origin/3.0.x
+;    version=b988d893571757506d6f9ec9bbf2f41f3445df4f
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
@@ -35,7 +37,7 @@
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
 
 [JMSSecurityExtraBundle]
-    git=https://github.com/schmittjoh/JMSSecurityExtraBundle.git
+    git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
     target=/bundles/JMS/SecurityExtraBundle
 
 [WebConfiguratorBundle]
@@ -45,3 +47,22 @@
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
+
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+    version=origin/master
+
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    version=origin/master
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+
+[DoctrineExtensionsBundle]
+    git=https://github.com/stof/StofDoctrineExtensionsBundle.git
+    version=origin/master
+    target=/bundles/Stof/DoctrineExtensionsBundle
+
+[DoctrineExtensions]
+    git=http://github.com/l3pp4rd/DoctrineExtensions.git
+    version=origin/master
+    target=/gedmo-doctrine-extensions

@@ -1,0 +1,63 @@
+Theodo\ThothCmsBundle\Entity\Page:
+    type: entity
+    table: page
+    repositoryClass: Theodo\ThothCmsBundle\Repository\PageRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        content:
+            type: text
+        slug:
+            type: string
+            length: 255
+            unique: true
+        breadcrumb:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+            nullable: true
+        status:
+            type: string
+            length: 127
+        parent_id:
+            type: integer
+            nullable: true
+        content_type:
+            type: string
+            length: 127
+        cacheable:
+            type: boolean
+        public:
+            type: boolean
+        lifetime:
+            type: integer
+            nullable: true
+        published_at:
+            type: date
+            nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        parent:
+            targetEntity: Page
+            inversedBy: children
+    oneToMany:
+        children:
+            targetEntity: Page
+            mappedBy: parent
+            cascade: ["remove"]
