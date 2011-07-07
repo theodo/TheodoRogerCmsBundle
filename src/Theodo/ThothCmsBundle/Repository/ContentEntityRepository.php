@@ -33,7 +33,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
 
     /**
      * Return source by name and type
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
@@ -41,13 +41,10 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function getSourceByNameAndType($name, $type = 'page')
     {
         // Retrieve template
-        $template = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
-                ->findOneByName($name);
+        $template = $this->getRepository($type)->findOneByName($name);
 
         // Check template
-        if (!$template)
-        {
+        if (!$template) {
             return null;
         }
 
@@ -56,7 +53,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
 
     /**
      * Return page by slug
-     * 
+     *
      * @return Page
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
@@ -64,16 +61,14 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function getPageBySlug($slug)
     {
         // Retrieve page
-        $page = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:Page')
-                ->findOneBySlug($slug);
+        $page = $this->getRepository('page')->findOneBySlug($slug);
 
         return $page;
     }
 
     /**
      * Return home page
-     * 
+     *
      * @return Page
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
@@ -81,23 +76,21 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function getHomePage()
     {
         // Retrieve home page (page without parent_id)
-        $page = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:Page')
-                ->findOneBy(array('parent_id' => null));
+        $page = $this->getRepository('page')->findOneBy(array('parent_id' => null));
 
         return $page;
     }
 
     /**
      * Return two first level pages
-     * 
+     *
      * @return Page[]
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */
     public function getFirstTwoLevelPages()
     {
-        return $this->getEntityManager()->getRepository('TheodoThothCmsBundle:Page')->queryForMainPages()->getResult();
+        return $this->getRepository('page')->queryForMainPages()->getResult();
     }
 
     /**
@@ -109,8 +102,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function remove($object = null)
     {
         // Check object
-        if (!$object)
-        {
+        if (!$object) {
             return null;
         }
 
@@ -128,8 +120,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function create($object = null)
     {
         // Check object
-        if (!$object)
-        {
+        if (!$object) {
             return null;
         }
 
@@ -146,9 +137,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
      */
     public function getSnippetByName($name)
     {
-        $snippet = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:Snippet')
-                ->findOneByName($name);
+        $snippet = $this->getRepository('snippet')->findOneByName($name);
 
         return $snippet;
     }
@@ -162,8 +151,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function save($object = null)
     {
         // Check object
-        if (!$object)
-        {
+        if (!$object) {
             return null;
         }
 
@@ -181,9 +169,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function findOneByName($name, $type)
     {
         // Retrieve the object
-        $object = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
-                ->findOneByName($name);
+        $object = $this->getRepository($type)->findOneByName($name);
 
         return $object;
     }
@@ -197,9 +183,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function findOneById($id, $type = 'page')
     {
         // Retrieve the object
-        $object = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
-                ->findOneById($id);
+        $object = $this->getRepository($type)->findOneById($id);
 
         return $object;
     }
@@ -212,10 +196,22 @@ class ContentEntityRepository implements ContentRepositoryInterface
      */
     public function findAll($type = 'page')
     {
-        $objects = $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type))
-                ->findAll();
+        $objects = $this->getRepository($type)->findAll();
 
         return $objects;
+    }
+
+    /**
+     *
+     * @param string $type
+     * @return EntityRepository
+     *
+     * @author fabriceb
+     * @since 2011-07-07
+     */
+    public function getRepository($type)
+    {
+        return $this->getEntityManager()
+                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type));
     }
 }

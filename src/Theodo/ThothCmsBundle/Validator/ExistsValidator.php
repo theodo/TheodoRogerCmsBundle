@@ -12,7 +12,7 @@ class ExistsValidator extends ConstraintValidator
 
     /**
      * Constuctor
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-22
      */
@@ -23,7 +23,7 @@ class ExistsValidator extends ConstraintValidator
 
     /**
      * Validation function
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-22
      */
@@ -33,8 +33,7 @@ class ExistsValidator extends ConstraintValidator
         $entity = $this->em->getRepository($constraint->entity)->findOneBy(array($constraint->property => $value));
 
         // Check $entity
-        if(!$entity)
-        {
+        if(!$entity) {
             // Validation fail, set message
             $this->setMessage(sprintf($constraint->message, $constraint->property, $value));
 
