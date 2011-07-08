@@ -12,19 +12,6 @@ use Theodo\ThothCmsBundle\Repository\UserRepository;
 
 class UserPreferencesType extends AbstractType
 {
-    protected $is_new;
-
-    /**
-     * Form constructor
-     * 
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-27
-     */
-    public function __construct($is_new = true)
-    {
-        $this->is_new = $is_new;
-    }
-    
     /**
      * Form builder
      * 
@@ -39,7 +26,6 @@ class UserPreferencesType extends AbstractType
         $builder->add('email', 'text', array('required' => true));
 
         $builder->add('password', 'repeated', array('type' => 'password', 'required' => false));
-        //$builder->add('password_confirm', 'password', array('required' => false));
         
         $builder->add('language', 'choice', array(
             'choices'   => UserRepository::getAvailableLanguages(),
@@ -47,8 +33,7 @@ class UserPreferencesType extends AbstractType
         ));
 
         // Salt hidden field
-        if ($this->is_new)
-        {
+        if (null === $options['data']->getPassword()) {
             $builder->add('salt', 'hidden', array('required' => true));
         }
     }
