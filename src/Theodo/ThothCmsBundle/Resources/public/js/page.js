@@ -73,7 +73,7 @@ var hideChildren = function (node)
   children.hide();
 
   // Update expand picture
-  node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/expand.png" />');
+  node.html('<img alt="toggle children" class="expander" src="../images/admin/expand.png" />');
 
   // remove expanded class
   node.removeClass('expanded');
@@ -98,7 +98,7 @@ var showChildren = function (node)
   children.show();
 
   // Update expand picture
-  node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/collapse.png" />');
+  node.html('<img alt="toggle children" class="expander" src="../images/admin/collapse.png" />');
 
   // remove expanded class
   node.addClass('expanded');
@@ -129,7 +129,7 @@ var loadAjaxChildren = function (node)
       node.addClass('expanded');
 
       // Update expand picture
-      node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/collapse.png" />');
+      node.html('<img alt="toggle children" class="expander" src="../images/admin/collapse.png" />');
     },
     complete: function()
     {
