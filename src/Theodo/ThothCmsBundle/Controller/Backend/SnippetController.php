@@ -44,6 +44,7 @@ class SnippetController extends Controller
      * @since 2011-06-20
      * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
      * @since 2011-07-06 mathieud ($hasErrors deleted)
+     * @since 2011-07-08 cyrillej ($hasErrors readded^^)
      */
     public function editAction($id)
     {
@@ -53,6 +54,9 @@ class SnippetController extends Controller
         }
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
+
+        // Initialize form hasErros
+        $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -77,12 +81,16 @@ class SnippetController extends Controller
 
                 return $redirect;
             }
+            else {
+                $hasErrors = true;
+            }
         }
 
         return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
                 array(
                     'snippet' => $snippet,
                     'form' => $form->createView(),
+                    'hasErrors'   => $hasErrors,
                   )
                 );
     }
