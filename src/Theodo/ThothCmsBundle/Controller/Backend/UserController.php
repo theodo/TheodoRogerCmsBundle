@@ -320,7 +320,6 @@ class UserController extends Controller
             if ($form->isValid()) {
                 $user = $form->getData();
 
-                // TODO FOSUserBundle
                 // Check password update
                 if ($user->getPassword() && $old_password != $user->getPassword()) {
                     // Encode password
