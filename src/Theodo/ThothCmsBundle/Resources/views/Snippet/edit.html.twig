@@ -29,9 +29,49 @@
             <p class="title">
                 {{ form_row(form.name) }}
             </p>
-            <p>{{ form_row(form.cacheable) }}</p>
-            <p>{{ form_row(form.public) }}</p>
-            <p>{{ form_row(form.lifetime) }}</p>
+            <div class="drawer">
+                <div class="toggle_wrapper">
+                    <div id="extra-fields" class="drawer_contents {% if (hasErrors is defined) and hasErrors %}display{% else %}hide{% endif %}">
+                        <table class="fieldset">
+                            <tbody>
+                                <tr>
+                                    <th class="label">
+                                        {% trans %}Cache{% endtrans %}
+                                    </th>
+                                    <td class="field">
+                                        <p>
+                                            {{ form_label(form.cacheable, 'Static Content?') }}
+                                            {{ form_widget(form.cacheable) }}
+                                            {{ form_errors(form.cacheable) }}
+                                            <em>{% trans %}Returns a 304 "not modified" status, when the template has not changed since last visit.{% endtrans %}</em>
+                                        </p>
+                                        <p>
+                                            {{ form_label(form.public, 'Visitor-independant content?') }}
+                                            {{ form_widget(form.public) }}
+                                            {{ form_errors(form.public) }}
+                                            <em>{% trans %}Allows proxies to cache the same content for different visitors.{% endtrans %}</em>
+                                        </p>
+                                        <p>
+                                            {{ form_label(form.lifetime, 'Cache lifetime:') }}
+                                            {{ form_widget(form.lifetime, { 'attr': {'style': 'width: 100px;'} }) }}
+                                            <em>{% trans %}Does a full content caching, except for snippets, during the specified lifetime. Leave empty for no cache.{% endtrans %}</em>
+                                            {{ form_errors(form.lifetime) }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="drawer_handle">
+                    <a id="link-more-fields" class="toggle more extra-fields-link {% if (hasErrors is not defined) or not hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
+                      {% trans %}More{% endtrans %}
+                    </a>
+                    <a id="link-less-fields" class="toggle less extra-fields-link {% if (hasErrors is defined) and hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
+                      {% trans %}Less{% endtrans %}
+                    </a>
+                </div>
+            </div>
             <p class="content">
                 {{ form_row(form.content) }}
 

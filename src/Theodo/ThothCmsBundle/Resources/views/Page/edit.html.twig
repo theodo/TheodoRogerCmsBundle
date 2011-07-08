@@ -76,11 +76,11 @@
 
                             <tr>
                                 <th class="label">
-                                    Cache
+                                    {% trans %}Cache{% endtrans %}
                                 </th>
                                 <td class="field">
                                     <p>
-                                        {{ form_label(form.cacheable, 'Static content?') }}
+                                        {{ form_label(form.cacheable, 'Static Content?') }}
                                         {{ form_widget(form.cacheable) }}
                                         {{ form_errors(form.cacheable) }}
                                         <em>{% trans %}Returns a 304 "not modified" status, when the template has not changed since last visit.{% endtrans %}</em>
