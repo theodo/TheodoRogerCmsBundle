@@ -56,4 +56,9 @@ class PageType extends AbstractType
            'data_class' => 'Theodo\ThothCmsBundle\Entity\Page',
         );
     }
+
+    public function getName()
+    {
+        return 'page';
+    }
 }

@@ -58,4 +58,9 @@ class UserType extends UserPreferencesType
            'data_class' => 'Theodo\ThothCmsBundle\Entity\User',
         );
     }
+
+    public function getName()
+    {
+        return 'user';
+    }
 }
