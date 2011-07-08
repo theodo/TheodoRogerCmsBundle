@@ -12,19 +12,6 @@ use Theodo\ThothCmsBundle\Repository\UserRepository;
 
 class UserType extends UserPreferencesType
 {
-    protected $is_new;
-
-    /**
-     * Form constructor
-     * 
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-27
-     */
-    public function __construct($is_new = true)
-    {
-        $this->is_new = $is_new;
-    }
-    
     /**
      * Form builder
      * 
@@ -37,7 +24,9 @@ class UserType extends UserPreferencesType
         
         // Set inputs
         $builder->add('notes', 'textarea', array('required' => false));
-        $builder->add('password', 'repeated', array('type' => 'password', 'required' => true));
+        if (null === $options['data']->getPassword()) {
+            $builder->add('password', 'repeated', array('type' => 'password', 'required' => true));
+        }
         $builder->add('user_roles', 'entity', array(
             'class'    => 'Theodo\\ThothCmsBundle\\Entity\\Role',
             'expanded' => true,
