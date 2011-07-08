@@ -4,7 +4,7 @@ imports:
 
 framework:
     test: ~
-    csrf_protection: false
+    csrf_protection: true
     session:
         storage_id: session.storage.filesystem
 
