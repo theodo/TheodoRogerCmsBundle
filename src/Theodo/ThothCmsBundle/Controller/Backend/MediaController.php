@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller;
+namespace Theodo\ThothCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\ThothCmsBundle\Form\MediaType;
