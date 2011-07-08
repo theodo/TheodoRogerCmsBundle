@@ -7,6 +7,6 @@ jQuery(document).ready(function ()
 			,allow_toggle: true
 			,word_wrap: true
 			,language: "en"
-			,syntax: "php"
+			,syntax: "twig"
 		});
 });
