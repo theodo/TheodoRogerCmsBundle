@@ -27,4 +27,8 @@ class SnippetType extends AbstractType
         );
     }
 
+    public function getName()
+    {
+        return 'snippet';
+    }
 }

@@ -2,5 +2,5 @@
     {% trans %}Logged in as{% endtrans %}
     <a href="{{ url('user_preferences') }}">{{user.name}}</a>
     (<a href="{{ url('logout') }}">{% trans %}Logout{% endtrans %}</a>)
-    <a href="/" id="view_site">{% trans %}View Site{% endtrans %}</a>
+    <a href="{{ url ('page') }}" id="view_site">{% trans %}View Site{% endtrans %}</a>
 </div>

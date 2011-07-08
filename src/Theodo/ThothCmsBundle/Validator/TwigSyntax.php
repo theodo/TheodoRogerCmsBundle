@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 
 class TwigSyntax extends Constraint
 {
-    public $message = '"%s" "%s" does\'nt exists';
+    public $message = '"%s" "%s" doesn\'t exist';
     public $entity;
     public $property;
    
