@@ -599,6 +599,16 @@ img.avatar.avatar_32x32
   width: auto;
 }
 
+#content .drawer_contents table.fieldset td.field p label
+{
+  display: inline;
+}
+
+#content .drawer_contents table.fieldset td.field p em
+{
+  font-size: 85%;
+}
+
 .drawer_contents table.fieldset td.field input.textbox,
 .drawer_contents table.fieldset td.field select
 {

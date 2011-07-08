@@ -79,26 +79,24 @@
                                     Cache
                                 </th>
                                 <td class="field">
-                                    {{ form_label(form.cacheable, 'Static content?') }}
-                                    {{ form_widget(form.cacheable) }}
-                                    {{ form_errors(form.cacheable) }}
-                                    <em>{% trans %}Returns a 304 "not modified" status, when the template has not changed since last visit.{% endtrans %}</em>
-
-                                    <br />
-                                    <br />
-
-                                    {{ form_label(form.public, 'Visitor-independant content?') }}
-                                    {{ form_widget(form.public) }}
-                                    {{ form_errors(form.public) }}
-                                    <em>{% trans %}Allows proxies to cache the same content for different visitors.{% endtrans %}</em>
-
-                                    <br />
-                                    <br />
-
-                                    {{ form_label(form.lifetime, 'Cache lifetime:') }}
-                                    {{ form_widget(form.lifetime, { 'attr': {'style': 'width: 100px;'} }) }}
-                                    <em>{% trans %}Does a full content caching, except for snippets, during the specified lifetime. Leave empty for no cache.{% endtrans %}</em>
-                                    {{ form_errors(form.lifetime) }}
+                                    <p>
+                                        {{ form_label(form.cacheable, 'Static content?') }}
+                                        {{ form_widget(form.cacheable) }}
+                                        {{ form_errors(form.cacheable) }}
+                                        <em>{% trans %}Returns a 304 "not modified" status, when the template has not changed since last visit.{% endtrans %}</em>
+                                    </p>
+                                    <p>
+                                        {{ form_label(form.public, 'Visitor-independant content?') }}
+                                        {{ form_widget(form.public) }}
+                                        {{ form_errors(form.public) }}
+                                        <em>{% trans %}Allows proxies to cache the same content for different visitors.{% endtrans %}</em>
+                                    </p>
+                                    <p>
+                                        {{ form_label(form.lifetime, 'Cache lifetime:') }}
+                                        {{ form_widget(form.lifetime, { 'attr': {'style': 'width: 100px;'} }) }}
+                                        <em>{% trans %}Does a full content caching, except for snippets, during the specified lifetime. Leave empty for no cache.{% endtrans %}</em>
+                                        {{ form_errors(form.lifetime) }}
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
