@@ -54,7 +54,7 @@
                                         <p>
                                             {{ form_label(form.lifetime, 'Cache lifetime:') }}
                                             {{ form_widget(form.lifetime, { 'attr': {'style': 'width: 100px;'} }) }}
-                                            <em>{% trans %}Does a full content caching, except for snippets, during the specified lifetime. Leave empty for no cache.{% endtrans %}</em>
+                                            <em>{% trans %}Does a full content caching during the specified lifetime. Leave empty for no cache.{% endtrans %}</em>
                                             {{ form_errors(form.lifetime) }}
                                         </p>
                                     </td>
