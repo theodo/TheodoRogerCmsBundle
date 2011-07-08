@@ -44,7 +44,7 @@ class ThothActionsExtension extends \Twig_Extension
      */
     public function renderSnippet($name, $attributes = array())
     {
-        $controller = 'TheodoThothCmsBundle:Frontend:snippet';
+        $controller = 'TheodoThothCmsBundle:Frontend\Frontend:snippet';
         $params['name'] = $name;
         $params['attributes'] = $attributes;
         $options['standalone'] = true;
