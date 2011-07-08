@@ -24,4 +24,8 @@ class MediaType extends AbstractType
         );
     }
 
+    public function getName()
+    {
+        return 'media';
+    }
 }

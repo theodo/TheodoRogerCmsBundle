@@ -18,15 +18,15 @@
         <span class="w1">
             {% if page.children|length > 0 and page.parent %}
                 <a class="expandable" href="{{ url('page_expand', {'id' : page.id, 'level' : level + 1}) }}">
-                    <img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/expand.png" />
+                    <img alt="toggle children" class="expander" src="{{ asset('bundles/theodothothcms/images/admin/expand.png') }}" />
                 </a>
             {% endif %}
             <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
                 <span class="content_type">{{ page.contentSubtype }}</span>
-                <img alt="" class="icon" src="/bundles/theodothothcms/images/admin/thoth_page.png" />
+                <img alt="" class="icon" src="{{ asset('bundles/theodothothcms/images/admin/thoth_page.png') }}" />
                 <span class="title">{{ page.name }}</span>
             </a>
-            <img src="/bundles/theodothothcms/images/admin/spinner.gif" class="ajax-loader hide busy" alt="" />
+            <img src="{{ asset('bundles/theodothothcms/images/admin/spinner.gif') }}" class="ajax-loader hide busy" alt="" />
         </span>
     </td>
     <td class="status">

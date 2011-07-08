@@ -10,7 +10,7 @@
     <ul>
         <li>
           <a class="new-media" href="{{ url('media_new') }}">
-            <img alt="Plus" src="/bundles/theodothothcms/images/admin/plus.png" />{% trans %}New Media{% endtrans %}</a>
+            <img alt="Plus" src="{{ asset('bundles/theodothothcms/images/admin/plus.png') }}" />{% trans %}New Media{% endtrans %}</a>
         </li>
     </ul>
 </div>
@@ -26,7 +26,7 @@
         {% for media in medias %}
             <tr class="node level_1">
                 <td class="media">
-                    <img alt="" src="/bundles/theodothothcms/images/admin/thoth_media.png" />
+                    <img alt="" src="{{ asset('bundles/theodothothcms/images/admin/thoth_media.png') }}" />
                     <a href="{{ url('media_edit', { 'id': media.id }) }}">{{ media.name }}</a>
                 </td>
                 <td class="remove">

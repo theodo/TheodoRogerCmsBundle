@@ -65,4 +65,9 @@ class UserPreferencesType extends AbstractType
            'data_class' => 'Theodo\ThothCmsBundle\Entity\User',
         );
     }
+
+    public function getName()
+    {
+        return 'user_preferences';
+    }
 }
