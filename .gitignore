@@ -18,3 +18,4 @@ app/bootstrap_cache.php.cache
 web/bundles/*
 deps.lock
 web/uploads/*
+.DS_Store
