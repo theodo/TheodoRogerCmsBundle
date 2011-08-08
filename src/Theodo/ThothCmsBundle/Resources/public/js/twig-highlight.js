@@ -1,5 +1,6 @@
 jQuery(document).ready(function ()
 {
+  /*
   editAreaLoader.init({
 			id: textarea_id	// id of the textarea to transform
 			,start_highlight: true	// if start with highlight
@@ -9,4 +10,9 @@ jQuery(document).ready(function ()
 			,language: "en"
 			,syntax: "twig"
 		});
+  */
+  //CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+  CKEDITOR.config.entities = false;
+  CKEDITOR.replace(textarea_id);
+
 });

@@ -7,7 +7,7 @@
 {% block javascripts_assets %}
 <script type="text/javascript"> textarea_id = 'page_content'; form_id = 'new_page'; </script>
 <script src="{{ asset('bundles/theodothothcms/js/page.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/theodothothcms/js/edit_area/edit_area_full.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/theodothothcms/js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
 <script src="{{ asset('bundles/theodothothcms/js/twig-highlight.js') }}" type="text/javascript"></script>
 {% endblock %}
 
@@ -114,22 +114,29 @@
         </div>
         <div id="tab_control">
             <div class="tabs" id="tabs">
-                {# <div id="tab_toolbar">
+
+                
+
+                <div id="tab_toolbar">
                     <a class="popup" href="#add_part_popup" title="{% trans %}Add Part{% endtrans %}">
-                        <img alt="{% trans %}Add Part{% endtrans %}" src="/images/admin/add_tab.png" />
+                        <img alt="{% trans %}Add Part{% endtrans %}" src="{{ asset('bundles/theodothothcms/images/admin/add_tab.png') }}" />
                     </a>
                 </div>
-                <a href="#" class="tab"><span>sidebar</span><img src="/images/admin/tab_close.png" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}"></a> #}
+                
                 <a href="#" class="tab here">
                     <span>{% trans %}Body{% endtrans %}</span>
-                    {# <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" /> #}
+                    <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
+                </a>
+                <a href="#" class="tab here">
+                    <span>{% trans %}Body 2{% endtrans %}</span>
+                    <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
                 </a>
             </div>
             <div class="pages" id="pages">
                 <div class="page" id="page_body">
                     <div class="part" id="part_body">
                         <p>
-                            {{ form_label(form.content) }}
+                            {# {{ form_label(form.content) }} #}
                             {{ form_errors(form.content) }}
 
                             <span class="reference_links">
