@@ -67,6 +67,31 @@ class PageController extends Controller
             $page = $this->get('thoth.content_repository')->findOneById($id);
             $parent_page = $page->getParent();
         }
+        
+        // FABRICE
+
+        // contenu -> découpage en blocks et layout
+
+        $value = $page->getContent();
+        $twig = $this->get('twig');
+        $tokens = $twig->tokenize($value);
+        $nodes = $twig->parse($tokens);
+        $blocks = $nodes->getnode('blocks');
+        foreach($blocks as $block)
+        {
+            $block_name = $block->getAttribute('name');
+            $num_matches = preg_match('/{% block '.$block_name.' %}(.*){% endblock %}/s', $value, $matches);
+            if ($num_matches > 0)
+            {
+                $block_content = $matches[1];
+            }
+            var_dump($block_name);
+            var_dump($block_content);
+        }
+        var_dump($nodes->getnode('parent')->getAttribute('value'));
+        die();
+
+        // FIN FABRICE
 
         // Create form
         $form = $this->createForm(new PageType(), $page);
