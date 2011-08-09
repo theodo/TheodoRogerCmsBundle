@@ -74,6 +74,20 @@ class PageController extends Controller
 
         $value = $page->getContent();
         $twig = $this->get('twig');
+        /*
+        // tentative avortée de faire un mini-parser uniquement block et extends
+
+        $parserbroker = $twig->getTokenParsers();
+        $tokenparsers = $parserbroker->getParsers();
+        var_dump($tokenparsers);
+        foreach($tokenparsers as $name => $tokenparser)
+        {
+            if ($name != 'extends' && $name != 'block')
+            {
+                unset($tokenparsers[$name]);
+            }
+        }
+        $parserbroker->setParsers($tokenparsers);*/
         $tokens = $twig->tokenize($value);
         $nodes = $twig->parse($tokens);
         $blocks = $nodes->getnode('blocks');
