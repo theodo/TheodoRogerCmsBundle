@@ -115,40 +115,76 @@
         <div id="tab_control">
             <div class="tabs" id="tabs">
 
-                
-
                 <div id="tab_toolbar">
                     <a class="popup" href="#add_part_popup" title="{% trans %}Add Part{% endtrans %}">
                         <img alt="{% trans %}Add Part{% endtrans %}" src="{{ asset('bundles/theodothothcms/images/admin/add_tab.png') }}" />
                     </a>
                 </div>
-                
-                <a href="#" class="tab here">
-                    <span>{% trans %}Body{% endtrans %}</span>
-                    <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
-                </a>
-                <a href="#" class="tab here">
-                    <span>{% trans %}Body 2{% endtrans %}</span>
-                    <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
-                </a>
+                {% if layout_name is null %}
+                    <a id="tab_body" href="#" class="tab here">
+                        <span>{% trans %}Body{% endtrans %}</span>
+                        <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
+                    </a>
+                {% else %}
+                    {% set increment = 0 %}
+                    {% for tab_name in tabs|keys %}
+                        {% set increment = increment + 1 %}
+                        <a id="tab_{{ tab_name }}" href="#" class="tab {{ increment < 2 ? 'here' : '' }} ">
+                          <span> {{ tab_name }} </span>
+                          <img src="{{ asset('bundles/theodothothcms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
+                        </a>
+                    {% endfor%}
+                {%endif%}
             </div>
             <div class="pages" id="pages">
-                <div class="page" id="page_body">
-                    <div class="part" id="part_body">
-                        <p>
-                            {# {{ form_label(form.content) }} #}
-                            {{ form_errors(form.content) }}
+                {% if layout_name is null %}
+                    <div class="page" id="page_body">
+                        <div class="part" id="part_body">
+                            <p>
+                                {# {{ form_label(form.content) }} #}
+                                {{ form_errors(form.content) }}
 
-                            <span class="reference_links">
-                                <a href="http://www.twig-project.org/documentation" target="_blank">{% trans %}Twig documentation{% endtrans %}</a>
-                            </span>
-                        </p>
-                        <div>
-                            {{ form_widget(form.content) }}
+                                <span class="reference_links">
+                                    <a href="http://www.twig-project.org/documentation" target="_blank">{% trans %}Twig documentation{% endtrans %}</a>
+                                </span>
+                            </p>
+                            <div>
+                                {{ form_widget(form.content) }}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% else %}   
+                    {% set increment = 0 %}
+                    {% for tab_name, tab_content in tabs %}
+                        {% set increment = increment + 1 %}
+                        <div class="page {{ increment > 1 ? 'hide' : '' }}" id="page_{{ tab_name }}">
+                            <div class="part" id="part_{{ tab_name }}">
+                                <p>
+                                    {{ form_errors(form.content) }}
+                                    
+                                    <span class="reference_links">
+                                        <a href="http://www.twig-project.org/documentation" target="_blank">{% trans %}Twig documentation{% endtrans %}</a>
+                                    </span>
+                                </p>
+                                <div>
+                                    <textarea id="page_content_{{ tab_name }}" class="textarea large" name="page_block[{{ tab_name }}]" style="width: 100%;">{{ tab_content }}</textarea> 
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor%}
+                 {%endif%}   
             </div>
+        </div>
+        <div class="set">
+             <p
+                <label class="required" for="page_layout">Layout</label>
+                <select class="required" name="page_layout" id="page_layout">
+                    <option value=""></option>
+                    {% for layout in layouts %}
+                        <option {{ layout_name == layout.name ? 'selected="selected"' : '' }} value="{{layout.name}}">{{layout.name}}</option>
+                    {% endfor%}
+                </select>
+            </p>
         </div>
         <div class="set">
             <p>
@@ -162,7 +198,9 @@
                 </div>
             {% endif %}
         </div>
-        {{ form_rest(form) }}
+            
+        {{ form_widget(form._token) }}
+        {{ form_widget(form.parent_id) }}
         <p class="buttons" style="clear: left;">
             <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
             <input accesskey="s" class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />

@@ -8,6 +8,15 @@ jQuery(document).ready(function ()
 
   // Load expand page listener
   loadExpandPageListener();
+  
+  // Load toogle tabs listener
+  loadToogleTabListener();
+  
+  // Load add tab listener
+  loadAddTabListener();
+  
+  // Load supp tab listener
+  loadSupTabListener();
 });
 
 /**
@@ -200,3 +209,163 @@ var updateSlugValue = function ()
   jQuery('#page_slug').val(string_to_slug(jQuery('#page_name').val()));
 }
 
+/**
+ * Load toogle tab listeners
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-09
+ */
+var loadToogleTabListener = function ()
+{
+  // Set listener on input
+  jQuery('.tab').live('click', function (event)
+  {
+    event.preventDefault();
+
+    // Retrieve node
+    var node = jQuery(this);
+    
+    highlightPageBlock(node);
+    
+  });
+  
+}
+
+var highlightPageBlock = function (node)
+{
+    // Hide old tab
+    jQuery('.tab.here').each( function () {jQuery(this).removeClass('here');});
+    
+    // highlight new tab
+    node.addClass('here');
+    
+    // hide the old page and display the new
+    tooglePage(node);
+}
+
+/**
+ * Update page status
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-09
+ */
+var tooglePage = function (node)
+{
+  // Get page id to display
+  page_id = node.attr('id').replace('tab','page');
+
+  // Hide old page
+  jQuery('.page:not(.hide)').each( function () {jQuery(this).addClass('hide');});
+
+  // Display new page
+  jQuery('div#'+page_id).removeClass('hide');
+}
+ 
+/**
+ * Load Add tab listener 
+ * 
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-09
+ */
+var loadAddTabListener = function ()
+{
+  // Set listener on input
+  jQuery('#tab_toolbar > .popup').live('click', function (event)
+  {
+    event.preventDefault();
+    
+    var page_name = 'toto';
+    addTabPage(page_name);
+    
+  });
+    
+}
+
+/**
+ * Add new block 
+ * 
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-09
+ */
+var addTabPage = function (page_name)
+{
+    jQuery('#tabs').append(
+        "<a id='tab_"+page_name+"' href='#' class='tab'>" +
+            "<span> "+page_name+" </span>" +
+            "<img src='/bundles/theodothothcms/images/admin/tab_close.png' class='close' alt='Remove part' title='Remove part' />" +
+        "</a>"  
+    );
+    
+    jQuery('#pages').append(
+        '<div class="page hide" id="page_'+page_name+'">' +
+            '<div class="part" id="part_'+page_name+'">' +
+                '<p>' +
+                    '<span class="reference_links">' +
+                        '<a href="http://www.twig-project.org/documentation" target="_blank">Twig documentation</a>' +
+                    '</span>' +
+                '</p>' +
+                '<div>' +
+                    '<textarea id="page_content_'+page_name+'" class="textarea large" name="page[block_'+page_name+']" style="width: 100%;"></textarea> ' +
+                '</div>' +
+            '</div>' +
+        '</div>'
+    );
+
+    var node = jQuery(".tab:last");
+    
+    highlightPageBlock(node);
+    
+    CKEDITOR.replace('page_content_'+page_name);
+}
+
+/**
+ * Load delete tab listener 
+ * 
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-11
+ */
+var loadSupTabListener = function ()
+{
+  // Set listener on input
+  jQuery('.tab > img.close').live('click', function (event)
+  {
+    event.preventDefault();
+    
+    // Retrieve node
+    node = jQuery(this).parent('a');
+    
+    // delete page & tab
+    supTabPage(node);
+    
+    if (node.hasClass('here'))
+    {
+        // highlight new tab
+        highlightPageBlock(jQuery('.tab:first'));
+    }
+        
+    return false;
+  });
+    
+}
+
+/**
+ * Delete page and tab
+ * 
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-11
+ */
+var supTabPage = function (node) 
+{
+    // Get page id to delete
+    page_id = node.attr('id').replace('tab','page');
+
+    // Delete tab
+    node.remove();
+    
+    // Delete page
+    jQuery('div#'+page_id).remove();
+}

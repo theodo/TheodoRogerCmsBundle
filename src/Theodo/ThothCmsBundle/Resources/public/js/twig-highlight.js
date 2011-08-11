@@ -11,8 +11,11 @@ jQuery(document).ready(function ()
 			,syntax: "twig"
 		});
   */
-  //CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+  CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
   CKEDITOR.config.entities = false;
-  CKEDITOR.replace(textarea_id);
+  CKEDITOR.config.autoParagraph = false;
+  CKEDITOR.config.templates_replaceContent = false;
+  //CKEDITOR.replace(textarea_id);
+  CKEDITOR.replaceAll('textarea');
 
 });

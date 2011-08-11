@@ -45,6 +45,7 @@ class PageController extends Controller
      * @return Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
+     * @author Romain Barberi <romainb@theodo.fr>
      * @since 2011-06-21
      */
     public function editAction($id = null, $parent_id = null)
@@ -68,45 +69,27 @@ class PageController extends Controller
             $parent_page = $page->getParent();
         }
         
-        // FABRICE
-
-        // contenu -> découpage en blocks et layout
-
-        $value = $page->getContent();
-        $twig = $this->get('twig');
-        /*
-        // tentative avortée de faire un mini-parser uniquement block et extends
-
-        $parserbroker = $twig->getTokenParsers();
-        $tokenparsers = $parserbroker->getParsers();
-        var_dump($tokenparsers);
-        foreach($tokenparsers as $name => $tokenparser)
+        // Get all layout
+        $layouts = $this->get('thoth.content_repository')->findAll('layout');
+        
+        $page_content = $page->getContent();
+        
+        //contenu -> récupération du layout
+        if (preg_match('#{% extends [\',\"]layout:(?P<layout_name>(.*))[\',\"] %}#sU', $page_content, $matches))
         {
-            if ($name != 'extends' && $name != 'block')
-            {
-                unset($tokenparsers[$name]);
-            }
+            $layout_name = $matches['layout_name'];
+        } else {
+            $layout_name = null;
         }
-        $parserbroker->setParsers($tokenparsers);*/
-        $tokens = $twig->tokenize($value);
-        $nodes = $twig->parse($tokens);
-        $blocks = $nodes->getnode('blocks');
-        foreach($blocks as $block)
+
+        // contenu -> récupération des blocks
+        if (preg_match_all('#{% block (?P<block_name>(.*)) %}(?P<block_content>(.*)){% endblock %}#sU', $page_content, $matches))
         {
-            $block_name = $block->getAttribute('name');
-            $num_matches = preg_match('/{% block '.$block_name.' %}(.*){% endblock %}/s', $value, $matches);
-            if ($num_matches > 0)
-            {
-                $block_content = $matches[1];
-            }
-            var_dump($block_name);
-            var_dump($block_content);
+            $tabs = array_combine($matches['block_name'], $matches['block_content']);
+        } else {
+            $tabs = array();
         }
-        var_dump($nodes->getnode('parent')->getAttribute('value'));
-        die();
-
-        // FIN FABRICE
-
+                
         // Create form
         $form = $this->createForm(new PageType(), $page);
 
@@ -118,8 +101,8 @@ class PageController extends Controller
 
         // Request is post
         if ($request->getMethod() == 'POST') {
-            // Bind form
-            $form->bindRequest($request);
+            
+            $this->bindEditForm($form, $request);
 
             // Check form and save object
             if ($form->isValid())
@@ -153,7 +136,10 @@ class PageController extends Controller
                 'form'        => $form->createView(),
                 'page'        => $page,
                 'hasErrors'   => $hasErrors,
-                'parent_page' => $parent_page
+                'parent_page' => $parent_page,
+                'layouts'     => $layouts,
+                'layout_name' => $layout_name,
+                'tabs'        => $tabs
             )
         );
     }
@@ -241,5 +227,66 @@ class PageController extends Controller
                 'level' => 0
             )
         );
+    }
+    
+    /**
+     * Bind the edit form
+     * 
+     * @param $form
+     * @param $request
+     * 
+     * @author Romain Barberi <romainb@theodo.fr>
+     * @since 2011-08-11
+     */
+    protected function bindEditForm(&$form, $request)
+    {
+        
+        $data = array_replace_recursive(
+            $request->request->get($form->getName(), array()),
+            $request->files->get($form->getName(), array())
+        );
+               
+        /*
+         * si la clef existe => on est en editions du twig brut
+         * sinon on est uniquement sur l'edition des blocks
+         */
+        if (key_exists('content', $data)) {
+            $page_content = $data['content'];
+        } else {
+            $page_content = '';
+        }
+
+        // Gestion du layout
+        $layout_name = $request->get('page_layout', '');
+        
+        // Gestion de la suppresion du layout
+        $layout_replace = ('' != $layout_name) ? "{% extends 'layout:".$layout_name."' %}" : "";
+        
+        // Maj du layout dans la page
+        if (is_int(strpos($page_content, "{% extends 'layout"))) {
+            $page_content = preg_replace("{% extends 'layout:(.*)' %}", $layout_replace, $page_content);
+        } else {
+            $page_content = $layout_replace.$page_content;
+        }
+
+        // Gestion des blocks
+        $blocks = $request->get('page_block', array());
+        
+        // Maj des différent blocks contenues dans la page
+        foreach( $blocks as $block_name => $block_content)
+        {
+           
+            if (is_int(strpos($page_content, '{% block '.$block_name.' %}'))) {
+                $page_content = preg_replace('{% block '.$block_name.' %}(.*){% endblock %}', '{% block '.$block_name.' %}'.$block_content.'{% endblock %}', $page_content);
+            } else {
+                $page_content .= '{% block '.$block_name.' %}'.$block_content.'{% endblock %}';
+            }
+
+        }
+
+        $data['content'] = $page_content;
+
+        // Bind form
+        $form->bind($data);
     }
 }
