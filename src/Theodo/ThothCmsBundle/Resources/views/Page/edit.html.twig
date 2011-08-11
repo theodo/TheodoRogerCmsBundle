@@ -4,11 +4,16 @@
 {% set tab = 'content' %}
 {% set nav = 'pages' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/theodothothcms/css/jqModal.css') }}" type="text/css" media="screen" />
+{% endblock %}
+
 {% block javascripts_assets %}
-<script type="text/javascript"> textarea_id = 'page_content'; form_id = 'new_page'; </script>
-<script src="{{ asset('bundles/theodothothcms/js/page.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/theodothothcms/js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/theodothothcms/js/twig-highlight.js') }}" type="text/javascript"></script>
+    <script type="text/javascript"> textarea_id = 'page_content'; form_id = 'new_page'; </script>
+    <script src="{{ asset('bundles/theodothothcms/js/page.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/theodothothcms/js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/theodothothcms/js/twig-highlight.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/theodothothcms/js/jqModal.js') }}" type="text/javascript"></script>
 {% endblock %}
 
 {% block page_title "Pages" %}
@@ -211,4 +216,29 @@
           {% trans %}Last Updated by <strong>Administrator</strong> at 07:27 am on January 02, 2009{% endtrans %}
         </p> #}
     </form>
+
+    <div id="popin-delete" class="jqmWindow">
+        <div class="modal-title">
+          <h4>Delete block</h4>
+          <a href="#" class="jqmClose" title="Close window">X fermer</a>
+        </div>
+        <div class="modal-content">
+          <p>Delete this tab ?</p>
+          <input type="submit" value="yes" name="yes">
+          <input type="submit" value="no" name="no">
+        </div>
+    </div>
+
+    <div id="popin-add" class="jqmWindow">
+        <div class="modal-title">
+          <h4>Create new block</h4>
+          <a href="#" class="jqmClose" title="Close window">X fermer</a>
+        </div>
+        <div class="modal-content">
+          <p>Delete this tab ?</p>
+          <input type="text" value="" name="new-block">
+          <input type="submit" value="ok" name="ok">
+          <input type="submit" value="cancel" name="cancel">
+        </div>
+    </div>
 {% endblock %}

@@ -17,6 +17,9 @@ jQuery(document).ready(function ()
   
   // Load supp tab listener
   loadSupTabListener();
+    
+  loadPopinListerner();
+
 });
 
 /**
@@ -274,10 +277,25 @@ var loadAddTabListener = function ()
   jQuery('#tab_toolbar > .popup').live('click', function (event)
   {
     event.preventDefault();
-    
-    var page_name = 'toto';
-    addTabPage(page_name);
-    
+
+      // Retrieve node
+      node = jQuery(this).parent('a');
+
+      jQuery('#popin-add')
+        .jqmShow()
+        .find(':submit:visible')
+        .click(function(){
+            if (this.value == 'ok') {
+                page_name = jQuery(this).parent('div').children('input:text').val();
+                if ('' != page_name) {
+                    addTabPage(page_name);
+                }
+                jQuery(this).parent('div').children('input:text').val('');
+            }
+            $('#popin-add').jqmHide();
+        });
+
+      return false;
   });
     
 }
@@ -312,10 +330,8 @@ var addTabPage = function (page_name)
             '</div>' +
         '</div>'
     );
-
-    var node = jQuery(".tab:last");
     
-    highlightPageBlock(node);
+    highlightPageBlock(jQuery(".tab:last"));
     
     CKEDITOR.replace('page_content_'+page_name);
 }
@@ -329,25 +345,33 @@ var addTabPage = function (page_name)
  */
 var loadSupTabListener = function ()
 {
-  // Set listener on input
-  jQuery('.tab > img.close').live('click', function (event)
-  {
-    event.preventDefault();
-    
-    // Retrieve node
-    node = jQuery(this).parent('a');
-    
-    // delete page & tab
-    supTabPage(node);
-    
-    if (node.hasClass('here'))
+    // Set listener on input
+    jQuery('.tab > img.close').live('click', function (event)
     {
-        // highlight new tab
-        highlightPageBlock(jQuery('.tab:first'));
-    }
-        
-    return false;
-  });
+      event.preventDefault();
+
+      // Retrieve node
+      node = jQuery(this).parent('a');
+
+      jQuery('#popin-delete')
+        .jqmShow()
+        .find(':submit:visible')
+        .click(function(){
+            if (this.value == 'yes') {
+                // delete page & tab
+                supTabPage(node);
+
+                if (node.hasClass('here'))
+                {
+                   // highlight new tab
+                   highlightPageBlock(jQuery('.tab:first'));
+                }
+            }
+            $('#popin-delete').jqmHide();
+        });
+
+      return false;
+     });  
     
 }
 
@@ -368,4 +392,16 @@ var supTabPage = function (node)
     
     // Delete page
     jQuery('div#'+page_id).remove();
+}
+
+/**
+ * Load delete tab listener 
+ * 
+ *
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @since 2011-08-11
+ */
+var loadPopinListerner = function ()
+{
+    jQuery('#popin-delete, #popin-add').jqm({overlay: 45, toTop: true});
 }
