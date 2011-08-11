@@ -285,14 +285,12 @@ var loadAddTabListener = function ()
         .jqmShow()
         .find(':submit:visible')
         .click(function(){
-            if (this.value == 'ok') {
-                page_name = jQuery(this).parent('div').children('input:text').val();
-                if ('' != page_name) {
-                    addTabPage(page_name);
-                }
+            page_name = jQuery(this).parent('div').children('input:text').val().replace(/[\s|\n|\r|\t]/g, '');
+            if (this.value == 'ok' && '' != page_name && !page_name.match(/[\]\[!\"#$%&'()*+,./:;<=>?@\^`{|}~-]/g)) {
+                addTabPage(page_name);
                 jQuery(this).parent('div').children('input:text').val('');
+                $('#popin-add').jqmHide();
             }
-            $('#popin-add').jqmHide();
         });
 
       return false;
@@ -325,7 +323,7 @@ var addTabPage = function (page_name)
                     '</span>' +
                 '</p>' +
                 '<div>' +
-                    '<textarea id="page_content_'+page_name+'" class="textarea large" name="page[block_'+page_name+']" style="width: 100%;"></textarea> ' +
+                    '<textarea id="page_content_'+page_name+'" class="textarea large" name="page_block['+page_name+']" style="width: 100%;"></textarea> ' +
                 '</div>' +
             '</div>' +
         '</div>'
