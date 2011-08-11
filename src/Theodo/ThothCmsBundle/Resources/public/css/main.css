@@ -2119,3 +2119,62 @@ table.index td.note
 {
   display: block;
 }
+
+.jqmWindow {
+    display: none;
+    
+    position: fixed;
+    top: 17%;
+    left: 50%;
+    
+    margin-left: -150px;
+    width: 300px;
+    
+    background-color: #fff;
+    color: #000;
+    border: 0px solid black;
+    padding: 0px;
+    
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+
+}
+
+.jqmWindow .modal-title {
+    background: url("../images/admin/navigation_background.png") repeat-x scroll 0 0 #11649E;
+    height: 45px;
+    position: relative;
+    width: 100%;
+    top: -1px;
+    -moz-border-radius-topleft: 6px;
+    -webkit-border-top-left-radius: 6px;
+    border-top-left-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -webkit-border-top-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.jqmWindow .modal-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.jqmWindow h4 {
+    left: 20px;
+    position: absolute;
+    top: 15px;
+}
+
+.jqmWindow a.jqmClose {
+    color: #000;
+    display: block;
+    font-size: 12px;
+    position: absolute;
+    right: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    top: 15px;
+    z-index: 1;
+}
