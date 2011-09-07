@@ -1,3 +1,0 @@
-ThothCms:
-    resource: "@TheodoThothCmsBundle/Resources/config/routing.yml"
-    prefix: /
