@@ -1,0 +1,60 @@
+{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+
+{% set body_class = 'reversed edit_personal_preferences' %}
+{% set tab = 'settings' %}
+{% set nav = 'personal' %}
+
+{% block page_title "Preferences" %}
+
+{% block javascripts_assets %}
+<script src="{{ asset('bundles/theodothothcms/js/user.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% form_theme form 'TheodoThothCmsBundle:Form:form_user_layout.html.twig' %}
+
+{% block cmscontent %}
+    <h1>{% trans %}Personal Preferences{% endtrans %}</h1>
+    
+    <form class="edit_user" action="{{ url('user_preferencesUpdate') }}" method="post" {{ form_enctype(form) }}>
+        <div id="avatar">
+          <img width="80" height="80" src="http://www.gravatar.com/avatar/{{user.gravatarEmailHash}}" class="avatar" alt="" />
+          <p class="caption">{% trans %}Avatar provided by Gravatar.com{% endtrans %}</p>
+        </div>
+      
+        <p>{{ form_row(form.name) }}</p>
+      
+        <p>{{ form_row(form.username) }}</p>
+      
+        <p>{{ form_row(form.email) }}</p>
+      
+        <p id="display_password" class="{% if form_errors(form.password) or form_errors(form) %}hide{% else %}display{% endif %}">
+            <label>{% trans %}Password{% endtrans %}</label>
+
+            <span class="value">
+              •••••
+              <a id="change-password-link" href="#" class="action">{% trans %}Change{% endtrans %}</a>
+            </span>
+        </p>
+
+        <div class="set change-password {% if form_errors(form.password) or form_errors(form) %}display{% else %}hide{% endif %}">
+            <p>{{ form_row(form.password) }}</p>
+            {#<p>
+                {{ form_row(form.password_confirm) }}
+                <span>
+                    {% trans %} or {% endtrans %}
+                    <a id="cancel-change-password-link" href="#" class="action">{% trans %}Cancel{% endtrans %}</a>
+                </span>#}
+            </p>
+        </div>
+        
+        <p>{{ form_row(form.language) }}</p>
+
+        {{ form_rest(form) }}
+      
+        <p class="buttons">
+            <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save" />
+            {% trans %}or{% endtrans %}
+            <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+        </p>
+    </form>
+{% endblock %}

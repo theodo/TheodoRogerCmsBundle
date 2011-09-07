@@ -1,0 +1,147 @@
+# Admin routing
+login:
+    pattern:  /admin
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:login }
+
+login_check:
+    pattern:   /admin/login
+
+logout:
+    pattern:   /admin/logout
+
+user_accessDenied:
+    pattern: /admin/access-denied
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:accessDenied }
+
+# User routing
+user_list:
+    pattern:  /admin/users
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:list }
+
+user_edit:
+    pattern:  /admin/users/{id}/edit
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:edit, self: false }
+
+user_new:
+    pattern:  /admin/users/new
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:edit, id: null, self: false }
+
+user_remove:
+    pattern:  /admin/users/{id}/remove
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:remove }
+
+user_preferences:
+    pattern:  /admin/preferences/edit
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:edit, id: null, self: true }
+
+user_preferencesUpdate:
+    pattern:  /admin/preferences/update
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:edit, id: null, self: true }
+
+user_update:
+    pattern:  /admin/users/{id}/update
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:edit, self: false }
+
+user_checkSessionLocale:
+    pattern:  /admin/check-session/{redirect_route}
+    defaults: { _controller: TheodoThothCmsBundle:Backend\User:checkSessionLocale }
+
+# Page routing
+page_list:
+    pattern:  /admin/pages
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Page:index }
+
+page_new:
+    pattern:  /admin/pages/{parent_id}/new
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Page:edit, id: null }
+
+page_edit:
+    pattern:  /admin/pages/{id}/edit
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Page:edit }
+
+page_update:
+    pattern:  /admin/pages/{id}/update
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Page:edit }
+
+page_remove:
+    pattern:  /admin/pages/{id}/remove
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Page:remove }
+
+page_expand:
+    pattern:  /admin/pages/{id}/expand/{level}
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Page:expand }
+
+# Layout routing
+layout_new:
+    pattern: /admin/layouts/new
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Layout:edit, id: null }
+
+layout_update:
+    pattern: /admin/layouts/{id}
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Layout:edit }
+
+layout_edit:
+    pattern: /admin/layouts/{id}/edit
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Layout:edit }
+
+layout_list:
+    pattern: /admin/layouts
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Layout:index }
+
+layout_remove:
+    pattern: /admin/layouts/{id}/remove
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Layout:remove }
+
+# Snippet routing
+snippet_new:
+    pattern: /admin/snippets/new
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Snippet:edit, id: null }
+
+snippet_update:
+    pattern: /admin/snippets/{id}
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Snippet:edit }
+
+snippet_edit:
+    pattern: /admin/snippets/{id}/edit
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Snippet:edit }
+
+snippet_list:
+    pattern: /admin/snippets
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Snippet:index }
+
+snippet_remove:
+    pattern: /admin/snippets/{id}/remove
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Snippet:remove }
+
+# Media routing
+media_new:
+    pattern: /admin/medias/new
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Media:edit, id: null }
+
+media_update:
+    pattern: /admin/medias/{id}
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Media:edit }
+
+media_edit:
+    pattern: /admin/medias/{id}/edit
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Media:edit }
+
+media_list:
+    pattern: /admin/medias
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Media:index }
+
+media_remove:
+    pattern: /admin/medias/{id}/remove
+    defaults: { _controller: TheodoThothCmsBundle:Backend\Media:remove }
+
+# ESI routing
+_internal:
+    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+    prefix:   /_internal
+
+# Frontend routing
+page:
+    pattern: /{slug}
+    defaults: { _controller: TheodoThothCmsBundle:Frontend\Frontend:page, slug: 'homepage'}
+    requirements:
+        slug: ".+"
