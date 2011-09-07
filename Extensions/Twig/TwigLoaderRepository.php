@@ -52,9 +52,9 @@ class TwigLoaderRepository implements Twig_LoaderInterface
           // fais le path relative au dossier principal du projet
           $path_prefix = __DIR__.'/../../../../../';
 
-          if (file_exists($path_prefix.$fallback_path))
+          if (!file_exists($path_prefix.$fallback_path))
           {
-              throw new \InvalidArgumentException('The specified fallback path does not exist.');
+              throw new \InvalidArgumentException('The specified fallback path does not exist. Tried to access: '.$path_prefix.$fallback_path);
           }
 
           $this->fallback_loader->addPath($path_prefix.$fallback_path);
