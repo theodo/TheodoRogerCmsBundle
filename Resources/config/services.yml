@@ -15,7 +15,7 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
     thoth.twig.loader:
         class: %thoth.twig.loader.class%
-        arguments: ['@thoth.content_repository', '@twig.loader']
+        arguments: ['@thoth.content_repository', '@twig.loader', %thot.twig.loader.fallback_path%]
     thoth.twig:
         class: %twig.class%
         arguments: ['@thoth.twig.loader', %twig.options%]

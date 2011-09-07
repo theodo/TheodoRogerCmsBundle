@@ -43,13 +43,21 @@ class TwigLoaderRepository implements Twig_LoaderInterface
      * @author fabriceb
      * @since 2001-06-22
      */
-    public function __construct(ContentRepositoryInterface $content_repository, Twig_LoaderInterface $fallback_loader = null)
+    public function __construct(ContentRepositoryInterface $content_repository, Twig_LoaderInterface $fallback_loader = null, $fallback_path = null)
     {
         $this->content_repository = $content_repository;
         $this->fallback_loader = $fallback_loader;
-        if ($this->fallback_loader instanceof Twig_Loader_Filesystem)
+        if ($this->fallback_loader instanceof Twig_Loader_Filesystem && $fallback_path != null)
         {
-          $this->fallback_loader->addPath(__DIR__.'/../../../CiteDeLespaceBundle/Resources/views');
+          // fais le path relative au dossier principal du projet
+          $path_prefix = __DIR__.'/../../../../../';
+
+          if (file_exists($path_prefix.$fallback_path))
+          {
+              throw new \InvalidArgumentException('The specified fallback path does not exist.');
+          }
+
+          $this->fallback_loader->addPath($path_prefix.$fallback_path);
         }
     }
 
