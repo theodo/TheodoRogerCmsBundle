@@ -14,17 +14,17 @@ namespace Theodo\ThothCmsBundle\Extensions\Twig;
 use Twig_Environment;
 use Twig_Function_Method;
 
-class Twig_Cache_Database
+class TwigCacheDatabase
 {
     /**
      *
-     * @var Twig_Environment 
+     * @var Twig_Environment
      */
     protected $twig_environment = null;
-    
+
     /**
      *
-     * @param Twig_Environment $twig_environment 
+     * @param Twig_Environment $twig_environment
      * @author fabriceb
      * @since 2001-06-24
      */
@@ -32,12 +32,12 @@ class Twig_Cache_Database
     {
         $this->twig_environment = $twig_environment;
     }
-    
+
     /**
      *
      * @return Twig_Environment
      * @author fabriceb
-     * @since 2001-06-24 
+     * @since 2001-06-24
      */
     public function getTwigEnvironment()
     {
@@ -46,7 +46,7 @@ class Twig_Cache_Database
 
     /**
      *
-     * @param Twig_Environment $twig_environment 
+     * @param Twig_Environment $twig_environment
      * @author fabriceb
      * @since 2001-06-24
      */
@@ -54,7 +54,7 @@ class Twig_Cache_Database
     {
         $this->twig_environment = $twig_environment;
     }
-    
+
     /**
      *
      * @param string $name
@@ -65,7 +65,7 @@ class Twig_Cache_Database
     {
         @unlink($this->getTwigEnvironment()->getCacheFilename($name));
     }
-    
+
     /**
      *
      * @param string $name

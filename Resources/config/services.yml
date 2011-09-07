@@ -1,6 +1,6 @@
 parameters:
-    thoth.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig\Twig_Loader_Repository
-    thoth.caching.class: Theodo\ThothCmsBundle\Extensions\Twig\Twig_Cache_Database
+    thoth.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig\TwigLoaderRepository
+    thoth.caching.class: Theodo\ThothCmsBundle\Extensions\Twig\TwigCacheDatabase
     thoth.content_repository.class: Theodo\ThothCmsBundle\Repository\ContentEntityRepository
     thoth.routing.class: Theodo\ThothCmsBundle\Extensions\Twig\Extension\ThothRoutingExtension
     thoth.twig.extension.actions.class: Theodo\ThothCmsBundle\Extensions\Twig\Extension\ThothActionsExtension

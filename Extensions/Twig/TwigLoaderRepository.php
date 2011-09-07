@@ -20,22 +20,22 @@ use Theodo\ThothCmsBundle\Repository\ContentRepositoryInterface;
  * Loads a template from a repository.
  *
  */
-class Twig_Loader_Repository implements Twig_LoaderInterface
+class TwigLoaderRepository implements Twig_LoaderInterface
 {
-    
+
     static $types = array('page', 'snippet', 'layout');
     /**
      *
      * @var ContentRepositoryInterface
      */
     protected $content_repository = null;
-    
+
     /**
      *
      * @var Twig_LoaderInterface
      */
     protected $fallback_loader = null;
-    
+
     /**
      *
      * @param ContentRepositoryInterface $content_repository
@@ -52,12 +52,12 @@ class Twig_Loader_Repository implements Twig_LoaderInterface
           $this->fallback_loader->addPath(__DIR__.'/../../../CiteDeLespaceBundle/Resources/views');
         }
     }
-    
+
     /**
      *
      * @return EntityManager
      * @author fabriceb
-     * @since 2001-06-22 
+     * @since 2001-06-22
      */
     public function getContentRepository()
     {
@@ -74,7 +74,7 @@ class Twig_Loader_Repository implements Twig_LoaderInterface
     {
         $this->content_repository = $content_repository;
     }
-    
+
     public static function parseName($name)
     {
         $name_parts = explode(':', $name);
@@ -87,10 +87,10 @@ class Twig_Loader_Repository implements Twig_LoaderInterface
             return false;
         }
         $name = $name_parts[1];
-        
+
         return array($type, $name);
     }
-    
+
     /**
      * Gets the source code of a template, given its name.
      * Name format can be 'name' or 'type:name' where type is 'page', 'layout', or 'snippet'
@@ -98,14 +98,14 @@ class Twig_Loader_Repository implements Twig_LoaderInterface
      * @param  string $name The name of the template to load
      *
      * @return string The template source code
-     * 
+     *
      * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2011-06-22
      */
     public function getSource($name)
     {
         $parsed_info = self::parseName($name);
-        
+
         if ($parsed_info === false) {
             return $this->fallback_loader->getSource($name);
         }
@@ -120,8 +120,8 @@ class Twig_Loader_Repository implements Twig_LoaderInterface
         if (!$source) {
             throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type: '.$type);
         }
-        
-        //$this->get('logger')->info('ThothCmsBundle: ('.$type.', '.$name.' loaded');        
+
+        //$this->get('logger')->info('ThothCmsBundle: ('.$type.', '.$name.' loaded');
 
         return $source;
     }
