@@ -8,12 +8,14 @@ at this stage of developement.
 ## Installation
 
 ### Step 1: Downloading the bundle
-As for time being this bundle is usable and tested only as a submodule in your
-`src/` directory.
-To add it to your project execute this command:
+As for time being this bundle is tested only being in your `src/` directory.
+To add it to your project add the following entry to your deps file:
 
 ``` bash
-$ git submodule add git@github.com:Allomatch/TheodoThothCMSBundle.git src/Theodo/ThothCmsBundle
+[ThothCmsBundle]
+    git=git@github.com:Allomatch/TheodoThothCMSBundle.git
+    version=origin/citedelespace
+    target=../src/Theodo/ThothCmsBundle
 ```
 
 ### Step 2: Dependencies
