@@ -110,7 +110,7 @@ class FrontendController extends Controller
         $snippet = $this->get('thoth.content_repository')->findOneByName($name, 'snippet');
 
         if (!$snippet) {
-              throw $this->createNotFoundException();
+              throw $this->createNotFoundException('Snippet "'.$name.'" not found.');
         }
 
         $response = self::configureCache($snippet, new Response());
