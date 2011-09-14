@@ -14,14 +14,14 @@ class UserType extends UserPreferencesType
 {
     /**
      * Form builder
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        
+
         // Set inputs
         $builder->add('notes', 'textarea', array('required' => false));
         if (null === $options['data']->getPassword()) {
@@ -31,13 +31,14 @@ class UserType extends UserPreferencesType
             'class'    => 'Theodo\\ThothCmsBundle\\Entity\\Role',
             'expanded' => true,
             'multiple' => true,
-            'required' => true
+            'required' => true,
+            'em' => $options['em'],
         ));
     }
-   
+
     /**
      * Form default options
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
@@ -45,6 +46,7 @@ class UserType extends UserPreferencesType
     {
         return array(
            'data_class' => 'Theodo\ThothCmsBundle\Entity\User',
+           'em' => null,
         );
     }
 

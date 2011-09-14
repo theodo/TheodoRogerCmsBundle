@@ -1,4 +1,5 @@
 parameters:
+    thoth.entity_manager.name: default
     thoth.user_provider.class: Symfony\Bridge\Doctrine\Security\User\EntityUserProvider
     thoth.user_provider.user.class: Theodo\ThothCmsBundle\Entity\User
     thoth.user_provider.user.parameter: username

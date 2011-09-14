@@ -32,7 +32,7 @@ class UserController extends Controller
     {
 
         return $this->get('doctrine')->getEntityManager(
-            $this->getContainer()->getParameter('thoth.entity_manager')
+            $this->container->getParameter('thoth.entity_manager.name')
         );
     }
     /**
@@ -307,7 +307,9 @@ class UserController extends Controller
         }
 
         // Create form
-        $form = $this->createForm(new UserType(false), $user);
+        $form = $this->createForm(new UserType(false), $user, array(
+            'em' => $this->container->getParameter('thoth.entity_manager.name'),
+        ));
 
         // Retrieve request
         $request = $this->get('request');
