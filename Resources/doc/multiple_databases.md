@@ -21,7 +21,7 @@ How?
 
 1. Define your connection
 (all changes take place in config yml)
-```
+```yaml
 doctrine:
     dbal:
         connections:
@@ -33,11 +33,10 @@ doctrine:
                 user:     %cms.database_user%
                 password: %cms.database_password%
                 charset:  UTF8
-            ...
 ```
 
 2. Add an entity manager to this connection:
-```
+```yaml
 doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -48,11 +47,10 @@ doctrine:
                 mappings:
                     TheodoThothCmsBundle: ~
                     StofDoctrineExtensionsBundle: false
-            ...
 ```
 
 3. Add the timestampable behaviour to that entity manager
-```
+```yaml
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
@@ -63,7 +61,6 @@ stof_doctrine_extensions:
             sluggable:     false
             translatable:  false
             loggable:      false
-        ...
 ```
 
 4. Overwrite Thoth services to use your new entity manager
