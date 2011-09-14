@@ -23,7 +23,6 @@ class UserController extends Controller
 {
 
     /**
-     *
      * @return EntityManager
      *
      * @author fabricbe
@@ -32,7 +31,9 @@ class UserController extends Controller
     public function getEntityManager()
     {
 
-        return $this->get('doctrine.orm.entity_manager');
+        return $this->get('doctrine')->getEntityManager(
+            $this->getContainer()->getParameter('thoth.entity_manager')
+        );
     }
     /**
      *
