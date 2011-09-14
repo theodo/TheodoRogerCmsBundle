@@ -8,8 +8,8 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_CLIENT, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        main:
-            entity: { class: Theodo\ThothCmsBundle\Entity\User, property: username }
+        cms_user:
+            id: thoth.user_provider
 
     firewalls:
         profiler:

@@ -1,4 +1,7 @@
 parameters:
+    thoth.user_provider.class: Symfony\Bridge\Doctrine\Security\User\EntityUserProvider
+    thoth.user_provider.user.class: Theodo\ThothCmsBundle\Entity\User
+    thoth.user_provider.user.parameter: username
     thoth.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig\TwigLoaderRepository
     thoth.caching.class: Theodo\ThothCmsBundle\Extensions\Twig\TwigCacheDatabase
     thoth.content_repository.class: Theodo\ThothCmsBundle\Repository\ContentEntityRepository
@@ -10,6 +13,12 @@ parameters:
     gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener
 
 services:
+    thoth.user_provider:
+        class: %thoth.user_provider.class%
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - %thoth.user_provider.user.class%
+            - %thoth.user_provider.user.parameter%
     thoth.content_repository:
         class: %thoth.content_repository.class%
         arguments: ['@doctrine.orm.entity_manager']
