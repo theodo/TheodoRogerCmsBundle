@@ -1,21 +1,38 @@
 <?php
-namespace Theodo\ThothCmsBundle\Validator;
+namespace Theodo\ThothCmsBundle\Validator\Constraints;
 
-use Symfony\Bridge\Doctrine\Validator\Constraints;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineConstraints;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
+use Symfony\Component\Validator\ConstraintValidator;
+
 /**
- * Description of ThothUniqueEntityValidator
+ * This class is a correction to symfony entity validator
+ * Which takes the default entity manager instead of entity's own manager
+ * causing errors with multiple EMs.
+ *
+ * A pull request has been made to sf2.1
  *
  * @author Marek Kalnik <marekk@theodo.fr>
  */
-class ThothUniqueEntityValidator extends UniqueEntityValidator
+class ThothUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidator
 {
     /**
-     * This class is a correction to symfony entity validator
-     * Which takes the default entity manager instead of entity's own manager
-     * causing errors with multiple EMs.
-     *
-     * A pull request has been made to sf2.1
-     *
+     * @var RegistryInterface
+     */
+    private $registry;
+
+    /**
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry)
+    {
+        $this->registry = $registry;
+    }
+
+    /**
      * @see UniqueEntityValidator
      */
     public function isValid($entity, Constraint $constraint)
@@ -30,7 +47,7 @@ class ThothUniqueEntityValidator extends UniqueEntityValidator
             throw new ConstraintDefinitionException("At least one field has to be specified.");
         }
 
-        if ($constraint->$em) {
+        if ($constraint->em) {
             $em = $this->registry->getEntityManager($constraint->em);
         } else {
             $em = $this->registry->getEntityManagerForClass(get_class($entity));

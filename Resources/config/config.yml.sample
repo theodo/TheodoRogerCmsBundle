@@ -50,6 +50,3 @@ stof_doctrine_extensions:
             sluggable:     false
             translatable:  false
             loggable:      false
-
-doctrine.orm.validator.unique:
-    class: Theodo\ThothCmsBundle\Validator\ThothUniqueEntityValidator

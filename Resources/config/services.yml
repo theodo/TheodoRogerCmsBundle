@@ -51,6 +51,11 @@ services:
         arguments: ['@thoth.twig']
         tags:
             - { name: validator.constraint_validator, alias: validator.twig_syntax }
+    doctrine.orm.validator.unique:
+        class: Theodo\ThothCmsBundle\Validator\Constraints\ThothUniqueEntityValidator
+        tags:
+            - { name: validator.constraint_validator, alias: doctrine.orm.validator.unique }
+        arguments: ['@doctrine']
 
     # Timestampable listener
     gedmo.timestampable.listener:
