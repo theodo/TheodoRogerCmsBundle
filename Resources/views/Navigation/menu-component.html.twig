@@ -1,0 +1,24 @@
+{% set current_tab = tab|default('content') %}
+{% set current_nav = nav|default('') %}
+
+<ul id="navigation">
+    {% for tabKey,tab in menu %}
+        {% if not tab.roles or is_granted(tab.roles) %}
+            <li{% if current_tab == tabKey %} class="current"{% endif %}>
+                <a href="{{ url(tab.route) }}">{{ tab.name }}</a>
+
+                <ul class="nav_sub">
+                    {% for linkKey,link in tab.links %}
+                        {% if not link.roles or is_granted(link.roles) %}
+                            <li>
+                                <a{% if current_nav == linkKey %} class="current"{% endif %} href="{{ url(link.route) }}">
+                                    <span>{{ link.name }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
