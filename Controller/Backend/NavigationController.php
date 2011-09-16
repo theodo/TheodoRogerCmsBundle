@@ -25,7 +25,7 @@ class NavigationController extends Controller
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-09-14
      */
-    public function menuComponentAction()
+    public function menuComponentAction($request)
     {
         // Build thoth.menu.yml file path
         $path = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'thoth.menu.yml';
@@ -43,7 +43,10 @@ class NavigationController extends Controller
 
         return $this->render(
             'TheodoThothCmsBundle:Navigation:menu-component.html.twig',
-            array('menu' => $menu)
+            array(
+                'menu'    => $menu,
+                'request' => $request
+            )
         );
     }
 }

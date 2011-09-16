@@ -16,7 +16,7 @@
         <div id="page" class="thoth">
             <div id="header">
                 {% render "TheodoThothCmsBundle:Backend\\User:boxComponent" %}
-                {% render "TheodoThothCmsBundle:Backend\\Navigation:menuComponent" %}
+                {% render "TheodoThothCmsBundle:Backend\\Navigation:menuComponent" with { 'request' : app.request } %}
 
                 <div id="header_bottom">
                     <div></div>

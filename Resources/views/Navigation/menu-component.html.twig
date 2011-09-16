@@ -1,5 +1,5 @@
-{% set current_tab = tab|default('content') %}
-{% set current_nav = nav|default('') %}
+{% set current_tab = request.get('tab')|default('content') %}
+{% set current_nav = request.get('nav')|default('') %}
 
 <ul id="navigation">
     {% for tabKey,tab in menu %}

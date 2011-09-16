@@ -2,47 +2,40 @@ content:
     name: Content
     roles: false
     route: page_list
-    a_link_attributes: []
     links:
         medias:
             roles: false
             name: Medias
             route: media_list
-            a_link_attributes: []
         pages:
             roles: false
             name: Pages
             route: page_list
-            a_link_attributes: []
+
 design:
     name: Design
     roles: [ROLE_USER]
     route: layout_list
-    a_link_attributes: []
     links:
         layouts:
             roles: false
             name: Layouts
             route: layout_list
-            a_link_attributes: []
         snippets:
             roles: false
             name: Snippets
             route: snippet_list
-            a_link_attributes: []
+
 settings:
     name: Settings
     roles: false
     route: user_preferences
-    a_link_attributes: []
     links:
         personal:
             roles: false
             name: Personal
             route: user_preferences
-            a_link_attributes: []
         users:
             roles: [ROLE_ADMIN]
             name: Users
             route: user_list
-            a_link_attributes: []

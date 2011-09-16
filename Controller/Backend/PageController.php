@@ -68,12 +68,12 @@ class PageController extends Controller
             $page = $this->get('thoth.content_repository')->findOneById($id);
             $parent_page = $page->getParent();
         }
-        
+
         // Get all layout
         $layouts = $this->get('thoth.content_repository')->findAll('layout');
-        
+
         $page_content = $page->getContent();
-        
+
         //contenu -> récupération du layout
         if (preg_match('#{% extends [\',\"]layout:(?P<layout_name>(.*))[\',\"] %}#sU', $page_content, $matches))
         {
@@ -89,7 +89,7 @@ class PageController extends Controller
         } else {
             $tabs = array();
         }
-                
+
         // Create form
         $form = $this->createForm(new PageType(), $page);
 
@@ -101,7 +101,7 @@ class PageController extends Controller
 
         // Request is post
         if ($request->getMethod() == 'POST') {
-            
+
             $this->bindEditForm($form, $request);
 
             // Check form and save object
@@ -228,24 +228,24 @@ class PageController extends Controller
             )
         );
     }
-    
+
     /**
      * Bind the edit form
-     * 
+     *
      * @param $form
      * @param $request
-     * 
+     *
      * @author Romain Barberi <romainb@theodo.fr>
      * @since 2011-08-11
      */
     protected function bindEditForm(&$form, $request)
     {
-        
+
         $data = array_replace_recursive(
             $request->request->get($form->getName(), array()),
             $request->files->get($form->getName(), array())
         );
-               
+
         /*
          * si la clef existe => on est en editions du twig brut
          * sinon on est uniquement sur l'edition des blocks
@@ -258,10 +258,10 @@ class PageController extends Controller
 
         // Gestion du layout
         $layout_name = $request->get('page_layout', '');
-        
+
         // Gestion de la suppresion du layout
         $layout_replace = ('' != $layout_name) ? "{% extends 'layout:".$layout_name."' %}" : "";
-        
+
         // Maj du layout dans la page
         if (is_int(strpos($page_content, "{% extends 'layout"))) {
             $page_content = preg_replace("{% extends 'layout:(.*)' %}", $layout_replace, $page_content);
@@ -271,11 +271,11 @@ class PageController extends Controller
 
         // Gestion des blocks
         $blocks = $request->get('page_block', array());
-        
+
         // Maj des différent blocks contenues dans la page
         foreach( $blocks as $block_name => $block_content)
         {
-           
+
             if (is_int(strpos($page_content, '{% block '.$block_name.' %}'))) {
                 $page_content = preg_replace('{% block '.$block_name.' %}(.*){% endblock %}', '{% block '.$block_name.' %}'.$block_content.'{% endblock %}', $page_content);
             } else {
