@@ -11,7 +11,7 @@
                     {% for linkKey,link in tab.links %}
                         {% if not link.roles or is_granted(link.roles) %}
                             <li>
-                                <a{% if current_nav == linkKey %} class="current"{% endif %} href="{{ url(link.route) }}">
+                                <a{% if current_nav == linkKey %} class="current"{% endif %} href="{{ path(link.route, link.route_parameters|default({})) }}">
                                     <span>{{ link.name }}</span>
                                 </a>
                             </li>
