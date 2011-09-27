@@ -526,8 +526,9 @@ class Page
      */
     public function isHomepage()
     {
-        return $this->getSlug() == 'homepage';
+        return $this->getSlug() == PageRepository::SLUG_HOMEPAGE;
     }
+
     /**
      * @var string $title
      */
