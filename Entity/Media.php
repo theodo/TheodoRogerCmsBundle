@@ -194,8 +194,10 @@ class Media
      */
     public function removeUpload()
     {
-        if ($file = $this->getFullPath() && file_exists($file)) {
-            unlink($file);
+        if ($file = $this->getFullPath()) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
         }
     }
 
