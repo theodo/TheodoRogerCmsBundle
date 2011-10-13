@@ -43,7 +43,7 @@ class Media
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class Media
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -98,7 +98,7 @@ class Media
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -118,7 +118,7 @@ class Media
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -138,7 +138,7 @@ class Media
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -148,10 +148,10 @@ class Media
     /**
      * Media validator
      *
-     * 
+     *
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {        
+    {
         // Name validator: not null
         $metadata->addPropertyConstraint('name', new NotBlank());
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
@@ -194,11 +194,11 @@ class Media
      */
     public function removeUpload()
     {
-        if ($file = $this->getFullPath()) {
+        if ($file = $this->getFullPath() && file_exists($file)) {
             unlink($file);
         }
     }
-    
+
     public function getFullPath()
     {
         return self::getUploadRootDir().'/'.$this->path;
