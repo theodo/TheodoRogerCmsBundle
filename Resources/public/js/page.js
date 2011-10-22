@@ -85,7 +85,7 @@ var hideChildren = function (node)
   children.hide();
 
   // Update expand picture
-  node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/expand.png" />');
+  node.html('<img alt="toggle children" class="expander" src="/bundles/theodorogercms/images/admin/expand.png" />');
 
   // remove expanded class
   node.removeClass('expanded');
@@ -110,7 +110,7 @@ var showChildren = function (node)
   children.show();
 
   // Update expand picture
-  node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/collapse.png" />');
+  node.html('<img alt="toggle children" class="expander" src="/bundles/theodorogercms/images/admin/collapse.png" />');
 
   // remove expanded class
   node.addClass('expanded');
@@ -141,7 +141,7 @@ var loadAjaxChildren = function (node)
       node.addClass('expanded');
 
       // Update expand picture
-      node.html('<img alt="toggle children" class="expander" src="/bundles/theodothothcms/images/admin/collapse.png" />');
+      node.html('<img alt="toggle children" class="expander" src="/bundles/theodorogercms/images/admin/collapse.png" />');
     },
     complete: function()
     {
@@ -310,7 +310,7 @@ var addTabPage = function (page_name)
     jQuery('#tabs').append(
         "<a id='tab_"+page_name+"' href='#' class='tab'>" +
             "<span> "+page_name+" </span>" +
-            "<img src='/bundles/theodothothcms/images/admin/tab_close.png' class='close' alt='Remove part' title='Remove part' />" +
+            "<img src='/bundles/theodorogercms/images/admin/tab_close.png' class='close' alt='Remove part' title='Remove part' />" +
         "</a>"  
     );
     

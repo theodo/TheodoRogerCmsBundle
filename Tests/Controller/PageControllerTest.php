@@ -1,11 +1,11 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Tests\Controller;
+namespace Theodo\RogerCmsBundle\Tests\Controller;
 
 require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Theodo\ThothCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
 
 class PageControllerTest extends WebTestCase
 {
@@ -198,7 +198,7 @@ class PageControllerTest extends WebTestCase
 
         // Submit valid form
         $crawler = $client->submit($form, array( 
-            'page[parent_id]'  => $this->em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
+            'page[parent_id]'  => $this->em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
             'page[name]'       => 'Functional test',
             'page[slug]'       => 'functional-test',
             'page[breadcrumb]' => 'Functional test',

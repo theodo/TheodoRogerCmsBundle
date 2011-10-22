@@ -1,4 +1,4 @@
-{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
 
 {% set body_class = 'reversed edit_personal_preferences' %}
 {% set tab = 'settings' %}
@@ -7,10 +7,10 @@
 {% block page_title "Preferences" %}
 
 {% block javascripts_assets %}
-<script src="{{ asset('bundles/theodothothcms/js/user.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/theodorogercms/js/user.js') }}" type="text/javascript"></script>
 {% endblock %}
 
-{% form_theme form 'TheodoThothCmsBundle:Form:form_user_layout.html.twig' %}
+{% form_theme form 'TheodoRogerCmsBundle:Form:form_user_layout.html.twig' %}
 
 {% block cmscontent %}
     <h1>{% trans %}Personal Preferences{% endtrans %}</h1>

@@ -1,9 +1,9 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\DataFixtures\ORM;
+namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
-use Theodo\ThothCmsBundle\Entity\Media;
-use Theodo\ThothCmsBundle\Repository\MediaRepository;
+use Theodo\RogerCmsBundle\Entity\Media;
+use Theodo\RogerCmsBundle\Repository\MediaRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 class MediaData implements FixtureInterface

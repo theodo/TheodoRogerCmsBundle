@@ -1,12 +1,12 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Form;
+namespace Theodo\RogerCmsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-use Theodo\ThothCmsBundle\Entity\Page;
-use Theodo\ThothCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
 
 class PageType extends AbstractType
 {
@@ -55,7 +55,7 @@ class PageType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-           'data_class' => 'Theodo\ThothCmsBundle\Entity\Page',
+           'data_class' => 'Theodo\RogerCmsBundle\Entity\Page',
         );
     }
 

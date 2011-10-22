@@ -1,4 +1,4 @@
-Theodo ThothCMSBundle
+Theodo RogerCMSBundle
 =====================
 
 TODO: Bundle description

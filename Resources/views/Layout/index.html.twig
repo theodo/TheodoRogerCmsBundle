@@ -1,4 +1,4 @@
-{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
 
 {% set tab = 'design' %}
 {% set nav = 'layouts' %}
@@ -10,7 +10,7 @@
     <ul>
         <li>
           <a class="new-layout" href="{{ url('layout_new') }}">
-            <img alt="Plus" src="{{ asset('bundles/theodothothcms/images/admin/plus.png') }}" />{% trans %}New Layout{% endtrans %}</a>
+            <img alt="Plus" src="{{ asset('bundles/theodorogercms/images/admin/plus.png') }}" />{% trans %}New Layout{% endtrans %}</a>
         </li>
     </ul>
 </div>
@@ -26,7 +26,7 @@
         {% for layout in layouts %}
             <tr class="node level_1">
                 <td class="layout">
-                    <img alt="" src="{{ asset('bundles/theodothothcms/images/admin/thoth_layout.png') }}" />
+                    <img alt="" src="{{ asset('bundles/theodorogercms/images/admin/roger_layout.png') }}" />
                     <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
                 </td>
                 <td class="remove">

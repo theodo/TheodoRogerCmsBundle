@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Entity;
+namespace Theodo\RogerCmsBundle\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -12,10 +12,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-use Theodo\ThothCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
 
 /**
- * Theodo\ThothCmsBundle\Entity\User
+ * Theodo\RogerCmsBundle\Entity\User
  */
 class User implements UserInterface
 {
@@ -65,7 +65,7 @@ class User implements UserInterface
     private $is_main_admin;
 
     /**
-     * @var Theodo\ThothCmsBundle\Entity\Role
+     * @var Theodo\RogerCmsBundle\Entity\Role
      */
     private $user_roles;
 
@@ -247,9 +247,9 @@ class User implements UserInterface
     /**
      * Add user_roles
      *
-     * @param Theodo\ThothCmsBundle\Entity\Role $userRoles
+     * @param Theodo\RogerCmsBundle\Entity\Role $userRoles
      */
-    public function addUserRoles(\Theodo\ThothCmsBundle\Entity\Role $userRoles)
+    public function addUserRoles(\Theodo\RogerCmsBundle\Entity\Role $userRoles)
     {
         $this->user_roles[] = $userRoles;
     }
@@ -453,9 +453,9 @@ class User implements UserInterface
     /**
      * Add user_roles
      *
-     * @param Theodo\ThothCmsBundle\Entity\Role $userRoles
+     * @param Theodo\RogerCmsBundle\Entity\Role $userRoles
      */
-    public function addRole(\Theodo\ThothCmsBundle\Entity\Role $userRoles)
+    public function addRole(\Theodo\RogerCmsBundle\Entity\Role $userRoles)
     {
         $this->user_roles[] = $userRoles;
     }

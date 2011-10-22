@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,14 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\DependencyInjection;
+namespace Theodo\RogerCmsBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
 
-class TheodoThothCmsExtension extends Extension
+class TheodoRogerCmsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {

@@ -1,58 +1,58 @@
 parameters:
-    thoth.entity_manager.name: default
-    thoth.user_provider.class: Symfony\Bridge\Doctrine\Security\User\EntityUserProvider
-    thoth.user_provider.user.class: Theodo\ThothCmsBundle\Entity\User
-    thoth.user_provider.user.parameter: username
-    thoth.twig.loader.class: Theodo\ThothCmsBundle\Extensions\Twig\TwigLoaderRepository
-    thoth.caching.class: Theodo\ThothCmsBundle\Extensions\Twig\TwigCacheDatabase
-    thoth.content_repository.class: Theodo\ThothCmsBundle\Repository\ContentEntityRepository
-    thoth.routing.class: Theodo\ThothCmsBundle\Extensions\Twig\Extension\ThothRoutingExtension
-    thoth.twig.extension.actions.class: Theodo\ThothCmsBundle\Extensions\Twig\Extension\ThothActionsExtension
-    validator.twig_syntax.class: Theodo\ThothCmsBundle\Validator\TwigSyntaxValidator
+    roger.entity_manager.name: default
+    roger.user_provider.class: Symfony\Bridge\Doctrine\Security\User\EntityUserProvider
+    roger.user_provider.user.class: Theodo\RogerCmsBundle\Entity\User
+    roger.user_provider.user.parameter: username
+    roger.twig.loader.class: Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository
+    roger.caching.class: Theodo\RogerCmsBundle\Extensions\Twig\TwigCacheDatabase
+    roger.content_repository.class: Theodo\RogerCmsBundle\Repository\ContentEntityRepository
+    roger.routing.class: Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerRoutingExtension
+    roger.twig.extension.actions.class: Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerActionsExtension
+    validator.twig_syntax.class: Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator
 
     # Timestampable listener class
     gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener
 
 services:
-    thoth.user_provider:
-        class: %thoth.user_provider.class%
+    roger.user_provider:
+        class: %roger.user_provider.class%
         arguments:
             - '@doctrine.orm.entity_manager'
-            - %thoth.user_provider.user.class%
-            - %thoth.user_provider.user.parameter%
-    thoth.content_repository:
-        class: %thoth.content_repository.class%
+            - %roger.user_provider.user.class%
+            - %roger.user_provider.user.parameter%
+    roger.content_repository:
+        class: %roger.content_repository.class%
         arguments: ['@doctrine.orm.entity_manager']
-    thoth.twig.loader:
-        class: %thoth.twig.loader.class%
-        arguments: ['@thoth.content_repository', '@twig.loader', %thoth.twig.loader.fallback_path%]
-    thoth.twig:
+    roger.twig.loader:
+        class: %roger.twig.loader.class%
+        arguments: ['@roger.content_repository', '@twig.loader', %roger.twig.loader.fallback_path%]
+    roger.twig:
         class: %twig.class%
-        arguments: ['@thoth.twig.loader', %twig.options%]
-    thoth.templating:
+        arguments: ['@roger.twig.loader', %twig.options%]
+    roger.templating:
         class: %templating.engine.twig.class%
-        arguments: ['@thoth.twig', '@templating.name_parser', '@templating.globals']
-    thoth.caching:
-        class: %thoth.caching.class%
-        arguments: ['@thoth.twig']
-    thoth.routing:
-        class: %thoth.routing.class%
+        arguments: ['@roger.twig', '@templating.name_parser', '@templating.globals']
+    roger.caching:
+        class: %roger.caching.class%
+        arguments: ['@roger.twig']
+    roger.routing:
+        class: %roger.routing.class%
         arguments: ['@router', '@doctrine.orm.entity_manager']
         tags:
-            - { name: thoth.twig.extension }
+            - { name: roger.twig.extension }
             - { name: twig.extension }
-    thoth.twig.extension.actions:
-        class: %thoth.twig.extension.actions.class%
+    roger.twig.extension.actions:
+        class: %roger.twig.extension.actions.class%
         arguments: ['@service_container']
         tags:
-            - { name: thoth.twig.extension }
+            - { name: roger.twig.extension }
     validator.twig_syntax:
         class: %validator.twig_syntax.class%
-        arguments: ['@thoth.twig']
+        arguments: ['@roger.twig']
         tags:
             - { name: validator.constraint_validator, alias: validator.twig_syntax }
     doctrine.orm.validator.unique:
-        class: Theodo\ThothCmsBundle\Validator\Constraints\ThothUniqueEntityValidator
+        class: Theodo\RogerCmsBundle\Validator\Constraints\RogerUniqueEntityValidator
         tags:
             - { name: validator.constraint_validator, alias: doctrine.orm.validator.unique }
         arguments: ['@doctrine']

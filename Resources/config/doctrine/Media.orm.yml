@@ -1,4 +1,4 @@
-Theodo\ThothCmsBundle\Entity\Media:
+Theodo\RogerCmsBundle\Entity\Media:
     type: entity
     table: media
     id:

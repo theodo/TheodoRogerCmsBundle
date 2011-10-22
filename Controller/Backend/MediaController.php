@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller\Backend;
+namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Theodo\ThothCmsBundle\Form\MediaType;
+use Theodo\RogerCmsBundle\Form\MediaType;
 
 class MediaController extends Controller
 {
@@ -26,9 +26,9 @@ class MediaController extends Controller
      */
     public function indexAction()
     {
-        $medias = $this->get('thoth.content_repository')->findAll('media');
+        $medias = $this->get('roger.content_repository')->findAll('media');
 
-        return $this->render('TheodoThothCmsBundle:Media:index.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
                 array('medias' => $medias)
                 );
     }
@@ -48,7 +48,7 @@ class MediaController extends Controller
     {
         $media = null;
         if ($id) {
-            $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
+            $media = $this->get('roger.content_repository')->findOneById($id, 'media');
         }
         $form = $this->createForm(new MediaType(), $media);
         $request = $this->get('request');
@@ -64,7 +64,7 @@ class MediaController extends Controller
                 {
                     $media->setPath(null);
                 }
-                $this->get('thoth.content_repository')->save($media);
+                $this->get('roger.content_repository')->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('media_list'));
@@ -77,7 +77,7 @@ class MediaController extends Controller
             }
         }
 
-        return $this->render('TheodoThothCmsBundle:Media:edit.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Media:edit.html.twig',
                 array(
                     'media' => $media,
                     'form' => $form->createView(),
@@ -96,16 +96,16 @@ class MediaController extends Controller
      */
     public function removeAction($id)
     {
-        $media = $media = $this->get('thoth.content_repository')->findOneById($id, 'media');
+        $media = $media = $this->get('roger.content_repository')->findOneById($id, 'media');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $media = $this->get('thoth.content_repository')->remove($media);
+            $media = $this->get('roger.content_repository')->remove($media);
 
             return $this->redirect($this->generateUrl('media_list'));
         }
 
-        return $this->render('TheodoThothCmsBundle:Media:remove.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Media:remove.html.twig',
                 array(
                   'media' => $media
                 ));

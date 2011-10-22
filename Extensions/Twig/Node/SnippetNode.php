@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions\Twig\Node;
+namespace Theodo\RogerCmsBundle\Extensions\Twig\Node;
 
 /**
  * Represents a snippet node.
@@ -32,7 +32,7 @@ class SnippetNode extends \Twig_Node
     {
         $compiler
             ->addDebugInfo($this)
-            ->write("echo \$this->env->getExtension('thoth_actions')->renderSnippet(")
+            ->write("echo \$this->env->getExtension('roger_actions')->renderSnippet(")
             ->subcompile($this->getNode('name'))
             ->raw(', ')
             ->subcompile($this->getNode('attributes'))

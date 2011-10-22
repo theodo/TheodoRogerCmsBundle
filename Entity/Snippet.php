@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Entity;
+namespace Theodo\RogerCmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -9,10 +9,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Min;
 
-use Theodo\ThothCmsBundle\Validator\TwigSyntax;
+use Theodo\RogerCmsBundle\Validator\TwigSyntax;
 
 /**
- * Theodo\ThothCmsBundle\Entity\Snippet
+ * Theodo\RogerCmsBundle\Entity\Snippet
  */
 class Snippet
 {

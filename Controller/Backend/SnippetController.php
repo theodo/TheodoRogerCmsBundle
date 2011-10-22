@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller\Backend;
+namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Theodo\ThothCmsBundle\Form\SnippetType;
+use Theodo\RogerCmsBundle\Form\SnippetType;
 
 class SnippetController extends Controller
 {
@@ -27,9 +27,9 @@ class SnippetController extends Controller
      */
     public function indexAction()
     {
-        $snippets = $this->get('thoth.content_repository')->findAll('snippet');
+        $snippets = $this->get('roger.content_repository')->findAll('snippet');
 
-        return $this->render('TheodoThothCmsBundle:Snippet:index.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Snippet:index.html.twig',
                 array('snippets' => $snippets)
                 );
     }
@@ -50,7 +50,7 @@ class SnippetController extends Controller
     {
         $snippet = null;
         if ($id) {
-            $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
+            $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
         }
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
@@ -64,14 +64,14 @@ class SnippetController extends Controller
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($snippet) {
-                    $this->get('thoth.caching')->invalidate('snippet:'.$snippet->getName());
+                    $this->get('roger.caching')->invalidate('snippet:'.$snippet->getName());
                 }
 
                 //save snippet
                 $snippet = $form->getData();
-                $this->get('thoth.content_repository')->save($snippet);
+                $this->get('roger.content_repository')->save($snippet);
 
-                $this->get('thoth.caching')->warmup('snippet:'.$snippet->getName());
+                $this->get('roger.caching')->warmup('snippet:'.$snippet->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
@@ -86,7 +86,7 @@ class SnippetController extends Controller
             }
         }
 
-        return $this->render('TheodoThothCmsBundle:Snippet:edit.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Snippet:edit.html.twig',
                 array(
                     'snippet' => $snippet,
                     'form' => $form->createView(),
@@ -106,16 +106,16 @@ class SnippetController extends Controller
      */
     public function removeAction($id)
     {
-        $snippet = $snippet = $this->get('thoth.content_repository')->findOneById($id, 'snippet');
+        $snippet = $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $snippet = $this->get('thoth.content_repository')->remove($snippet);
+            $snippet = $this->get('roger.content_repository')->remove($snippet);
 
             return $this->redirect($this->generateUrl('snippet_list'));
         }
 
-        return $this->render('TheodoThothCmsBundle:Snippet:remove.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Snippet:remove.html.twig',
                 array(
                   'snippet' => $snippet
                 ));

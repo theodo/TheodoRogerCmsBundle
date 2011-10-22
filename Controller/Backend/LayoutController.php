@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller\Backend;
+namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Theodo\ThothCmsBundle\Form\LayoutType;
+use Theodo\RogerCmsBundle\Form\LayoutType;
 
 class LayoutController extends Controller
 {
@@ -27,9 +27,9 @@ class LayoutController extends Controller
      */
     public function indexAction()
     {
-        $layouts = $this->get('thoth.content_repository')->findAll('layout');
+        $layouts = $this->get('roger.content_repository')->findAll('layout');
 
-        return $this->render('TheodoThothCmsBundle:Layout:index.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig',
                 array('layouts' => $layouts)
                 );
     }
@@ -49,7 +49,7 @@ class LayoutController extends Controller
     {
         $layout = null;
         if ($id) {
-            $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
+            $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
         }
 
         $form = $this->createForm(new LayoutType(), $layout);
@@ -61,14 +61,14 @@ class LayoutController extends Controller
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($layout) {
-                    $this->get('thoth.caching')->invalidate('layout:'.$layout->getName());
+                    $this->get('roger.caching')->invalidate('layout:'.$layout->getName());
                 }
 
                 // save layout
                 $layout = $form->getData();
-                $this->get('thoth.content_repository')->save($layout);
+                $this->get('roger.content_repository')->save($layout);
 
-                $this->get('thoth.caching')->warmup('layout:'.$layout->getName());
+                $this->get('roger.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('layout_list'));
@@ -80,7 +80,7 @@ class LayoutController extends Controller
             }
         }
 
-        return $this->render('TheodoThothCmsBundle:Layout:edit.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig',
                 array(
                     'layout' => $layout,
                     'form' => $form->createView(),
@@ -99,16 +99,16 @@ class LayoutController extends Controller
      */
     public function removeAction($id)
     {
-        $layout = $this->get('thoth.content_repository')->findOneById($id, 'layout');
+        $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->get('thoth.content_repository')->remove($layout);
+            $this->get('roger.content_repository')->remove($layout);
 
             return $this->redirect($this->generateUrl('layout_list'));
         }
 
-        return $this->render('TheodoThothCmsBundle:Layout:remove.html.twig',
+        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig',
                 array(
                   'layout' => $layout
                 ));

@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Validator;
+namespace Theodo\RogerCmsBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
 

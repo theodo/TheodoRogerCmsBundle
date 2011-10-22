@@ -1,9 +1,9 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\DataFixtures\ORM;
+namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
-use Theodo\ThothCmsBundle\Entity\Role;
-use Theodo\ThothCmsBundle\Repository\RoleRepository;
+use Theodo\RogerCmsBundle\Entity\Role;
+use Theodo\RogerCmsBundle\Repository\RoleRepository;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

@@ -53,10 +53,10 @@ class MediaTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve media
-        $media = $em->getRepository('TheodoThothCmsBundle:Media')->findOneById(1);
+        $media = $em->getRepository('TheodoRogerCmsBundle:Media')->findOneById(1);
 
         // Test full path
-        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\Media', $media);
+        $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Media', $media);
         $this->assertEquals('uploads/picture.jpg', $media->getFullPath());
     }
 }

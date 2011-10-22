@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller\Backend;
+namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Theodo\ThothCmsBundle\Repository\PageRepository;
-use Theodo\ThothCmsBundle\Form\PageType;
-use Theodo\ThothCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Form\PageType;
+use Theodo\RogerCmsBundle\Entity\Page;
 
 class PageController extends Controller
 {
@@ -30,9 +30,9 @@ class PageController extends Controller
     public function indexAction()
     {
         // Retrieve pages
-        $pages = $this->get('thoth.content_repository')->getFirstTwoLevelPages();
+        $pages = $this->get('roger.content_repository')->getFirstTwoLevelPages();
 
-        return $this->render('TheodoThothCmsBundle:Page:index.html.twig', array('pages' => $pages));
+        return $this->render('TheodoRogerCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
 
 
@@ -53,7 +53,7 @@ class PageController extends Controller
         // new page
         if (!$id) {
             $page = new Page();
-            $parent_page = $this->get('thoth.content_repository')->findOneById($parent_id);
+            $parent_page = $this->get('roger.content_repository')->findOneById($parent_id);
             // Create the homepage
             if ($parent_page) {
                 $page->setParentId($parent_page->getId());
@@ -65,12 +65,12 @@ class PageController extends Controller
         }
         // update page
         else {
-            $page = $this->get('thoth.content_repository')->findOneById($id);
+            $page = $this->get('roger.content_repository')->findOneById($id);
             $parent_page = $page->getParent();
         }
 
         // Get all layout
-        $layouts = $this->get('thoth.content_repository')->findAll('layout');
+        $layouts = $this->get('roger.content_repository')->findAll('layout');
 
         $page_content = $page->getContent();
 
@@ -108,12 +108,12 @@ class PageController extends Controller
             if ($form->isValid())
             {
                 // remove twig cached file
-                $this->get('thoth.caching')->invalidate('page:'.$page->getName());
+                $this->get('roger.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
-                $this->get('thoth.content_repository')->save($page);
+                $this->get('roger.content_repository')->save($page);
 
-                $this->get('thoth.caching')->warmup('page:'.$page->getName());
+                $this->get('roger.caching')->warmup('page:'.$page->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('page_list'));
@@ -131,7 +131,7 @@ class PageController extends Controller
         }
 
         return $this->render(
-            'TheodoThothCmsBundle:Page:edit.html.twig',
+            'TheodoRogerCmsBundle:Page:edit.html.twig',
             array(
                 'form'        => $form->createView(),
                 'page'        => $page,
@@ -159,18 +159,18 @@ class PageController extends Controller
         $request = $this->getRequest();
 
         // Retrieve page
-        $page = $this->get('thoth.content_repository')->findOneById($id);
+        $page = $this->get('roger.content_repository')->findOneById($id);
 
         // Request is post
         if ($request->getMethod() == 'POST') {
             // Delete page
-            $this->get('thoth.content_repository')->remove($page);
+            $this->get('roger.content_repository')->remove($page);
 
             return $this->redirect($this->generateUrl('page_list'));
         }
 
         return $this->render(
-            'TheodoThothCmsBundle:Page:remove.html.twig',
+            'TheodoRogerCmsBundle:Page:remove.html.twig',
             array(
                 'page' => $page
             )
@@ -192,10 +192,10 @@ class PageController extends Controller
         $request = $this->getRequest();
 
         // Retrieve page childrens
-        $pages = $this->get('thoth.content_repository')->findOneById($id)->getChildren();
+        $pages = $this->get('roger.content_repository')->findOneById($id)->getChildren();
 
         return $this->render(
-            'TheodoThothCmsBundle:Page:page-list.html.twig',
+            'TheodoRogerCmsBundle:Page:page-list.html.twig',
             array(
                 'pages' => $pages,
                 'level' => $request->get('level')
@@ -218,10 +218,10 @@ class PageController extends Controller
         $request = $this->getRequest();
 
         // Retrieve page
-        $page = $this->get('thoth.content_repository')->findOneById($from_id);
+        $page = $this->get('roger.content_repository')->findOneById($from_id);
 
         return $this->render(
-            'TheodoThothCmsBundle:Page:site-map-component.html.twig',
+            'TheodoRogerCmsBundle:Page:site-map-component.html.twig',
             array(
                 'page'  => $page,
                 'level' => 0

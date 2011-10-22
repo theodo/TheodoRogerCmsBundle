@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,18 +9,18 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle;
+namespace Theodo\RogerCmsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Theodo\ThothCmsBundle\DependencyInjection\Compiler\ThothTwigEnvironmentPass;
+use Theodo\RogerCmsBundle\DependencyInjection\Compiler\RogerTwigEnvironmentPass;
 
-class TheodoThothCmsBundle extends Bundle
+class TheodoRogerCmsBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
 
-        $container->addCompilerPass(new ThothTwigEnvironmentPass());
+        $container->addCompilerPass(new RogerTwigEnvironmentPass());
     }
 }

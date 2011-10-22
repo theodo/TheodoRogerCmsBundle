@@ -1,4 +1,4 @@
-{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
 
 {% set tab = 'design' %}
 {% set nav = 'snippets' %}
@@ -10,7 +10,7 @@
     <ul>
         <li>
           <a id="new-snippet" href="{{ url('snippet_new') }}">
-            <img alt="Plus" src="{{ asset('bundles/theodothothcms/images/admin/plus.png') }}" />{% trans %}New Snippet{% endtrans %}</a>
+            <img alt="Plus" src="{{ asset('bundles/theodorogercms/images/admin/plus.png') }}" />{% trans %}New Snippet{% endtrans %}</a>
         </li>
     </ul>
 </div>
@@ -26,7 +26,7 @@
         {% for snippet in snippets %}
             <tr class="node level_1">
                 <td class="snippet">
-                    <img alt="" src="{{ asset('bundles/theodothothcms/images/admin/thoth_snippet.png') }}" />
+                    <img alt="" src="{{ asset('bundles/theodorogercms/images/admin/roger_snippet.png') }}" />
                     <span>
                       <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>
                     </span>

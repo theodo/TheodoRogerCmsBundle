@@ -1,4 +1,4 @@
-Theodo\ThothCmsBundle\Entity\Layout:
+Theodo\RogerCmsBundle\Entity\Layout:
     type: entity
     table: layout
     id:

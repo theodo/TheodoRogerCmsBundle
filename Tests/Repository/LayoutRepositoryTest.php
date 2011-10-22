@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Entity\Layout;
-use Theodo\ThothCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Entity\Layout;
+use Theodo\RogerCmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\LayoutData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\LayoutData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
@@ -50,7 +50,7 @@ class LayoutRepositoryTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve available snippets
-        $layouts = $em->getRepository('Theodo\ThothCmsBundle\Entity\Layout')->findAll();
+        $layouts = $em->getRepository('Theodo\RogerCmsBundle\Entity\Layout')->findAll();
 
         // Test number of snippets
         $this->assertTrue(count($layouts) > 0);

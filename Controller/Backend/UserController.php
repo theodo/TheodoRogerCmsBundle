@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller\Backend;
+namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
-use Theodo\ThothCmsBundle\Repository\UserRepository;
-use Theodo\ThothCmsBundle\Form\UserPreferencesType;
-use Theodo\ThothCmsBundle\Form\UserType;
-use Theodo\ThothCmsBundle\Entity\User;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Form\UserPreferencesType;
+use Theodo\RogerCmsBundle\Form\UserType;
+use Theodo\RogerCmsBundle\Entity\User;
 
 class UserController extends Controller
 {
@@ -32,7 +32,7 @@ class UserController extends Controller
     {
 
         return $this->get('doctrine')->getEntityManager(
-            $this->container->getParameter('thoth.entity_manager.name')
+            $this->container->getParameter('roger.entity_manager.name')
         );
     }
     /**
@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function getUserRepository()
     {
-        return $this->getEntityManager()->getRepository('TheodoThothCmsBundle:User');
+        return $this->getEntityManager()->getRepository('TheodoRogerCmsBundle:User');
     }
 
     /**
@@ -93,7 +93,7 @@ class UserController extends Controller
     {
         // User already authenticated, redirect to page list
         if($this->get('session')->has('_security_main')) {
-            return $this->redirect($this->generateUrl('admin_theodo_citedelespace_article_list'));
+            return $this->redirect('/admin/pages');
         }
 
         // Get the login error if there is one
@@ -104,7 +104,7 @@ class UserController extends Controller
             $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
         }
 
-        return $this->render('TheodoThothCmsBundle:User:login.html.twig', array(
+        return $this->render('TheodoRogerCmsBundle:User:login.html.twig', array(
             // Last username entered by the user
             'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
@@ -124,7 +124,7 @@ class UserController extends Controller
         // Retrieve connected user
         $user = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render('TheodoThothCmsBundle:User:box-component.html.twig', array(
+        return $this->render('TheodoRogerCmsBundle:User:box-component.html.twig', array(
             'user' => $user
         ));
     }
@@ -142,7 +142,7 @@ class UserController extends Controller
         // Retrieve users
         $users = $this->getUserRepository()->findAll('user');
 
-        return $this->render('TheodoThothCmsBundle:User:list.html.twig', array(
+        return $this->render('TheodoRogerCmsBundle:User:list.html.twig', array(
             'users' => $users,
         ));
     }
@@ -182,7 +182,7 @@ class UserController extends Controller
             $this->get('session')->setFlash('error', $this->get('translator')->trans('Can not remove main admin'));
         }
 
-        return $this->render('TheodoThothCmsBundle:User:remove.html.twig', array(
+        return $this->render('TheodoRogerCmsBundle:User:remove.html.twig', array(
             'user' => $user,
         ));
     }
@@ -308,7 +308,7 @@ class UserController extends Controller
 
         // Create form
         $form = $this->createForm(new UserType(false), $user, array(
-            'em' => $this->container->getParameter('thoth.entity_manager.name'),
+            'em' => $this->container->getParameter('roger.entity_manager.name'),
         ));
 
         // Retrieve request
@@ -356,7 +356,7 @@ class UserController extends Controller
         }
 
         return $this->render(
-            'TheodoThothCmsBundle:User:'.$action.'.html.twig',
+            'TheodoRogerCmsBundle:User:'.$action.'.html.twig',
             array(
                 'form'      => $form->createView(),
                 'user'      => $user

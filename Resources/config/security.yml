@@ -1,6 +1,6 @@
 security:
     encoders:
-        Theodo\ThothCmsBundle\Entity\User: sha512
+        Theodo\RogerCmsBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_USER:        ROLE_CLIENT
@@ -9,7 +9,7 @@ security:
 
     providers:
         cms_user:
-            id: thoth.user_provider
+            id: roger.user_provider
 
     firewalls:
         profiler:
@@ -24,8 +24,8 @@ security:
             pattern:  ^/admin$
             security: false
 
-        main:
-            provider: main
+        admin:
+            provider: cms_user
             pattern:    ^/admin/*
             access_denied_url: /admin/access-denied
             form_login:
@@ -35,6 +35,26 @@ security:
             logout:
                 path:               /admin/logout
                 target:             /admin
+                invalidate_session: true
+            http_basic: true
+            remember_me:
+                key:      463a06ee69fbea064218b1d02c416125
+                lifetime: 86400
+                path:     /                
+
+        front:
+            pattern:    ^/*
+            anonymous: ~
+            access_denied_url: /access-denied
+            form_login:
+                check_path:  /enregistrer-le-projet-de-visite/login
+                login_path:  /connection
+                remember_me: true
+                post_only: false
+                default_target_path: /projet-de-visite
+            logout:
+                path:               /enregistrer-le-projet-de-visite/logout
+                target:             /
                 invalidate_session: true
             http_basic: true
             remember_me:

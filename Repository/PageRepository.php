@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Repository;
+namespace Theodo\RogerCmsBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -91,7 +91,7 @@ class PageRepository extends EntityRepository
     {
         // Create sql query
         $sql_query = <<<EOF
-SELECT p, c, c2 FROM TheodoThothCmsBundle:Page p
+SELECT p, c, c2 FROM TheodoRogerCmsBundle:Page p
   LEFT JOIN p.children c
   LEFT JOIN c.children c2
   WHERE p.parent_id IS NULL
@@ -111,7 +111,7 @@ EOF;
      */
     public function queryHomepage()
     {
-        $query = $this->getEntityManager()->createQuery("SELECT p FROM TheodoThothCmsBundle:Page p WHERE p.parent_id IS NULL");
+        $query = $this->getEntityManager()->createQuery("SELECT p FROM TheodoRogerCmsBundle:Page p WHERE p.parent_id IS NULL");
 
         return $query;
     }

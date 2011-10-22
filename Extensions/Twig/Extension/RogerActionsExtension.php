@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions\Twig\Extension;
+namespace Theodo\RogerCmsBundle\Extensions\Twig\Extension;
 
-use Theodo\ThothCmsBundle\Extensions\Twig\TokenParser\SnippetTokenParser;
+use Theodo\RogerCmsBundle\Extensions\Twig\TokenParser\SnippetTokenParser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ThothActionsExtension extends \Twig_Extension
+class RogerActionsExtension extends \Twig_Extension
 {
     private $container;
 
@@ -46,7 +46,7 @@ class ThothActionsExtension extends \Twig_Extension
             $name = end($array);
         }
         else {
-            $controller = 'TheodoThothCmsBundle:Frontend\Frontend:snippet';
+            $controller = 'TheodoRogerCmsBundle:Frontend\Frontend:snippet';
         }
         $params['name'] = $name;
         $params['attributes'] = $attributes;
@@ -70,6 +70,6 @@ class ThothActionsExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'thoth_actions';
+        return 'roger_actions';
     }
 }

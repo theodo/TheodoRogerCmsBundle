@@ -1,4 +1,4 @@
-{% extends "TheodoThothCmsBundle::layout.html.twig" %}
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
 
 {% set tab = 'content' %}
 {% set nav = 'pages' %}
@@ -10,7 +10,7 @@
 <p>{% trans %}Are you sure you want to <strong class="warning">permanently remove</strong> the following pages?{% endtrans %}</p>
 
 <div class="inset">
-    {% render "TheodoThothCmsBundle:Backend\\Page:siteMapComponent" with {'from_id': page.id} %}
+    {% render "TheodoRogerCmsBundle:Backend\\Page:siteMapComponent" with {'from_id': page.id} %}
 </div>
 
 <form class="edit_page" action="{{ url('page_remove', {'id' : page.id}) }}" method="post">

@@ -1,16 +1,16 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Entity;
+namespace Theodo\RogerCmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-use Theodo\ThothCmsBundle\Validator\TwigSyntax;
+use Theodo\RogerCmsBundle\Validator\TwigSyntax;
 
 /**
- * Theodo\ThothCmsBundle\Entity\Layout
+ * Theodo\RogerCmsBundle\Entity\Layout
  */
 class Layout
 {

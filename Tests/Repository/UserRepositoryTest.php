@@ -2,12 +2,12 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Entity\User;
-use Theodo\ThothCmsBundle\Repository\UserRepository;
-use Theodo\ThothCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Entity\User;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\UserData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\UserData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;

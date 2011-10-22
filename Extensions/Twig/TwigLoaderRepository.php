@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions\Twig;
+namespace Theodo\RogerCmsBundle\Extensions\Twig;
 
 use Twig_LoaderInterface;
 use Twig_Error_Loader;
 use Twig_Loader_Filesystem;
-use Theodo\ThothCmsBundle\Repository\ContentRepositoryInterface;
+use Theodo\RogerCmsBundle\Repository\ContentRepositoryInterface;
 
 /**
  * Loads a template from a repository.
@@ -129,7 +129,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
             throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type: '.$type);
         }
 
-        //$this->get('logger')->info('ThothCmsBundle: ('.$type.', '.$name.' loaded');
+        //$this->get('logger')->info('RogerCmsBundle: ('.$type.', '.$name.' loaded');
 
         return $source;
     }

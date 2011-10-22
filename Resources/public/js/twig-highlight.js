@@ -30,7 +30,7 @@ jQuery(document).ready(function ()
               stylesSet: 'citedelespace'
           }
         );
-        CKFinder.setupCKEditor( editor, '/bundles/theodothothcms/ckfinder/' ) ;
+        CKFinder.setupCKEditor( editor, '/bundles/theodorogercms/ckfinder/' ) ;
     }
   );
 });

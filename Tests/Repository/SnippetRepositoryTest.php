@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Entity\Snippet;
-use Theodo\ThothCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Entity\Snippet;
+use Theodo\RogerCmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\SnippetData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\SnippetData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
@@ -50,7 +50,7 @@ class SnippetRepositoryTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve available snippets
-        $snippets = $em->getRepository('Theodo\ThothCmsBundle\Entity\Snippet')->findAll();
+        $snippets = $em->getRepository('Theodo\RogerCmsBundle\Entity\Snippet')->findAll();
 
         // Test number of snippets
         $this->assertTrue(count($snippets) > 0);

@@ -1,11 +1,11 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Form;
+namespace Theodo\RogerCmsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-use Theodo\ThothCmsBundle\Entity\Media;
+use Theodo\RogerCmsBundle\Entity\Media;
 
 class MediaType extends AbstractType
 {
@@ -20,7 +20,7 @@ class MediaType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class' => 'Theodo\ThothCmsBundle\Entity\Media',
+            'data_class' => 'Theodo\RogerCmsBundle\Entity\Media',
         );
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\DataFixtures\ORM;
+namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
-use Theodo\ThothCmsBundle\Entity\User;
-use Theodo\ThothCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Entity\User;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Form;
+namespace Theodo\RogerCmsBundle\Form;
 
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityRepository;
 
-use Theodo\ThothCmsBundle\Form\UserPreferencesType;
-use Theodo\ThothCmsBundle\Entity\User;
-use Theodo\ThothCmsBundle\Entity\Role;
-use Theodo\ThothCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Form\UserPreferencesType;
+use Theodo\RogerCmsBundle\Entity\User;
+use Theodo\RogerCmsBundle\Entity\Role;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
 
 class UserType extends UserPreferencesType
 {
@@ -28,7 +28,7 @@ class UserType extends UserPreferencesType
             $builder->add('password', 'repeated', array('type' => 'password', 'required' => true));
         }
         $builder->add('user_roles', 'entity', array(
-            'class'    => 'Theodo\\ThothCmsBundle\\Entity\\Role',
+            'class'    => 'Theodo\\RogerCmsBundle\\Entity\\Role',
             'expanded' => true,
             'multiple' => true,
             'required' => true,
@@ -45,7 +45,7 @@ class UserType extends UserPreferencesType
     public function getDefaultOptions(array $options)
     {
         return array(
-           'data_class' => 'Theodo\ThothCmsBundle\Entity\User',
+           'data_class' => 'Theodo\RogerCmsBundle\Entity\User',
            'em' => null,
         );
     }

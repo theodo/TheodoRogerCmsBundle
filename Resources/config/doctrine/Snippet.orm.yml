@@ -1,4 +1,4 @@
-Theodo\ThothCmsBundle\Entity\Snippet:
+Theodo\RogerCmsBundle\Entity\Snippet:
     type: entity
     table: snippet
     id:

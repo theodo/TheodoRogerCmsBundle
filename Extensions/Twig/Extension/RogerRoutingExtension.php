@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions\Twig\Extension;
+namespace Theodo\RogerCmsBundle\Extensions\Twig\Extension;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\EntityManager;
@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManager;
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  */
-class ThothRoutingExtension extends \Twig_Extension
+class RogerRoutingExtension extends \Twig_Extension
 {
     private $generator;
 
@@ -44,14 +44,14 @@ class ThothRoutingExtension extends \Twig_Extension
 
     public function getFullUrl($slug)
     {
-        $page = $this->em->getRepository('TheodoThothCmsBundle:Page')->findOneBySlug($slug);
+        $page = $this->em->getRepository('TheodoRogerCmsBundle:Page')->findOneBySlug($slug);
 
         return $this->generator->generate('page', array('slug' => $page->getFullSlug()), true);
     }
 
     public function getMediaUrl($name)
     {
-        $media = $this->em->getRepository('TheodoThothCmsBundle:Media')->findOneByName($name);
+        $media = $this->em->getRepository('TheodoRogerCmsBundle:Media')->findOneByName($name);
         if ($media)
         {
             return '/uploads/'.$media->getPath();
@@ -67,6 +67,6 @@ class ThothRoutingExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'thoth_routing';
+        return 'roger_routing';
     }
 }

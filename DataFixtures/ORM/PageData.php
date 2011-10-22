@@ -1,9 +1,9 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\DataFixtures\ORM;
+namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
-use Theodo\ThothCmsBundle\Entity\Page;
-use Theodo\ThothCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 class PageData implements FixtureInterface

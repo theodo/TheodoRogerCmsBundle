@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Entity\Page;
-use Theodo\ThothCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\PageData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\PageData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
@@ -53,15 +53,15 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $aboutPage = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'about'));
+        $aboutPage = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'about'));
 
         // Test aboutPage
-        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\Page', $aboutPage);
+        $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Page', $aboutPage);
         $this->assertEquals('About', $aboutPage->getName());
         
         // Retrieve parent page
         $parentPage = $aboutPage->getParent();
-        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\Page', $parentPage);
+        $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Page', $parentPage);
         $this->assertEquals('Homepage', $parentPage->getName());
     }
 
@@ -79,10 +79,10 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "about" page
-        $homepage = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
+        $homepage = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
 
         // Test hompepage
-        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\Page', $homepage);
+        $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Page', $homepage);
         $this->assertEquals('Homepage', $homepage->getName());
 
         // Retrieve children pages
@@ -104,13 +104,13 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "home" page
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
 
         // Test full slug
         $this->assertEquals($page->getFullSlug(), 'homepage');
 
         // Retrieve "theodo-team" page
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
 
         // Test full slug
         $this->assertEquals($page->getFullSlug(), 'homepage/theodo/theodo-team');

@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Entity\Snippet;
-use Theodo\ThothCmsBundle\Repository\SnippetRepository;
-use Theodo\ThothCmsBundle\Entity\Layout;
-use Theodo\ThothCmsBundle\Repository\LayoutRepository;
-use Theodo\ThothCmsBundle\Entity\Page;
-use Theodo\ThothCmsBundle\Repository\PageRepository;
-use Theodo\ThothCmsBundle\Tests\Unit;
-use Theodo\ThothCmsBundle\Extensions\Twig_Loader_Repository;
+use Theodo\RogerCmsBundle\Entity\Snippet;
+use Theodo\RogerCmsBundle\Repository\SnippetRepository;
+use Theodo\RogerCmsBundle\Entity\Layout;
+use Theodo\RogerCmsBundle\Repository\LayoutRepository;
+use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Extensions\Twig_Loader_Repository;
 
 class Twig_Loader_RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Theodo\ThothCmsBundle\Extensions\Twig_Loader_Repository
+     * @var \Theodo\RogerCmsBundle\Extensions\Twig_Loader_Repository
      */
     protected $twig_loader;
 
@@ -25,13 +25,13 @@ class Twig_Loader_RepositoryTest extends \PHPUnit_Framework_TestCase
         $kernel->boot();
 
         // Load "test" entity manager
-        $this->twig_loader = $kernel->getContainer()->get('thoth.twig.loader');
+        $this->twig_loader = $kernel->getContainer()->get('roger.twig.loader');
     }
 
     /**
      * TwigLoader getter
      *
-     * @return \Theodo\ThothCmsBundle\Extensions\Twig_Loader_Repository
+     * @return \Theodo\RogerCmsBundle\Extensions\Twig_Loader_Repository
      */
     protected function getTwigLoader()
     {

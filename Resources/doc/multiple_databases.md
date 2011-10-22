@@ -1,13 +1,13 @@
-Using ThothCms with dedicated database
+Using RogerCms with dedicated database
 ======================================
 
 Why?
 ----
-The reasons to use Thoth with dedicated database are:
+The reasons to use Roger with dedicated database are:
 
 ### Avoid table collisions
 
-Thoth has a fairly big model, especially its own model of users, and some similar
+Roger has a fairly big model, especially its own model of users, and some similar
 bundles (eg. blogs) may use similar tables. Separating databases keeps you safe.
 
 ### Facilitate developement by multiple developers
@@ -47,7 +47,7 @@ doctrine:
             cms:
                 connection:   cms
                 mappings:
-                    TheodoThothCmsBundle: ~
+                    TheodoRogerCmsBundle: ~
                     StofDoctrineExtensionsBundle: false
 ```
 
@@ -66,8 +66,8 @@ stof_doctrine_extensions:
             loggable:      false
 ```
 
-4. Overwrite Thoth services to use your new entity manager
-Replace all occurences of *'@doctrine.orm.entity_manager'* in Thoth's services.yml
+4. Overwrite Roger services to use your new entity manager
+Replace all occurences of *'@doctrine.orm.entity_manager'* in Roger's services.yml
 by *'@doctrine.orm.cms_entity_manager'*
 
 And it's done!

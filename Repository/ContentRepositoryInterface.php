@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Repository;
+namespace Theodo\RogerCmsBundle\Repository;
 
 interface ContentRepositoryInterface
 {

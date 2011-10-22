@@ -1,9 +1,9 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\DataFixtures\ORM;
+namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
-use Theodo\ThothCmsBundle\Entity\Snippet;
-use Theodo\ThothCmsBundle\Repository\SnippetRepository;
+use Theodo\RogerCmsBundle\Entity\Snippet;
+use Theodo\RogerCmsBundle\Repository\SnippetRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 class SnippetData implements FixtureInterface

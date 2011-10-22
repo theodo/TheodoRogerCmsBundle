@@ -1,7 +1,7 @@
-Theodo\ThothCmsBundle\Entity\Page:
+Theodo\RogerCmsBundle\Entity\Page:
     type: entity
     table: page
-    repositoryClass: Theodo\ThothCmsBundle\Repository\PageRepository
+    repositoryClass: Theodo\RogerCmsBundle\Repository\PageRepository
     id:
         id:
             type: integer

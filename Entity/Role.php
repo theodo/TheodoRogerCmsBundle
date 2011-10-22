@@ -1,12 +1,12 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Entity;
+namespace Theodo\RogerCmsBundle\Entity;
 
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Theodo\ThothCmsBundle\Entity\Role
+ * Theodo\RogerCmsBundle\Entity\Role
  */
 class Role implements RoleInterface
 {
@@ -69,7 +69,7 @@ class Role implements RoleInterface
      */
     public function __toString()
     {
-        $available_role_names = \Theodo\ThothCmsBundle\Repository\RoleRepository::getAvailableRoles();
+        $available_role_names = \Theodo\RogerCmsBundle\Repository\RoleRepository::getAvailableRoles();
         
         return $available_role_names[$this->getName()];
     }

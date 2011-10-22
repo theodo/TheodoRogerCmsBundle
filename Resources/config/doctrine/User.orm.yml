@@ -1,7 +1,7 @@
-Theodo\ThothCmsBundle\Entity\User:
+Theodo\RogerCmsBundle\Entity\User:
     type: entity
     table: user
-    repositoryClass: Theodo\ThothCmsBundle\Repository\UserRepository
+    repositoryClass: Theodo\RogerCmsBundle\Repository\UserRepository
     id:
         id:
             type: integer

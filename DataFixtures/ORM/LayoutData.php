@@ -1,9 +1,9 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\DataFixtures\ORM;
+namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
-use Theodo\ThothCmsBundle\Entity\Layout;
-use Theodo\ThothCmsBundle\Repository\LayoutRepository;
+use Theodo\RogerCmsBundle\Entity\Layout;
+use Theodo\RogerCmsBundle\Repository\LayoutRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 class LayoutData implements FixtureInterface

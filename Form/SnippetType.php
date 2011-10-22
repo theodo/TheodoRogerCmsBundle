@@ -1,11 +1,11 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Form;
+namespace Theodo\RogerCmsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-use Theodo\ThothCmsBundle\Entity\Snippet;
+use Theodo\RogerCmsBundle\Entity\Snippet;
 
 class SnippetType extends AbstractType
 {
@@ -23,7 +23,7 @@ class SnippetType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class' => 'Theodo\ThothCmsBundle\Entity\Snippet',
+            'data_class' => 'Theodo\RogerCmsBundle\Entity\Snippet',
         );
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Entity;
+namespace Theodo\RogerCmsBundle\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;

@@ -1,4 +1,4 @@
-Getting Started with Theodo ThothCMSBundle
+Getting Started with Theodo RogerCMSBundle
 ==========================================
 
 WARNING: This bundle is still under developpement and it's not considered stable.
@@ -12,10 +12,10 @@ As for time being this bundle is tested only being in your `src/` directory.
 To add it to your project add the following entry to your deps file:
 
 ``` bash
-[ThothCmsBundle]
-    git=git@github.com:Allomatch/TheodoThothCMSBundle.git
+[RogerCmsBundle]
+    git=git@github.com:Allomatch/TheodoRogerCMSBundle.git
     version=origin/citedelespace
-    target=../src/Theodo/ThothCmsBundle
+    target=../src/Theodo/RogerCmsBundle
 ```
 
 ### Step 2: Dependencies

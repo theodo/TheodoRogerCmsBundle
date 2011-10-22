@@ -1,11 +1,11 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Tests\Controller;
+namespace Theodo\RogerCmsBundle\Tests\Controller;
 
 require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Theodo\ThothCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
 
 class UserControllerTest extends WebTestCase
 {

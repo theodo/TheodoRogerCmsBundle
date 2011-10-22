@@ -1,5 +1,5 @@
 <?php
-namespace Theodo\ThothCmsBundle\Validator\Constraints;
+namespace Theodo\RogerCmsBundle\Validator\Constraints;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineConstraints;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\Validator\ConstraintValidator;
  *
  * @author Marek Kalnik <marekk@theodo.fr>
  */
-class ThothUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidator
+class RogerUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidator
 {
     /**
      * @var RegistryInterface

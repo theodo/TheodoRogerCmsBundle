@@ -2,12 +2,12 @@
 
 require_once __DIR__.'/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Entity\Page;
-use Theodo\ThothCmsBundle\Repository\PageRepository;
-use Theodo\ThothCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Tests\Unit;
 
 use Doctrine\Common\DataFixtures\Loader;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\PageData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\PageData;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
@@ -73,7 +73,7 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve "main" pages
-        $pages = $em->getRepository('TheodoThothCmsBundle:Page')->queryForMainPages()->getResult(Query::HYDRATE_OBJECT);
+        $pages = $em->getRepository('TheodoRogerCmsBundle:Page')->queryForMainPages()->getResult(Query::HYDRATE_OBJECT);
 
         // Check pages
         $this->assertInternalType('array', $pages);
@@ -81,7 +81,7 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Check first page
         $page = reset($pages);
-        $this->assertInstanceOf('Theodo\ThothCmsBundle\Entity\Page', $page);
+        $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Page', $page);
         $this->assertEquals('Homepage', $page->getName());
         $this->assertTrue(is_null($page->getParentId()));
     }
@@ -101,7 +101,7 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
         $em = $this->getEntityManager();
 
         // Retrieve the homepage
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->getHomepage();
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->getHomepage();
 
         // check page
         $this->assertEquals('Homepage', $page->getName());

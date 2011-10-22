@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Repository;
+namespace Theodo\RogerCmsBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -212,6 +212,6 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function getRepository($type)
     {
         return $this->getEntityManager()
-                ->getRepository('TheodoThothCmsBundle:' . ucfirst($type));
+                ->getRepository('TheodoRogerCmsBundle:' . ucfirst($type));
     }
 }

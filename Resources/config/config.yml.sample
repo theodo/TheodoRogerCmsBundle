@@ -26,12 +26,12 @@ doctrine:
             default:
                 connection:   default
                 mappings:
-                    TheodoThothCmsBundle: ~
+                    TheodoRogerCmsBundle: ~
                     StofDoctrineExtensionsBundle: false # The mapping is only needed when using the Translatable or the Loggable behaviors
             test:
                 connection:   test
                 mappings:
-                    TheodoThothCmsBundle: ~
+                    TheodoRogerCmsBundle: ~
                     StofDoctrineExtensionsBundle: false # The mapping is only needed when using the Translatable or the Loggable behaviors
 
 

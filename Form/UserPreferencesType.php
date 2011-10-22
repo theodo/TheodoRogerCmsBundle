@@ -1,14 +1,14 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Form;
+namespace Theodo\RogerCmsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityRepository;
 
-use Theodo\ThothCmsBundle\Entity\User;
-use Theodo\ThothCmsBundle\Entity\Role;
-use Theodo\ThothCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Entity\User;
+use Theodo\RogerCmsBundle\Entity\Role;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
 
 class UserPreferencesType extends AbstractType
 {
@@ -47,7 +47,7 @@ class UserPreferencesType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-           'data_class' => 'Theodo\ThothCmsBundle\Entity\User',
+           'data_class' => 'Theodo\RogerCmsBundle\Entity\User',
         );
     }
 

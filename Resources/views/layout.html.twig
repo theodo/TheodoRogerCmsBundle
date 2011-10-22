@@ -3,20 +3,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block page_title %}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('bundles/theodothothcms/css/jqModal.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{{ asset('bundles/theodothothcms/css/main.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/theodorogercms/css/jqModal.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('bundles/theodorogercms/css/main.css') }}" type="text/css" media="all" />
         {% block stylesheets %}{% endblock %}
-        <script src="{{ asset('bundles/theodothothcms/js/jquery-1.6.1.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/theodothothcms/js/global.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/theodorogercms/js/jquery-1.6.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/theodorogercms/js/global.js') }}" type="text/javascript"></script>
         {% block javascripts_assets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     {% set body_class = body_class|default('') %}
     <body{% if body_class != '' %} class="{{ body_class }}"{% endif %}>
-        <div id="page" class="thoth">
+        <div id="page" class="roger">
             <div id="header">
-                {% render "TheodoThothCmsBundle:Backend\\User:boxComponent" %}
-                {% render "TheodoThothCmsBundle:Backend\\Navigation:menuComponent" with { 'request' : app.request } %}
+                {% render "TheodoRogerCmsBundle:Backend\\User:boxComponent" %}
+                {% include "TheodoRogerCmsBundle::navigation.html.twig" %}
 
                 <div id="header_bottom">
                     <div></div>

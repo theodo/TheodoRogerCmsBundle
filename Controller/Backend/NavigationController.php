@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Controller\Backend;
+namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\Exception\FileLoaderLoadException;
 
-use Theodo\ThothCmsBundle\Form\LayoutType;
+use Theodo\RogerCmsBundle\Form\LayoutType;
 
 class NavigationController extends Controller
 {
@@ -27,22 +27,22 @@ class NavigationController extends Controller
      */
     public function menuComponentAction($request)
     {
-        // Build thoth.menu.yml file path
-        $path = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'thoth.menu.yml';
+        // Build roger.menu.yml file path
+        $path = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'roger.menu.yml';
 
         // Check file exists
         if (!file_exists($path)) {
             throw new FileLoaderLoadException(sprintf(
-              "File \"%s\" can not be found!\nPlease create file from ThothCmsBundle/config/menu.yml",
+              "File \"%s\" can not be found!\nPlease create file from RogerCmsBundle/config/menu.yml",
               $path
             ));
         }
 
-        // Load thoth.menu.yml file
+        // Load roger.menu.yml file
         $menu = Yaml::parse($path);
 
         return $this->render(
-            'TheodoThothCmsBundle:Navigation:menu-component.html.twig',
+            'TheodoRogerCmsBundle:Navigation:menu-component.html.twig',
             array(
                 'menu'    => $menu,
                 'request' => $request

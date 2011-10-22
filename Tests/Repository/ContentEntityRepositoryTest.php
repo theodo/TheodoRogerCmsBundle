@@ -2,14 +2,14 @@
 
 require_once __DIR__ . '/../../../../../app/AppKernel.php';
 
-use Theodo\ThothCmsBundle\Tests\Unit;
-use Theodo\ThothCmsBundle\Repository\ContentEntityRepository;
-use Theodo\ThothCmsBundle\Entity\Layout;
-use Theodo\ThothCmsBundle\Entity\Page;
-use Theodo\ThothCmsBundle\Entity\Snippet;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\LayoutData;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\PageData;
-use Theodo\ThothCmsBundle\DataFixtures\ORM\SnippetData;
+use Theodo\RogerCmsBundle\Tests\Unit;
+use Theodo\RogerCmsBundle\Repository\ContentEntityRepository;
+use Theodo\RogerCmsBundle\Entity\Layout;
+use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Entity\Snippet;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\LayoutData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\PageData;
+use Theodo\RogerCmsBundle\DataFixtures\ORM\SnippetData;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
@@ -31,7 +31,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Load "test" entity manager
         $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-        $this->content_repository = $kernel->getContainer()->get('thoth.content_repository');
+        $this->content_repository = $kernel->getContainer()->get('roger.content_repository');
     }
 
     /**
@@ -47,7 +47,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * ContentRepository getter
      *
-     * @return Theodo\ThothCmsBundle\Repository\ContentEntityRepository
+     * @return Theodo\RogerCmsBundle\Repository\ContentEntityRepository
      */
     protected function getContentRepository()
     {
@@ -66,7 +66,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Retrieve entity manager
         $em = $this->getEntityManager();
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('name' => 'Homepage'));
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('name' => 'Homepage'));
 
         $source = $this->getContentRepository()->getSourceByNameAndType($page->getName());
 
@@ -94,7 +94,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Retrieve entity manager
         $em = $this->getEntityManager();
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('name' => 'Homepage'));
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('name' => 'Homepage'));
         $homepage = $this->getContentRepository()->getHomePage();
 
         $this->assertSame($homepage->getId(), $page->getId());
@@ -112,7 +112,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
         // Retrieve entity manager
         $em = $this->getEntityManager();
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
         $page2 = $this->getContentRepository()->getPageBySlug('theodo-team');
 
         $this->assertSame($page->getId(), $page2->getId());
@@ -170,8 +170,8 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->getContentRepository()->create($page);
 
         // Test page
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'content-entity-repository'));
-        $this->assertInstanceOf('\Theodo\ThothCmsBundle\Entity\Page', $page);
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'content-entity-repository'));
+        $this->assertInstanceOf('\Theodo\RogerCmsBundle\Entity\Page', $page);
 
         // Rollback
         $em->getConnection()->rollback();
@@ -197,14 +197,14 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(null, $this->getContentRepository()->remove());
 
         // Retrieve about page
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'about'));
-        $this->assertInstanceOf('\Theodo\ThothCmsBundle\Entity\Page', $page);
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'about'));
+        $this->assertInstanceOf('\Theodo\RogerCmsBundle\Entity\Page', $page);
 
         // Remove about page
         $this->getContentRepository()->remove($page);
 
         // Try to retrieve about page
-        $page = $em->getRepository('TheodoThothCmsBundle:Page')->findOneBy(array('slug' => 'about'));
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'about'));
         $this->assertSame(null, $page);
 
         // Rollback

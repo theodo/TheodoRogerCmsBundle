@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Thoth CMS Bundle
+ * This file is part of the Roger CMS Bundle
  *
  * (c) Theodo <contact@theodo.fr>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Theodo\ThothCmsBundle\Extensions\Twig\TokenParser;
+namespace Theodo\RogerCmsBundle\Extensions\Twig\TokenParser;
 
-use Theodo\ThothCmsBundle\Extensions\Twig\Node\SnippetNode;
+use Theodo\RogerCmsBundle\Extensions\Twig\Node\SnippetNode;
 
 /**
  *

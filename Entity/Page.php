@@ -1,6 +1,6 @@
 <?php
 
-namespace Theodo\ThothCmsBundle\Entity;
+namespace Theodo\RogerCmsBundle\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -8,13 +8,13 @@ use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
-use Theodo\ThothCmsBundle\Repository\PageRepository;
-use Theodo\ThothCmsBundle\Validator\Unique;
-use Theodo\ThothCmsBundle\Validator\Exists;
-use Theodo\ThothCmsBundle\Validator\TwigSyntax;
+use Theodo\RogerCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Validator\Unique;
+use Theodo\RogerCmsBundle\Validator\Exists;
+use Theodo\RogerCmsBundle\Validator\TwigSyntax;
 
 /**
- * Theodo\ThothCmsBundle\Entity\Page
+ * Theodo\RogerCmsBundle\Entity\Page
  */
 class Page
 {
@@ -64,12 +64,12 @@ class Page
     private $layout_id;
 
     /**
-     * @var Theodo\ThothCmsBundle\Entity\Page
+     * @var Theodo\RogerCmsBundle\Entity\Page
      */
     private $children;
 
     /**
-     * @var Theodo\ThothCmsBundle\Entity\Page
+     * @var Theodo\RogerCmsBundle\Entity\Page
      */
     private $parent;
 
@@ -251,9 +251,9 @@ class Page
     /**
      * Add children
      *
-     * @param Theodo\ThothCmsBundle\Entity\Page $children
+     * @param Theodo\RogerCmsBundle\Entity\Page $children
      */
-    public function addChildren(\Theodo\ThothCmsBundle\Entity\Page $children)
+    public function addChildren(\Theodo\RogerCmsBundle\Entity\Page $children)
     {
         $this->children[] = $children;
     }
@@ -271,9 +271,9 @@ class Page
     /**
      * Set parent
      *
-     * @param Theodo\ThothCmsBundle\Entity\Page $parent
+     * @param Theodo\RogerCmsBundle\Entity\Page $parent
      */
-    public function setParent(\Theodo\ThothCmsBundle\Entity\Page $parent)
+    public function setParent(\Theodo\RogerCmsBundle\Entity\Page $parent)
     {
         $this->parent = $parent;
     }
@@ -281,7 +281,7 @@ class Page
     /**
      * Get parent
      *
-     * @return Theodo\ThothCmsBundle\Entity\Page $parent
+     * @return Theodo\RogerCmsBundle\Entity\Page $parent
      */
     public function getParent()
     {
@@ -583,9 +583,9 @@ class Page
     /**
      * Add children
      *
-     * @param Theodo\ThothCmsBundle\Entity\Page $children
+     * @param Theodo\RogerCmsBundle\Entity\Page $children
      */
-    public function addPage(\Theodo\ThothCmsBundle\Entity\Page $children)
+    public function addPage(\Theodo\RogerCmsBundle\Entity\Page $children)
     {
         $this->children[] = $children;
     }
