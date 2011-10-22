@@ -49,10 +49,10 @@ class Role implements RoleInterface
     {
         return $this->name;
     }
- 
+
     /**
      * Implementation of getRole for the RoleInterface.
-     * 
+     *
      * @return string The role.
      */
     public function getRole()
@@ -62,7 +62,7 @@ class Role implements RoleInterface
 
     /**
      * toString function
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06)27
@@ -70,7 +70,7 @@ class Role implements RoleInterface
     public function __toString()
     {
         $available_role_names = \Theodo\RogerCmsBundle\Repository\RoleRepository::getAvailableRoles();
-        
+
         return $available_role_names[$this->getName()];
     }
     /**
@@ -97,7 +97,7 @@ class Role implements RoleInterface
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -117,7 +117,7 @@ class Role implements RoleInterface
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {

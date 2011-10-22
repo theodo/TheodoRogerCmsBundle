@@ -12,27 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class RoleRepository extends EntityRepository
 {
-    const ROLE_USER   = 'ROLE_USER';
-    const ROLE_ADMIN  = 'ROLE_ADMIN';
-    const ROLE_CLIENT = 'ROLE_CLIENT';
+    const ROLE_DESIGNER        = 'ROLE_DESIGNER';
+    const ROLE_ADMIN           = 'ROLE_ADMIN';
+    const ROLE_CONTENT_MANAGER = 'ROLE_CONTENT_MANAGER';
+    const ROLE_VISITOR         = 'ROLE_VISITOR';
 
-    const ROLE_USER_NAME   = 'Designer';
-    const ROLE_ADMIN_NAME  = 'Administrator';
-    const ROLE_CLIENT_NAME = 'Client';
+    static $role_names = array(
+        self::ROLE_DESIGNER        => 'Designer',
+        self::ROLE_ADMIN           => 'Administrator',
+        self::ROLE_CONTENT_MANAGER => 'Content Manager',
+        self::ROLE_VISITOR         => 'Visitor',
+    );
 
     /**
      * Return available roles
-     * 
+     *
      * @return array
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
      */
     public static function getAvailableRoles()
     {
-        return array(
-            self::ROLE_USER   => self::ROLE_USER_NAME,
-            self::ROLE_ADMIN  => self::ROLE_ADMIN_NAME,
-            self::ROLE_CLIENT => self::ROLE_CLIENT_NAME,
-        );
+        return self::$role_names;
     }
 }

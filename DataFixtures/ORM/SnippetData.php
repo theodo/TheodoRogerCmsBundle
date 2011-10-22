@@ -10,7 +10,7 @@ class SnippetData implements FixtureInterface
 {
     public function load($manager)
     {
-      
+
         // Create new page (homepage)
         $snippet1 = new Snippet();
         $snippet1->setName('bonsoir');
@@ -25,7 +25,7 @@ EOF
         $snippet2 = new Snippet();
         $snippet2->setName('theodo');
         $snippet2->setContent(<<<EOF
- <a id="theodo-link" href="http://localhost:4042/theodo">Theodo</a>
+ <a id="theodo-link" href="http://www.theodo.fr">Theodo</a>
 EOF
 );
         $snippet2->setCacheable(false);

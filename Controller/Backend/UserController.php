@@ -297,6 +297,7 @@ class UserController extends Controller
      */
     public function editAction($id, $self)
     {
+
         // Retrieve user
         $user = $this->retrieveUser($id, $self);
         $old_password = $user->getPassword();

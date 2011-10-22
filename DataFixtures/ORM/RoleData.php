@@ -22,23 +22,29 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface
         $admin_role = new Role();
         $admin_role->setName(RoleRepository::ROLE_ADMIN);
         $manager->persist($admin_role);
-        
-        // Create user role
-        $user_role = new Role();
-        $user_role->setName(RoleRepository::ROLE_USER);
-        $manager->persist($user_role);
-        
+
+        // Create designer role
+        $designer_role = new Role();
+        $designer_role->setName(RoleRepository::ROLE_DESIGNER);
+        $manager->persist($designer_role);
+
         // Create client role
-        $client_role = new Role();
-        $client_role->setName(RoleRepository::ROLE_CLIENT);
-        $manager->persist($client_role);
+        $cm_role = new Role();
+        $cm_role->setName(RoleRepository::ROLE_CONTENT_MANAGER);
+        $manager->persist($cm_role);
+
+        // Create visitor role
+        $visitor_role = new Role();
+        $visitor_role->setName(RoleRepository::ROLE_VISITOR);
+        $manager->persist($visitor_role);
 
         // Save users
         $manager->flush();
-        
+
         $this->addReference('admin-role', $admin_role);
-        $this->addReference('user-role', $user_role);
-        $this->addReference('client-role', $client_role);
+        $this->addReference('designer-role', $designer_role);
+        $this->addReference('content-manager-role', $client_role);
+        $this->addReference('visitor-role', $visitor_role);
     }
 
     /**
