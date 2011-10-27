@@ -1,0 +1,31 @@
+Theodo\RogerCmsBundle\Entity\Snippet:
+    type: entity
+    table: snippet
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        content:
+            type: text
+        cacheable:
+            type: boolean
+        public:
+            type: boolean
+        lifetime:
+            type: integer
+            nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update

@@ -1,0 +1,40 @@
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
+
+{% set tab = 'design' %}
+{% set nav = 'layouts' %}
+
+{% block page_title "Layouts" %}
+
+{% block cmscontent %}
+<div id="actions">
+    <ul>
+        <li>
+          <a class="new-layout" href="{{ url('layout_new') }}">
+            <img alt="Plus" src="{{ asset('bundles/theodorogercms/images/admin/plus.png') }}" />{% trans %}New Layout{% endtrans %}</a>
+        </li>
+    </ul>
+</div>
+<div class="outset">
+    <table class="index" id="layouts">
+        <thead>
+            <tr>
+                <th class="layout">{% trans %}Layout{% endtrans %}</th>
+                <th class="modify">{% trans %}Modify{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for layout in layouts %}
+            <tr class="node level_1">
+                <td class="layout">
+                    <img alt="" src="{{ asset('bundles/theodorogercms/images/admin/roger_layout.png') }}" />
+                    <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
+                </td>
+                <td class="remove">
+                    <a id="remove-layout-{{ layout.id }}" href="{{ url('layout_remove', { 'id': layout.id }) }}">{% trans %}Remove{% endtrans %}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

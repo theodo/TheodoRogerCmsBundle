@@ -1,0 +1,43 @@
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
+
+{% block javascripts_assets %}
+<script src="{{ asset('bundles/theodorogercms/js/page.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% set tab = 'content' %}
+{% set nav = 'pages' %}
+
+{% block page_title "Pages" %}
+
+{% block cmscontent %}
+{% if pages|length == 0 %}
+    <div id="actions">
+        <ul>
+            <li>
+              <a href="{{ url('page_new', {'parent_id' : 'homepage'}) }}">
+                  <img src="{{ asset('bundles/theodorogercms/images/admin/plus.png') }}" alt="">
+                  {% trans %}New Homepage{% endtrans %}
+              </a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+<div class="outset">
+    <table class="index" id="site_map" summary="{% trans %}Page hierarchy of the current site{% endtrans %}">
+        <thead>
+            <tr>
+                <th class="page">{% trans %}Page{% endtrans %}</th>
+                <th class="status">{% trans %}Status{% endtrans %}</th>
+                <th class="modify" colspan="2">{% trans %}Modify{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% if pages|length == 0 %}
+            <td colspan="4" class="empty">{% trans %}No pages{% endtrans %}</td>
+          {% else %}
+            {% include "TheodoRogerCmsBundle:Page:page-list.html.twig" with {'pages': pages, 'level' : 0} %}
+          {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

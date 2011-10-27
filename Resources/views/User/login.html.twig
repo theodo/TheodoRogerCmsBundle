@@ -1,0 +1,51 @@
+{% extends "TheodoRogerCmsBundle::security-layout.html.twig" %}
+
+{% block page_title "Login" %}
+
+{% block notice %}
+    {% if error %}
+        <div id="error">
+            <p>{{ error.message|trans }}</p>
+        </div>
+    {% endif %}
+
+    {% if app.session.hasFlash('notice') %}
+        <div id="notice">
+            <p>{{ app.session.flash('notice') }}</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block cmscontent %}
+    <div id='single_form'>
+        <h1>{% trans %}Please Login{% endtrans %}</h1>
+
+        <form action="{{ url('login_check') }}" method="post">
+            <p>
+                <label for="username">{% trans %}Username{% endtrans %}</label>
+                <input type="text" size="40" name="_username" maxlength="40" id="username" class="textbox activate" value="{{ last_username }}">
+            </p>
+
+            <p>
+                <label for="password">{% trans %}Password{% endtrans %}</label>
+                <input class="textbox password" id="password" maxlength="40" name="_password" size="40" type="password" value="" />
+            </p>
+
+            <p class="remember_me">
+                <input type="checkbox" value="1" name="_remember_me" id="remember_me" class="checkbox">
+                <label for="remember_me" class="checkbox">{% trans %}Remember me{% endtrans %}</label>
+            </p>
+
+            <input type="hidden" name="_target_path" value="{{ url('user_checkSessionLocale', {'redirect_route': 'page_list'}) }}" />
+
+            <p class='buttons'>
+                <input class="button" type="submit" name="login" value="{% trans %}Login{% endtrans %}"/>
+            </p>
+        </form>
+
+    </div>
+
+    <p class='version'>
+        {% trans %}Powered by <a href='http://www.rogercms.com'>Roger CMS</a>{% endtrans %}
+    </p>
+{% endblock %}

@@ -1,0 +1,31 @@
+Theodo\RogerCmsBundle\Entity\Media:
+    type: entity
+    table: media
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        path:
+            type: string
+            length: 255
+            unique: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        postPersist: [ upload ]
+        preUpdate: [ preUpload ]
+        postUpdate: [ upload ]
+        postRemove: [ removeUpload ]

@@ -1,0 +1,72 @@
+security:
+    encoders:
+        Theodo\RogerCmsBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_USER:        ROLE_CLIENT
+        ROLE_ADMIN:       [ROLE_USER, ROLE_CLIENT]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_CLIENT, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        cms_user:
+            id: roger.user_provider
+
+    firewalls:
+        profiler:
+            pattern:  ^/_profiler
+            security: false
+
+        wdt:
+            pattern:  ^/_wdt
+            security: false
+
+        login:
+            pattern:  ^/admin$
+            security: false
+
+        admin:
+            provider: cms_user
+            pattern:    ^/admin/*
+            access_denied_url: /admin/access-denied
+            form_login:
+                check_path:  /admin/login
+                login_path:  /admin
+                remember_me: true
+            logout:
+                path:               /admin/logout
+                target:             /admin
+                invalidate_session: true
+            http_basic: true
+            remember_me:
+                key:      463a06ee69fbea064218b1d02c416125
+                lifetime: 86400
+                path:     /                
+
+        front:
+            pattern:    ^/*
+            anonymous: ~
+            access_denied_url: /access-denied
+            form_login:
+                check_path:  /enregistrer-le-projet-de-visite/login
+                login_path:  /connection
+                remember_me: true
+                post_only: false
+                default_target_path: /projet-de-visite
+            logout:
+                path:               /enregistrer-le-projet-de-visite/logout
+                target:             /
+                invalidate_session: true
+            http_basic: true
+            remember_me:
+                key:      463a06ee69fbea064218b1d02c416125
+                lifetime: 86400
+                path:     /
+
+    access_control:
+        - { path: ^/admin/users*, roles: ROLE_ADMIN }
+        - { path: ^/admin/snippets*, roles: ROLE_USER }
+        - { path: ^/admin/layouts*, roles: ROLE_USER }
+        - { path: ^/admin/*, roles: ROLE_CLIENT }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+

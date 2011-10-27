@@ -1,0 +1,42 @@
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
+
+{% set tab = 'design' %}
+{% set nav = 'snippets' %}
+
+{% block page_title "Snippets" %}
+
+{% block cmscontent %}
+<div id="actions">
+    <ul>
+        <li>
+          <a id="new-snippet" href="{{ url('snippet_new') }}">
+            <img alt="Plus" src="{{ asset('bundles/theodorogercms/images/admin/plus.png') }}" />{% trans %}New Snippet{% endtrans %}</a>
+        </li>
+    </ul>
+</div>
+<div class="outset">
+    <table class="index" id="snippets">
+        <thead>
+            <tr>
+                <th class="snippet">{% trans %}Snippet{% endtrans %}</th>
+                <th class="modify">{% trans %}Modify{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for snippet in snippets %}
+            <tr class="node level_1">
+                <td class="snippet">
+                    <img alt="" src="{{ asset('bundles/theodorogercms/images/admin/roger_snippet.png') }}" />
+                    <span>
+                      <a href="{{ url('snippet_edit', { 'id': snippet.id }) }}">{{ snippet.name }}</a>
+                    </span>
+                </td>
+                <td class="remove">
+                    <a id="remove-snippet-{{ snippet.id }}" href="{{ url('snippet_remove', { 'id': snippet.id }) }}">{% trans %}Remove{% endtrans %}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

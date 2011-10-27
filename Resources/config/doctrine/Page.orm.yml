@@ -1,0 +1,73 @@
+Theodo\RogerCmsBundle\Entity\Page:
+    type: entity
+    table: page
+    repositoryClass: Theodo\RogerCmsBundle\Repository\PageRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        content:
+            type: text
+            nullable: true
+        slug:
+            type: string
+            length: 255
+            unique: true
+        breadcrumb:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+        title:
+            type: string
+            length: 255
+            nullable: true
+        keywords:
+            type: text
+            nullable: true
+        status:
+            type: string
+            length: 127
+        parent_id:
+            type: integer
+            nullable: true
+        content_type:
+            type: string
+            length: 127
+        cacheable:
+            type: boolean
+        public:
+            type: boolean
+        lifetime:
+            type: integer
+            nullable: true
+        published_at:
+            type: date
+            nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        parent:
+            targetEntity: Page
+            inversedBy: children
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+    oneToMany:
+        children:
+            targetEntity: Page
+            mappedBy: parent
+            cascade: ["remove"]

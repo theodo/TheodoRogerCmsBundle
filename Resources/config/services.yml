@@ -1,0 +1,64 @@
+parameters:
+    roger.entity_manager.name: default
+    roger.user_provider.class: Symfony\Bridge\Doctrine\Security\User\EntityUserProvider
+    roger.user_provider.user.class: Theodo\RogerCmsBundle\Entity\User
+    roger.user_provider.user.parameter: username
+    roger.twig.loader.class: Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository
+    roger.caching.class: Theodo\RogerCmsBundle\Extensions\Twig\TwigCacheDatabase
+    roger.content_repository.class: Theodo\RogerCmsBundle\Repository\ContentEntityRepository
+    roger.routing.class: Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerRoutingExtension
+    roger.twig.extension.actions.class: Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerActionsExtension
+    validator.twig_syntax.class: Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator
+
+    # Timestampable listener class
+    gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener
+
+services:
+    roger.user_provider:
+        class: %roger.user_provider.class%
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - %roger.user_provider.user.class%
+            - %roger.user_provider.user.parameter%
+    roger.content_repository:
+        class: %roger.content_repository.class%
+        arguments: ['@doctrine.orm.entity_manager']
+    roger.twig.loader:
+        class: %roger.twig.loader.class%
+        arguments: ['@roger.content_repository', '@twig.loader', %roger.twig.loader.fallback_path%]
+    roger.twig:
+        class: %twig.class%
+        arguments: ['@roger.twig.loader', %twig.options%]
+    roger.templating:
+        class: %templating.engine.twig.class%
+        arguments: ['@roger.twig', '@templating.name_parser', '@templating.globals']
+    roger.caching:
+        class: %roger.caching.class%
+        arguments: ['@roger.twig']
+    roger.routing:
+        class: %roger.routing.class%
+        arguments: ['@router', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: roger.twig.extension }
+            - { name: twig.extension }
+    roger.twig.extension.actions:
+        class: %roger.twig.extension.actions.class%
+        arguments: ['@service_container']
+        tags:
+            - { name: roger.twig.extension }
+    validator.twig_syntax:
+        class: %validator.twig_syntax.class%
+        arguments: ['@roger.twig']
+        tags:
+            - { name: validator.constraint_validator, alias: validator.twig_syntax }
+    doctrine.orm.validator.unique:
+        class: Theodo\RogerCmsBundle\Validator\Constraints\RogerUniqueEntityValidator
+        tags:
+            - { name: validator.constraint_validator, alias: doctrine.orm.validator.unique }
+        arguments: ['@doctrine']
+
+    # Timestampable listener
+    gedmo.timestampable.listener:
+        class: %gedmo.timestampable.listener.class%
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }

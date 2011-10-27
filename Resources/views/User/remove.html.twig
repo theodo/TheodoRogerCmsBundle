@@ -1,0 +1,29 @@
+{% extends "TheodoRogerCmsBundle::layout.html.twig" %}
+
+{% set tab = 'settings' %}
+{% set nav = 'users' %}
+
+{% block page_title "Remove User" %}
+
+{% block cmscontent %}
+<h1>{% trans %}Remove{% endtrans %} {{user.name}}</h1>
+<p>{% trans %}Are you sure you want to <strong class="warning">permanently remove</strong> the following user?{% endtrans %}</p>
+
+<table id="users" class="index">
+    <tbody>
+      <tr id="user_{{ user.id }}" class="node level_1">
+          <td class="users">
+              <span class="title">{{ user.name }}</span>
+          </td>
+      </tr>
+    </tbody>
+</table>
+
+<form class="edit_user" action="{{ url('user_remove', {'id' : user.id}) }}" method="post">
+    <p class="buttons">
+        <input class="button" type="submit" value="{% trans %}Delete{% endtrans %}" />
+        {% trans %}or{% endtrans %}
+        <a href="{{ url('user_list') }}">{% trans %}Cancel{% endtrans %}</a>
+    </p>
+</form>
+{% endblock %}
