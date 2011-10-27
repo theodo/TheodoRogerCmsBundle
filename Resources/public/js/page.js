@@ -8,16 +8,17 @@ jQuery(document).ready(function ()
 
   // Load expand page listener
   loadExpandPageListener();
-  
+
   // Load toogle tabs listener
   loadToogleTabListener();
-  
+
   // Load add tab listener
   loadAddTabListener();
-  
+
   // Load supp tab listener
   loadSupTabListener();
-    
+
+
   loadPopinListerner();
 
 });
@@ -227,21 +228,21 @@ var loadToogleTabListener = function ()
 
     // Retrieve node
     var node = jQuery(this);
-    
+
     highlightPageBlock(node);
-    
+
   });
-  
+
 }
 
 var highlightPageBlock = function (node)
 {
     // Hide old tab
     jQuery('.tab.here').each( function () {jQuery(this).removeClass('here');});
-    
+
     // highlight new tab
     node.addClass('here');
-    
+
     // hide the old page and display the new
     tooglePage(node);
 }
@@ -255,18 +256,27 @@ var highlightPageBlock = function (node)
 var tooglePage = function (node)
 {
   // Get page id to display
-  page_id = node.attr('id').replace('tab','page');
+  var page_id = node.attr('id').replace('tab','page');
 
   // Hide old page
   jQuery('.page:not(.hide)').each( function () {jQuery(this).addClass('hide');});
 
   // Display new page
   jQuery('div#'+page_id).removeClass('hide');
+  editAreaLoader.init({
+                    id: jQuery('div#' + page_id + ' textarea').attr('id')	// id of the textarea to transform
+                    ,start_highlight: true	// if start with highlight
+                    ,allow_resize: "both"
+                    ,allow_toggle: true
+                    ,word_wrap: true
+                    ,language: "en"
+                    ,syntax: "twig"
+            });
 }
- 
+
 /**
- * Load Add tab listener 
- * 
+ * Load Add tab listener
+ *
  *
  * @author Romain Barberi <romainb@theodo.fr>
  * @since 2011-08-09
@@ -295,12 +305,12 @@ var loadAddTabListener = function ()
 
       return false;
   });
-    
+
 }
 
 /**
- * Add new block 
- * 
+ * Add new block
+ *
  *
  * @author Romain Barberi <romainb@theodo.fr>
  * @since 2011-08-09
@@ -311,9 +321,9 @@ var addTabPage = function (page_name)
         "<a id='tab_"+page_name+"' href='#' class='tab'>" +
             "<span> "+page_name+" </span>" +
             "<img src='/bundles/theodorogercms/images/admin/tab_close.png' class='close' alt='Remove part' title='Remove part' />" +
-        "</a>"  
+        "</a>"
     );
-    
+
     jQuery('#pages').append(
         '<div class="page hide" id="page_'+page_name+'">' +
             '<div class="part" id="part_'+page_name+'">' +
@@ -328,15 +338,15 @@ var addTabPage = function (page_name)
             '</div>' +
         '</div>'
     );
-    
+
     highlightPageBlock(jQuery(".tab:last"));
-    
+
     CKEDITOR.replace('page_content_'+page_name);
 }
 
 /**
- * Load delete tab listener 
- * 
+ * Load delete tab listener
+ *
  *
  * @author Romain Barberi <romainb@theodo.fr>
  * @since 2011-08-11
@@ -369,37 +379,39 @@ var loadSupTabListener = function ()
         });
 
       return false;
-     });  
-    
+     });
+
 }
 
 /**
  * Delete page and tab
- * 
+ *
  *
  * @author Romain Barberi <romainb@theodo.fr>
  * @since 2011-08-11
  */
-var supTabPage = function (node) 
+var supTabPage = function (node)
 {
     // Get page id to delete
     page_id = node.attr('id').replace('tab','page');
 
     // Delete tab
     node.remove();
-    
+
     // Delete page
     jQuery('div#'+page_id).remove();
 }
 
 /**
- * Load delete tab listener 
- * 
+ * Load delete tab listener
+ *
  *
  * @author Romain Barberi <romainb@theodo.fr>
  * @since 2011-08-11
  */
 var loadPopinListerner = function ()
 {
-    jQuery('#popin-delete, #popin-add').jqm({overlay: 45, toTop: true});
+    if (jQuery('#popin-delete, #popin-add').length > 0 ) {
+        jQuery('#popin-delete, #popin-add').jqm({overlay: 45, toTop: true});
+    }
 }

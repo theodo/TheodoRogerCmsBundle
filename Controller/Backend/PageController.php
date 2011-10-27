@@ -69,12 +69,11 @@ class PageController extends Controller
             $parent_page = $page->getParent();
         }
 
-        // Get all layout
+        // Get all layouts
         $layouts = $this->get('roger.content_repository')->findAll('layout');
-
         $page_content = $page->getContent();
 
-        //contenu -> récupération du layout
+        // Get the current layout from the Twig content
         if (preg_match('#{% extends [\',\"]layout:(?P<layout_name>(.*))[\',\"] %}#sU', $page_content, $matches))
         {
             $layout_name = $matches['layout_name'];
@@ -82,7 +81,10 @@ class PageController extends Controller
             $layout_name = null;
         }
 
-        // contenu -> récupération des blocks
+        // Separate the different blocks from Twig
+        // @TODO: this does not work with nested blocks.
+        // Clean solution might be to use the Twig parser and recompile (?) blocks separately in twig
+        //
         if (preg_match_all('#{% block (?P<block_name>(.*)) %}(?P<block_content>(.*)){% endblock %}#sU', $page_content, $matches))
         {
             $tabs = array_combine($matches['block_name'], $matches['block_content']);

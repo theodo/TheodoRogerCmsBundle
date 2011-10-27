@@ -773,7 +773,7 @@ textarea
 
 textarea.large
   {
-  height: 280px;
+  height: 400px;
 }
 
 p.updated_line
@@ -2122,19 +2122,19 @@ table.index td.note
 
 .jqmWindow {
     display: none;
-    
+
     position: fixed;
     top: 17%;
     left: 50%;
-    
+
     margin-left: -150px;
     width: 300px;
-    
+
     background-color: #fff;
     color: #000;
     border: 0px solid black;
     padding: 0px;
-    
+
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
