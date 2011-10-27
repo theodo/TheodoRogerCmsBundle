@@ -2,8 +2,6 @@ Getting Started with Theodo RogerCMSBundle
 ==========================================
 
 WARNING: This bundle is still under developpement and it's not considered stable.
-WARNING2: Keep this bundle private, please. It's not intended to be distributed
-at this stage of developement.
 
 ## Installation
 
@@ -13,7 +11,7 @@ To add it to your project add the following entry to your deps file:
 
 ``` bash
 [RogerCmsBundle]
-    git=git@github.com:Allomatch/TheodoRogerCMSBundle.git
+    git=git@github.com:Theodo/TheodoRogerCMSBundle.git
     version=origin/citedelespace
     target=../src/Theodo/RogerCmsBundle
 ```
