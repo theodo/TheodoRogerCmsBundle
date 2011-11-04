@@ -24,7 +24,8 @@ To add it to your project add the following entry to your deps file:
 **Using the vendors script**
 
 Add the following lines to your `deps` file:
-```
+
+``` bash
 [DoctrineExtensionsBundle]
     git=https://github.com/stof/StofDoctrineExtensionsBundle.git
     version=origin/master
@@ -39,7 +40,8 @@ Add the following lines to your `deps` file:
 ### Step 3: AppKernel.php
 
 Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBundle\TheodoRogerCmsBundle(),`
-```
+
+``` php
     public function registerBundles()
     {
         $bundles = array(
@@ -57,7 +59,7 @@ Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBun
 
 Add the following lines to your `app/config/routing.yml` file:
 
-```
+``` bash
 RogerCms:
     resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
     prefix: /
