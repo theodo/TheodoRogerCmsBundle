@@ -37,6 +37,10 @@ Add the following lines to your `deps` file:
     target=/gedmo-doctrine-extensions
 ```
 
+**Notice:**
+TheodoRogerCms depends on Twig and it's not usable without it.
+Due to some bugs in previous versions of Twig, v 1.2.0 or higher is required.
+
 ### Step 3: AppKernel.php
 
 Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBundle\TheodoRogerCmsBundle(),`
@@ -55,6 +59,8 @@ Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBun
         );
 ```
 
+Follow StofDoctrineExtensionsBundle's doc to add the configuration for **timestampable** behavior.
+
 ### Step 4: Routing
 
 Add the following lines to your `app/config/routing.yml` file:
@@ -64,3 +70,15 @@ RogerCms:
     resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
     prefix: /
 ```
+
+### Step 5: Database and entities
+
+RogerCMS uses database to store all content informations, so you need to add its
+entities to your entity manager. As it also uses his own user management system
+it may be a good idea to use a separate database. For further informations on
+how to setup and manage a separate database connection for the CMS, refer to
+99-multiple_databases.md file.
+
+If you don't feel like having Roger in separate db, the Symfony Standard Edition
+default config will work out of the box. Just generate your schema/migrations
+and update your db.
