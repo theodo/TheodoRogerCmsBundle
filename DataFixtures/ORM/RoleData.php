@@ -43,7 +43,7 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface
 
         $this->addReference('admin-role', $admin_role);
         $this->addReference('designer-role', $designer_role);
-        $this->addReference('content-manager-role', $client_role);
+        $this->addReference('content-manager-role', $cm_role);
         $this->addReference('visitor-role', $visitor_role);
     }
 
