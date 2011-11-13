@@ -37,6 +37,10 @@ Add the following lines to your `deps` file:
     target=/gedmo-doctrine-extensions
 ```
 
+** Notice: **
+TheodoRogerCms depends on Twig and it's not usable without it.
+Due to some bugs in previous versions of Twig, v 1.2.0 or higher is required.
+
 ### Step 3: AppKernel.php
 
 Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBundle\TheodoRogerCmsBundle(),`
