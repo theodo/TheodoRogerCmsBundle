@@ -12,18 +12,14 @@ WARNING: This bundle is still under developpement and is not considered stable.
 
 TheodoRoger CMS has a basic security/user management configuration included.
 
-1. Modify your security.yml
+#### 1. Modifying your security.yml
+ * If you don't have any pages that require user login:  
+ Replace your app/config/security.yml by Roger's security.yml
+ (`path/to/Roger/Resources/config/security.yml`).  
+ * If you integrate Roger's security into an already existing frontend system:  
+ Add the following entries to your security.yml  
 
-* If you don't have any pages that require user login:
-
-Replace your app/config/security.yml by Roger's security.yml
-(`path/to/Roger/Resources/config/security.yml`).
-
-* If you integrate Roger's security into an already existing frontend system:
-
-Add the following entries to your security.yml
-
-``` bash
+ ``` bash
 security:
     encoders:
         [...]
@@ -67,10 +63,8 @@ security:
         - { path: ^/admin/layouts*, roles: ROLE_USER }
         - { path: ^/admin/*, roles: ROLE_CLIENT }
         - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
-```
-
-2. Creating users
+ ```
+#### 2. Creating users
 
 The simplest way to create your first users is to load them from fixtures.
 RogerCMS provides some examples in /path/to/Roger/DataFixtures/ORM/Users.php,
@@ -84,12 +78,12 @@ preferred configuration and run:
 app/console doctrine:fixtures:load --fixtures=/path/to/Roger/DataFixtures/ORM --append
 ```
 
-3. Sign in:
+#### 3. Signing in
 
-The admin login form will be accessible now by /admin path of your website.
+The admin login form will be accessible now by `/admin` path of your website.
 Loading fixtures also enabled some of the default webpages. You can access the homepage
-by /homepage path of your website.
+by `/homepage` path of your website.
 
-4. Managing your users
+#### 4. Managin your users
 
-You can now choose Settings->Users in Roger's menu, to manage your users.
+You can now choose __Settings->Users__ in Roger's menu, to manage your users.
