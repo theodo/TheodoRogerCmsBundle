@@ -42,26 +42,6 @@ security:
                 lifetime: 86400
                 path:     /                
 
-        front:
-            pattern:    ^/*
-            anonymous: ~
-            access_denied_url: /access-denied
-            form_login:
-                check_path:  /enregistrer-le-projet-de-visite/login
-                login_path:  /connection
-                remember_me: true
-                post_only: false
-                default_target_path: /projet-de-visite
-            logout:
-                path:               /enregistrer-le-projet-de-visite/logout
-                target:             /
-                invalidate_session: true
-            http_basic: true
-            remember_me:
-                key:      463a06ee69fbea064218b1d02c416125
-                lifetime: 86400
-                path:     /
-
     access_control:
         - { path: ^/admin/users*, roles: ROLE_ADMIN }
         - { path: ^/admin/snippets*, roles: ROLE_USER }
