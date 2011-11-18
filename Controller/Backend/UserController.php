@@ -76,7 +76,7 @@ class UserController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
 
         // Set locale
-        $this->get('session')->setLocale($user->getLanguage());
+        $this->get('request')->setLocale($user->getLanguage());
 
         return $this->redirect($this->generateUrl($redirect_route));
     }
@@ -342,7 +342,7 @@ class UserController extends Controller
 
                 // Set locale
                 if ($self) {
-                    $this->get('session')->setLocale($user->getLanguage());
+                    $this->get('request')->setLocale($user->getLanguage());
                 }
 
                 // Set success flash message
