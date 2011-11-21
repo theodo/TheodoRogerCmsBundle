@@ -9,13 +9,12 @@ WARNING: This bundle is still under developpement and is not considered stable.
 
 
 ### Step 1: Downloading the bundle
-As for time being this bundle is tested only being in your `src/` directory.
-To add it to your project add the following entry to your deps file:
+To add the bundle to your project add the following entry to your deps file:
 
 ``` bash
 [RogerCmsBundle]
     git=https://github.com/theodo/TheodoRogerCmsBundle.git
-    target=../src/Theodo/RogerCmsBundle
+    target=/bundles/Theodo/RogerCmsBundle
 ```
 
 
@@ -82,3 +81,7 @@ how to setup and manage a separate database connection for the CMS, refer to
 If you don't feel like having Roger in separate db, the Symfony Standard Edition
 default config will work out of the box. Just generate your schema/migrations
 and update your db.
+
+### Step 6: Read the docs
+
+For more documentation, check out the Resources/doc folder.

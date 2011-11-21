@@ -9,13 +9,12 @@ WARNING: This bundle is still under developpement and is not considered stable.
 
 
 ### Step 1: Downloading the bundle
-As for time being this bundle is tested only being in your `src/` directory.
-To add it to your project add the following entry to your deps file:
+To add the bundle to your project add the following entry to your deps file:
 
 ``` bash
 [RogerCmsBundle]
     git=https://github.com/theodo/TheodoRogerCmsBundle.git
-    target=../src/Theodo/RogerCmsBundle
+    target=/bundles/Theodo/RogerCmsBundle
 ```
 
 
