@@ -47,6 +47,7 @@ services:
         arguments: ['@service_container']
         tags:
             - { name: roger.twig.extension }
+            - { name: twig.extension }
     validator.twig_syntax:
         class: %validator.twig_syntax.class%
         arguments: ['@roger.twig']
