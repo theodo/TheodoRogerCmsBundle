@@ -28,7 +28,7 @@ class NavigationController extends Controller
     public function menuComponentAction($request)
     {
         // Build roger.menu.yml file path
-        $path = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'roger.menu.yml';
+        $path = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'roger/menu.yml';
 
         // Check file exists
         if (!file_exists($path)) {
@@ -45,7 +45,8 @@ class NavigationController extends Controller
             'TheodoRogerCmsBundle:Navigation:menu-component.html.twig',
             array(
                 'menu'    => $menu,
-                'request' => $request
+                'request' => $request,
+                'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
             )
         );
     }
