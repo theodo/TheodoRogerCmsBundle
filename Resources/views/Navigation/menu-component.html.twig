@@ -1,24 +1,25 @@
 {% set current_tab = request.get('tab')|default('content') %}
 {% set current_nav = request.get('nav')|default('') %}
-
-<ul id="navigation">
-    {% for tabKey,tab in menu %}
-        {% if not tab.roles or is_granted(tab.roles) %}
-            <li{% if current_tab == tabKey %} class="current"{% endif %}>
-                <a href="{{ url(tab.route, tab.route_parameters|default({})) }}">{{ tab.name }}</a>
-
-                <ul class="nav_sub">
-                    {% for linkKey,link in tab.links %}
-                        {% if not link.roles or is_granted(link.roles) %}
-                            <li>
-                                <a{% if current_nav == linkKey %} class="current"{% endif %} href="{{ path(link.route, link.route_parameters|default({})) }}">
-                                    <span>{{ link.name }}</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+    <ul id="navigation">
+        {% for tabKey,tab in menu %}
+        {% set this_tab = 'sub_nav_'~tab.name %}
+        {% block this_tab %}
+            {% if not tab.roles or is_granted(tab.roles) %}
+                <li{% if current_tab == tabKey %} class="current"{% endif %}>
+                    <a href="{{ url(tab.route, tab.route_parameters|default({})) }}">{{ tab.name }}</a>
+                    <ul class="nav_sub">
+                        {% for linkKey,link in tab.links %}
+                            {% if not link.roles or is_granted(link.roles) %}
+                                <li>
+                                    <a{% if current_nav == linkKey %} class="current"{% endif %} href="{{ path(link.route, link.route_parameters|default({})) }}">
+                                        <span>{{ link.name }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
+                {% endblock %}
+        {% endfor %}
+    </ul>
