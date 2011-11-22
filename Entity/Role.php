@@ -20,6 +20,8 @@ class Role implements RoleInterface
      */
     private $name;
 
+    protected $rolesTable = array();
+
     /**
      * Get id
      *
@@ -61,6 +63,26 @@ class Role implements RoleInterface
     }
 
     /**
+     * Set rolesTable
+     *
+     * @param array $rolesTable
+     */
+    public function setRolesTable($rolesTable)
+    {
+        $this->rolesTable = $rolesTable;
+    }
+
+    /**
+     * Get rolesTable
+     *
+     * @return array $rolesTable
+     */
+    public function getRolesTable()
+    {
+        return $this->rolesTable;
+    }
+
+    /**
      * toString function
      *
      * @return string
@@ -69,6 +91,11 @@ class Role implements RoleInterface
      */
     public function __toString()
     {
+        if ($this->rolesTable && isset($this->rolesTable[$this->getName()])) {
+
+            return $this->rolesTable[$this->getName()];
+        }
+
         $available_role_names = \Theodo\RogerCmsBundle\Repository\RoleRepository::getAvailableRoles();
 
         return $available_role_names[$this->getName()];

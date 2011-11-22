@@ -9,7 +9,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class RoleData extends AbstractFixture implements OrderedFixtureInterface
-{    
+{
     /**
      * Load role fixtures
      *
@@ -17,7 +17,7 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface
      * @since 2011-06-24
      */
     public function load($manager)
-    {        
+    {
         // Create admin role
         $admin_role = new Role();
         $admin_role->setName(RoleRepository::ROLE_ADMIN);

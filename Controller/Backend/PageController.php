@@ -32,7 +32,13 @@ class PageController extends Controller
         // Retrieve pages
         $pages = $this->get('roger.content_repository')->getFirstTwoLevelPages();
 
-        return $this->render('TheodoRogerCmsBundle:Page:index.html.twig', array('pages' => $pages));
+        return $this->render(
+                 'TheodoRogerCmsBundle:Page:index.html.twig',
+                 array(
+                    'pages' => $pages,
+                    'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
+                 )
+               );
     }
 
 
@@ -141,7 +147,8 @@ class PageController extends Controller
                 'parent_page' => $parent_page,
                 'layouts'     => $layouts,
                 'layout_name' => $layout_name,
-                'tabs'        => $tabs
+                'tabs'        => $tabs,
+                'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
             )
         );
     }
@@ -174,7 +181,8 @@ class PageController extends Controller
         return $this->render(
             'TheodoRogerCmsBundle:Page:remove.html.twig',
             array(
-                'page' => $page
+                'page' => $page,
+                'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
             )
         );
     }
@@ -200,7 +208,8 @@ class PageController extends Controller
             'TheodoRogerCmsBundle:Page:page-list.html.twig',
             array(
                 'pages' => $pages,
-                'level' => $request->get('level')
+                'level' => $request->get('level'),
+                'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
             )
         );
     }
@@ -226,7 +235,8 @@ class PageController extends Controller
             'TheodoRogerCmsBundle:Page:site-map-component.html.twig',
             array(
                 'page'  => $page,
-                'level' => 0
+                'level' => 0,
+                'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
             )
         );
     }
