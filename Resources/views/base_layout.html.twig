@@ -19,7 +19,20 @@
             {% set current_nav = nav|default('') %}
 
             <div id="header">
-                {% render "TheodoRogerCmsBundle:Backend\\User:boxComponent" %}
+                <div id="site_links">
+                    {% trans %}Logged in as{% endtrans %}
+                    <a href="{{ url('user_preferences') }}">{{ app.security.token.user.name }}</a>
+                    (<a href="{{ url('logout') }}">{% trans %}Logout{% endtrans %}</a>)
+
+                    {% set route = app.request.attributes.get('_route') %}
+                    {% set params = app.request.attributes.remove('_route') %}
+                    {% set paramsFr = app.request.attributes.set('_locale', 'fr')%}
+                    <a href="{{ url ( route, app.request.attributes.all()) }}">French</a>
+                    {% set paramsEn = app.request.attributes.set('_locale', 'en')%}
+                    <a href="{{ url ( route, app.request.attributes.all()) }}">English</a>
+
+                    <a href="{{ url ('page') }}" id="view_site">{% trans %}View Site{% endtrans %}</a>
+                </div>
 
                 {% block navigation %}
                     <ul id="navigation">
@@ -92,8 +105,7 @@
 
                 <div id="header_bottom">
                     <div></div>
-                </div>              
-                
+                </div>
             </div>
 
 
