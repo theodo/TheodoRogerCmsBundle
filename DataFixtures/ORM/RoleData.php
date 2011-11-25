@@ -11,11 +11,11 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 class RoleData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * Load role fixtures
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
+* Load role fixtures
+*
+* @author Vincent Guillon <vincentg@theodo.fr>
+* @since 2011-06-24
+*/
     public function load($manager)
     {
         // Create admin role
@@ -48,12 +48,12 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface
     }
 
     /**
-     * Retrieve the order number of current fixture
-     *
-     * @return integer
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
+* Retrieve the order number of current fixture
+*
+* @return integer
+* @author Vincent Guillon <vincentg@theodo.fr>
+* @since 2011-06-24
+*/
     public function getOrder()
     {
         // The order in which fixtures will be loaded

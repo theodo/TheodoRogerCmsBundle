@@ -20,10 +20,10 @@ class PageType extends AbstractType
     {
         // Set inputs
         $builder->add('parent_id', 'hidden', array('required' => true));
-        $builder->add('name', 'text', array('required' => true));
+        $builder->add('name', 'text', array('required' => false));
         $builder->add('slug', 'text', array('required' => true));
         $builder->add('breadcrumb', 'text', array('required' => false));
-        $builder->add('title', 'text', array('required' => false));
+        $builder->add('title', 'text', array('required' => true));
         $builder->add('description', 'text', array('required' => false));
         $builder->add('keywords', 'text', array('required' => false));
         $builder->add('content', 'textarea', array('required' => false));

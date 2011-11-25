@@ -2,6 +2,9 @@ Theodo\RogerCmsBundle\Entity\Page:
     type: entity
     table: page
     repositoryClass: Theodo\RogerCmsBundle\Repository\PageRepository
+    gedmo:
+        translation:
+            locale: locale
     id:
         id:
             type: integer
@@ -27,6 +30,8 @@ Theodo\RogerCmsBundle\Entity\Page:
             type: string
             length: 255
             nullable: true
+            gedmo:
+                - translatable
         keywords:
             type: text
             nullable: true

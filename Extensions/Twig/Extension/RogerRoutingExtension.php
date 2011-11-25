@@ -60,6 +60,21 @@ class RogerRoutingExtension extends \Twig_Extension
         return '';
     }
 
+    public function getRoute()
+    {
+
+    }
+
+    public function getParams()
+    {
+
+    }
+
+    public function changeLocale($params)
+    {
+
+    }
+
     /**
      * Returns the name of the extension.
      *

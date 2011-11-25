@@ -12,6 +12,8 @@ use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Theodo\RogerCmsBundle\Validator\Unique;
 use Theodo\RogerCmsBundle\Validator\Exists;
 use Theodo\RogerCmsBundle\Validator\TwigSyntax;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * Theodo\RogerCmsBundle\Entity\Page
@@ -72,6 +74,18 @@ class Page
      * @var Theodo\RogerCmsBundle\Entity\Page
      */
     private $parent;
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 
     public function __construct()
     {
@@ -339,8 +353,9 @@ class Page
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        // Name validator: not null
-        $metadata->addPropertyConstraint('name', new NotBlank());
+        // Title validator: not null
+        $metadata->addPropertyConstraint('title', new NotBlank());
+
 
         // Slug validator: not null and unique
         $metadata->addPropertyConstraint('slug', new NotBlank());

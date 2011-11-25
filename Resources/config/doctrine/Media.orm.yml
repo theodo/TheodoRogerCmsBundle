@@ -13,6 +13,7 @@ Theodo\RogerCmsBundle\Entity\Media:
             type: string
             length: 255
             unique: true
+
         created_at:
             type: datetime
             gedmo:

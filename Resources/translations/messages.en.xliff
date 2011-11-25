@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="1">
                 <source>Content</source>
-                <target>Contenu</target>
+                <target>Content</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>Design</source>
@@ -12,19 +12,19 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>Settings</source>
-                <target>Paramètres</target>
+                <target>Settings</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>Logged in as</source>
-                <target>Connecté en tant que</target>
+                <target>Logged in as</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>Logout</source>
-                <target>Déconnexion</target>
+                <target>Logout</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>View Site</source>
-                <target>Afficher le site</target>
+                <target>View Site</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>Pages</source>
@@ -52,19 +52,19 @@
             </trans-unit>
             <trans-unit id="13">
                 <source>Personal</source>
-                <target>Profil</target>
+                <target>Personal</target>
             </trans-unit>
             <trans-unit id="14">
                 <source>Personal Preferences</source>
-                <target>Préférences du profil</target>
+                <target>Personal Preferences</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>Users</source>
-                <target>Utilisateurs</target>
+                <target>Users</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>User</source>
-                <target>Utilisateur</target>
+                <target>User</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>Extensions</source>
@@ -76,31 +76,31 @@
             </trans-unit>
             <trans-unit id="19">
                 <source>Status</source>
-                <target>Statut</target>
+                <target>Status</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>Modify</source>
-                <target>Modifier</target>
+                <target>Modify</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>Roles</source>
-                <target>Rôles</target>
+                <target>Roles</target>
             </trans-unit>
             <trans-unit id="22">
                 <source>Role</source>
-                <target>Rôle</target>
+                <target>Role</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>Remove</source>
-                <target>Supprimer</target>
+                <target>Remove</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>Add Child</source>
-                <target>Ajouter une page</target>
+                <target>Add Child</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>Administrator</source>
-                <target>Administrateur</target>
+                <target>Administrator</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>Designer</source>
@@ -112,55 +112,55 @@
             </trans-unit>
             <trans-unit id="28">
                 <source>Published</source>
-                <target>Publié</target>
+                <target>Published</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>Reviewed</source>
-                <target>Révisé</target>
+                <target>Reviewed</target>
             </trans-unit>
             <trans-unit id="30">
                 <source>Draft</source>
-                <target>Brouillon</target>
+                <target>Draft</target>
             </trans-unit>
             <trans-unit id="31">
                 <source>Hidden</source>
-                <target>Caché</target>
+                <target>Hidden</target>
             </trans-unit>
             <trans-unit id="32">
                 <source>Name / Username</source>
-                <target>Nom / Nom d'utilisateur</target>
+                <target>Name / Username</target>
             </trans-unit>
           <trans-unit id="33">
               <source>New Homepage</source>
-              <target>Nouvelle page d'accueil</target>
+              <target>New Homepage</target>
           </trans-unit>
           <trans-unit id="34">
               <source>New Layout</source>
-              <target>Nouveau layout</target>
+              <target>New Layout</target>
           </trans-unit>
           <trans-unit id="35">
               <source>New Snippet</source>
-              <target>Nouveau snippet</target>
+              <target>New Snippet</target>
           </trans-unit>
           <trans-unit id="36">
               <source>New User</source>
-              <target>Nouvel utilisateur</target>
+              <target>New User</target>
           </trans-unit>
           <trans-unit id="37">
               <source>New Page</source>
-              <target>Nouvelle page</target>
+              <target>New Page</target>
           </trans-unit>
           <trans-unit id="38">
               <source>Edit Page</source>
-              <target>Modifier la page</target>
+              <target>Edit Page</target>
           </trans-unit>
           <trans-unit id="39">
               <source>Page Title</source>
-              <target>Titre de la page</target>
+              <target>Page Title</target>
           </trans-unit>
           <trans-unit id="40">
               <source>Name</source>
-              <target>Nom</target>
+              <target>Name</target>
           </trans-unit>
           <trans-unit id="41">
               <source>Slug</source>
@@ -168,7 +168,7 @@
           </trans-unit>
           <trans-unit id="42">
               <source>Breadcrumb</source>
-              <target>Fil d'Ariane</target>
+              <target>Breadcrumb</target>
           </trans-unit>
           <trans-unit id="43">
               <source>Description</source>
@@ -176,39 +176,39 @@
           </trans-unit>
           <trans-unit id="44">
               <source>More</source>
-              <target>Plus</target>
+              <target>More</target>
           </trans-unit>
           <trans-unit id="45">
               <source>Less</source>
-              <target>Moins</target>
+              <target>Less</target>
           </trans-unit>
           <trans-unit id="46">
               <source>Body</source>
-              <target>Corps</target>
+              <target>Body</target>
           </trans-unit>
           <trans-unit id="47">
               <source>Published at</source>
-              <target>Publié le</target>
+              <target>Published at</target>
           </trans-unit>
           <trans-unit id="48">
               <source>Create</source>
-              <target>Créer</target>
+              <target>Create</target>
           </trans-unit>
           <trans-unit id="49">
               <source>Save Changes</source>
-              <target>Enregistrer les modifications</target>
+              <target>Save Changes</target>
           </trans-unit>
           <trans-unit id="50">
               <source>Save and Continue Editing</source>
-              <target>Enregistrer et continuer</target>
+              <target>Save and Continue Editing</target>
           </trans-unit>
           <trans-unit id="51">
               <source>or</source>
-              <target>ou</target>
+              <target>or</target>
           </trans-unit>
           <trans-unit id="52">
               <source>Cancel</source>
-              <target>Annuler</target>
+              <target>Cancel</target>
           </trans-unit>
           <trans-unit id="53">
               <source>Content type</source>
@@ -216,87 +216,87 @@
           </trans-unit>
           <trans-unit id="54">
               <source>Remove Layout</source>
-              <target>Supprimer un layout</target>
+              <target>Remove Layout</target>
           </trans-unit>
           <trans-unit id="55">
               <source>Remove Snippet</source>
-              <target>Supprimer un snippet</target>
+              <target>Remove Snippet</target>
           </trans-unit>
           <trans-unit id="56">
               <source>Remove User</source>
-              <target>Supprimer un utilisateur</target>
+              <target>Remove User</target>
           </trans-unit>
           <trans-unit id="57">
               <source>Delete</source>
-              <target>Supprimer</target>
+              <target>Delete</target>
           </trans-unit>
           <trans-unit id="58">
               <source>Delete Layout</source>
-              <target>Supprimer ce layout</target>
+              <target>Delete Layout</target>
           </trans-unit>
           <trans-unit id="59">
               <source>Delete Snippet</source>
-              <target>Supprimer ce snippet</target>
+              <target>Delete Snippet</target>
           </trans-unit>
           <trans-unit id="60">
               <source>Delete User</source>
-              <target>Supprimer cet utilisateur</target>
+              <target>Delete User</target>
           </trans-unit>
           <trans-unit id="61">
               <source>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following pages?</source>
-              <target>Êtes-vous sûr de vouloir  &lt;strong class="warning"&gt;supprimer définitivement&lt;/strong&gt; les pages suivantes ?</target>
+              <target>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following pages?</target>
           </trans-unit>
           <trans-unit id="62">
               <source>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following layout?</source>
-              <target>Êtes-vous sûr de vouloir  &lt;strong class="warning"&gt;supprimer définitivement&lt;/strong&gt; le layout suivant ?</target>
+              <target>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following layout?</target>
           </trans-unit>
           <trans-unit id="63">
               <source>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following snippet?</source>
-              <target>Êtes-vous sûr de vouloir  &lt;strong class="warning"&gt;supprimer définitivement&lt;/strong&gt; le snippet suivant ?</target>
+              <target>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following snippet?</target>
           </trans-unit>
           <trans-unit id="64">
               <source>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following user?</source>
-              <target>Êtes-vous sûr de vouloir  &lt;strong class="warning"&gt;supprimer définitivement&lt;/strong&gt; l'utilisateur suivant ?</target>
+              <target>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following user?</target>
           </trans-unit>
           <trans-unit id="65">
               <source>Username</source>
-              <target>Nom d'utilisateur</target>
+              <target>Username</target>
           </trans-unit>
           <trans-unit id="66">
               <source>Email</source>
-              <target>E-mail</target>
+              <target>Email</target>
           </trans-unit>
           <trans-unit id="67">
               <source>Password</source>
-              <target>Mot de passe</target>
+              <target>Password</target>
           </trans-unit>
           <trans-unit id="68">
               <source>Password confirm</source>
-              <target>Répéter le mot de passe</target>
+              <target>Password confirm</target>
           </trans-unit>
           <trans-unit id="69">
               <source>Change</source>
-              <target>Changer</target>
+              <target>Change</target>
           </trans-unit>
           <trans-unit id="70">
               <source>Language</source>
-              <target>Langue</target>
+              <target>Language</target>
           </trans-unit>
           <trans-unit id="71">
               <source>french</source>
-              <target>français</target>
+              <target>french</target>
           </trans-unit>
           <trans-unit id="72">
               <source>english</source>
-              <target>anglais</target>
+              <target>english</target>
           </trans-unit>
           <trans-unit id="73">
               <source>Avatar provided by Gravatar.com</source>
-              <target>Avatar fourni par Gravatar.com</target>
+              <target>Avatar provided by Gravatar.com</target>
           </trans-unit>
           <trans-unit id="74">
               <source>User roles</source>
-              <target>Rôle</target>
+              <target>User roles</target>
           </trans-unit>
           <trans-unit id="75">
               <source>Notes</source>
@@ -304,143 +304,147 @@
           </trans-unit>
           <trans-unit id="76">
               <source>Edit Layout</source>
-              <target>Modifier un layout</target>
+              <target>Edit Layout</target>
           </trans-unit>
           <trans-unit id="77">
               <source>Edit Snippet</source>
-              <target>Modifier un snippet</target>
+              <target>Edit Snippet</target>
           </trans-unit>
           <trans-unit id="78">
               <source>Edit User</source>
-              <target>Modifier un utilisateur</target>
+              <target>Edit User</target>
           </trans-unit>
           <trans-unit id="79">
               <source>Can not update your preferences due some errors</source>
-              <target>Des erreurs empêchent la mise à jour de vos préférences</target>
+              <target>Can not update your preferences due some errors</target>
           </trans-unit>
           <trans-unit id="80">
               <source>Your preferences have been updated</source>
-              <target>Vos préférences ont bien été mises à jour</target>
+              <target>Your preferences have been updated</target>
           </trans-unit>
           <trans-unit id="81">
               <source>Can not update "%user%" due some errors</source>
-              <target>Des erreurs empêchent la mise à jour de "%user%"</target>
+              <target>Can not update "%user%" due some errors</target>
           </trans-unit>
           <trans-unit id="82">
               <source>User "%user%" has been updated</source>
-              <target>L'utilisateur "%user%" a bien été mis à jour</target>
+              <target>User "%user%" has been updated</target>
           </trans-unit>
           <trans-unit id="83">
               <source>User "%user%" has been updated</source>
-              <target>L'utilisateur "%user%" a bien été mis à jour</target>
+              <target>User "%user%" has been updated</target>
           </trans-unit>
           <trans-unit id="84">
               <source>Can not remove main admin</source>
-              <target>Vous ne pouvez pas supprimer l'administrateur principal</target>
+              <target>Can not remove main admin</target>
           </trans-unit>
           <trans-unit id="85">
               <source>User "%user%" has been removed</source>
-              <target>L'utilisateur "%user%" a bien été supprimé</target>
+              <target>User "%user%" has been removed</target>
           </trans-unit>
           <trans-unit id="86">
               <source>Can not create user due some errors</source>
-              <target>Des erreurs empêchent la création de l'utilisateur</target>
+              <target>Can not create user due some errors</target>
           </trans-unit>
           <trans-unit id="87">
               <source>User "%user%" has been created</source>
-              <target>L'utilisateur "%user%" a bien été créé</target>
+              <target>User "%user%" has been created</target>
           </trans-unit>
           <trans-unit id="88">
               <source>Access denied, you must have more privileges to perform this action.</source>
-              <target>Accès refusé, vous n'avez pas les privilèges requis pour réaliser cette action.</target>
+              <target>Access denied, you must have more privileges to perform this action.</target>
           </trans-unit>
           <trans-unit id="89">
               <source>Please Login</source>
-              <target>Veuillez vous identifier</target>
+              <target>Please Login</target>
           </trans-unit>
           <trans-unit id="90">
               <source>Remember me</source>
-              <target>Se souvenir de moi</target>
+              <target>Remember me</target>
           </trans-unit>
           <trans-unit id="91">
               <source>Login</source>
-              <target>Connexion</target>
+              <target>Login</target>
           </trans-unit>
           <trans-unit id="92">
               <source>Bad credentials</source>
-              <target>Identifiants invalides</target>
+              <target>Bad credentials</target>
           </trans-unit>
           <trans-unit id="93">
               <source>The presented password is invalid.</source>
-              <target>Mot de passe invalide</target>
+              <target>The presented password is invalid.</target>
           </trans-unit>
           <trans-unit id="94">
               <source>Edit Media</source>
-              <target>Modifier le media</target>
+              <target>Edit Media</target>
           </trans-unit>
           <trans-unit id="95">
               <source>Remove Media</source>
-              <target>Supprimer un media</target>
+              <target>Remove Media</target>
           </trans-unit>
           <trans-unit id="96">
               <source>File</source>
-              <target>Fichier</target>
+              <target>File</target>
           </trans-unit>
           <trans-unit id="97">
               <source>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following media?</source>
-              <target>Êtes-vous sûr de vouloir  &lt;strong class="warning"&gt;supprimer définitivement&lt;/strong&gt; le media suivant ?</target>
+              <target>Are you sure you want to &lt;strong class="warning"&gt;permanently remove&lt;/strong&gt; the following media?</target>
           </trans-unit>
           <trans-unit id="98">
               <source>Delete Media</source>
-              <target>Supprimer ce media</target>
+              <target>Delete Media</target>
           </trans-unit>
           <trans-unit id="99">
               <source>Current file:</source>
-              <target>Fichier associé :</target>
+              <target>Current file:</target>
           </trans-unit>
           <trans-unit id="100">
               <source>Click to open this file</source>
-              <target>Cliquez pour ouvrir le fichier</target>
+              <target>Click to open this file</target>
           </trans-unit>
           <trans-unit id="101">
               <source>Static Content?</source>
-              <target>Contenu Statique ?</target>
+              <target>Static Content?</target>
           </trans-unit>
           <trans-unit id="102">
               <source>Visitor-independant content?</source>
-              <target>Contenu indépendant de l'utilisateur ?</target>
+              <target>Visitor-independant content?</target>
           </trans-unit>
           <trans-unit id="103">
               <source>Cache lifetime:</source>
-              <target>Durée de vie du cache</target>
+              <target>Cache lifetime:</target>
           </trans-unit>
           <trans-unit id="104">
               <source>Returns a 304 "not modified" status, when the template has not changed since last visit.</source>
-              <target>Renvoie le statut 304 "non modifié" si je template n'a pas été modifié depuis la dernière visite.</target>
+              <target>Returns a 304 "not modified" status, when the template has not changed since last visit.</target>
           </trans-unit>
           <trans-unit id="105">
               <source>Allows proxies to cache the same content for different visitors.</source>
-              <target>Autorise les proxies à mettre le contenu en cache pour différents internautes.</target>
+              <target>Allows proxies to cache the same content for different visitors.</target>
           </trans-unit>
           <trans-unit id="106">
               <source>Does a full content caching, except for snippets, during the specified lifetime. Leave empty for no cache.</source>
-              <target>Met la page en cache, sauf les snippets, pendant la durée spécifiée. Laisser vide pour ne pas utiliser le cache.</target>
+              <target>Does a full content caching, except for snippets, during the specified lifetime. Leave empty for no cache.</target>
           </trans-unit>
           <trans-unit id="107">
               <source>Does a full content caching during the specified lifetime. Leave empty for no cache.</source>
-              <target>Met le snippet en cache pendant la durée spécifiée. Laisser vide pour ne pas utiliser le cache.</target>
+              <target>Does a full content caching during the specified lifetime. Leave empty for no cache.</target>
           </trans-unit>
           <trans-unit id="108">
               <source>Title</source>
-              <target>Titre</target>
+              <target>Title</target>
           </trans-unit>
           <trans-unit id="109">
               <source>Keywords</source>
-              <target>Mots-clefs</target>
+              <target>Keywords</target>
           </trans-unit>
           <trans-unit id="110">
               <source>Homepage</source>
-              <target>Page d'accueil</target>
+              <target>Homepage</target>
+          </trans-unit>
+          <trans-unit id="111">
+              <source>Configuration de carrousel</source>
+              <target>Carousel configuration</target>
           </trans-unit>
         </body>
     </file>

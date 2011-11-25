@@ -1,6 +1,9 @@
 Theodo\RogerCmsBundle\Entity\Layout:
     type: entity
     table: layout
+    gedmo:
+      locale: ~
+
     id:
         id:
             type: integer
@@ -12,6 +15,9 @@ Theodo\RogerCmsBundle\Entity\Layout:
             unique: true
         content:
             type: text
+            gedmo:
+              - translatable
+
         created_at:
             type: datetime
             gedmo:

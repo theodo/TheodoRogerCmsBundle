@@ -1,31 +1,37 @@
 <?php
-/*
- * This file is part of the Roger CMS Bundle
- *
- * (c) Theodo <contact@theodo.fr>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
 
-/**
- * Page entity test class.
- *
- * @author Vincent Guillon <vincentg@theodo.fr>
- * @author Mathieu Dähne <mathieud@theodo.fr>
- * @author Fabrice Bernhard <fabriceb@theodo.fr>
- * @author Marek Kalnik <marekk@theodo.fr>
- * @author Benjamin Grandfond <benjaming@theodo.fr>
- */
-namespace Theodo\RogerCmsBundle\Tests\Entity;
+require_once __DIR__.'/../../../../../../app/AppKernel.php';
 
-require_once __DIR__.'/Test.php';
-
-use Theodo\RogerCmsBundle\Tests\Entity\Test as TestCase;
 use Theodo\RogerCmsBundle\Entity\Page;
 
 class PageTest extends TestCase
 {
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    public function setUp()
+    {
+        // Load and boot kernel
+        $kernel = new \AppKernel('test', true);
+        $kernel->boot();
+
+        // Load "test" entity manager
+        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
+
+    }
+
+    /**
+     * EntityManager getter
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->em;
+    }
+
     /**
      * Test getParent function
      *
@@ -96,4 +102,30 @@ class PageTest extends TestCase
         // Test full slug
         $this->assertEquals('homepage/theodo/theodo-team', $page->getFullSlug());
     }
+
+    /**
+     * Test getFullSlug function
+     *
+     * @author Pierre-Henri Cumenge <pierrehenric@theodo.fr>
+     * @since 2011-11-25
+     */
+    public function testI18NPageEdit()
+    {
+        print_r("\n> Test \"I8N Page\"");
+
+        // Retrieve entity manager
+        $em = $this->getEntityManager();
+
+        // Retrieve "home" page
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
+
+        $page->setTitle('translated');
+
+        // Retrieve "home" page
+        $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
+
+        var_dump($page->getTitle());
+    }
+
+
 }
