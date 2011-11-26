@@ -99,7 +99,3 @@ how to setup and manage a separate database connection for the CMS, refer to
 If you don't feel like having Roger in separate db, the Symfony Standard Edition
 default config will work out of the box. Just generate your schema/migrations
 and update your db.
-
-### Step 7: Read the docs
-
-For more documentation, check out the Resources/doc folder.
