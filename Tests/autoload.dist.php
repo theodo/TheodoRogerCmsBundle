@@ -22,11 +22,12 @@ $loader->registerNamespaces(array(
     'Doctrine\\Common' => $vendorDir.'/doctrine-common/lib',
     'Doctrine\\DBAL'   => $vendorDir.'/doctrine-dbal/lib',
     'Doctrine'         => $vendorDir.'/doctrine/lib',
+    'Doctrine\\Common\\DataFixtures'   => $vendorDir.'/doctrine-fixtures/lib',
     'Stof'             => $vendorDir.'/bundles',
     'Gedmo'            => $vendorDir.'/gedmo-doctrine-extensions/lib',
     'Theodo'           => __DIR__.'/../',
 ));
 $loader->registerPrefixes(array(
-    'Twig_Extensions_' => $vendorDir.'/twig-extensions/lib',
     'Twig_'            => $vendorDir.'/twig/lib',
 ));
+$loader->register();

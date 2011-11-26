@@ -24,13 +24,13 @@ use Symfony\Bundle\DoctrineFixturesBundle\Common\DataFixtures\Loader as DataFixt
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
-class Test extends WebTestCase
+abstract class Test extends WebTestCase
 {
     /**
      * Creates a Kernel, generate the Doctrine schema and load the fixtures.
      *
      * @see Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createKernel
-     * 
+     *
      * @param array $options An array of options
      */
     public static function createRogerKernel(array $options = array())
