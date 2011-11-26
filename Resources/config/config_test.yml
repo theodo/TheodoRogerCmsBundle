@@ -5,13 +5,16 @@ imports:
 framework:
     secret:          %secret%
     charset:         UTF-8
-    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    router:          { resource: "%kernel.root_dir%/../Resources/config/routing.yml" }
+    profiler:        { only_exceptions: false }
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
+    test: ~
     session:
+        storage_id: session.storage.filesystem
         auto_start:     true
 
 # Twig Configuration
