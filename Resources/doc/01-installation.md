@@ -40,9 +40,27 @@ Add the following lines to your `deps` file:
 TheodoRogerCms depends on Twig and it's not usable without it.
 Due to some bugs in previous versions of Twig, v 1.2.0 or higher is required.
 
-### Step 3: AppKernel.php
+### Step 3: autoload.php
 
-Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBundle\TheodoRogerCmsBundle(),`
+You need to register the `Theodo` namespace before using the bundle. Add the following line to your `app/autoload.php` file: `'Theodo' => __DIR__.'/../vendor/bundles',`.
+As TheodoRogerCms depends on the DoctrineExtensionsBundle and the DoctrineExtensions library you also need to register them in the autoload.
+
+``` php
+    use Symfony\Component\ClassLoader\UniversalClassLoader;
+    use Doctrine\Common\Annotations\AnnotationRegistry;
+
+    $loader = new UniversalClassLoader();
+    $loader->registerNamespaces(array(
+        'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
+        'Stof'             => __DIR__.'/../vendor/bundles',
+        'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
+        'Theodo'           => __DIR__.'/../vendor/bundles',
+    ));
+```
+
+### Step 4: AppKernel.php
+
+Register TheodoRogerCmsBundle in your `app/AppKernel.php` file:
 
 ``` php
     public function registerBundles()
@@ -53,14 +71,14 @@ Add the following line to your `app/AppKernel.php` file: `new Theodo\RogerCmsBun
             new Symfony\Bundle\TwigBundle\TwigBundle(),
 
             [...]
-
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Theodo\RogerCmsBundle\TheodoRogerCmsBundle(),
         );
 ```
 
 Follow StofDoctrineExtensionsBundle's doc to add the configuration for **timestampable** behavior.
 
-### Step 4: Routing
+### Step 5: Routing
 
 Add the following lines to your `app/config/routing.yml` file:
 
@@ -70,7 +88,7 @@ RogerCms:
     prefix: /
 ```
 
-### Step 5: Database and entities
+### Step 6: Database and entities
 
 RogerCMS uses database to store all content informations, so you need to add its
 entities to your entity manager. As it also uses his own user management system
@@ -81,3 +99,7 @@ how to setup and manage a separate database connection for the CMS, refer to
 If you don't feel like having Roger in separate db, the Symfony Standard Edition
 default config will work out of the box. Just generate your schema/migrations
 and update your db.
+
+### Step 7: Read the docs
+
+For more documentation, check out the Resources/doc folder.
