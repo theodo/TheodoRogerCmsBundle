@@ -43,7 +43,7 @@ abstract class Test extends WebTestCase
      *
      * @param array $options An array of options
      */
-    public static function createRogerKernel(array $options = array())
+    static public function createRogerKernel(array $options = array())
     {
         static::$kernel = static::createKernel($options);
         static::$kernel->boot();
