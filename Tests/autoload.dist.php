@@ -25,9 +25,19 @@ $loader->registerNamespaces(array(
     'Doctrine\\Common\\DataFixtures'   => $vendorDir.'/doctrine-fixtures/lib',
     'Stof'             => $vendorDir.'/bundles',
     'Gedmo'            => $vendorDir.'/gedmo-doctrine-extensions/lib',
-    'Theodo'           => __DIR__.'/../',
 ));
 $loader->registerPrefixes(array(
     'Twig_'            => $vendorDir.'/twig/lib',
 ));
 $loader->register();
+
+spl_autoload_register(function($class) {
+    if (0 === strpos($class, 'Theodo\\RogerCmsBundle\\')) {
+        $path = __DIR__.'/../'.implode('/', array_slice(explode('\\', $class), 2)).'.php';
+        if (!stream_resolve_include_path($path)) {
+            return false;
+        }
+        require_once $path;
+        return true;
+    }
+});

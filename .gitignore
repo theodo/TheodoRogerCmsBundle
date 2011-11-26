@@ -17,6 +17,9 @@ clover.html
 # Doctrine backup files 
 *.php~
 
+# Cache
+Tests/cache
+
 # Filesystem
 .DS_Store
 

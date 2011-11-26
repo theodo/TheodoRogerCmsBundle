@@ -18,6 +18,7 @@
 
 namespace Theodo\RogerCmsBundle\Tests;
 
+use Theodo\RogerCmsBundle\Tests\RogerCmsTestKernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\DoctrineFixturesBundle\Common\DataFixtures\Loader as DataFixturesLoader;
