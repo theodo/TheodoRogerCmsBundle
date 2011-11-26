@@ -9,12 +9,12 @@
  */
 
 /**
- * User entity test class.
+ * Layout entity test class.
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
-namespace Theodo\RogerCmsBundle\Tests;
+namespace Theodo\RogerCmsBundle\Tests\Entity;
 
 require_once __DIR__.'/Test.php';
 

@@ -14,7 +14,7 @@
  * @author Vincent Guillon <vincentg@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
-namespace Theodo\RogerCmsBundle\Tests;
+namespace Theodo\RogerCmsBundle\Tests\Entity;
 
 require_once __DIR__.'/Test.php';
 

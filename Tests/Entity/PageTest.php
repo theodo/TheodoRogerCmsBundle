@@ -9,13 +9,13 @@
  */
 
 /**
- * User entity test class.
+ * Page entity test class.
  *
  * @author Fabrice Bernhard <fabriceb@theodo.fr>
  * @author Marek Kalnik <marekk@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
-namespace Theodo\RogerCmsBundle\Tests;
+namespace Theodo\RogerCmsBundle\Tests\Entity;
 
 require_once __DIR__.'/Test.php';
 

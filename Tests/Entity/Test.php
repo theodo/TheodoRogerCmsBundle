@@ -9,7 +9,7 @@
  */
 
 /**
- * Test class.
+ * Entities base test class.
  *
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
