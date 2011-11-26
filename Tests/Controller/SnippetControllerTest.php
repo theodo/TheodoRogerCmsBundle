@@ -75,8 +75,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testList()
     {
-        print_r("\n> SnippetController - Test list action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets');
@@ -97,8 +95,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testNew()
     {
-        print_r("\n> SnippetController - Test new action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets/new');
@@ -117,8 +113,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testEdit()
     {
-        print_r("\n> SnippetController - Test edit action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets/1/edit');
@@ -138,8 +132,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testUpdate()
     {
-        print_r("\n> SnippetController - Test update action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets/1');
@@ -158,8 +150,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testRemove()
     {
-        print_r("\n> SnippetController - Test remove action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets/1/remove');
@@ -178,8 +168,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        print_r("\n> SnippetController - Test workflow");
-
         // Start transaction
         static::$em->getConnection()->beginTransaction();
 

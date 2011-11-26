@@ -31,8 +31,6 @@ class FrontendControllerTest extends WebTestCase
      */
     public function testPage()
     {
-        print_r("\n> FrontendController - Test page action");
-
         $client = $this->createClient();
         $crawler = $client->request('GET', '/homepage');
 

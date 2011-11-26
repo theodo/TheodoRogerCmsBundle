@@ -32,8 +32,6 @@ class MediaTest extends TestCase
      */
     public function testFullPath()
     {
-        print_r("\n> Test \"getFullPath\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 

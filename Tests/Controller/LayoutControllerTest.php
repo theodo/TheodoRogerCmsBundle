@@ -73,8 +73,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testList()
     {
-        print_r("\n> LayoutController - Test list action");
-
         $client = $this->createClient();
 
         // Connect user
@@ -98,8 +96,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testNew()
     {
-        print_r("\n> LayoutController - Test new action");
-
         $client = $this->createClient();
 
         // Connect user
@@ -121,8 +117,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testEdit()
     {
-        print_r("\n> LayoutController - Test edit action");
-
         $client = $this->createClient();
 
         // Connect user
@@ -145,8 +139,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testUpdate()
     {
-        print_r("\n> LayoutController - Test update action");
-
         $client = $this->createClient();
 
         // Connect user
@@ -168,8 +160,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testRemove()
     {
-        print_r("\n> LayoutController - Test remove action");
-
         $client = $this->createClient();
 
         // Connect user
@@ -191,8 +181,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        print_r("\n> LayoutController - Test workflow");
-
         // Start transaction
         static::$em->getConnection()->beginTransaction();
 

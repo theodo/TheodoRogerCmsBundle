@@ -39,8 +39,6 @@ class ContentEntityRepositoryTest extends TestCase
      */
     public function testGetSourceByName()
     {
-        print_r("\n> Test \"getSourceByName\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('name' => 'Homepage'));
@@ -67,8 +65,6 @@ class ContentEntityRepositoryTest extends TestCase
      */
     public function testGetHomePage()
     {
-        print_r("\n> Test \"getHomePage\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('name' => 'Homepage'));
@@ -85,8 +81,6 @@ class ContentEntityRepositoryTest extends TestCase
      */
     public function testGetPageBySlug()
     {
-        print_r("\n> Test \"getPageBySlug\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
@@ -103,8 +97,6 @@ class ContentEntityRepositoryTest extends TestCase
      */
     public function testGetFirstTwoLevelPages()
     {
-        print_r("\n> Test \"getFirstTwoLevelPages\" function");
-
         // Retrieve pages
         $pages = $this->getContentRepository()->getFirstTwoLevelPages();
         $this->assertSame(1, count($pages));
@@ -120,8 +112,6 @@ class ContentEntityRepositoryTest extends TestCase
      */
     public function testCreate()
     {
-        print_r("\n> Test \"create\" function");
-
         // Retrieve entity manager
         $em = $this->getContentRepository()->getEntityManager();
 
@@ -162,8 +152,6 @@ class ContentEntityRepositoryTest extends TestCase
      */
     public function testRemove()
     {
-        print_r("\n> Test \"Remove\" function");
-
         // Retrieve entity manager
         $em = $this->getContentRepository()->getEntityManager();
 

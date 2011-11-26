@@ -31,8 +31,6 @@ class UserTest extends TestCase
      */
     public function testGetRoles()
     {
-        print_r("\n> Test \"getRoles\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -56,8 +54,6 @@ class UserTest extends TestCase
      */
     public function testGetUserRoles()
     {
-        print_r("\n> Test \"getUserRoles\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -81,8 +77,6 @@ class UserTest extends TestCase
      */
     public function testEquals()
     {
-        print_r("\n> Test \"equals\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -105,8 +99,6 @@ class UserTest extends TestCase
      */
     public function testGetGravatarEmailHash()
     {
-        print_r("\n> Test \"getGravatarEmailHash\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 

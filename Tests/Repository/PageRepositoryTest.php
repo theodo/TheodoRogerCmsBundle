@@ -39,8 +39,6 @@ class PageRepositoryTest extends TestCase
      */
     public function testAvailableStatus()
     {
-        print_r("\n> Test \"getAvailableStatus\" function");
-
         // Retrieve available status
         $availableStatus = PageRepository::getAvailableStatus();
 
@@ -59,8 +57,6 @@ class PageRepositoryTest extends TestCase
      */
     public function testQueryForMainPages()
     {
-        print_r("\n> Test \"queryForMainPages\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -87,8 +83,6 @@ class PageRepositoryTest extends TestCase
      */
     public function testGetHomepage()
     {
-        print_r("\n> Test \"getHomepage\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 

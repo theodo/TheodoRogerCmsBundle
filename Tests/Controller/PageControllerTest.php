@@ -81,8 +81,6 @@ class PageControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/cms/pages');
 
-        print_r("\n> Test page index action");
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Homepage.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*About.*/', $client->getResponse()->getContent());
@@ -104,8 +102,6 @@ class PageControllerTest extends WebTestCase
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/pages/1/new');
 
-        print_r("\n> Test page new action");
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
 
@@ -124,8 +120,6 @@ class PageControllerTest extends WebTestCase
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/pages/1/edit');
 
-        print_r("\n> Test page edit action");
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
 
@@ -140,8 +134,6 @@ class PageControllerTest extends WebTestCase
      */
     public function testUpdate()
     {
-        print_r("\n> Test page update action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/pages/1/update');
@@ -160,8 +152,6 @@ class PageControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        print_r("\n> Test page workflow");
-
         // Start transaction
         static::$em->getConnection()->beginTransaction();
 

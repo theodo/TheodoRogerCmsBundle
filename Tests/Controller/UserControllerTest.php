@@ -80,8 +80,6 @@ class UserControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/cms/users');
 
-        print_r("\n> Test user list action");
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Theodore De Banville.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Administrator.*/', $client->getResponse()->getContent());
@@ -105,8 +103,6 @@ class UserControllerTest extends WebTestCase
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/users/new');
 
-        print_r("\n> Test user new action");
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New User.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Gravatar.*/', $client->getResponse()->getContent());
@@ -126,8 +122,6 @@ class UserControllerTest extends WebTestCase
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/users/1/edit');
 
-        print_r("\n> Test user edit action");
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit User.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Name.*/', $client->getResponse()->getContent());
@@ -144,8 +138,6 @@ class UserControllerTest extends WebTestCase
      */
     public function testUpdate()
     {
-        print_r("\n> Test user update action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/users/1/update');
@@ -166,8 +158,6 @@ class UserControllerTest extends WebTestCase
      */
     public function testRemove()
     {
-        print_r("\n> Test user remove action");
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/users/2/remove');
@@ -186,8 +176,6 @@ class UserControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        print_r("\n> Test user workflow");
-
         // Start transaction
         static::$em->getConnection()->beginTransaction();
 

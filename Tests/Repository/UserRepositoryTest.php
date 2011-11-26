@@ -37,8 +37,6 @@ class UserRepositoryTest extends TestCase
      */
     public function testGetAvailableLanguages()
     {
-        print_r("\n> Test \"getAvailableLanguages\" function");
-
         // Retrieve available languages
         $availableLanguages = UserRepository::getAvailableLanguages();
 
