@@ -9,9 +9,9 @@
  */
 
 /**
- * Layout repository test class.
+ * User repository test class.
  *
- * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Vincent Guillon <vincentg@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
 namespace Theodo\RogerCmsBundle\Tests\Repository;

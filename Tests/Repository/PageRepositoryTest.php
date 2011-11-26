@@ -9,8 +9,9 @@
  */
 
 /**
- * Layout repository test class.
+ * Page repository test class.
  *
+ * @author Vincent Guillon <vincentg@theodo.fr>
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */

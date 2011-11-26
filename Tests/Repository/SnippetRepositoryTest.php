@@ -9,7 +9,7 @@
  */
 
 /**
- * Layout repository test class.
+ * Snippet repository test class.
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
