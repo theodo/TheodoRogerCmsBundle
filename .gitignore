@@ -3,6 +3,7 @@ vendor/symfony
 vendor/doctrine
 vendor/doctrine-common
 vendor/doctrine-dbal
+vendor/doctrine-fixtures
 vendor/twig
 vendor/bundles
 vendor/gedmo-doctrine-extensions

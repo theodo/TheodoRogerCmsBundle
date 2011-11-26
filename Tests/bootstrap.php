@@ -1,11 +1,13 @@
 <?php
 /*
- * This file is part of the Roger CMS Bundle
+ * This file is part of the FOSUserBundle package.
  *
- * (c) Theodo <contact@theodo.fr>
+ * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
  *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * Updated fot the TheodoRogerCmsBundle needs by Benjamin Grandfond <benjaming@theodo.fr>
  */
 
 if (file_exists($file = __DIR__.'/autoload.php')) {

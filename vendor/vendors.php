@@ -22,6 +22,8 @@ $deps = array(
     array('twig', 'https://github.com/fabpot/Twig', 'origin/master'),
     array('bundles/Stof/DoctrineExtensionsBundle', 'https://github.com/stof/StofDoctrineExtensionsBundle.git', 'origin/master'),
     array('gedmo-doctrine-extensions', 'https://github.com/l3pp4rd/DoctrineExtensions.git', 'origin/master'),
+    array('doctrine-fixtures', 'https://github.com/doctrine/data-fixtures.git', 'origin/master'),
+    array('bundles/Symfony/Bundle/DoctrineFixturesBundle', 'https://github.com/symfony/DoctrineFixturesBundle.git', 'origin/master')
 );
 
 foreach ($deps as $dep) {

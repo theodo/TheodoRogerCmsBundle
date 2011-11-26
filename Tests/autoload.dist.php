@@ -1,11 +1,13 @@
 <?php
 /*
- * This file is part of the Roger CMS Bundle
+ * This file is part of the FOSUserBundle package.
  *
- * (c) Theodo <contact@theodo.fr>
+ * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
  *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * Updated fot the TheodoRogerCmsBundle needs by Benjamin Grandfond <benjaming@theodo.fr>
  */
 
 $vendorDir = __DIR__.'/../vendor';
@@ -20,11 +22,11 @@ $loader->registerNamespaces(array(
     'Doctrine\\Common' => $vendorDir.'/doctrine-common/lib',
     'Doctrine\\DBAL'   => $vendorDir.'/doctrine-dbal/lib',
     'Doctrine'         => $vendorDir.'/doctrine/lib',
-    'Stof'             => __DIR__.'/../vendor/bundles',
-    'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
+    'Stof'             => $vendorDir.'/bundles',
+    'Gedmo'            => $vendorDir.'/gedmo-doctrine-extensions/lib',
     'Theodo'           => __DIR__.'/../',
 ));
 $loader->registerPrefixes(array(
-    'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
-    'Twig_'            => __DIR__.'/../vendor/twig/lib',
+    'Twig_Extensions_' => $vendorDir.'/twig-extensions/lib',
+    'Twig_'            => $vendorDir.'/twig/lib',
 ));
