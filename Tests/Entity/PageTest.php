@@ -11,6 +11,8 @@
 /**
  * Page entity test class.
  *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Fabrice Bernhard <fabriceb@theodo.fr>
  * @author Marek Kalnik <marekk@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
@@ -32,8 +34,6 @@ class PageTest extends TestCase
      */
     public function testGetParent()
     {
-        print_r("\n> Test \"getParent\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -58,8 +58,6 @@ class PageTest extends TestCase
      */
     public function testGetChildren()
     {
-        print_r("\n> Test \"getChildren\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -81,10 +79,8 @@ class PageTest extends TestCase
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-29
      */
-    public function testGetFUllSlug()
+    public function testGetFullSlug()
     {
-        print_r("\n> Test \"getFullSlug\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -92,12 +88,12 @@ class PageTest extends TestCase
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
 
         // Test full slug
-        $this->assertEquals($page->getFullSlug(), 'homepage');
+        $this->assertEquals('homepage', $page->getFullSlug());
 
         // Retrieve "theodo-team" page
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
 
         // Test full slug
-        $this->assertEquals($page->getFullSlug(), 'homepage/theodo/theodo-team');
+        $this->assertEquals('homepage/theodo/theodo-team', $page->getFullSlug());
     }
 }

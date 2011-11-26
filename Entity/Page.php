@@ -323,7 +323,7 @@ class Page
     public function getFullSlug()
     {
         $parent = $this->getParent();
-        if ($parent && !$parent->isHomepage()) {
+        if ($parent && !$this->isHomepage()) {
             return $parent->getFullSlug().'/'.$this->getSlug();
         }
         else {
@@ -538,7 +538,6 @@ class Page
      * @var text $keywords
      */
     private $keywords;
-
 
     /**
      * Set title
