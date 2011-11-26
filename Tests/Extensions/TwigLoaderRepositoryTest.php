@@ -54,9 +54,7 @@ class TwigLoaderRepositoryTest extends TestCase
      */
     public function testGetSource()
     {
-        print_r("\n> Test \"getSource\" function");
-
-        $source = $this->getTwigLoader()->getSource('page:homepage');
+        $source = $this->getTwigLoader()->getSource('page:Homepage');
         $this->assertRegExp('/id="homepage"/', $source);
 
         $source = $this->getTwigLoader()->getSource('layout:normal');
@@ -69,7 +67,7 @@ class TwigLoaderRepositoryTest extends TestCase
             $this->getTwigLoader()->getSource('doesnotexist');
             $this->fail('Exception missing');
         }
-        catch (Twig_Error_Loader $expected) {
+        catch (\Twig_Error_Loader $expected) {
             $this->assertTrue(true);
         }
 
@@ -77,7 +75,7 @@ class TwigLoaderRepositoryTest extends TestCase
             $this->getTwigLoader()->getSource('layout:doesnotexist');
             $this->fail('Exception missing');
         }
-        catch (Twig_Error_Loader $expected) {
+        catch (\Twig_Error_Loader $expected) {
             $this->assertTrue(true);
         }
 
@@ -85,7 +83,7 @@ class TwigLoaderRepositoryTest extends TestCase
             $this->getTwigLoader()->getSource('doesnotexist:bonsoir');
             $this->fail('Exception missing');
         }
-        catch (Twig_Error_Loader $expected) {
+        catch (\Twig_Error_Loader $expected) {
             $this->assertTrue(true);
         }
     }
