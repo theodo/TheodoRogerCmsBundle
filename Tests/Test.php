@@ -78,7 +78,7 @@ abstract class Test extends WebTestCase
      */
     static protected function loadFixtures()
     {
-        $path = __DIR__.'/DataFixtures/ORM';
+        $path = __DIR__.'/../DataFixtures/ORM';
 
         $loader = new DataFixturesLoader(static::$kernel->getContainer());
         $loader->loadFromDirectory($path);
