@@ -28,6 +28,11 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 abstract class Test extends WebTestCase
 {
     /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    protected static $em;
+
+    /**
      * Creates a Kernel, generate the Doctrine schema and load the fixtures.
      *
      * @see Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createKernel
@@ -50,16 +55,16 @@ abstract class Test extends WebTestCase
      */
     static protected function generateSchema()
     {
-        static::$entityManager = static::$kernel->getContainer()->get('doctrine')->getEntityManager();
-        $metadatas = static::$entityManager->getMetadataFactory()->getAllMetadata();
+        static::$em = static::$kernel->getContainer()->get('doctrine')->getEntityManager();
+        $metadatas = static::$em->getMetadataFactory()->getAllMetadata();
 
-        $connection = static::$entityManager->getConnection();
+        $connection = static::$em->getConnection();
         $name = $connection->getDatabase();
 
         $connection->getSchemaManager()->dropDatabase($name);
 
         if (!empty($metadatas)) {
-            $tool = new SchemaTool(static::$entityManager);
+            $tool = new SchemaTool(static::$em);
             $tool->createSchema($metadatas);
         } else {
             throw new Doctrine\DBAL\Schema\SchemaException('No Metadata Classes to process.');
@@ -85,8 +90,8 @@ abstract class Test extends WebTestCase
             );
         }
 
-        $purger = new ORMPurger(static::$entityManager);
-        $executor = new ORMExecutor(static::$entityManager, $purger);
+        $purger = new ORMPurger(static::$em);
+        $executor = new ORMExecutor(static::$em, $purger);
         $executor->execute($fixtures);
     }
 }
