@@ -21,7 +21,7 @@ require_once __DIR__.'/../Test.php';
 use Theodo\RogerCmsBundle\Tests\Test as TestCase;
 use Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository;
 
-class Twig_Loader_RepositoryTest extends TestCase
+class TwigLoaderRepositoryTest extends TestCase
 {
     /**
      * @var Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository

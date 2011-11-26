@@ -25,7 +25,7 @@ class TwigCacheDatabase
     /**
      *
      * @param Twig_Environment $twig_environment
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-24
      */
     public function __construct(Twig_Environment $twig_environment)
@@ -36,7 +36,7 @@ class TwigCacheDatabase
     /**
      *
      * @return Twig_Environment
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-24
      */
     public function getTwigEnvironment()
@@ -47,7 +47,7 @@ class TwigCacheDatabase
     /**
      *
      * @param Twig_Environment $twig_environment
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-24
      */
     public function setTwigEnvironment(Twig_Environment $twig_environment)
@@ -58,7 +58,7 @@ class TwigCacheDatabase
     /**
      *
      * @param string $name
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-24
      */
     public function invalidate($name)
@@ -69,7 +69,7 @@ class TwigCacheDatabase
     /**
      *
      * @param string $name
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-24
      */
     public function warmup($name/*, $ext*/)

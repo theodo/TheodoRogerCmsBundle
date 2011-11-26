@@ -25,7 +25,7 @@ class UserController extends Controller
     /**
      * @return EntityManager
      *
-     * @author fabricbe
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2011-07-08
      */
     public function getEntityManager()
@@ -38,7 +38,7 @@ class UserController extends Controller
     /**
      *
      * @return UserRepository
-     * @author fabricbe
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2011-07-08
      */
     public function getUserRepository()
