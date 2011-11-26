@@ -1,7 +1,9 @@
 <?php
 /*
- * This file is part of the Roger CMS Bundle
+ * This file is part of the Roger CMS Bundle.
+ * Some parts of this file are copied form the ParisStreetPingPong application.
  *
+ * (c) Benjamin Grandfond <benjamin.grandfond@gmail.com>
  * (c) Theodo <contact@theodo.fr>
  *
  * This source file is subject to the MIT license that is bundled
@@ -28,6 +30,7 @@ class Test extends WebTestCase
      * Creates a Kernel, generate the Doctrine schema and load the fixtures.
      *
      * @see Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createKernel
+     * 
      * @param array $options An array of options
      */
     public static function createRogerKernel(array $options = array())
@@ -43,8 +46,6 @@ class Test extends WebTestCase
      * Generate the schema.
      *
      * @throws Doctrine\DBAL\Schema\SchemaException
-     *
-     * @return void
      */
     static protected function generateSchema()
     {
@@ -65,9 +66,9 @@ class Test extends WebTestCase
     }
 
     /**
-     * @static
+     * Load the fixtures from DataFixtures dir.
+     *
      * @throws InvalidArgumentException
-     * @return void
      */
     static protected function loadFixtures()
     {
