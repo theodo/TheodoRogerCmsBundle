@@ -1,62 +1,39 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-require_once __DIR__ . '/../../../../../app/AppKernel.php';
+/**
+ * Content repository test class.
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
+namespace Theodo\RogerCmsBundle\Tests\Repository;
 
-use Theodo\RogerCmsBundle\Tests\Unit;
+require_once __DIR__.'/../Test.php';
+
+use Theodo\RogerCmsBundle\Tests\Test as TestCase;
 use Theodo\RogerCmsBundle\Repository\ContentEntityRepository;
 use Theodo\RogerCmsBundle\Entity\Layout;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Entity\Snippet;
-use Theodo\RogerCmsBundle\DataFixtures\ORM\LayoutData;
-use Theodo\RogerCmsBundle\DataFixtures\ORM\PageData;
-use Theodo\RogerCmsBundle\DataFixtures\ORM\SnippetData;
-use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\ORM\Query;
 
-class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
+class ContentEntityRepositoryTest extends TestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-    private $content_repository;
-
     public function setUp()
     {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-        $this->content_repository = $kernel->getContainer()->get('roger.content_repository');
-    }
-
-    /**
-     * EntityManager getter
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->em;
-    }
-
-    /**
-     * ContentRepository getter
-     *
-     * @return Theodo\RogerCmsBundle\Repository\ContentEntityRepository
-     */
-    protected function getContentRepository()
-    {
-        return $this->content_repository;
+        self::createRogerKernel();
     }
 
     /**
      * Test getSourceByName
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */
@@ -84,7 +61,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test getHomePage
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */
@@ -102,7 +79,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test getPageBySlug
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */
@@ -120,7 +97,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test getFirstTwoLevelPages
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */
@@ -137,7 +114,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test create
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */
@@ -179,7 +156,7 @@ class ContentEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test remove
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-29
      */

@@ -1,41 +1,32 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+/**
+ * Layout repository test class.
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
+namespace Theodo\RogerCmsBundle\Tests\Repository;
 
+require_once __DIR__.'/../Test.php';
+
+use Theodo\RogerCmsBundle\Tests\Test as TestCase;
 use Theodo\RogerCmsBundle\Entity\Snippet;
-use Theodo\RogerCmsBundle\Tests\Unit;
-
-use Doctrine\Common\DataFixtures\Loader;
-use Theodo\RogerCmsBundle\DataFixtures\ORM\SnippetData;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
 
-class SnippetRepositoryTest extends \PHPUnit_Framework_TestCase
+class SnippetRepositoryTest extends TestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
     public function setUp()
     {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-    }
-
-    /**
-     * EntityManager getter
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->em;
+        static::createRogerKernel();
     }
 
     /**

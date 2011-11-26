@@ -33,6 +33,11 @@ abstract class Test extends WebTestCase
     protected static $em;
 
     /**
+     * @var Theodo\RogerCmsBundle\ContentRepositoryInterface
+     */
+    protected static $contentRepository;
+
+    /**
      * Creates a Kernel, generate the Doctrine schema and load the fixtures.
      *
      * @see Symfony\Bundle\FrameworkBundle\Test\WebTestCase::createKernel
@@ -43,6 +48,8 @@ abstract class Test extends WebTestCase
     {
         static::$kernel = static::createKernel($options);
         static::$kernel->boot();
+
+        static::$contentRepository = static::$kernel->getContainer()->get('roger.content_repository');
 
         static::generateSchema();
         static::loadFixtures();
@@ -121,5 +128,15 @@ abstract class Test extends WebTestCase
     protected function getEntityManager()
     {
         return static::$em;
+    }
+
+    /**
+     * ContentRepository getter
+     *
+     * @return Theodo\RogerCmsBundle\Reposiroty\ContentRepositoryInterface
+     */
+    protected function getContentRepository()
+    {
+        return static::$contentRepository;
     }
 }
