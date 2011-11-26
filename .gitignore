@@ -19,6 +19,7 @@ clover.html
 
 # Cache
 Tests/cache
+Tests/logs
 
 # Filesystem
 .DS_Store

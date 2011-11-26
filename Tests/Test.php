@@ -49,6 +49,24 @@ abstract class Test extends WebTestCase
     }
 
     /**
+     * Creates a Client.
+     *
+     * @param array   $options An array of options to pass to the createKernel class
+     * @param array   $server  An array of server parameters
+     *
+     * @return Client A Client instance
+     */
+    static protected function createClient(array $options = array(), array $server = array())
+    {
+        static::createRogerKernel($options);
+
+        $client = static::$kernel->getContainer()->get('test.client');
+        $client->setServerParameters($server);
+
+        return $client;
+    }
+
+    /**
      * Generate the schema.
      *
      * @throws Doctrine\DBAL\Schema\SchemaException

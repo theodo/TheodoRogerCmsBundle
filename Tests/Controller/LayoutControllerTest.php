@@ -1,31 +1,30 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+/**
+ * Layout Controller test class.
+ *
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__ . '/../../../../../app/AppKernel.php';
+require_once __DIR__.'/../Test.php';
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
 
 class LayoutControllerTest extends WebTestCase
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
-    public function setUp()
-    {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-    }
-
-    /**
      * User connection
-     * 
+     *
      * @return Crawler
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
@@ -56,7 +55,7 @@ class LayoutControllerTest extends WebTestCase
 
     /**
      * Logout user
-     * 
+     *
      * @return Crawler
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
@@ -195,7 +194,7 @@ class LayoutControllerTest extends WebTestCase
         print_r("\n> LayoutController - Test workflow");
 
         // Start transaction
-        $this->em->getConnection()->beginTransaction();
+        static::$em->getConnection()->beginTransaction();
 
         $client = $this->createClient();
 
@@ -281,7 +280,7 @@ class LayoutControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertRegexp('/.*cms\/layouts$/', $client->getRequest()->getUri());
 
-        $this->em->getConnection()->rollBack();
+        static::$em->getConnection()->rollBack();
 
         $this->logout($client);
     }
