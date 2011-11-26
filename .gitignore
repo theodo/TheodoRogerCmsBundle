@@ -1,21 +1,24 @@
-app/cache/*
-app/logs/*
-log
-cache
-symfttpd
-nbproject
-vendor/*
+# Vendors
+vendor/symfony
+vendor/doctrine
+vendor/doctrine-common
+vendor/doctrine-dbal
+vendor/twig
+vendor/bundles
+vendor/gedmo-doctrine-extensions
+
+# PHPUnit special files
+phpunit.xml
 undercontrol.xml
 clover.xml
 clover.html
-app/phpunit.xml
-app/config/parameters.ini
-app/config/parameters_test.ini
-app/config/dbs.list
-app/config/create_dbs.sql
-app/bootstrap_cache.php.cache
+
+# Doctrine backup files 
 *.php~
-web/bundles/*
-deps.lock
-web/uploads/*
+
+# Filesystem
 .DS_Store
+
+# IDES
+.nbproject
+.idea
