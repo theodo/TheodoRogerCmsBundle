@@ -94,4 +94,14 @@ abstract class Test extends WebTestCase
         $executor = new ORMExecutor(static::$em, $purger);
         $executor->execute($fixtures);
     }
+
+    /**
+     * EntityManager getter
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return static::$em;
+    }
 }
