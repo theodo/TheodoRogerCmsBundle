@@ -84,10 +84,10 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Theodore De Banville.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Administrator.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*Designer.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*User.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*admin.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*user.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Content Manager.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Client.*/', $client->getResponse()->getContent());
+        $this->assertRegexp('/.*Visitor.*/', $client->getResponse()->getContent());
 
         $this->logout($client);
     }
