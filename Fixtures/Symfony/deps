@@ -1,22 +1,22 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=v2.0.6
+    version=origin/master
 
 [twig]
     git=http://github.com/fabpot/Twig.git
-    version=v1.1.2
+    version=origin/master
 
 [doctrine-common]
     git=http://github.com/doctrine/common.git
-    version=2.1.2
+    version=origin/master
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
-    version=2.1.3
+    version=origin/master
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
-    version=2.1.2
+    version=origin/master
 
 [doctrine-fixtures]
     git=http://github.com/doctrine/data-fixtures.git
