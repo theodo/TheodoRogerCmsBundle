@@ -40,7 +40,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
      *
      * @param ContentRepositoryInterface $content_repository
      * @param Twig_LoaderInterface $fallback_loader
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-22
      */
     public function __construct(ContentRepositoryInterface $content_repository, Twig_LoaderInterface $fallback_loader = null, $fallback_path = null)
@@ -63,7 +63,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     /**
      *
      * @return EntityManager
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-22
      */
     public function getContentRepository()
@@ -74,7 +74,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     /**
      *
      * @param ContentRepositoryInterface $content_repository
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-22
      */
     public function setContentRepository(ContentRepositoryInterface $content_repository)

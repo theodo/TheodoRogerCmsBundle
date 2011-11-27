@@ -206,7 +206,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
      * @param string $type
      * @return EntityRepository
      *
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2011-07-07
      */
     public function getRepository($type)

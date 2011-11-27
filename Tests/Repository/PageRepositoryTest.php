@@ -1,42 +1,34 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+/**
+ * Page repository test class.
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
+namespace Theodo\RogerCmsBundle\Tests\Repository;
 
+require_once __DIR__.'/../Test.php';
+
+use Theodo\RogerCmsBundle\Tests\Test as TestCase;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
-use Theodo\RogerCmsBundle\Tests\Unit;
-
-use Doctrine\Common\DataFixtures\Loader;
-use Theodo\RogerCmsBundle\DataFixtures\ORM\PageData;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\ORM\Query;
 
-class PageRepositoryTest extends \PHPUnit_Framework_TestCase
+class PageRepositoryTest extends TestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
     public function setUp()
     {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-    }
-
-    /**
-     * EntityManager getter
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->em;
+        static::createRogerKernel();
     }
 
     /**
@@ -47,8 +39,6 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testAvailableStatus()
     {
-        print_r("\n> Test \"getAvailableStatus\" function");
-
         // Retrieve available status
         $availableStatus = PageRepository::getAvailableStatus();
 
@@ -67,8 +57,6 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueryForMainPages()
     {
-        print_r("\n> Test \"queryForMainPages\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -95,8 +83,6 @@ class PageRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHomepage()
     {
-        print_r("\n> Test \"getHomepage\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 

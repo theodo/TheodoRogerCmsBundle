@@ -1,31 +1,30 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+/**
+ * Layout Controller test class.
+ *
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__ . '/../../../../../app/AppKernel.php';
+require_once __DIR__.'/../Test.php';
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
 
 class LayoutControllerTest extends WebTestCase
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
-    public function setUp()
-    {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-    }
-
-    /**
      * User connection
-     * 
+     *
      * @return Crawler
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
@@ -33,7 +32,7 @@ class LayoutControllerTest extends WebTestCase
     protected function login($client, $username = 'admin', $password = 'admin')
     {
         // Retrieve crawler
-        $crawler = $client->request('GET', '/cms');
+        $crawler = $client->request('GET', '/admin');
 
         // Select the login form
         $form = $crawler->filterXPath('//input[@name="login"]')->form();
@@ -56,14 +55,14 @@ class LayoutControllerTest extends WebTestCase
 
     /**
      * Logout user
-     * 
+     *
      * @return Crawler
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
      */
     protected function logout($client)
     {
-        return $client->request('GET', '/cms/logout');
+        return $client->request('GET', '/admin/logout');
     }
 
     /**
@@ -74,14 +73,12 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testList()
     {
-        print_r("\n> LayoutController - Test list action");
-
         $client = $this->createClient();
 
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/cms/layouts');
+        $crawler = $client->request('GET', '/admin/layouts');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Layouts.*/', $client->getResponse()->getContent());
@@ -99,14 +96,12 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testNew()
     {
-        print_r("\n> LayoutController - Test new action");
-
         $client = $this->createClient();
 
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/cms/layouts/new');
+        $crawler = $client->request('GET', '/admin/layouts/new');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Layout.*/', $client->getResponse()->getContent());
@@ -122,14 +117,12 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testEdit()
     {
-        print_r("\n> LayoutController - Test edit action");
-
         $client = $this->createClient();
 
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/cms/layouts/1/edit');
+        $crawler = $client->request('GET', '/admin/layouts/1/edit');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
@@ -146,14 +139,12 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testUpdate()
     {
-        print_r("\n> LayoutController - Test update action");
-
         $client = $this->createClient();
 
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/cms/layouts/1');
+        $crawler = $client->request('GET', '/admin/layouts/1');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
@@ -169,14 +160,12 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testRemove()
     {
-        print_r("\n> LayoutController - Test remove action");
-
         $client = $this->createClient();
 
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/cms/layouts/1/remove');
+        $crawler = $client->request('GET', '/admin/layouts/1/remove');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
@@ -192,17 +181,12 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        print_r("\n> LayoutController - Test workflow");
-
-        // Start transaction
-        $this->em->getConnection()->beginTransaction();
-
         $client = $this->createClient();
 
         // Connect user
         $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/cms/layouts');
+        $crawler = $client->request('GET', '/admin/layouts');
 
         //Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -224,7 +208,7 @@ class LayoutControllerTest extends WebTestCase
 
         // Test return
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*cms\/layouts\/new$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*admin\/layouts\/new$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*New Layout.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*This value should not be blank.*/', $client->getResponse()->getContent());
 
@@ -238,7 +222,7 @@ class LayoutControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertRegexp('/.*cms\/layouts\/.*\/edit$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*admin\/layouts\/.*\/edit$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
@@ -251,7 +235,7 @@ class LayoutControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*cms\/layouts\/.*\/edit$/', $client->getRequest()->getUri());
+        $this->assertRegexp('/.*admin\/layouts\/.*\/edit$/', $client->getRequest()->getUri());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
 
@@ -279,9 +263,7 @@ class LayoutControllerTest extends WebTestCase
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*cms\/layouts$/', $client->getRequest()->getUri());
-
-        $this->em->getConnection()->rollBack();
+        $this->assertRegexp('/.*admin\/layouts$/', $client->getRequest()->getUri());
 
         $this->logout($client);
     }
