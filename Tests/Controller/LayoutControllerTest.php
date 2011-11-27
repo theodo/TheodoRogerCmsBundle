@@ -181,9 +181,6 @@ class LayoutControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        // Start transaction
-        static::$em->getConnection()->beginTransaction();
-
         $client = $this->createClient();
 
         // Connect user
@@ -267,8 +264,6 @@ class LayoutControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertRegexp('/.*cms\/layouts$/', $client->getRequest()->getUri());
-
-        static::$em->getConnection()->rollBack();
 
         $this->logout($client);
     }

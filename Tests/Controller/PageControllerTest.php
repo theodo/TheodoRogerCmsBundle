@@ -152,9 +152,6 @@ class PageControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        // Start transaction
-        static::$em->getConnection()->beginTransaction();
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/pages');
@@ -223,8 +220,6 @@ class PageControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/cms/pages');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
-
-        static::$em->getConnection()->rollBack();
 
         $this->logout($client);
     }

@@ -168,9 +168,6 @@ class SnippetControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        // Start transaction
-        static::$em->getConnection()->beginTransaction();
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/snippets');
@@ -255,8 +252,6 @@ class SnippetControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertRegexp('/.*cms\/snippets$/', $client->getRequest()->getUri());
-
-        static::$em->getConnection()->rollBack();
 
         $this->logout($client);
     }

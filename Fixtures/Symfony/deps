@@ -1,0 +1,44 @@
+[symfony]
+    git=http://github.com/symfony/symfony.git
+    version=v2.0.6
+
+[twig]
+    git=http://github.com/fabpot/Twig.git
+    version=v1.1.2
+
+[doctrine-common]
+    git=http://github.com/doctrine/common.git
+    version=2.1.2
+
+[doctrine-dbal]
+    git=http://github.com/doctrine/dbal.git
+    version=2.1.3
+
+[doctrine]
+    git=http://github.com/doctrine/doctrine2.git
+    version=2.1.2
+
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+    version=origin/master
+
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    version=origin/master
+    target=bundles/Symfony/Bundle/DoctrineFixturesBundle
+
+[gedmo-doctrine-extensions]
+    git=http://github.com/l3pp4rd/DoctrineExtensions.git
+
+[StofDoctrineExtensionsBundle]
+    git=http://github.com/stof/StofDoctrineExtensionsBundle.git
+    target=bundles/Stof/DoctrineExtensionsBundle
+
+[SensioFrameworkExtraBundle]
+    git=http://github.com/sensio/SensioFrameworkExtraBundle.git
+    target=bundles/Sensio/Bundle/FrameworkExtraBundle
+
+[SensioDistributionBundle]
+    git=http://github.com/sensio/SensioDistributionBundle.git
+    target=bundles/Sensio/Bundle/DistributionBundle
+    version=origin/1.0

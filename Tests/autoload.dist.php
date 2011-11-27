@@ -1,43 +1,19 @@
 <?php
 /*
- * This file is part of the FOSUserBundle package.
+ * This file is part of the Roger CMS Bundle
  *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
+ * (c) Theodo <contact@theodo.fr>
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  *
- * Updated fot the TheodoRogerCmsBundle needs by Benjamin Grandfond <benjaming@theodo.fr>
+ * Idea from http://www.willdurand.fr/tests-unitaires-et-fonctionnels-sur-un-bundle-en-symfony2/
  */
 
-$vendorDir = __DIR__.'/../vendor';
-require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+require_once __DIR__.'/../Fixtures/Symfony/app/bootstrap.php.cache';
 
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
-
-$loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Symfony'          => array($vendorDir.'/symfony/src', $vendorDir.'/bundles'),
-    'Doctrine\\Common' => $vendorDir.'/doctrine-common/lib',
-    'Doctrine\\DBAL'   => $vendorDir.'/doctrine-dbal/lib',
-    'Doctrine'         => $vendorDir.'/doctrine/lib',
-    'Doctrine\\Common\\DataFixtures'   => $vendorDir.'/doctrine-fixtures/lib',
-    'Stof'             => $vendorDir.'/bundles',
-    'Gedmo'            => $vendorDir.'/gedmo-doctrine-extensions/lib',
-));
-$loader->registerPrefixes(array(
-    'Twig_'            => $vendorDir.'/twig/lib',
-));
-$loader->register();
-
-spl_autoload_register(function($class) {
-    if (0 === strpos($class, 'Theodo\\RogerCmsBundle\\')) {
-        $path = __DIR__.'/../'.implode('/', array_slice(explode('\\', $class), 2)).'.php';
-        if (!stream_resolve_include_path($path)) {
-            return false;
-        }
-        require_once $path;
-        return true;
-    }
-});
+$filesystem = new \Symfony\Component\HttpKernel\Util\Filesystem();
+$filesystem->remove(__DIR__.'/../Fixtures/Symfony/app/cache');
+$filesystem->remove(__DIR__.'/../Fixtures/Symfony/app/logs');
+$filesystem->mkdir(__DIR__.'/../Fixtures/Symfony/app/cache');
+$filesystem->mkdir(__DIR__.'/../Fixtures/Symfony/app/logs');

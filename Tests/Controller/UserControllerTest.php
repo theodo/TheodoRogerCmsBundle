@@ -176,9 +176,6 @@ class UserControllerTest extends WebTestCase
      */
     public function testWorkflow()
     {
-        // Start transaction
-        static::$em->getConnection()->beginTransaction();
-
         $client = $this->createClient();
         $crawler = $this->login($client);
         $crawler = $client->request('GET', '/cms/users');
@@ -250,8 +247,6 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('POST', $form->getUri());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Can not remove main admin.*/', $client->getResponse()->getContent());
-
-        static::$em->getConnection()->rollBack();
 
         $this->logout($client);
     }

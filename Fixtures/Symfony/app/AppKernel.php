@@ -1,31 +1,10 @@
 <?php
-/*
- * This file is part of the Roger CMS Bundle
- *
- * (c) Theodo <contact@theodo.fr>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
-/**
- * RogerCmsTestKernel class.
- *
- * @author Benjamin Grandfond <benjaming@theodo.fr>
- */
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-class RogerCmsTestKernel extends Kernel
+class AppKernel extends Kernel
 {
-    /**
-     * Returns an array of bundles to registers.
-     *
-     * @return array An array of bundle instances.
-     *
-     * @api
-     */
     public function registerBundles()
     {
         $bundles = array(
@@ -41,16 +20,8 @@ class RogerCmsTestKernel extends Kernel
         return $bundles;
     }
 
-    /**
-     * Loads the container configuration
-     *
-     * @param LoaderInterface $loader A LoaderInterface instance
-     *
-     * @api
-     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/../Resources/config/config_test.yml');
+        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
-
 }
