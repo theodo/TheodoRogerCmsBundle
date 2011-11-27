@@ -49,7 +49,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
         $this->fallback_loader = $fallback_loader;
         if ($this->fallback_loader instanceof Twig_Loader_Filesystem && $fallback_path != null)
         {
-          $path_prefix = __DIR__.'/../../../../../';
+          $path_prefix = __DIR__.'/../../../../../../';
 
           if (!file_exists($path_prefix.$fallback_path))
           {

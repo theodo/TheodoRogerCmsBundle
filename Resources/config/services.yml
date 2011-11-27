@@ -10,6 +10,7 @@ parameters:
     roger.routing.class: Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerRoutingExtension
     roger.twig.extension.actions.class: Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerActionsExtension
     validator.twig_syntax.class: Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator
+    roger.admin.layout: Theodo\RogerCmsBundle\Resources\views\base_layout.html.twig
 
     # Timestampable listener class
     gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener

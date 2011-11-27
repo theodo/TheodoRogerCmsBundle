@@ -30,7 +30,9 @@ class LayoutController extends Controller
         $layouts = $this->get('roger.content_repository')->findAll('layout');
 
         return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig',
-                array('layouts' => $layouts)
+                array('layouts' => $layouts,
+                      'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
+                     )
                 );
     }
 
@@ -84,7 +86,8 @@ class LayoutController extends Controller
                 array(
                     'layout' => $layout,
                     'form' => $form->createView(),
-                  )
+                    'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
+                     )
                 );
     }
 
@@ -110,7 +113,9 @@ class LayoutController extends Controller
 
         return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig',
                 array(
-                  'layout' => $layout
-                ));
+                  'layout' => $layout,
+                  'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
+                     )
+                );
     }
 }

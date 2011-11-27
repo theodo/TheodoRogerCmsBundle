@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block page_title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('bundles/theodorogercms/css/jqModal.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('bundles/theodorogercms/css/main.css') }}" type="text/css" media="all" />
+        {% block stylesheets %}{% endblock %}
+        <script src="{{ asset('bundles/theodorogercms/js/jquery-1.6.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/theodorogercms/js/global.js') }}" type="text/javascript"></script>
+        {% block javascripts_assets %}{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    {% set body_class = body_class|default('') %}
+    <body{% if body_class != '' %} class="{{ body_class }}"{% endif %}>
+
+        <div id="page" class="roger">
+            {% set current_tab = tab|default('content') %}
+            {% set current_nav = nav|default('') %}
+
+            <div id="header">
+                {% render "TheodoRogerCmsBundle:Backend\\User:boxComponent" %}
+
+                {% block navigation %}
+                    <ul id="navigation">
+
+                        <li{% if current_tab == 'content' %} class="current"{% endif %}>
+                            <a href="{{ url('page_list') }}">{% trans %}Content{% endtrans %}</a>
+                            <ul class="nav_sub">
+
+                                {% block content_sub_nav %}
+                                <li>
+                                    <a{% if current_nav == 'medias' %} class="current"{% endif %} href="{{ url('media_list') }}">
+                                        <span>{% trans %}Medias{% endtrans %}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a{% if current_nav == 'pages' %} class="current"{% endif %} href="{{ url('page_list') }}">
+                                        <span>{% trans %}Pages{% endtrans %}</span>
+                                    </a>
+                                </li>
+                                {% endblock %}
+                            </ul>
+                        </li>
+
+                        {% if is_granted('ROLE_USER') %}
+                            <li{% if current_tab == 'design' %} class="current"{% endif %}>
+                                <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
+                                <ul class="nav_sub">
+                                    {% block design_sub_nav %}
+                                    <li>
+                                        <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
+                                            <span>{% trans %}Layouts{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
+                                            <span>{% trans %}Snippets{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                    {% endblock %}
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        <li{% if current_tab == 'settings' %} class="current"{% endif %}>
+                            <a href="{{ url('user_preferences') }}">{% trans %}Settings{% endtrans %}</a>
+                            <ul class="nav_sub">
+                                <li>
+                                    <a{% if current_nav == 'personal' %} class="current"{% endif %} href="{{ url('user_preferences') }}">
+                                        <span>{% trans %}Personal{% endtrans %}</span>
+                                    </a>
+                                </li>
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li>
+                                        <a{% if current_nav == 'users' %} class="current"{% endif %} href="{{ url('user_list') }}">
+                                            <span>{% trans %}Users{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                   <!--<li>
+                                        <a{% if current_nav == 'extensions' %} class="current"{% endif %} href="#">
+                                            <span>{% trans %}Extensions{% endtrans %}</span>
+                                        </a>
+                                    </li>-->
+                                {% endif %}
+                            </ul>
+                        </li>
+
+                    </ul>
+                {% endblock %}
+
+                <div id="header_bottom">
+                    <div></div>
+                </div>              
+                
+            </div>
+
+
+            <div id="main">
+                {% block notice %}
+                    {% if app.session.hasFlash('notice') %}
+                        <div id="notice">
+                            <p>{{ app.session.flash('notice') }}</p>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% block global_error %}
+                    {% if app.session.hasFlash('error') %}
+                        <div id="error">
+                            <p>{{ app.session.flash('error') }}</p>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+                <div id="content">
+                    {% block cmscontent %}{% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+         </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -125,7 +125,8 @@ class UserController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
 
         return $this->render('TheodoRogerCmsBundle:User:box-component.html.twig', array(
-            'user' => $user
+            'user' => $user,
+            'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
         ));
     }
 
@@ -144,6 +145,7 @@ class UserController extends Controller
 
         return $this->render('TheodoRogerCmsBundle:User:list.html.twig', array(
             'users' => $users,
+            'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
         ));
     }
 
@@ -184,7 +186,8 @@ class UserController extends Controller
 
         return $this->render('TheodoRogerCmsBundle:User:remove.html.twig', array(
             'user' => $user,
-        ));
+            'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
+          ));
     }
 
     /**
@@ -360,7 +363,8 @@ class UserController extends Controller
             'TheodoRogerCmsBundle:User:'.$action.'.html.twig',
             array(
                 'form'      => $form->createView(),
-                'user'      => $user
+                'user'      => $user,
+                'roger_admin_layout' => $this->container->getParameter('roger.admin.layout')
             )
         );
     }
