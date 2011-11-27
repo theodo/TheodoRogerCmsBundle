@@ -3,4 +3,4 @@ php:
   - 5.3
   - 5.4
 before_script:
-  - Fixtures/Symfony/bin/vendor install
+  - php Fixtures/Symfony/bin/vendors install
