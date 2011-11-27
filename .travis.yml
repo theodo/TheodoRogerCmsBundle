@@ -4,3 +4,4 @@ php:
   - 5.4
 before_script:
   - php Fixtures/Symfony/bin/vendors install
+script: phpunit --debug
