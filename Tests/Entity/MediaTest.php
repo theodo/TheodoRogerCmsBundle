@@ -1,43 +1,28 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+/**
+ * Media entity test class.
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
+namespace Theodo\RogerCmsBundle\Tests\Entity;
 
-use Theodo\TheodoCmsBundle\Entity\Media;
-use Theodo\TheodoCmsBundle\Tests\Unit;
+require_once __DIR__.'/Test.php';
 
-use Doctrine\Common\DataFixtures\Loader;
-use Theodo\TheodoCmsBundle\DataFixtures\ORM\MediaData;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\ORM\Query;
+use Theodo\RogerCmsBundle\Tests\Entity\Test as TestCase;
+use Theodo\RogerCmsBundle\Entity\Media;
 
-class MediaTest extends \PHPUnit_Framework_TestCase
+class MediaTest extends TestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
-    public function setUp()
-    {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-    }
-
-    /**
-     * EntityManager getter
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->em;
-    }
-
     /**
      * Test getPages function
      *
@@ -47,8 +32,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
      */
     public function testFullPath()
     {
-        print_r("\n> Test \"getFullPath\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 

@@ -9,19 +9,19 @@
 {% set nav = 'users' %}
 
 {% if user.id is not null %}
-  {% set title %}Edit User{% endset %}
-  {% set gravatarHash %}{{ user.gravatarEmailHash }}{% endset %}
+  {% set title = 'Edit User' %}
+  {% set gravatarHash = user.gravatarEmailHash %}
 {% else %}
-  {% set title %}New User{% endset %}
-  {% set gravatarHash %}{% endset %}
+  {% set title = 'New User' %}
+  {% set gravatarHash = '' %}
 {% endif %}
 
 {% block page_title title %}
-  
+
 {% form_theme form 'TheodoRogerCmsBundle:Form:form_user_layout.html.twig' %}
 
-{% block cmscontent %}  
-    {% if user.id is not null %} 
+{% block cmscontent %}
+    {% if user.id is not null %}
     <h1>{% trans %}Edit User{% endtrans %}</h1>
     <form class="edit_user" action="{{ url('user_update', { 'id' : user.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
@@ -35,11 +35,11 @@
         </div>
 
         <p>{{ form_row(form.name) }}</p>
-      
+
         <p>{{ form_row(form.username) }}</p>
-      
+
         <p>{{ form_row(form.email) }}</p>
-      
+
         <p id="display_password" class="{% if form_errors(form.password) or form_errors(form) or user.id is null %}hide{% else %}display{% endif %}">
             <label>{% trans %}Password{% endtrans %}</label>
             <span class="value">
@@ -63,13 +63,13 @@
         </div>
 
         <p>{{ form_row(form.user_roles) }}</p>
-        
+
         <p>{{ form_row(form.language) }}</p>
-        
+
         <p>{{ form_row(form.notes) }}</p>
 
         {{ form_rest(form) }}
-      
+
         <p class="buttons">
             <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save" />
             {% trans %}or{% endtrans %}
