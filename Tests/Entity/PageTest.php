@@ -1,44 +1,31 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-require_once __DIR__.'/../../../../../app/AppKernel.php';
+/**
+ * Page entity test class.
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
+namespace Theodo\RogerCmsBundle\Tests\Entity;
 
+require_once __DIR__.'/Test.php';
+
+use Theodo\RogerCmsBundle\Tests\Entity\Test as TestCase;
 use Theodo\RogerCmsBundle\Entity\Page;
-use Theodo\RogerCmsBundle\Tests\Unit;
 
-use Doctrine\Common\DataFixtures\Loader;
-use Theodo\RogerCmsBundle\DataFixtures\ORM\PageData;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\ORM\Query;
-
-class PageTest extends \PHPUnit_Framework_TestCase
+class PageTest extends TestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
-    public function setUp()
-    {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-        
-    }
-
-    /**
-     * EntityManager getter
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->em;
-    }
-
     /**
      * Test getParent function
      *
@@ -47,8 +34,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParent()
     {
-        print_r("\n> Test \"getParent\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -58,7 +43,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         // Test aboutPage
         $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Page', $aboutPage);
         $this->assertEquals('About', $aboutPage->getName());
-        
+
         // Retrieve parent page
         $parentPage = $aboutPage->getParent();
         $this->assertInstanceOf('Theodo\RogerCmsBundle\Entity\Page', $parentPage);
@@ -73,8 +58,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
-        print_r("\n> Test \"getChildren\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -96,10 +79,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-29
      */
-    public function testGetFUllSlug()
+    public function testGetFullSlug()
     {
-        print_r("\n> Test \"getFullSlug\" function");
-
         // Retrieve entity manager
         $em = $this->getEntityManager();
 
@@ -107,12 +88,12 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
 
         // Test full slug
-        $this->assertEquals($page->getFullSlug(), 'homepage');
+        $this->assertEquals('homepage', $page->getFullSlug());
 
         // Retrieve "theodo-team" page
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'theodo-team'));
 
         // Test full slug
-        $this->assertEquals($page->getFullSlug(), 'homepage/theodo/theodo-team');
+        $this->assertEquals('homepage/theodo/theodo-team', $page->getFullSlug());
     }
 }

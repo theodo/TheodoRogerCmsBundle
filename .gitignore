@@ -1,21 +1,27 @@
-app/cache/*
-app/logs/*
-log
-cache
-symfttpd
-nbproject
-vendor/*
+# Vendors
+Fixtures/Symfony/vendor/*
+Fixtures/Symfony/app/cache/*
+Fixtures/Symfony/app/logs/*
+Fixtures/Symfony/vendor/*
+Fixtures/Symfony/web/bundles/*
+Fixtures/Symfony/app/bootstrap_cache.php.cache
+
+# PHPUnit special files
+phpunit.xml
 undercontrol.xml
 clover.xml
 clover.html
-app/phpunit.xml
-app/config/parameters.ini
-app/config/parameters_test.ini
-app/config/dbs.list
-app/config/create_dbs.sql
-app/bootstrap_cache.php.cache
+
+# Doctrine backup files 
 *.php~
-web/bundles/*
-deps.lock
-web/uploads/*
+
+# Cache
+Tests/cache
+Tests/logs
+
+# Filesystem
 .DS_Store
+
+# IDES
+.nbproject
+.idea

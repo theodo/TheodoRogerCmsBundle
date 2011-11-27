@@ -8,10 +8,15 @@
         </testsuite>
     </testsuites>
 
+    <php>
+        <server name="KERNEL_DIR" value="Fixtures/Symfony/app" />
+    </php>
+
     <filter>
         <whitelist>
             <directory>./</directory>
             <exclude>
+                <directory>./DataFixtures</directory>
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
             </exclude>
