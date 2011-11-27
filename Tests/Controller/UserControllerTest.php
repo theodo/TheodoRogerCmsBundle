@@ -40,11 +40,12 @@ class UserControllerTest extends WebTestCase
 
         // Submit the form with valid credentials
         $crawler = $client->submit(
-                        $form, array(
-                    '_username' => $username,
-                    '_password' => $password,
-                    '_remember_me' => true
-                        )
+            $form,
+            array(
+                '_username' => $username,
+                '_password' => $password,
+                '_remember_me' => true
+            )
         );
 
         // Response should be success
@@ -208,15 +209,15 @@ class UserControllerTest extends WebTestCase
 
         // Submit valid form
         $crawler = $client->submit($form, array(
-            'user[name]' => 'User de test',
-            'user[username]' => 'userdetest',
-            'user[email]' => 'userdetest@theodo.fr',
-            'user[password][first]' => 'testpwd',
+            'user[name]'             => 'User de test',
+            'user[username]'         => 'userdetest',
+            'user[email]'            => 'userdetest@theodo.fr',
+            'user[password][first]'  => 'testpwd',
             'user[password][second]' => 'testpwd',
-            'user[user_roles][1]' => true,
-            'user[user_roles][2]' => true,
-            'user[user_roles][3]' => true,
-            'user[language]' => UserRepository::LANGUAGE_EN,
+            'user[user_roles][1]'    => true,
+            'user[user_roles][2]'    => true,
+            'user[user_roles][3]'    => true,
+            'user[language]'         => UserRepository::LANGUAGE_EN,
         ));
 
         // Test return
