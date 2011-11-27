@@ -323,7 +323,7 @@ class Page
     public function getFullSlug()
     {
         $parent = $this->getParent();
-        if ($parent && !$parent->isHomepage()) {
+        if ($parent && !$this->isHomepage()) {
             return $parent->getFullSlug().'/'.$this->getSlug();
         }
         else {
@@ -473,7 +473,7 @@ class Page
     /**
      * Get lifetime
      *
-     * @return integer 
+     * @return integer
      */
     public function getLifetime()
     {
@@ -499,7 +499,7 @@ class Page
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
@@ -519,9 +519,9 @@ class Page
 
         return $subtypes[$this->content_type];
     }
-    
+
     /**
-     * @author fabriceb
+     * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2011-08-19
      */
     public function isHomepage()
@@ -539,7 +539,6 @@ class Page
      */
     private $keywords;
 
-
     /**
      * Set title
      *
@@ -553,7 +552,7 @@ class Page
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -573,7 +572,7 @@ class Page
     /**
      * Get keywords
      *
-     * @return text 
+     * @return text
      */
     public function getKeywords()
     {

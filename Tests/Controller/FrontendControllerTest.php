@@ -1,29 +1,28 @@
 <?php
+/*
+ * This file is part of the Roger CMS Bundle
+ *
+ * (c) Theodo <contact@theodo.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+/**
+ * Frontend Controller test class.
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Benjamin Grandfond <benjaming@theodo.fr>
+ */
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__ . '/../../../../../app/AppKernel.php';
+require_once __DIR__.'/../Test.php';
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
 use Theodo\RogerCmsBundle\Repository\LayoutRepository;
 
 class FrontendControllerTest extends WebTestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    private $em;
-
-    public function setUp()
-    {
-        // Load and boot kernel
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
-
-        // Load "test" entity manager
-        $this->em = $kernel->getContainer()->get('doctrine')->getEntityManager('test');
-    }
-
     /**
      * Test layout list
      *
@@ -32,8 +31,6 @@ class FrontendControllerTest extends WebTestCase
      */
     public function testPage()
     {
-        print_r("\n> FrontendController - Test page action");
-
         $client = $this->createClient();
         $crawler = $client->request('GET', '/homepage');
 
