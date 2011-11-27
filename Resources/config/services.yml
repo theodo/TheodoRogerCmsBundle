@@ -32,7 +32,7 @@ services:
         arguments: ['@roger.twig.loader', %twig.options%]
     roger.templating:
         class: %templating.engine.twig.class%
-        arguments: ['@roger.twig', '@templating.name_parser', '@file_locator', '@templating.globals']
+        arguments: ['@roger.twig', '@templating.name_parser', '@templating.globals']
     roger.caching:
         class: %roger.caching.class%
         arguments: ['@roger.twig']
