@@ -73,8 +73,7 @@ class RogerUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidat
 
         // strange bug when using the Translatable extension: Entity gets refreshed and never updated. To avoid this we created our own validator. But it works only with id as primary key.
         $qb = $repository->createQueryBuilder('e');
-        if ($entity->getId())
-        {
+        if ($entity->getId()) {
           $qb = $qb->andWhere($qb->expr()->neq('e.id', $entity->getId()));
         }
 
