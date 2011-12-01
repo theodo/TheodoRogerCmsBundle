@@ -110,20 +110,17 @@ class PageController extends Controller
 
         // Request is post
         if ($request->getMethod() == 'POST') {
-            //$this->get('roger.content_repository')->getEntityManager()->clear();
-            //var_dump($form->getData()->getTitle());die;
+            $old_name = $page->getName();
             $this->bindEditForm($form, $request);
 
             // Check form and save object
             if ($form->isValid())
             {
-                                // remove twig cached file
-                $this->get('roger.caching')->invalidate('page:'.$page->getName());
+                // remove twig cached file
+                $this->get('roger.caching')->invalidate('page:'.$old_name);
 
                 $page = $form->getData();
-
                 $this->get('roger.content_repository')->save($page);
-
 
                 $this->get('roger.caching')->warmup('page:'.$page->getName());
 

@@ -356,7 +356,6 @@ class Page
         // Title validator: not null
         $metadata->addPropertyConstraint('title', new NotBlank());
 
-
         // Slug validator: not null and unique
         $metadata->addPropertyConstraint('slug', new NotBlank());
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('slug'))));

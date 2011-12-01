@@ -70,13 +70,22 @@ class RogerUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidat
         }
 
         $repository = $em->getRepository($className);
-        $result = $repository->findBy($criteria);
 
-        /* If no entity matched the query criteria or a single entity matched,
-         * which is the same as the entity being validated, the criteria is
-         * unique.
-         */
-        if (0 == count($result) || (1 == count($result) && $entity === $result[0])) {
+        // strange bug when using the Translatable extension: Entity gets refreshed and never updated. To avoid this we created our own validator. But it works only with id as primary key.
+        $qb = $repository->createQueryBuilder('e');
+        if ($entity->getId())
+        {
+          $qb = $qb->andWhere($qb->expr()->neq('e.id', $entity->getId()));
+        }
+
+        foreach ($criteria as $column => $value) {
+            $qb = $qb->andWhere($qb->expr()->eq('e.'.$column, ':'.$column));
+            $qb->setParameter($column, $value);
+        }
+
+        $result = $qb->getQuery()->getArrayResult();
+
+        if (0 == count($result)) {
             return true;
         }
 
