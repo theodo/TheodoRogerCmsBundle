@@ -1,9 +1,13 @@
 # Admin routing
+login_auto_lang:
+    pattern:  /admin
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:login }
+
 login:
     pattern:  /admin/{_locale}
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:login }
     requirements:
-        _locale: en|fr|de
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 login_check:
     pattern:   /admin/int/login
@@ -15,129 +19,186 @@ user_accessDenied:
     pattern: /admin/{_locale}/access-denied
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:accessDenied, _locale: fr }
     requirements:
-        _locale: en|fr|de
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 # User routing
 user_list:
     pattern:  /admin/{_locale}/users
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:list, tab: settings, nav: users }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_edit:
     pattern:  /admin/{_locale}/users/{id}/edit
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, self: false, tab: settings, nav: users }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_new:
     pattern:  /admin/{_locale}/users/new
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: false, tab: settings, nav: users }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_remove:
     pattern:  /admin/{_locale}/users/{id}/remove
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:remove, tab: settings, nav: users }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_preferences:
     pattern:  /admin/{_locale}/preferences/edit
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: true, tab: settings, nav: personal }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_preferencesUpdate:
     pattern:  /admin/{_locale}/preferences/update
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: true, tab: settings, nav: personal }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_update:
     pattern:  /admin/{_locale}/users/{id}/update
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, self: false, tab: settings, nav: personal }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 user_checkSessionLocale:
     pattern:  /admin/{_locale}/check-session/{redirect_route}
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:checkSessionLocale }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 # Page routing
 page_list:
     pattern:  /admin/{_locale}/pages
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:index, tab: content, nav: pages, _locale: fr }
     requirements:
-        _locale: en|fr|de|nl
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
+
 page_new:
     pattern:  /admin/{_locale}/pages/{parent_id}/new
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, id: null, tab: content, nav: pages }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 page_edit:
     pattern:  /admin/{_locale}/pages/{id}/edit
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, tab: content, nav: pages }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 page_update:
     pattern:  /admin/{_locale}/pages/{id}/update
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, tab: content, nav: pages }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 page_remove:
     pattern:  /admin/{_locale}/pages/{id}/remove
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:remove, tab: content, nav: pages }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 page_expand:
     pattern:  /admin/{_locale}/pages/{id}/expand/{level}
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:expand, tab: content, nav: pages }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 # Layout routing
 layout_new:
     pattern: /admin/{_locale}/layouts/new
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:edit, id: null, tab: design, nav: layouts }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 layout_update:
     pattern: /admin/{_locale}/layouts/{id}
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:edit, tab: design, nav: layouts }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 layout_edit:
     pattern: /admin/{_locale}/layouts/{id}/edit
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:edit, tab: design, nav: layouts }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 layout_list:
     pattern: /admin/{_locale}/layouts
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:index, tab: design, nav: layouts }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 layout_remove:
     pattern: /admin/{_locale}/layouts/{id}/remove
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:remove, tab: design, nav: layouts }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 # Snippet routing
 snippet_new:
     pattern: /admin/{_locale}/snippets/new
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:edit, id: null, tab: design, nav: snippets }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 snippet_update:
     pattern: /admin/{_locale}/snippets/{id}
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:edit, tab: design, nav: snippets }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 snippet_edit:
     pattern: /admin/{_locale}/snippets/{id}/edit
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:edit, tab: design, nav: snippets }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 snippet_list:
     pattern: /admin/{_locale}/snippets
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:index, tab: design, nav: snippets }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 snippet_remove:
     pattern: /admin/{_locale}/snippets/{id}/remove
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:remove, tab: design, nav: snippets }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 # Media routing
 media_new:
     pattern: /admin/{_locale}/medias/new
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:edit, id: null, tab: content, nav: medias }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 media_update:
     pattern: /admin/{_locale}/medias/{id}
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:edit, tab: content, nav: medias }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 media_edit:
     pattern: /admin/{_locale}/medias/{id}/edit
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:edit, tab: content, nav: medias }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 media_list:
     pattern: /admin/{_locale}/medias
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:index, tab: content, nav: medias }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 media_remove:
     pattern: /admin/{_locale}/medias/{id}/remove
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:remove, tab: content, nav: medias }
+    requirements:
+        _locale: ^[a-z]{2}((\-|\_)[A-Z]{2})?$
 
 # ESI routing
 _internal:
