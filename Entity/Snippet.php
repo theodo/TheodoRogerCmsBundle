@@ -31,6 +31,11 @@ class Snippet
      */
     private $content;
 
+    /**
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
     /**
      * Set id
@@ -116,7 +121,7 @@ class Snippet
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -136,7 +141,7 @@ class Snippet
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -171,7 +176,7 @@ class Snippet
     /**
      * Get cacheable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCacheable()
     {
@@ -191,7 +196,7 @@ class Snippet
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
@@ -211,7 +216,7 @@ class Snippet
     /**
      * Get lifetime
      *
-     * @return integer 
+     * @return integer
      */
     public function getLifetime()
     {
@@ -221,7 +226,7 @@ class Snippet
         /**
      * Snippet validator
      *
-     * 
+     *
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
@@ -235,5 +240,10 @@ class Snippet
 
         //$metadata->addPropertyConstraint('lifetime', new Type(array('type' => 'Numeric')));
         //$metadata->addPropertyConstraint('lifetime', new Min(array('limit' => 0)));
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
