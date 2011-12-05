@@ -186,7 +186,7 @@ class PageController extends Controller
             array(
                 'page' => $page,
                 'roger_admin_layout' => $this->container->getParameter('roger.admin.layout'),
-                'roger_admin_remove_page' => $this->container->getParameter('roger.admin.remove_page'),
+                'roger_admin_page_remove' => $this->container->getParameter('roger.admin.page.remove'),
             )
         );
     }
@@ -214,7 +214,7 @@ class PageController extends Controller
                 'pages' => $pages,
                 'level' => $request->get('level'),
                 'roger_admin_layout' => $this->container->getParameter('roger.admin.layout'),
-                'roger_admin_expand_page' => $this->container->getParameter('roger.admin.expand_page'),
+                'roger_admin_expand_page' => $this->container->getParameter('roger.admin.page.expand'),
             )
         );
     }
@@ -242,7 +242,7 @@ class PageController extends Controller
                 'page'  => $page,
                 'level' => 0,
                 'roger_admin_layout' => $this->container->getParameter('roger.admin.layout'),
-                'roger_admin_site_map' => $this->container->getParameter('roger.admin.site_map'),
+                'roger_admin_site_map' => $this->container->getParameter('roger.admin.page.site_map'),
             )
         );
     }

@@ -43,13 +43,13 @@ class TwigLoaderRepository implements Twig_LoaderInterface
      * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2001-06-22
      */
-    public function __construct(ContentRepositoryInterface $content_repository, Twig_LoaderInterface $fallback_loader = null, $fallback_path = null)
+    public function __construct(ContentRepositoryInterface $content_repository, Twig_LoaderInterface $fallback_loader = null, $fallback_path = null, $kernel = null)
     {
         $this->content_repository = $content_repository;
         $this->fallback_loader = $fallback_loader;
         if ($this->fallback_loader instanceof Twig_Loader_Filesystem && $fallback_path != null)
         {
-          $path_prefix = __DIR__.'/../../../../../../';
+          $path_prefix = $kernel->getRootDir().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR;
 
           if (!file_exists($path_prefix.$fallback_path))
           {

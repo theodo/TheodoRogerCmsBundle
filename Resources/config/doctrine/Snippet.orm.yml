@@ -1,6 +1,9 @@
 Theodo\RogerCmsBundle\Entity\Snippet:
     type: entity
     table: snippet
+    gedmo:
+        translation:
+            locale: locale
     id:
         id:
             type: integer
@@ -12,6 +15,8 @@ Theodo\RogerCmsBundle\Entity\Snippet:
             unique: true
         content:
             type: text
+            gedmo:
+                - translatable
         cacheable:
             type: boolean
         public:

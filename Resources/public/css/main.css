@@ -235,6 +235,17 @@ body.single_form #content #single_form
   text-decoration: none;
 }
 
+#site_links > form
+{
+  display: inline-block;
+  font-size: inherit;
+}
+
+#site_links form *
+{
+  font-size: inherit;
+}
+
 #view_site
 {
   font-size: 90%;
@@ -242,7 +253,7 @@ body.single_form #content #single_form
   display: block;
   position: absolute;
   right: 12px;
-  top: 14px;
+  top: 19px;
   height: 17px;
   width: 64px;
   line-height: 17px;

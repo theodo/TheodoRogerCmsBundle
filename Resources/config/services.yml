@@ -18,7 +18,7 @@ parameters:
     validator.twig_syntax.class: Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator
 
     roger.admin.layout: 'TheodoRogerCmsBundle::base_layout.html.twig'
-    
+
     # Timestampable listener class
     gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener
 
@@ -36,7 +36,7 @@ services:
 
     roger.twig.loader:
         class: %roger.twig.loader.class%
-        arguments: ['@roger.content_repository', '@twig.loader', %roger.twig.loader.fallback_path%]
+        arguments: ['@roger.content_repository', '@twig.loader', %roger.twig.loader.fallback_path%, '@kernel']
 
     roger.twig:
         class: %twig.class%
