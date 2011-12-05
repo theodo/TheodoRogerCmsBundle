@@ -15,6 +15,10 @@ login_check:
 logout:
     pattern:   /admin/int/logout
 
+language_switch:
+    pattern: /admin/language
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Language:switch }
+
 user_accessDenied:
     pattern: /admin/{_locale}/access-denied
     defaults: { _controller: TheodoRogerCmsBundle:Backend\User:accessDenied, _locale: fr }
