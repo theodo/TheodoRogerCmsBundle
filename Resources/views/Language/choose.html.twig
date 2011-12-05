@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('language_switch') }}">
+  {{ form_widget(form.language) }}
+  <button>{% trans %}Change{% endtrans %}</button>
+</form>
