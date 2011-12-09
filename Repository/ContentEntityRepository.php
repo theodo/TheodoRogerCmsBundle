@@ -215,4 +215,30 @@ class ContentEntityRepository implements ContentRepositoryInterface
                 ->getRepository('TheodoRogerCmsBundle:' . ucfirst($type));
     }
 
+    /**
+     * Checks if layout of given name exists
+     * Used by advanced mode, when template is specified manually
+     *
+     * @author Marek Kalnik <marekk@theodo.fr>
+     * @since  2011-11-08
+     * @param  String $name
+     * @return Boolean If the layout of given name exists in database
+     */
+    public function layoutExists($name)
+    {
+        if ($name == '') {
+
+            return false;
+        }
+
+        $layout_exists = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('count(l.id)')
+            ->from('Theodo\RogerCmsBundle\Entity\Layout', 'l')
+            ->where('l.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()->getSingleScalarResult();
+
+        return (bool) $layout_exists;
+    }
 }
