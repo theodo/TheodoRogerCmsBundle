@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Theodo\RogerCmsBundle\Form\PageType;
 use Theodo\RogerCmsBundle\Entity\Page;
+use Theodo\RogerCmsBundle\Entity\Layout;
 
 class PageController extends Controller
 {
@@ -57,10 +58,11 @@ class PageController extends Controller
      */
     public function editAction($id = null, $parent_id = null)
     {
+        $contentRepository = $this->get('roger.content_repository');
         // new page
         if (!$id) {
             $page = new Page();
-            $parent_page = $this->get('roger.content_repository')->findOneById($parent_id);
+            $parent_page = $contentRepository->findOneById($parent_id);
             // Create the homepage
             if ($parent_page) {
                 $page->setParentId($parent_page->getId());
@@ -72,20 +74,30 @@ class PageController extends Controller
         }
         // update page
         else {
-            $page = $this->get('roger.content_repository')->findOneById($id);
+            $page = $contentRepository->findOneById($id);
             $parent_page = $page->getParent();
         }
 
         // Get all layouts
-        $layouts = $this->get('roger.content_repository')->findAll('layout');
+        $layouts = $contentRepository->findAll('layout');
         $page_content = $page->getContent();
 
         // Get the current layout from the Twig content
-        if (preg_match('#{% extends [\',\"]layout:(?P<layout_name>(.*))[\',\"] %}#sU', $page_content, $matches))
+        if (preg_match('#{% extends [\',\"](?P<layout_name>(.*))[\',\"] %}#sU', $page_content, $matches))
         {
             $layout_name = $matches['layout_name'];
+            $layout_name = str_replace('layout:', '', $layout_name);
         } else {
             $layout_name = null;
+        }
+
+        // if layout was added manually in expert mode,
+        // then add it to the layouts dropdown of the beginner mode,
+        // to prevent it from being erased
+        if ($layout_name && !$contentRepository->layoutExists($layout_name)) {
+            $fakeLayout = new Layout();
+            $fakeLayout->setName($layout_name);
+            $layouts[] = $fakeLayout;
         }
 
         // Separate the different blocks from Twig
@@ -277,8 +289,14 @@ class PageController extends Controller
         // Gestion du layout
         $layout_name = $request->get('page_layout', '');
 
+        $layout_exists = $this->get('thoth.content_repository')->layoutExists($layout_name);
+
         // Gestion de la suppresion du layout
-        $layout_replace = ('' != $layout_name) ? "{% extends 'layout:".$layout_name."' %}" : "";
+        if ($layout_exists || $layout_name == '') {
+            $layout_replace = ('' != $layout_name) ? "{% extends 'layout:".$layout_name."' %}" : "";
+        } else {
+            $layout_replace = "{% extends '".$layout_name."' %}";
+        }
 
         // Maj du layout dans la page
         if (is_int(strpos($page_content, "{% extends 'layout"))) {
