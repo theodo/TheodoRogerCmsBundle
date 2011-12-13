@@ -263,15 +263,17 @@ var tooglePage = function (node)
 
   // Display new page
   jQuery('div#'+page_id).removeClass('hide');
-  editAreaLoader.init({
-                    id: jQuery('div#' + page_id + ' textarea').attr('id')	// id of the textarea to transform
-                    ,start_highlight: true	// if start with highlight
-                    ,allow_resize: "both"
-                    ,allow_toggle: true
-                    ,word_wrap: true
-                    ,language: "en"
-                    ,syntax: "twig"
-            });
+  if (typeof(editAreaLoader) !== 'undefined') {
+      editAreaLoader.init({
+          id: jQuery('div#' + page_id + ' textarea').attr('id'),	// id of the textarea to transform
+          start_highlight: true,	// if start with highlight
+          allow_resize: "both",
+          allow_toggle: true,
+          word_wrap: true,
+          language: "en",
+          syntax: "twig"
+      });
+  }
 }
 
 /**
@@ -372,9 +374,12 @@ var loadSupTabListener = function ()
                 if (node.hasClass('here'))
                 {
                    // highlight new tab
-                   highlightPageBlock(jQuery('.tab:first'));
+                   if (jQuery('.tab').length > 0) {
+                       highlightPageBlock(jQuery('.tab:first'));
+                   }
                 }
             }
+
             $('#popin-delete').jqmHide();
         });
 
