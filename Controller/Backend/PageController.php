@@ -108,7 +108,7 @@ class PageController extends Controller
         {
             $tabs = array_combine($matches['block_name'], $matches['block_content']);
         } else {
-            $tabs = array();
+            $tabs = array('Body' => '');
         }
 
         // Create form

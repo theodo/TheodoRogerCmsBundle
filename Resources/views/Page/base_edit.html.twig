@@ -132,28 +132,18 @@
                         <img alt="{% trans %}Add Part{% endtrans %}" src="{{ asset('bundles/theodorogercms/images/admin/add_tab.png') }}" />
                     </a>
                 </div>
-                {% if layout_name is null %}
-                    <a id="tab_body" href="#" class="tab here">
-                        <span>{% trans %}Body{% endtrans %}</span>
-                        <img src="{{ asset('bundles/theodorogercms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
+                {% for tab_name in tabs|keys %}
+                    <a id="tab_{{ tab_name }}" href="#" class="tab {{ loop.first ? 'here' : '' }} ">
+                      <span> {{ tab_name }} </span>
+                      <img src="{{ asset('bundles/theodorogercms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
                     </a>
-                {% else %}
-                    {% set increment = 0 %}
-                    {% for tab_name in tabs|keys %}
-                        {% set increment = increment + 1 %}
-                        <a id="tab_{{ tab_name }}" href="#" class="tab {{ increment < 2 ? 'here' : '' }} ">
-                          <span> {{ tab_name }} </span>
-                          <img src="{{ asset('bundles/theodorogercms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
-                        </a>
-                    {% endfor%}
-                {%endif%}
+                {% endfor%}
             </div>
             <div class="pages" id="pages">
-                {% if layout_name is null %}
-                    <div class="page" id="page_body">
-                        <div class="part" id="part_body">
+                {% for tab_name, tab_content in tabs %}
+                    <div class="page {{ loop.first ? '' : 'hide' }}" id="page_{{ tab_name }}">
+                        <div class="part" id="part_{{ tab_name }}">
                             <p>
-                                {# {{ form_label(form.content) }} #}
                                 {{ form_errors(form.content) }}
 
                                 <span class="reference_links">
@@ -161,30 +151,11 @@
                                 </span>
                             </p>
                             <div>
-                                {{ form_widget(form.content) }}
+                                <textarea id="page_content_{{ tab_name }}" class="textarea large" name="page_block[{{ tab_name }}]" style="width: 100%;">{{ tab_content }}</textarea>
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    {% set increment = 0 %}
-                    {% for tab_name, tab_content in tabs %}
-                        {% set increment = increment + 1 %}
-                        <div class="page {{ increment > 1 ? 'hide' : '' }}" id="page_{{ tab_name }}">
-                            <div class="part" id="part_{{ tab_name }}">
-                                <p>
-                                    {{ form_errors(form.content) }}
-
-                                    <span class="reference_links">
-                                        <a href="http://www.twig-project.org/documentation" target="_blank">{% trans %}Twig documentation{% endtrans %}</a>
-                                    </span>
-                                </p>
-                                <div>
-                                    <textarea id="page_content_{{ tab_name }}" class="textarea large" name="page_block[{{ tab_name }}]" style="width: 100%;">{{ tab_content }}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor%}
-                 {%endif%}
+                {% endfor%}
             </div>
         </div>
         <div class="set">
