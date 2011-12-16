@@ -70,7 +70,25 @@ class RogerUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidat
         }
 
         $repository = $em->getRepository($className);
-        if ($this->isUniqueKeyAvailable($repository, $class, $entity, $criteria)) {
+
+        // strange bug when using the Translatable extension: Entity gets refreshed and never updated. To avoid this we created our own validator. But it works only with id as primary key.
+        $qb = $repository->createQueryBuilder('e');
+        if ($entity->getId()) {
+            $orx = $qb->expr()->orx();
+            foreach($class->identifier as $identifier) {
+                $orx->add($qb->expr()->neq('e.'.$identifier, $class->reflFields[$identifier]->getValue($entity)));
+            }
+            $qb = $qb->andWhere($orx);
+        }
+        foreach ($criteria as $column => $value) {
+            $qb = $qb->andWhere($qb->expr()->eq('e.'.$column, ':'.$column));
+            $qb->setParameter($column, $value);
+        }
+        $qb->setMaxResults(1);
+
+        $result = $qb->getQuery()->getArrayResult();
+
+        if (0 == count($result)) {
             return true;
         }
 
@@ -80,41 +98,5 @@ class RogerUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidat
         $this->context->setPropertyPath($oldPath);
 
         return true; // all true, we added the violation already!
-    }
-
-    /**
-     *
-     * @param EntityRepository $repository
-     * @param Doctrine\ORM\Mapping\ClassMetadata $class
-     * @param object $entity
-     * @param array $criteria
-     * @return bool
-     */
-    protected function isUniqueKeyAvailable($repository, $class, $entity, $criteria)
-    {
-        // We build a query to fetch possible results with same unique columns but different identifier
-        $qb = $repository->createQueryBuilder('e');
-
-        $orx = $qb->expr()->orx();
-        foreach($class->identifier as $identifier) {
-            $orx->add($qb->expr()->neq('e.'.$identifier, ':'.$identifier));
-            $qb->setParameter($identifier, $class->reflFields[$identifier]->getValue($entity));
-        }
-        $qb = $qb->andWhere($orx);
-
-        foreach ($criteria as $column => $value) {
-            $qb = $qb->andWhere($qb->expr()->eq('e.'.$column, ':'.$column));
-            $qb->setParameter($column, $value);
-        }
-        $qb->setMaxResults(1);
-
-        $result = $qb->getQuery()->getArrayResult();
-
-        // if we get no such result, then the unique constraint is validated
-        if (0 == count($result)) {
-            return true;
-        }
-
-        return false;
     }
 }
