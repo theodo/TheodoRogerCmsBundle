@@ -27,8 +27,12 @@ class Media
     /**
      * @var string $file
      */
-    public $file;
+    protected $file;
 
+    /**
+     * @param String $oldPath
+     */
+    protected $oldPath;
 
     /**
      * Set Id
@@ -187,6 +191,14 @@ class Media
         $this->file->move(self::getUploadRootDir(), $this->path);
 
         unset($this->file);
+
+        // If the object has been updated, we remove the old file
+        if ($this->oldPath) {
+            $path = self::getUploadRootDir().'/'.$this->oldPath;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
     }
 
     /**
@@ -209,5 +221,21 @@ class Media
     public static function getUploadRootDir()
     {
       return 'uploads';
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+        /**
+         * Change Doctrine mapped parameter to force livecycleEvents
+         */
+        $this->oldPath = $this->getPath();
+        $this->setPath(null);
+    }
+
+    public function getFile()
+    {
+
+        return $this->file;
     }
 }
