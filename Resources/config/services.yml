@@ -37,6 +37,8 @@ services:
     roger.twig.loader:
         class: %roger.twig.loader.class%
         arguments: ['@roger.content_repository', '@twig.loader', %roger.twig.loader.fallback_path%, '@kernel']
+        calls:
+            - [setSession, ['@session']]
 
     roger.twig:
         class: %twig.class%

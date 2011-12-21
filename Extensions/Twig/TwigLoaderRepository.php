@@ -15,6 +15,7 @@ use Twig_LoaderInterface;
 use Twig_Error_Loader;
 use Twig_Loader_Filesystem;
 use Theodo\RogerCmsBundle\Repository\ContentRepositoryInterface;
+use Symfony\Component\HttpFoundation\Session;
 
 /**
  * Loads a template from a repository.
@@ -35,6 +36,16 @@ class TwigLoaderRepository implements Twig_LoaderInterface
      * @var Twig_LoaderInterface
      */
     protected $fallback_loader = null;
+
+    /**
+     * @var Symfony\Component\HttpFoundation\Session
+     */
+    protected $session;
+
+    /**
+     * @var String $locale
+     */
+    protected $locale;
 
     /**
      *
@@ -58,6 +69,35 @@ class TwigLoaderRepository implements Twig_LoaderInterface
 
           $this->fallback_loader->addPath($path_prefix.$fallback_path);
         }
+    }
+
+    /**
+     * Inject session to allow internationalized cache
+     *
+     * @author Marek Kalnik <marekk@theodo.fr>
+     * @param  Session $session
+     * @since  2011-12-21
+     */
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
+    }
+
+    /**
+     * Returns current locale
+     *
+     * @author Marek Kalnik <marekk@theodo.fr>
+     * @param  Session $session
+     * @since  2011-12-21
+     */
+    protected function getLocale()
+    {
+        // setLocale on first call to aviod setting it if session is not yet initialized
+        if ($this->locale == null) {
+            $this->locale = $this->session->getLocale();
+        }
+
+        return $this->locale;
     }
 
     /**
@@ -145,7 +185,8 @@ class TwigLoaderRepository implements Twig_LoaderInterface
         if (self::parseName($name) === false) {
             return $this->fallback_loader->getCacheKey($name);
         }
-        return $name;
+
+        return $name.$this->getLocale();
     }
 
     /**
