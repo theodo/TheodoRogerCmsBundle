@@ -238,4 +238,11 @@ class Media
 
         return $this->file;
     }
+
+    public function getExtension()
+    {
+        $path = $this->getPath();
+
+        return $path ? substr($path, -3, 3) : null;
+    }
 }
