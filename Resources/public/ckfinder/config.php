@@ -79,9 +79,8 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseDir = __DIR__.'/../../../../../../web/uploads/';//resolveUrl($baseUrl);
+$baseDir = __DIR__.'/../../../../../../../web/uploads/';//resolveUrl($baseUrl);
 
-//var_dump($baseDir); die();
 /*
  * ### Advanced Settings
  */
