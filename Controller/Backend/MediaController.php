@@ -63,7 +63,7 @@ class MediaController extends Controller
                 // save media
                 $media = $form->getData();
                 // TODO find way to force update without modifying the media
-                if (null !== $media->file)
+                if (null !== $media->getFile())
                 {
                     $media->setPath(null);
                 }
