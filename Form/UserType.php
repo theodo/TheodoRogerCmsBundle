@@ -27,13 +27,15 @@ class UserType extends UserPreferencesType
         if (null === $options['data']->getPassword()) {
             $builder->add('password', 'repeated', array('type' => 'password', 'required' => true));
         }
-        $builder->add('user_roles', 'entity', array(
-            'class'    => 'Theodo\\RogerCmsBundle\\Entity\\Role',
-            'expanded' => true,
-            'multiple' => true,
-            'required' => true,
-            'em' => $options['em'],
-        ));
+        if ($options['is_admin']) {
+          $builder->add('user_roles', 'entity', array(
+              'class'    => 'Theodo\\RogerCmsBundle\\Entity\\Role',
+              'expanded' => true,
+              'multiple' => true,
+              'required' => true,
+              'em' => $options['em'],
+          ));
+        }
     }
 
     /**
@@ -47,6 +49,7 @@ class UserType extends UserPreferencesType
         return array(
            'data_class' => 'Theodo\RogerCmsBundle\Entity\User',
            'em' => null,
+            'is_admin' => false
         );
     }
 

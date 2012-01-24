@@ -296,6 +296,7 @@ class UserController extends Controller
         // Create form
         $form = $this->createForm(new UserType(false), $user, array(
             'em' => $this->container->getParameter('roger.entity_manager.name'),
+            'is_admin' => $this->get('security.context')->isGranted('ROLE_ADMIN')
         ));
 
         // Retrieve request
