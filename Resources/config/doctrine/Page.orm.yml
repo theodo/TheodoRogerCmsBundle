@@ -16,6 +16,8 @@ Theodo\RogerCmsBundle\Entity\Page:
         content:
             type: text
             nullable: true
+            gedmo:
+                - translatable
         slug:
             type: string
             length: 255
