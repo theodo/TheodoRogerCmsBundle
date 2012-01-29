@@ -121,7 +121,7 @@ class UserController extends Controller
      */
     public function listAction()
     {
-        // Retrieve usersvar_dump('print');die;
+        // Retrieve users
         $users = $this->getUserRepository()->findAll('user');
 
         return $this->render('TheodoRogerCmsBundle:User:list.html.twig', array(

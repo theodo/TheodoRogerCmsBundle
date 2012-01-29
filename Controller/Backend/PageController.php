@@ -151,7 +151,6 @@ class PageController extends Controller
             }
         }
 
-        //var_dump($request->attributes->all());die;
         return $this->render(
             'TheodoRogerCmsBundle:Page:edit.html.twig',
             array(
