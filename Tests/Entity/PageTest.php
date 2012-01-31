@@ -113,6 +113,4 @@ class PageTest extends TestCase
         // Retrieve "home" page
         $page = $em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => 'homepage'));
     }
-
-
 }

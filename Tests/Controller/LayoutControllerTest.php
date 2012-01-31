@@ -23,49 +23,6 @@ use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
 class LayoutControllerTest extends WebTestCase
 {
     /**
-     * User connection
-     *
-     * @return Crawler
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
-    protected function login($client, $username = 'admin', $password = 'admin')
-    {
-        // Retrieve crawler
-        $crawler = $client->request('GET', '/admin');
-
-        // Select the login form
-        $form = $crawler->filterXPath('//input[@name="login"]')->form();
-
-        // Submit the form with valid credentials
-        $crawler = $client->submit(
-            $form,
-            array(
-                '_username'    => $username,
-                '_password'    => $password,
-                '_remember_me' => true
-            )
-        );
-
-        // Response should be success
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-        return $crawler;
-    }
-
-    /**
-     * Logout user
-     *
-     * @return Crawler
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
-    protected function logout($client)
-    {
-        return $client->request('GET', '/admin/logout');
-    }
-
-    /**
      * Test layout list
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
@@ -75,10 +32,11 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        // Connect user
-        $crawler = $this->login($client);
 
-        $crawler = $client->request('GET', '/admin/layouts');
+        $crawler = $client->request('GET', '/admin/fr/layouts', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Layouts.*/', $client->getResponse()->getContent());
