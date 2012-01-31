@@ -5,6 +5,7 @@ Fixtures/Symfony/app/logs/*
 Fixtures/Symfony/vendor/*
 Fixtures/Symfony/web/bundles/*
 Fixtures/Symfony/app/bootstrap_cache.php.cache
+Fixtures/Symfony/symfttpd
 
 # PHPUnit special files
 phpunit.xml
