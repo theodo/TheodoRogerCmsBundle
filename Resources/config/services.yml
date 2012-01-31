@@ -17,7 +17,34 @@ parameters:
 
     validator.twig_syntax.class: Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator
 
-    roger.admin.layout: 'TheodoRogerCmsBundle::base_layout.html.twig'
+    roger.admin.layout:           'TheodoRogerCmsBundle::base_layout.html.twig'
+    roger.admin.page.index:       'TheodoRogerCmsBundle::Page/base_index.html.twig'
+    roger.admin.page.edit:        'TheodoRogerCmsBundle::Page/base_edit.html.twig'
+    roger.admin.page.remove:      'TheodoRogerCmsBundle::Page/base_remove.html.twig'
+    roger.admin.page.expand:      'TheodoRogerCmsBundle::Page/page-list.html.twig'
+    roger.admin.page.site_map:    'TheodoRogerCmsBundle::Page/page-list.html.twig'
+    roger.admin.layout.index:     'TheodoRogerCmsBundle::Layout/base_index.html.twig'
+    roger.admin.layout.edit:      'TheodoRogerCmsBundle::Layout/base_edit.html.twig'
+    roger.admin.layout.remove:    'TheodoRogerCmsBundle::Layout/base_remove.html.twig'
+    roger.admin.media.index:      'TheodoRogerCmsBundle::Media/base_index.html.twig'
+    roger.admin.media.edit:       'TheodoRogerCmsBundle::Media/base_edit.html.twig'
+    roger.admin.media.remove:     'TheodoRogerCmsBundle::Media/base_remove.html.twig'
+    roger.admin.snippet.index:    'TheodoRogerCmsBundle::Snippet/base_index.html.twig'
+    roger.admin.snippet.edit:     'TheodoRogerCmsBundle::Snippet/base_edit.html.twig'
+    roger.admin.snippet.remove:   'TheodoRogerCmsBundle::Snippet/base_remove.html.twig'
+    roger.admin.user.index:       'TheodoRogerCmsBundle::User/base_index.html.twig'
+    roger.admin.user.edit:        'TheodoRogerCmsBundle::User/base_edit.html.twig'
+    roger.admin.user.remove:      'TheodoRogerCmsBundle::User/base_remove.html.twig'
+    roger.admin.user.preferences: 'TheodoRogerCmsBundle::User/base_preferences.html.twig'
+    roger.admin.languages:
+        - fr_FR
+        - en_GB
+        - de_DE
+        - fr_BE
+        - nl_BE
+        - nl_NL
+        - it_IT
+
 
     # Timestampable listener class
     gedmo.timestampable.listener.class: Gedmo\Timestampable\TimestampableListener
