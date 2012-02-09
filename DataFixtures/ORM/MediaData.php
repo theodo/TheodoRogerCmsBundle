@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 use Theodo\RogerCmsBundle\Entity\Media;
 use Theodo\RogerCmsBundle\Repository\MediaRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class MediaData implements FixtureInterface
 {
@@ -14,7 +15,7 @@ class MediaData implements FixtureInterface
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Create new page (homepage)
         $media1 = new Media();
