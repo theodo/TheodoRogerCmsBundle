@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class UserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -27,7 +28,7 @@ class UserData extends AbstractFixture implements OrderedFixtureInterface, Conta
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
      */
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         $factory = $this->container->get('security.encoder_factory');
         

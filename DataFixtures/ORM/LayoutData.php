@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 use Theodo\RogerCmsBundle\Entity\Layout;
 use Theodo\RogerCmsBundle\Repository\LayoutRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class LayoutData implements FixtureInterface
 {
@@ -14,7 +15,7 @@ class LayoutData implements FixtureInterface
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Create new page (homepage)
         $layout1 = new Layout();
