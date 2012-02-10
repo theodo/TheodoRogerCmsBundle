@@ -5,10 +5,11 @@ namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 use Theodo\RogerCmsBundle\Entity\Snippet;
 use Theodo\RogerCmsBundle\Repository\SnippetRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class SnippetData implements FixtureInterface
 {
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
 
         // Create new page (homepage)
