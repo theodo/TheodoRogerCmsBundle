@@ -83,10 +83,33 @@ Follow StofDoctrineExtensionsBundle's doc to add the configuration for **timesta
 Add the following lines to your `app/config/routing.yml` file:
 
 ``` bash
-RogerCms:
+_internal:
+    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+    prefix:   /_internal
+
+_roger_cms:
     resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
     prefix: /
+
 ```
+
+If you want to have a fine control of urls, you can also do that:
+
+``` bash
+_internal:
+    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+    prefix:   /_internal
+
+_roger_cms_admin:
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing/admin.yml"
+    prefix: /my-admin/cms
+
+_roger_cms_frontend:
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing/frontend.yml"
+    prefix: /cms
+```
+
+
 
 ### Step 6: Database and entities
 
