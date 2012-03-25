@@ -77,7 +77,7 @@ class FrontendController extends Controller
         if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus()) {
             $page = $this->get('roger.content_repository')->getPageBySlug('error404');
             if (!$page) {
-                throw $this->createNotFoundException();
+                throw $this->createNotFoundException(sprintf('There is no page corresponding to slug "%s".', $slug));
             }
             $response->setStatusCode(404);
         }
