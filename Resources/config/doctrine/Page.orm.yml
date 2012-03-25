@@ -1,6 +1,6 @@
 Theodo\RogerCmsBundle\Entity\Page:
     type: entity
-    table: page
+    table: roger_cms_page
     repositoryClass: Theodo\RogerCmsBundle\Repository\PageRepository
     id:
         id:
