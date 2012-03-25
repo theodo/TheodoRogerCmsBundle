@@ -1,6 +1,6 @@
 Theodo\RogerCmsBundle\Entity\Role:
     type: entity
-    table: role
+    table: roger_cms_role
     repositoryClass: Theodo\RogerCmsBundle\Repository\RoleRepository
     id:
         id:

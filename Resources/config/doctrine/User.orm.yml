@@ -1,6 +1,6 @@
 Theodo\RogerCmsBundle\Entity\User:
     type: entity
-    table: user
+    table: roger_cms_user
     repositoryClass: Theodo\RogerCmsBundle\Repository\UserRepository
     id:
         id:

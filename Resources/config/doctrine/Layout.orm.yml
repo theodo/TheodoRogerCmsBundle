@@ -1,6 +1,6 @@
 Theodo\RogerCmsBundle\Entity\Layout:
     type: entity
-    table: layout
+    table: roger_cms_layout
     id:
         id:
             type: integer
