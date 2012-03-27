@@ -1,6 +1,6 @@
 Theodo\RogerCmsBundle\Entity\Media:
     type: entity
-    table: media
+    table: roger_cms_media
     id:
         id:
             type: integer

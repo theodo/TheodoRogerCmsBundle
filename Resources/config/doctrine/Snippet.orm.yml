@@ -1,6 +1,6 @@
 Theodo\RogerCmsBundle\Entity\Snippet:
     type: entity
-    table: snippet
+    table: roger_cms_snippet
     id:
         id:
             type: integer
