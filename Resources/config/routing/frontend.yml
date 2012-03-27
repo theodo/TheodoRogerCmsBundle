@@ -1,0 +1,5 @@
+page:
+    pattern: /{slug}
+    defaults: { _controller: TheodoRogerCmsBundle:Frontend\Frontend:page, slug: 'homepage'}
+    requirements:
+        slug: ".+"

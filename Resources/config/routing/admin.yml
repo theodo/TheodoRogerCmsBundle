@@ -1,0 +1,135 @@
+login:
+    pattern:  /
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:login }
+
+login_check:
+    pattern:   /login
+
+logout:
+    pattern:   /logout
+
+user_accessDenied:
+    pattern: /access-denied
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:accessDenied }
+
+# User routing
+user_list:
+    pattern:  /users
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:list, tab: settings, nav: users }
+
+user_edit:
+    pattern:  /users/{id}/edit
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, self: false, tab: settings, nav: users }
+
+user_new:
+    pattern:  /users/new
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: false, tab: settings, nav: users }
+
+user_remove:
+    pattern:  /users/{id}/remove
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:remove, tab: settings, nav: users }
+
+user_preferences:
+    pattern:  /preferences/edit
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: true, tab: settings, nav: personal }
+
+user_preferencesUpdate:
+    pattern:  /preferences/update
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: true, tab: settings, nav: personal }
+
+user_update:
+    pattern:  /users/{id}/update
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, self: false, tab: settings, nav: personal }
+
+user_checkSessionLocale:
+    pattern:  /check-session/{redirect_route}
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:checkSessionLocale }
+
+# Page routing
+page_list:
+    pattern:  /pages
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:index, tab: content, nav: pages }
+
+page_new:
+    pattern:  /pages/{parent_id}/new
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, id: null, tab: content, nav: pages }
+
+page_edit:
+    pattern:  /pages/{id}/edit
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, tab: content, nav: pages }
+
+page_update:
+    pattern:  /pages/{id}/update
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, tab: content, nav: pages }
+
+page_remove:
+    pattern:  /pages/{id}/remove
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:remove, tab: content, nav: pages }
+
+page_expand:
+    pattern:  /pages/{id}/expand/{level}
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:expand, tab: content, nav: pages }
+
+# Layout routing
+layout_new:
+    pattern: /layouts/new
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:edit, id: null, tab: design, nav: layouts }
+
+layout_update:
+    pattern: /layouts/{id}
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:edit, tab: design, nav: layouts }
+
+layout_edit:
+    pattern: /layouts/{id}/edit
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:edit, tab: design, nav: layouts }
+
+layout_list:
+    pattern: /layouts
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:index, tab: design, nav: layouts }
+
+layout_remove:
+    pattern: /layouts/{id}/remove
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Layout:remove, tab: design, nav: layouts }
+
+# Snippet routing
+snippet_new:
+    pattern: /snippets/new
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:edit, id: null, tab: design, nav: snippets }
+
+snippet_update:
+    pattern: /snippets/{id}
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:edit, tab: design, nav: snippets }
+
+snippet_edit:
+    pattern: /snippets/{id}/edit
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:edit, tab: design, nav: snippets }
+
+snippet_list:
+    pattern: /snippets
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:index, tab: design, nav: snippets }
+
+snippet_remove:
+    pattern: /snippets/{id}/remove
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Snippet:remove, tab: design, nav: snippets }
+
+# Media routing
+media_new:
+    pattern: /medias/new
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:edit, id: null, tab: content, nav: medias }
+
+media_update:
+    pattern: /medias/{id}
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:edit, tab: content, nav: medias }
+
+media_edit:
+    pattern: /medias/{id}/edit
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:edit, tab: content, nav: medias }
+
+media_list:
+    pattern: /medias
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:index, tab: content, nav: medias }
+
+media_remove:
+    pattern: /medias/{id}/remove
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Media:remove, tab: content, nav: medias }
+
