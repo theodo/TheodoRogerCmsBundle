@@ -19,8 +19,8 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Theodo\\TheodoRogerCmsBundle":""
+			"Theodo\\RogerCmsBundle":""
 		}
 	},
-	"target-dir": "Theodo/TheodoRogerCmsBundle"
+	"target-dir": "Theodo/RogerCmsBundle"
 }
