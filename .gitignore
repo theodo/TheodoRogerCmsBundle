@@ -18,6 +18,7 @@ clover.html
 # Cache
 Tests/cache
 Tests/logs
+Tests/autoload.php
 
 # Filesystem
 .DS_Store
