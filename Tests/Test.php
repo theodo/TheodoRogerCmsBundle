@@ -10,20 +10,19 @@
  * with this source code in the file LICENSE.
  */
 
+namespace Theodo\RogerCmsBundle\Tests;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Bundle\FixturesBundle\Common\DataFixtures\Loader as DataFixturesLoader;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+
 /**
  * Test class.
  *
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
-
-namespace Theodo\RogerCmsBundle\Tests;
-
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\DoctrineFixturesBundle\Common\DataFixtures\Loader as DataFixturesLoader;
-use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-
 abstract class Test extends WebTestCase
 {
     /**

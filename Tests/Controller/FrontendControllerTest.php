@@ -8,19 +8,18 @@
  * with this source code in the file LICENSE.
  */
 
+namespace Theodo\RogerCmsBundle\Tests\Controller;
+
+require_once __DIR__.'/../Test.php';
+
+use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
+
 /**
  * Frontend Controller test class.
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
-namespace Theodo\RogerCmsBundle\Tests\Controller;
-
-require_once __DIR__.'/../Test.php';
-
-use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
-use Theodo\RogerCmsBundle\Repository\LayoutRepository;
-
 class FrontendControllerTest extends WebTestCase
 {
     /**

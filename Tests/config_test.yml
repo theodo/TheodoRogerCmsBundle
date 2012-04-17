@@ -1,0 +1,49 @@
+imports:
+    - { resource: security_test.yml }
+
+framework:
+    router:          { resource: "%kernel.root_dir%/../Resources/config/routing.yml" }
+    profiler:        { only_exceptions: false }
+    test:             ~
+    #esi:             ~
+    #translator:      { fallback: %locale% }
+    secret:          d0c2f6bb2c9e532bd95a36fede828c3db0cb04bc
+    charset:         UTF-8
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  en
+    session:
+        auto_start:     true
+        storage_id: session.storage.filesystem
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        host:     localhost
+        port:     ~
+        dbname:   roger
+        user:     root
+        password: ~
+        charset:  UTF8
+        path:     %kernel.cache_dir%/roger.db
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        mappings:
+            TheodoRogerCmsBundle: ~
+            StofDoctrineExtensionsBundle: false # The mapping is only needed when using the Translatable or the Loggable behaviors
+
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true

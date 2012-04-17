@@ -20,7 +20,7 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_DIR" value="Fixtures/Symfony/app" />
+        <server name="KERNEL_DIR" value="Tests" />
     </php>
 
     <filter>
