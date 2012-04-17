@@ -2,6 +2,4 @@ language: php
 php:
   - 5.3
 #  - 5.4 # Something weird append with this version of php
-before_script:
-  - php Fixtures/Symfony/bin/vendors install
 
