@@ -10,9 +10,9 @@
 
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../Test.php';
+require_once __DIR__.'/../WebTestCase.php';
 
-use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
+use Theodo\RogerCmsBundle\Tests\WebTestCase;
 
 /**
  * Frontend Controller test class.

@@ -26,17 +26,6 @@ if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
         'php composer.phar install'.$nl);
 }
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
-
-// intl
-if (!function_exists('intl_get_error_code')) {
-    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
-
-    $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
-}
-
-AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
-
 spl_autoload_register(function($class) {
     if (0 === strpos($class, 'Theodo\\RogerCmsBundle\\')) {
         $path = __DIR__.'/../'.implode('/', array_slice(explode('\\', $class), 2)).'.php';
@@ -47,3 +36,15 @@ spl_autoload_register(function($class) {
         return true;
     }
 });
+
+// intl
+if (!function_exists('intl_get_error_code')) {
+    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
+
+    $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
+}
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+
+

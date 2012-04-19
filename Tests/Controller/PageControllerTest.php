@@ -17,55 +17,13 @@
  */
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../Test.php';
+require_once __DIR__.'/../WebTestCase.php';
 
-use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;
+use Theodo\RogerCmsBundle\Tests\WebTestCase;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 
 class PageControllerTest extends WebTestCase
 {
-    /**
-     * User connection
-     *
-     * @return Crawler
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
-    protected function login($client, $username = 'admin', $password = 'admin')
-    {
-        // Retrieve crawler
-        $crawler = $client->request('GET', '/admin');
-
-        // Select the login form
-        $form = $crawler->filterXPath('//input[@name="login"]')->form();
-
-        // Submit the form with valid credentials
-        $crawler = $client->submit(
-                        $form, array(
-                    '_username' => $username,
-                    '_password' => $password,
-                    '_remember_me' => true
-                        )
-        );
-
-        // Response should be success
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-        return $crawler;
-    }
-
-    /**
-     * Logout user
-     *
-     * @return Crawler
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
-    protected function logout($client)
-    {
-        return $client->request('GET', '/admin/logout');
-    }
-
     /**
      * Test index action
      *
@@ -76,18 +34,16 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        // Connect user
-        $crawler = $this->login($client);
-
-        $crawler = $client->request('GET', '/admin/pages');
+        $crawler = $client->request('GET', '/admin/pages', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Homepage.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*About.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Theodo.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Published.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -99,13 +55,14 @@ class PageControllerTest extends WebTestCase
     public function testNew()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages/1/new');
+
+        $crawler = $client->request('GET', '/admin/pages/1/new', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -117,13 +74,14 @@ class PageControllerTest extends WebTestCase
     public function testEdit()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages/1/edit');
+
+        $crawler = $client->request('GET', '/admin/pages/1/edit', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -135,13 +93,14 @@ class PageControllerTest extends WebTestCase
     public function testUpdate()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages/1/update');
+
+        $crawler = $client->request('GET', '/admin/pages/1/update', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -153,8 +112,11 @@ class PageControllerTest extends WebTestCase
     public function testWorkflow()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/pages');
+
+        $crawler = $client->request('GET', '/admin/pages', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -220,7 +182,5 @@ class PageControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/admin/pages');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 }

@@ -17,55 +17,13 @@
  */
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../Test.php';
+require_once __DIR__.'/../WebTestCase.php';
 
-use Theodo\RogerCmsBundle\Tests\Test as WebTestCase;use Theodo\RogerCmsBundle\Repository\UserRepository;
+use Theodo\RogerCmsBundle\Tests\WebTestCase;
+use Theodo\RogerCmsBundle\Repository\UserRepository;
 
 class UserControllerTest extends WebTestCase
 {
-    /**
-     * User connection
-     *
-     * @return Crawler
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
-    protected function login($client, $username = 'admin', $password = 'admin')
-    {
-        // Retrieve crawler
-        $crawler = $client->request('GET', '/admin');
-
-        // Select the login form
-        $form = $crawler->filterXPath('//input[@name="login"]')->form();
-
-        // Submit the form with valid credentials
-        $crawler = $client->submit(
-            $form,
-            array(
-                '_username' => $username,
-                '_password' => $password,
-                '_remember_me' => true
-            )
-        );
-
-        // Response should be success
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-        return $crawler;
-    }
-
-    /**
-     * Logout user
-     *
-     * @return Crawler
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-24
-     */
-    protected function logout($client)
-    {
-        return $client->request('GET', '/admin/logout');
-    }
-
     /**
      * Test index action
      *
@@ -76,10 +34,10 @@ class UserControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        // Connect user
-        $crawler = $this->login($client);
-
-        $crawler = $client->request('GET', '/admin/users');
+        $crawler = $client->request('GET', '/admin/users', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Theodore De Banville.*/', $client->getResponse()->getContent());
@@ -88,8 +46,6 @@ class UserControllerTest extends WebTestCase
         $this->assertRegexp('/.*Content Manager.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Client.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Visitor.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -101,14 +57,15 @@ class UserControllerTest extends WebTestCase
     public function testNew()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/new');
+
+        $crawler = $client->request('GET', '/admin/users/new', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New User.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Gravatar.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -120,15 +77,16 @@ class UserControllerTest extends WebTestCase
     public function testEdit()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/1/edit');
+
+        $crawler = $client->request('GET', '/admin/users/1/edit', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit User.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Name.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Username.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -140,15 +98,16 @@ class UserControllerTest extends WebTestCase
     public function testUpdate()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/1/update');
+
+        $crawler = $client->request('GET', '/admin/users/1/update', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit User.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Name.*/', $client->getResponse()->getContent());
         $this->assertRegexp('/.*Username.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -160,13 +119,14 @@ class UserControllerTest extends WebTestCase
     public function testRemove()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users/2/remove');
+
+        $crawler = $client->request('GET', '/admin/users/2/remove', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Remove User.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 
     /**
@@ -178,8 +138,11 @@ class UserControllerTest extends WebTestCase
     public function testWorkflow()
     {
         $client = $this->createClient();
-        $crawler = $this->login($client);
-        $crawler = $client->request('GET', '/admin/users');
+
+        $crawler = $client->request('GET', '/admin/users', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'admin'
+        ));
 
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -248,7 +211,5 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('POST', $form->getUri());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Can not remove main admin.*/', $client->getResponse()->getContent());
-
-        $this->logout($client);
     }
 }
