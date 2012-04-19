@@ -34,6 +34,15 @@ class Layout
      */
     private $content_type;
 
+    /**
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
+     * @var datetime $updated_at
+     */
+    private $updated_at;
 
     /**
      * Set Id
@@ -117,11 +126,9 @@ class Layout
 
     /**
      * Layout validator
-     *
-     * 
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {        
+    {
         // Name validator: not null
         $metadata->addPropertyConstraint('name', new NotBlank());
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
@@ -130,16 +137,6 @@ class Layout
         $metadata->addPropertyConstraint('content', new NotBlank());
         $metadata->addPropertyConstraint('content', new TwigSyntax());
     }
-    /**
-     * @var datetime $created_at
-     */
-    private $created_at;
-
-    /**
-     * @var datetime $updated_at
-     */
-    private $updated_at;
-
 
     /**
      * Set created_at
@@ -154,7 +151,7 @@ class Layout
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -174,7 +171,7 @@ class Layout
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
