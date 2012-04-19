@@ -1,5 +1,5 @@
 {
-    "hash": "8851e0b66086ae8f83e9c087983a0cd8",
+    "hash": "7f5e214aca91877f55f783cffbe27dfb",
     "packages": [
         {
             "package": "doctrine/common",
@@ -8,7 +8,7 @@
         {
             "package": "doctrine/data-fixtures",
             "version": "dev-master",
-            "source-reference": "aea0b95a554188892f10d8f09ce3ae8150f28f8b"
+            "source-reference": "6d9f0d32041ad101cb390c36bcad691abb3eff5f"
         },
         {
             "package": "doctrine/dbal",
@@ -31,7 +31,7 @@
         {
             "package": "gedmo/doctrine-extensions",
             "version": "dev-master",
-            "source-reference": "49cee3615341b8c426bac121219539cdac55c344"
+            "source-reference": "ec5f3a680b127ebb3b5ae7caaea978d20a08af50"
         },
         {
             "package": "stof/doctrine-extensions-bundle",
@@ -41,13 +41,13 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "e7470ffebb07d1f09fe80c98670a00236d581563",
+            "source-reference": "4d8461f243e8bd5c45eff02f85181f7b59c06a6a",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "5799a889c03e38a2c6d0b475194ab8c0b8904487",
+            "source-reference": "037f86aa550737abf633e991f3606b9de5a69657",
             "alias": "1.7.9999999.9999999-dev"
         }
     ],
