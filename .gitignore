@@ -14,8 +14,8 @@ clover.html
 *.php~
 
 # Cache
-Tests/cache
-Tests/logs
+Tests/Fixtures/app/cache
+Tests/Fixtures/app/logs
 Tests/autoload.php
 
 # Filesystem

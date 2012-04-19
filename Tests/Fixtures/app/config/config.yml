@@ -1,8 +1,8 @@
 imports:
-    - { resource: security_test.yml }
+    - { resource: security.yml }
 
 framework:
-    router:          { resource: "%kernel.root_dir%/../Resources/config/routing.yml" }
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
     profiler:        { only_exceptions: false }
     test:             ~
     #esi:             ~
@@ -41,9 +41,10 @@ doctrine:
             TheodoRogerCmsBundle: ~
             StofDoctrineExtensionsBundle: false # The mapping is only needed when using the Translatable or the Loggable behaviors
 
-
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
         default:
             timestampable: true
+
+theodo_roger_cms: ~

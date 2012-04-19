@@ -10,7 +10,7 @@ security:
     providers:
         cms_user:
             #id: roger.user_provider
-            entity: { class: Theodo\RogerCmsBundle\Entity\User }
+            entity: { class: Theodo\RogerCmsBundle\Entity\User, property: username }
 
     firewalls:
         profiler:

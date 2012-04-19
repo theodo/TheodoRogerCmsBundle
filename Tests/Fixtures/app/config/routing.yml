@@ -1,0 +1,3 @@
+RogerCms:
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
+    prefix: /
