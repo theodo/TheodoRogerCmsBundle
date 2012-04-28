@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Roger CMS Bundle
  *
@@ -147,13 +148,13 @@ class PageControllerTest extends WebTestCase
 
         // Submit valid form
         $crawler = $client->submit($form, array(
-            'page[parent_id]'  => static::$em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
-            'page[name]'       => 'Functional test',
-            'page[slug]'       => 'functional-test',
-            'page[breadcrumb]' => 'Functional test',
-            'page[content]'    => '<p>Functional test page content</p>',
-            'page[status]'     => PageRepository::STATUS_PUBLISH,
-            'save-and-edit'    => true
+            'page[parent_id]'    => static::$em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
+            'page[name]'         => 'Functional test',
+            'page[slug]'         => 'functional-test',
+            'page[breadcrumb]'   => 'Functional test',
+            'page[content]'      => '<p>Functional test page content</p>',
+            'page[status]'       => PageRepository::STATUS_PUBLISH,
+            'save-and-edit'      => true
         ));
 
         // Test return
@@ -166,7 +167,7 @@ class PageControllerTest extends WebTestCase
         // Update Form
         $form = $crawler->filterXPath('//input[@type="submit"]')->form();
         $form['page[published_at][year]'] = date('Y');
-        $form['page[published_at][month]'] = date('m');
+        $form['page[published_at][month]'] = date('n');
         $form['page[published_at][day]'] = date('d');
 
         // Submit the form
