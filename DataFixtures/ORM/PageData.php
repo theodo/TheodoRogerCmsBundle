@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class PageData implements FixtureInterface
 {
@@ -14,7 +15,7 @@ class PageData implements FixtureInterface
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Create new page (homepage)
         $page1 = new Page();
@@ -74,7 +75,7 @@ EOF
         $page3->setContent(<<<EOF
 {% extends 'layout:normal' %}
 
-{% block content %} 
+{% block content %}
 <div id="theodo">
   <h2>Theodo</h2>
 </div>

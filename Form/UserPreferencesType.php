@@ -14,7 +14,7 @@ class UserPreferencesType extends AbstractType
 {
     /**
      * Form builder
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
@@ -26,7 +26,7 @@ class UserPreferencesType extends AbstractType
         $builder->add('email', 'text', array('required' => true));
 
         $builder->add('password', 'repeated', array('type' => 'password', 'required' => false));
-        
+
         $builder->add('language', 'choice', array(
             'choices'   => UserRepository::getAvailableLanguages(),
             'required'  => false
@@ -37,14 +37,14 @@ class UserPreferencesType extends AbstractType
             $builder->add('salt', 'hidden', array('required' => true));
         }
     }
-   
+
     /**
      * Form default options
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
            'data_class' => 'Theodo\RogerCmsBundle\Entity\User',

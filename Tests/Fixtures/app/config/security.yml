@@ -9,7 +9,8 @@ security:
 
     providers:
         cms_user:
-            id: roger.user_provider
+            #id: roger.user_provider
+            entity: { class: Theodo\RogerCmsBundle\Entity\User, property: username }
 
     firewalls:
         profiler:
@@ -49,4 +50,3 @@ security:
         - { path: ^/admin/*, roles: ROLE_CLIENT }
         - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-

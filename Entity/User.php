@@ -69,11 +69,24 @@ class User implements UserInterface
      */
     private $user_roles;
 
+    /**
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
+     * @var datetime $updated_at
+     */
+    private $updated_at;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->user_roles = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -263,28 +276,28 @@ class User implements UserInterface
     {
         return $this->user_roles;
     }
- 
+
     /**
      * Erases the user credentials.
      */
     public function eraseCredentials()
     {
- 
+
     }
- 
+
     /**
      * Gets an array of roles.
-     * 
+     *
      * @return array An array of Role objects
      */
     public function getRoles()
     {
         return $this->getUserRoles()->toArray();
     }
- 
+
     /**
      * Compares this user to another to determine if they are the same.
-     * 
+     *
      * @param UserInterface $user The user
      * @return boolean True if equal, false othwerwise.
      */
@@ -295,7 +308,7 @@ class User implements UserInterface
 
     /**
      * Return gravatar hash of user email
-     * 
+     *
      * @return string
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
@@ -304,7 +317,7 @@ class User implements UserInterface
     {
        return md5(strtolower(trim($this->getEmail())));
     }
-    
+
     private $password_confirm;
 
     /**
@@ -329,7 +342,7 @@ class User implements UserInterface
 
     /**
      * Check password
-     * 
+     *
      * @return boolean
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since date
@@ -341,7 +354,7 @@ class User implements UserInterface
 
     /**
      * Check not empty password
-     * 
+     *
      * @return boolean
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-28
@@ -356,10 +369,10 @@ class User implements UserInterface
 
         return true;
     }
-    
+
     /**
      * Check roles
-     * 
+     *
      * @return boolean
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-28
@@ -371,7 +384,7 @@ class User implements UserInterface
 
     /**
      * User validator
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
@@ -392,23 +405,13 @@ class User implements UserInterface
         // Password validator : not blank and match to confirmation
         //$metadata->addGetterConstraint('validPassword', new True(array('message' => 'The password does not match to confirmation')));
         //$metadata->addGetterConstraint('notEmptyPassword', new True(array('message' => 'The password can not be empty')));
-        
+
         // Role validator
         $metadata->addGetterConstraint('validRole', new Min(array('limit' => 1, 'message' => 'The user must have at least one role')));
 
         // Language validator: available
         $metadata->addPropertyConstraint('language', new Choice(array('choices' => array('' => '') + array_keys(UserRepository::getAvailableLanguages()))));
     }
-    /**
-     * @var datetime $created_at
-     */
-    private $created_at;
-
-    /**
-     * @var datetime $updated_at
-     */
-    private $updated_at;
-
 
     /**
      * Set created_at
@@ -423,7 +426,7 @@ class User implements UserInterface
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -443,7 +446,7 @@ class User implements UserInterface
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
