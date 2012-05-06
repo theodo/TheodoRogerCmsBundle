@@ -168,7 +168,7 @@ class PageControllerTest extends WebTestCase
         $form = $crawler->filterXPath('//input[@type="submit"]')->form();
         $form['page[published_at][year]'] = date('Y');
         $form['page[published_at][month]'] = date('n');
-        $form['page[published_at][day]'] = date('d');
+        $form['page[published_at][day]'] = date('j');
 
         // Submit the form
         $crawler = $client->submit($form);
