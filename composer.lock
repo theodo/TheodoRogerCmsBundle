@@ -1,5 +1,5 @@
 {
-    "hash": "7f5e214aca91877f55f783cffbe27dfb",
+    "hash": "2e5c6a3be1a6e7bcc222f33cd1a1075d",
     "packages": [
         {
             "package": "doctrine/common",
@@ -8,7 +8,7 @@
         {
             "package": "doctrine/data-fixtures",
             "version": "dev-master",
-            "source-reference": "6d9f0d32041ad101cb390c36bcad691abb3eff5f"
+            "source-reference": "7980ea20b3c6e5104241acb430e4822b8bc402ae"
         },
         {
             "package": "doctrine/dbal",
@@ -17,7 +17,7 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "dd3d35dd28e864fb908a70f8b206d1209aa2c333"
+            "source-reference": "9c8cdd383be8d8a9fd8113289cd36e3453c81e1c"
         },
         {
             "package": "doctrine/doctrine-fixtures-bundle",
@@ -31,24 +31,24 @@
         {
             "package": "gedmo/doctrine-extensions",
             "version": "dev-master",
-            "source-reference": "ec5f3a680b127ebb3b5ae7caaea978d20a08af50"
+            "source-reference": "015de8edd4024dd1aeddd95d969448ce931a6c66"
         },
         {
             "package": "stof/doctrine-extensions-bundle",
             "version": "dev-master",
-            "source-reference": "59be31ee6d89f0af0e055385e6b7474ebed161db"
+            "source-reference": "f141a698d65271a18d86469c1f7b29d7e24170dd"
         },
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "4d8461f243e8bd5c45eff02f85181f7b59c06a6a",
+            "source-reference": "e54f4e46c9347694767174dd8871a3f2ed04c65d",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "037f86aa550737abf633e991f3606b9de5a69657",
-            "alias": "1.7.9999999.9999999-dev"
+            "source-reference": "078905ed9507808b260d34fd8928e79e3a600d1d",
+            "alias": "1.9.9999999.9999999-dev"
         }
     ],
     "packages-dev": null,
