@@ -8,7 +8,7 @@ page_list:
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:index, tab: content, nav: pages }
 
 page_new:
-    pattern:  /pages/{parent_id}/new
+    pattern:  /pages/{parentId}/new
     defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:edit, id: null, tab: content, nav: pages }
 
 page_edit:

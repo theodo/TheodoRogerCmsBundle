@@ -14,11 +14,13 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\LayoutType;
 
+/**
+ * Controller for backend layout section
+ */
 class LayoutController extends Controller
 {
-
     /**
-     * Layout list
+     * Layouts list
      *
      * @return Response
      *
@@ -29,15 +31,16 @@ class LayoutController extends Controller
     {
         $layouts = $this->get('roger.content_repository')->findAll('layout');
 
-        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig',
-                array('layouts' => $layouts)
-                );
+        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig', array(
+            'layouts' => $layouts
+        ));
     }
 
     /**
-     * Layout edit
+     * Edit a layout
      *
      * @param integer $id
+     *
      * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
@@ -80,18 +83,17 @@ class LayoutController extends Controller
             }
         }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig',
-                array(
-                    'layout' => $layout,
-                    'form' => $form->createView(),
-                  )
-                );
+        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig', array(
+            'layout' => $layout,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
      * Layout remove
      *
      * @param integer $id
+     *
      * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
@@ -108,9 +110,8 @@ class LayoutController extends Controller
             return $this->redirect($this->generateUrl('layout_list'));
         }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig',
-                array(
-                  'layout' => $layout
-                ));
+        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig', array(
+            'layout' => $layout
+        ));
     }
 }

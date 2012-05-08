@@ -10,7 +10,7 @@
 <p>{% trans %}Are you sure you want to <strong class="warning">permanently remove</strong> the following pages?{% endtrans %}</p>
 
 <div class="inset">
-    {% render "TheodoRogerCmsBundle:Backend\\Page:siteMapComponent" with {'from_id': page.id} %}
+    {% render "TheodoRogerCmsBundle:Backend\\Page:siteMapComponent" with {'fromId': page.id} %}
 </div>
 
 <form class="edit_page" action="{{ url('page_remove', {'id' : page.id}) }}" method="post">
