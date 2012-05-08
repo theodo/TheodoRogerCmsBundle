@@ -4,20 +4,20 @@ namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
 use Theodo\RogerCmsBundle\Entity\Role;
 use Theodo\RogerCmsBundle\Repository\RoleRepository;
-
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class RoleData extends AbstractFixture implements OrderedFixtureInterface
-{    
+{
     /**
      * Load role fixtures
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-24
      */
-    public function load($manager)
-    {        
+    public function load(ObjectManager $manager)
+    {
         // Create admin role
         $admin_role = new Role();
         $admin_role->setName(RoleRepository::ROLE_ADMIN);

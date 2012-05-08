@@ -35,7 +35,7 @@ class RogerUniqueEntityValidator extends DoctrineConstraints\UniqueEntityValidat
     /**
      * @see UniqueEntityValidator
      */
-    public function isValid($entity, Constraint $constraint)
+    public function validate($entity, Constraint $constraint)
     {
         if (!is_array($constraint->fields) && !is_string($constraint->fields)) {
             throw new UnexpectedTypeException($constraint->fields, 'array');

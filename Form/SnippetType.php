@@ -20,7 +20,7 @@ class SnippetType extends AbstractType
         $builder->add('lifetime', 'text', array('required' => false));
     }
 
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'data_class' => 'Theodo\RogerCmsBundle\Entity\Snippet',

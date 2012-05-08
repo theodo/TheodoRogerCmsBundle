@@ -42,7 +42,7 @@ class UserType extends UserPreferencesType
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-27
      */
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
            'data_class' => 'Theodo\RogerCmsBundle\Entity\User',
