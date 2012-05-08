@@ -17,10 +17,18 @@ use Symfony\Component\Config\Exception\FileLoaderLoadException;
 
 use Theodo\RogerCmsBundle\Form\LayoutType;
 
+/**
+ * This controller is used to override menu creation
+ * by using a configurable file do define menu.
+ */
 class NavigationController extends Controller
 {
     /**
      * Display navigation tabs
+     *
+     * @param Request $request
+     *
+     * @return Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-09-14
@@ -33,8 +41,8 @@ class NavigationController extends Controller
         // Check file exists
         if (!file_exists($path)) {
             throw new FileLoaderLoadException(sprintf(
-              "File \"%s\" can not be found!\nPlease create file from RogerCmsBundle/config/menu.yml",
-              $path
+                "File \"%s\" can not be found!\nPlease create file from RogerCmsBundle/config/menu.yml",
+                $path
             ));
         }
 

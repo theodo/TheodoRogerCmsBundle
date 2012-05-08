@@ -16,7 +16,7 @@ use Theodo\RogerCmsBundle\Form\SnippetType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Snippet controller
+ * Handles backend snippet management
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Cyrille Jouineau <cyrillej@theodo.fr>
@@ -26,7 +26,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class SnippetController extends Controller
 {
-
     /**
      * Snippet list
      *
@@ -41,21 +40,22 @@ class SnippetController extends Controller
         $snippets = $this->get('roger.content_repository')->findAll('snippet');
 
         return $this->render('TheodoRogerCmsBundle:Snippet:index.html.twig',
-                array('snippets' => $snippets)
-                );
+            array('snippets' => $snippets)
+        );
     }
 
     /**
      * Snippet edit
      *
-     * @param $id
+     * @param integer $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
         $snippet = null;
         if ($id) {
-            $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
+            $snippet = $this->get('roger.content_repository')
+                ->findOneById($id, 'snippet');
         }
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
@@ -73,7 +73,8 @@ class SnippetController extends Controller
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($snippet) {
-                    $this->get('roger.caching')->invalidate('snippet:'.$snippet->getName());
+                    $this->get('roger.caching')
+                        ->invalidate('snippet:'.$snippet->getName());
                 }
 
                 //save snippet
@@ -85,29 +86,31 @@ class SnippetController extends Controller
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('snippet_list'));
                 if ($request->get('save-and-edit')) {
-                    $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
+                    $redirect = $this->redirect(
+                        $this->generateUrl('snippet_edit', array(
+                            'id' => $snippet->getId()
+                        )));
                 }
 
                 return $redirect;
-            }
-            else {
+            } else {
                 $hasErrors = true;
             }
         }
 
         return $this->render('TheodoRogerCmsBundle:Snippet:edit.html.twig',
-                array(
-                    'snippet' => $snippet,
-                    'form' => $form->createView(),
-                    'hasErrors'   => $hasErrors,
-                  )
-                );
+            array(
+                'snippet' => $snippet,
+                'form' => $form->createView(),
+                'hasErrors'   => $hasErrors,
+            )
+        );
     }
 
     /**
      * Snippet delete
      *
-     * @param $id
+     * @param integer $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function removeAction($id)
@@ -126,8 +129,9 @@ class SnippetController extends Controller
         }
 
         return $this->render('TheodoRogerCmsBundle:Snippet:remove.html.twig',
-                array(
-                  'snippet' => $snippet
-                ));
+            array(
+                'snippet' => $snippet
+            )
+        );
     }
 }

@@ -16,7 +16,7 @@ use Theodo\RogerCmsBundle\Form\LayoutType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Layout controller
+ * Controller for backend layout section
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Cyrille Jouineau <cyrillej@theodo.fr>
@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class LayoutController extends Controller
 {
     /**
-     * Layout list
+     * Layouts list
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
@@ -40,13 +40,13 @@ class LayoutController extends Controller
 
         $layouts = $this->get('roger.content_repository')->findAll('layout');
 
-        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig',
-            array('layouts' => $layouts)
-        );
+        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig', array(
+            'layouts' => $layouts
+        ));
     }
 
     /**
-     * Layout edit
+     * Edit a layout
      *
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -90,12 +90,10 @@ class LayoutController extends Controller
             }
         }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig',
-                array(
-                    'layout' => $layout,
-                    'form' => $form->createView(),
-                  )
-                );
+        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig', array(
+            'layout' => $layout,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -119,9 +117,8 @@ class LayoutController extends Controller
             return $this->redirect($this->generateUrl('layout_list'));
         }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig',
-                array(
-                  'layout' => $layout
-                ));
+        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig', array(
+            'layout' => $layout
+        ));
     }
 }

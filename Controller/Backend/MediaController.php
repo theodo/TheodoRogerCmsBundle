@@ -16,7 +16,7 @@ use Theodo\RogerCmsBundle\Form\MediaType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Media controller
+ * Backend media management controller
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  * @author Cyrille Jouineau <cyrillej@theodo.fr>
@@ -40,8 +40,8 @@ class MediaController extends Controller
         $medias = $this->get('roger.content_repository')->findAll('media');
 
         return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
-                array('medias' => $medias)
-                );
+            array('medias' => $medias)
+        );
     }
 
     /**
@@ -70,16 +70,14 @@ class MediaController extends Controller
                 // save media
                 $media = $form->getData();
                 // TODO find way to force update without modifying the media
-                if (null !== $media->file)
-                {
+                if (null !== $media->file) {
                     $media->setPath(null);
                 }
                 $this->get('roger.content_repository')->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('media_list'));
-                if ($request->get('save-and-edit'))
-                {
+                if ($request->get('save-and-edit')) {
                     $redirect = $this->redirect($this->generateUrl('media_edit', array('id' => $media->getId())));
                 }
 
@@ -87,12 +85,13 @@ class MediaController extends Controller
             }
         }
 
-        return $this->render('TheodoRogerCmsBundle:Media:edit.html.twig',
-                array(
-                    'media' => $media,
-                    'form' => $form->createView(),
-                  )
-                );
+        return $this->render(
+            'TheodoRogerCmsBundle:Media:edit.html.twig',
+            array(
+                'media' => $media,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -111,14 +110,15 @@ class MediaController extends Controller
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $media = $this->get('roger.content_repository')->remove($media);
+            $this->get('roger.content_repository')->remove($media);
 
             return $this->redirect($this->generateUrl('media_list'));
         }
 
         return $this->render('TheodoRogerCmsBundle:Media:remove.html.twig',
-                array(
-                  'media' => $media
-                ));
+            array(
+                'media' => $media
+            )
+        );
     }
 }

@@ -18,7 +18,7 @@ use Theodo\RogerCmsBundle\Entity\Page;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Page controller
+ * Controller for backend page management
  *
  * @author Vincent Guillon <vincentg@theodo.fr>
  * @author Romain Barberi <romainb@theodo.fr>
@@ -50,50 +50,45 @@ class PageController extends Controller
     /**
      * Edit page action
      *
-     * @param null $id
-     * @param null $parent_id
+     * @param integer $id       Id of page to edit. Null for new page.
+     * @param integer $parentId Id of parent page in hierarchy. Null if page is homepage
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    public function editAction($id = null, $parent_id = null)
+    public function editAction($id = null, $parentId = null)
     {
         // new page
         if (!$id) {
             $page = new Page();
-            $parent_page = $this->get('roger.content_repository')->findOneById($parent_id);
+            $parentPage = $this->get('roger.content_repository')->findOneById($parentId);
             // Create the homepage
-            if ($parent_page) {
-                $page->setParentId($parent_page->getId());
-                $page->setParent($parent_page);
-            }
-            else {
-                $parent_page = 'homepage';
+            if ($parentPage) {
+                $page->setParentId($parentPage->getId());
+                $page->setParent($parentPage);
+            } else {
+                $parentPage = 'homepage';
             }
         }
         // update page
         else {
             $page = $this->get('roger.content_repository')->findOneById($id);
-            $parent_page = $page->getParent();
+            $parentPage = $page->getParent();
         }
 
         // Get all layouts
         $layouts = $this->get('roger.content_repository')->findAll('layout');
-        $page_content = $page->getContent();
+        $pageContent = $page->getContent();
 
         // Get the current layout from the Twig content
-        if (preg_match('#{% extends [\',\"]layout:(?P<layout_name>(.*))[\',\"] %}#sU', $page_content, $matches))
-        {
-            $layout_name = $matches['layout_name'];
-        } else {
-            $layout_name = null;
+        if (!($layoutName = $this->matchLayoutName($pageContent))) {
+            $layoutName = null;
         }
 
-        // Separate the different blocks from Twig
-        // @TODO: this does not work with nested blocks.
-        // Clean solution might be to use the Twig parser and recompile (?) blocks separately in twig
-        //
-        if (preg_match_all('#{% block (?P<block_name>(.*)) %}(?P<block_content>(.*)){% endblock %}#sU', $page_content, $matches))
-        {
+        /**
+         * Separate the different blocks from Twig
+         * @TODO: this does not work with nested blocks.
+         */
+        if ($matches = $this->matchBlocks($pageContent)) {
             $tabs = array_combine($matches['block_name'], $matches['block_content']);
         } else {
             $tabs = array();
@@ -117,8 +112,7 @@ class PageController extends Controller
             $this->bindEditForm($form, $request);
 
             // Check form and save object
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 // remove twig cached file
                 $this->get('roger.caching')->invalidate('page:'.$page->getName());
 
@@ -138,9 +132,7 @@ class PageController extends Controller
                 }
 
                 return $this->redirect($this->generateUrl('page_list'));
-            }
-            else
-            {
+            } else {
                 $hasErrors = true;
             }
         }
@@ -151,9 +143,9 @@ class PageController extends Controller
                 'form'        => $form->createView(),
                 'page'        => $page,
                 'hasErrors'   => $hasErrors,
-                'parent_page' => $parent_page,
+                'parent_page' => $parentPage,
                 'layouts'     => $layouts,
-                'layout_name' => $layout_name,
+                'layout_name' => $layoutName,
                 'tabs'        => $tabs
             )
         );
@@ -197,7 +189,7 @@ class PageController extends Controller
     /**
      * Expand page action
      *
-     * @param $id
+     * @param integer $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function expandAction($id)
@@ -224,13 +216,13 @@ class PageController extends Controller
     /**
      * Site map action
      *
-     * @param $from_id
+     * @param integer $fromId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function siteMapComponentAction($from_id)
+    public function siteMapComponentAction($fromId)
     {
         // Retrieve page
-        $page = $this->get('roger.content_repository')->findOneById($from_id);
+        $page = $this->get('roger.content_repository')->findOneById($fromId);
 
         return $this->render(
             'TheodoRogerCmsBundle:Page:site-map-component.html.twig',
@@ -244,10 +236,10 @@ class PageController extends Controller
     /**
      * Bind the edit form
      *
-     * @param $form
-     * @param $request
+     * @param Form    $form    The form to bind
+     * @param Request $request Request to bind
      */
-    protected function bindEditForm(&$form, $request)
+    protected function bindEditForm($form, $request)
     {
         $data = array_replace_recursive(
             $request->request->get($form->getName(), array()),
@@ -258,43 +250,69 @@ class PageController extends Controller
          * si la clef existe => on est en edition du twig brut
          * sinon on est uniquement sur l'edition des blocks
          */
+        $pageContent = '';
         if (array_key_exists('content', $data)) {
-            $page_content = $data['content'];
-        } else {
-            $page_content = '';
+            $pageContent = $data['content'];
         }
 
         // Gestion du layout
-        $layout_name = $request->get('page_layout', '');
+        $layoutName = $request->get('page_layout', '');
 
         // Gestion de la suppresion du layout
-        $layout_replace = ('' != $layout_name) ? "{% extends 'layout:".$layout_name."' %}" : "";
+        $layoutReplace = ('' != $layoutName) ? "{% extends 'layout:".$layoutName."' %}" : "";
 
         // Maj du layout dans la page
-        if (is_int(strpos($page_content, "{% extends 'layout"))) {
-            $page_content = preg_replace("{% extends 'layout:(.*)' %}", $layout_replace, $page_content);
+        if (is_int(strpos($pageContent, "{% extends 'layout"))) {
+            $pageContent = preg_replace("{% extends 'layout:(.*)' %}", $layoutReplace, $pageContent);
         } else {
-            $page_content = $layout_replace.$page_content;
+            $pageContent = $layoutReplace.$pageContent;
         }
 
         // Gestion des blocks
         $blocks = $request->get('page_block', array());
 
         // Maj des différent blocks contenues dans la page
-        foreach( $blocks as $block_name => $block_content)
-        {
-
-            if (is_int(strpos($page_content, '{% block '.$block_name.' %}'))) {
-                $page_content = preg_replace('{% block '.$block_name.' %}(.*){% endblock %}', '{% block '.$block_name.' %}'.$block_content.'{% endblock %}', $page_content);
+        foreach ($blocks as $blockName => $blockContent) {
+            if (is_int(strpos($pageContent, '{% block '.$blockName.' %}'))) {
+                $pageContent = preg_replace('{% block '.$blockName.' %}(.*){% endblock %}', '{% block '.$blockName.' %}'.$blockContent.'{% endblock %}', $pageContent);
             } else {
-                $page_content .= '{% block '.$block_name.' %}'.$block_content.'{% endblock %}';
+                $pageContent .= '{% block '.$blockName.' %}'.$blockContent.'{% endblock %}';
             }
-
         }
 
-        $data['content'] = $page_content;
+        $data['content'] = $pageContent;
 
         // Bind form
         $form->bind($data);
+    }
+
+    /**
+     * @param String $pageContent Content to find layout name in.
+     *
+     * @return String|Boolean Layout name or false if no layout
+     */
+    private function matchLayoutName($pageContent)
+    {
+        $layoutRegexp = '#{% extends [\',\"]layout:(?P<layoutName>(.*))[\',\"] %}#sU';
+        if (preg_match($layoutRegexp, $pageContent, $matches)) {
+            return $matches['layoutName'];
+        }
+
+        return false;
+    }
+
+    /**
+     * @param String $pageContent Content to search in.
+     *
+     * @return Array|Boolean Block name and content or false if no block
+     */
+    private function matchBlocks($pageContent)
+    {
+        if (!preg_match_all('#{% block (?P<block_name>(.*)) %}(?P<block_content>(.*)){% endblock %}#sU', $pageContent, $matches)) {
+
+            return false;
+        }
+
+        return $matches;
     }
 }
