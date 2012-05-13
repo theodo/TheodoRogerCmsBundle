@@ -54,14 +54,14 @@ class Page
     private $status;
 
     /**
-     * @var integer $parent_id
+     * @var integer $parentId
      */
-    private $parent_id;
+    private $parentId;
 
     /**
-     * @var integer $layout_id
+     * @var integer $layoutId
      */
-    private $layout_id;
+    private $layoutId;
 
     /**
      * @var Theodo\RogerCmsBundle\Entity\Page
@@ -74,21 +74,6 @@ class Page
     private $parent;
 
     /**
-     * @var string $title
-     */
-    private $title;
-
-    /**
-     * @var text $keywords
-     */
-    private $keywords;
-
-    /**
-     * @var date $published_at
-     */
-    private $published_at;
-
-    /**
      * @var datetime $created_at
      */
     private $created_at;
@@ -99,14 +84,24 @@ class Page
     private $updated_at;
 
     /**
-     * @var boolean $public
+     * @var DateTime $createdAt
      */
-    private $public;
+    private $createdAt;
 
     /**
-     * @var integer $lifetime
+     * @var DateTime $updatedAt
      */
-    private $lifetime;
+    private $updatedAt;
+
+    /**
+     * @var date $publishedAt
+     */
+    private $publishedAt;
+
+    /**
+     * @var string $contentType
+     */
+    private $contentType;
 
     /**
      * @var boolean $cacheable
@@ -114,10 +109,28 @@ class Page
     private $cacheable;
 
     /**
-     * @var string $content_type
+     * @var string $title
      */
-    private $content_type;
+    private $title;
 
+    /**
+     * @var string $keywords
+     */
+    private $keywords;
+
+    /**
+     * @var integer $lifetime
+     */
+    private $lifetime;
+
+    /**
+     * @var boolean $public
+     */
+    private $public;
+
+    /**
+     * Initalize children as ArrayCollection for new objects
+     */
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
@@ -256,43 +269,43 @@ class Page
     }
 
     /**
-     * Set parent_id
+     * Set parentId
      *
      * @param integer $parentId
      */
     public function setParentId($parentId)
     {
-        $this->parent_id = $parentId;
+        $this->parentId = $parentId;
     }
 
     /**
-     * Get parent_id
+     * Get parentId
      *
      * @return integer $parentId
      */
     public function getParentId()
     {
-        return $this->parent_id;
+        return $this->parentId;
     }
 
     /**
-     * Set layout_id
+     * Set layoutId
      *
      * @param integer $layoutId
      */
     public function setLayoutId($layoutId)
     {
-        $this->layout_id = $layoutId;
+        $this->layoutId = $layoutId;
     }
 
     /**
-     * Get layout_id
+     * Get layoutId
      *
      * @return integer $layoutId
      */
     public function getLayoutId()
     {
-        return $this->layout_id;
+        return $this->layoutId;
     }
 
     /**
@@ -336,45 +349,47 @@ class Page
     }
 
     /**
-     * Set published_at
+     * Set publishedAt
      *
      * @param \DateTime $publishedAt
      */
     public function setPublishedAt($publishedAt)
     {
-        $this->published_at = $publishedAt;
+        $this->publishedAt = $publishedAt;
     }
 
     /**
-     * Get published_at
+     * Get publishedAt
      *
      * @return \DateTime $publishedAt
      */
     public function getPublishedAt()
     {
-        return $this->published_at;
+        return $this->publishedAt;
     }
 
     /**
-     *
      * Returns recursive slug
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-29
+     *
+     * @return String
      */
     public function getFullSlug()
     {
         $parent = $this->getParent();
         if ($parent && !$this->isHomepage()) {
             return $parent->getFullSlug().'/'.$this->getSlug();
-        }
-        else {
+        } else {
             return $this->getSlug();
         }
     }
 
     /**
      * Page validator
+     *
+     * @param ClassMetadata $metadata
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-22
@@ -394,67 +409,69 @@ class Page
 
         // Status validator: not null and available
         $metadata->addPropertyConstraint('status', new NotBlank());
-        $metadata->addPropertyConstraint('status', new Choice(array('choices' => PageRepository::getAvailableStatus())));
+        $metadata->addPropertyConstraint('status', new Choice(array(
+            'choices' => PageRepository::getAvailableStatus())
+        ));
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * Set content_type
+     * Set contentType
      *
      * @param string $contentType
      */
     public function setContentType($contentType)
     {
-        $this->content_type = $contentType;
+        $this->contentType = $contentType;
     }
 
     /**
-     * Get content_type
+     * Get contentType
      *
      * @return string
      */
     public function getContentType()
     {
-        return $this->content_type;
+        return $this->contentType;
     }
 
     /**
@@ -528,10 +545,14 @@ class Page
     {
         $subtypes = PageRepository::getAvailableContentSubtypes();
 
-        return $subtypes[$this->content_type];
+        return $subtypes[$this->contentType];
     }
 
     /**
+     * Test if the page is a homepage
+     *
+     * @return Boolean
+     *
      * @author Fabrice Bernhard <fabriceb@theodo.fr>
      * @since 2011-08-19
      */
@@ -563,7 +584,7 @@ class Page
     /**
      * Set keywords
      *
-     * @param text $keywords
+     * @param string $keywords
      */
     public function setKeywords($keywords)
     {
@@ -573,7 +594,7 @@ class Page
     /**
      * Get keywords
      *
-     * @return text
+     * @return string
      */
     public function getKeywords()
     {

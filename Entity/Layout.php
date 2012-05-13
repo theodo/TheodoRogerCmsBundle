@@ -105,37 +105,23 @@ class Layout
     }
 
     /**
-     * Set content_type
+     * Set contentType
      *
      * @param string $contentType
      */
     public function setContentType($contentType)
     {
-        $this->content_type = $contentType;
+        $this->contentType = $contentType;
     }
 
     /**
-     * Get content_type
+     * Get contentType
      *
      * @return string $contentType
      */
     public function getContentType()
     {
         return $this->contentType;
-    }
-
-    /**
-     * Layout validator
-     */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        // Name validator: not null
-        $metadata->addPropertyConstraint('name', new NotBlank());
-        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
-
-        // Content validator: not null
-        $metadata->addPropertyConstraint('content', new NotBlank());
-        $metadata->addPropertyConstraint('content', new TwigSyntax());
     }
 
     /**
@@ -176,5 +162,21 @@ class Layout
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Layout validator
+     *
+     * @param ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
+
+        // Content validator: not null
+        $metadata->addPropertyConstraint('content', new NotBlank());
+        $metadata->addPropertyConstraint('content', new TwigSyntax());
     }
 }
