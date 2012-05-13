@@ -18,11 +18,15 @@ use Symfony\Component\Config\FileLocator;
 
 class TheodoRogerCmsExtension extends Extension
 {
+    /**
+     * @param Array            $configs
+     * @param ContainerBuilder $container
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         // Create a yaml file loader
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        
+
         // Load the services.yml file
         $loader->load('services.yml');
     }
