@@ -13,6 +13,7 @@ namespace Theodo\RogerCmsBundle\Extensions\Twig\Extension;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\EntityManager;
+use Theodo\RogerCmsBundle\Entity\Media;
 
 /**
  * Generate cms frontend urls
@@ -23,6 +24,12 @@ class RogerRoutingExtension extends \Twig_Extension
 {
     private $generator;
 
+    /**
+     * Set dependencies.
+     *
+     * @param UrlGeneratorIntreface $generator Generator used for creating urls
+     * @param EntityManager         $em        Entity manager to provide pages
+     */
     public function __construct(UrlGeneratorInterface $generator, EntityManager $em)
     {
         $this->generator = $generator;
@@ -42,19 +49,36 @@ class RogerRoutingExtension extends \Twig_Extension
         );
     }
 
+    /**
+     * Generates a full url from a cms page slug
+     *
+     * @param string $slug
+     *
+     * @return string Generated url
+     */
     public function getFullUrl($slug)
     {
-        $page = $this->em->getRepository('TheodoRogerCmsBundle:Page')->findOneBySlug($slug);
+        $page = $this->em->getRepository('TheodoRogerCmsBundle:Page')
+            ->findOneBySlug($slug);
 
-        return $this->generator->generate('page', array('slug' => $page->getFullSlug()), true);
+        return $this->generator
+            ->generate('page', array('slug' => $page->getFullSlug()), true);
     }
 
+    /**
+     * Generates url for a media file of given name
+     *
+     * @param string $name Name of media file
+     *
+     * @return string Empty if file does not exist
+     */
     public function getMediaUrl($name)
     {
-        $media = $this->em->getRepository('TheodoRogerCmsBundle:Media')->findOneByName($name);
-        if ($media)
-        {
-            return '/uploads/'.$media->getPath();
+        $media = $this->em->getRepository('TheodoRogerCmsBundle:Media')
+            ->findOneByName($name);
+
+        if ($media) {
+            return '/' . Media::getUploadRootDir() . '/' . $media->getPath();
         }
 
         return '';
