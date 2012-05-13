@@ -30,19 +30,19 @@ class Layout
     private $content;
 
     /**
-     * @var string $content_type
+     * @var string $contentType
      */
-    private $content_type;
+    private $contentType;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * Set Id
@@ -121,7 +121,7 @@ class Layout
      */
     public function getContentType()
     {
-        return $this->content_type;
+        return $this->contentType;
     }
 
     /**
@@ -145,7 +145,7 @@ class Layout
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -155,7 +155,7 @@ class Layout
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -165,7 +165,7 @@ class Layout
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -175,6 +175,6 @@ class Layout
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 }

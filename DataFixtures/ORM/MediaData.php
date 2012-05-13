@@ -6,10 +6,15 @@ use Theodo\RogerCmsBundle\Entity\Media;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Data fixutres for Media model class
+ */
 class MediaData implements FixtureInterface
 {
     /**
      * Load media fixtures
+     *
+     * @param ObjectManager $manager
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
