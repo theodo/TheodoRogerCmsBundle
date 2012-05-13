@@ -19,7 +19,7 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Set inputs
-        $builder->add('parent_id', 'hidden', array('required' => true));
+        $builder->add('parentId', 'hidden', array('required' => true));
         $builder->add('name', 'text', array('required' => true));
         $builder->add('slug', 'text', array('required' => true));
         $builder->add('breadcrumb', 'text', array('required' => false));
@@ -31,7 +31,7 @@ class PageType extends AbstractType
             'choices'   => PageRepository::getAvailableStatus(),
             'required'  => true
         ));
-        $builder->add('content_type', 'choice', array(
+        $builder->add('contentType', 'choice', array(
             'choices'   => PageRepository::getAvailableContentTypes(),
             'required'  => true
         ));
@@ -39,10 +39,10 @@ class PageType extends AbstractType
         $builder->add('public', 'checkbox', array('required' => false));
         $builder->add('lifetime', 'text', array('required' => false));
 
-        // Display published_at date only in edition
+        // Display publishedAt date only in edition
         if (null !== $options['data']->getId())
         {
-            $builder->add('published_at', 'date', array('required' => false));
+            $builder->add('publishedAt', 'date', array('required' => false));
         }
     }
 
@@ -59,6 +59,9 @@ class PageType extends AbstractType
         );
     }
 
+    /**
+     * @return string Form type name
+     */
     public function getName()
     {
         return 'page';

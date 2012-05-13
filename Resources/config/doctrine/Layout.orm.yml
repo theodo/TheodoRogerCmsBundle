@@ -12,12 +12,12 @@ Theodo\RogerCmsBundle\Entity\Layout:
             unique: true
         content:
             type: text
-        created_at:
+        createdAt:
             type: datetime
             gedmo:
                 timestampable:
                     on: create
-        updated_at:
+        updatedAt:
             type: datetime
             gedmo:
                 timestampable:
