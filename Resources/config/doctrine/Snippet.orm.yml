@@ -19,12 +19,12 @@ Theodo\RogerCmsBundle\Entity\Snippet:
         lifetime:
             type: integer
             nullable: true
-        created_at:
+        createdAt:
             type: datetime
             gedmo:
                 timestampable:
                     on: create
-        updated_at:
+        updatedAt:
             type: datetime
             gedmo:
                 timestampable:

@@ -33,10 +33,10 @@ Theodo\RogerCmsBundle\Entity\Page:
         status:
             type: string
             length: 127
-        parent_id:
+        parentId:
             type: integer
             nullable: true
-        content_type:
+        contentType:
             type: string
             length: 127
         cacheable:
@@ -46,15 +46,15 @@ Theodo\RogerCmsBundle\Entity\Page:
         lifetime:
             type: integer
             nullable: true
-        published_at:
+        publishedAt:
             type: date
             nullable: true
-        created_at:
+        createdAt:
             type: datetime
             gedmo:
                 timestampable:
                     on: create
-        updated_at:
+        updatedAt:
             type: datetime
             gedmo:
                 timestampable:
@@ -64,7 +64,7 @@ Theodo\RogerCmsBundle\Entity\Page:
             targetEntity: Page
             inversedBy: children
             joinColumn:
-                name: parent_id
+                name: parentId
                 referencedColumnName: id
     oneToMany:
         children:

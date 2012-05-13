@@ -19,7 +19,7 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Set inputs
-        $builder->add('parent_id', 'hidden', array('required' => true));
+        $builder->add('parentId', 'hidden', array('required' => true));
         $builder->add('name', 'text', array('required' => true));
         $builder->add('slug', 'text', array('required' => true));
         $builder->add('breadcrumb', 'text', array('required' => false));
@@ -49,6 +49,9 @@ class PageType extends AbstractType
         );
     }
 
+    /**
+     * @return string Form type name
+     */
     public function getName()
     {
         return 'page';

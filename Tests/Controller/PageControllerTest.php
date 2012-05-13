@@ -148,7 +148,7 @@ class PageControllerTest extends WebTestCase
 
         // Submit valid form
         $crawler = $client->submit($form, array(
-            'page[parent_id]'    => static::$em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
+            'page[parentId]'    => static::$em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
             'page[name]'         => 'Functional test',
             'page[slug]'         => 'functional-test',
             'page[breadcrumb]'   => 'Functional test',
