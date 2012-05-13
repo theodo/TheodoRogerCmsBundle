@@ -10,11 +10,14 @@ use Symfony\Component\Validator\Constraints\File;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Entity for media files
+ *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
 class Media
-{    /**
+{
+    /**
      * @var integer $id
      */
     private $id;
@@ -75,15 +78,14 @@ class Media
     private $name;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
-    private $updated_at;
-
+    private $updatedAt;
 
     /**
      * Set name
@@ -112,7 +114,7 @@ class Media
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -122,7 +124,7 @@ class Media
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -132,7 +134,7 @@ class Media
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -142,22 +144,7 @@ class Media
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
-    }
-
-    /**
-     * Media validator
-     *
-     *
-     */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        // Name validator: not null
-        $metadata->addPropertyConstraint('name', new NotBlank());
-        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
-
-        // file validator: not null
-        $metadata->addPropertyConstraint('file', new File());
+        return $this->updatedAt;
     }
 
     /**
@@ -201,13 +188,38 @@ class Media
         }
     }
 
+    /**
+     * Returns physical path for the uploaded file
+     *
+     * @return string
+     */
     public function getFullPath()
     {
         return self::getUploadRootDir().'/'.$this->path;
     }
 
+    /**
+     * Returns upload directory name
+     * 
+     * @return string
+     */
     public static function getUploadRootDir()
     {
       return 'uploads';
+    }
+
+    /**
+     * Media validator
+     *
+     * @param ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
+
+        // file validator: not null
+        $metadata->addPropertyConstraint('file', new File());
     }
 }
