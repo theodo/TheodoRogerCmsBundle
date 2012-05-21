@@ -66,24 +66,21 @@ class TwigLoaderRepositoryTest extends TestCase
         try {
             $this->getTwigLoader()->getSource('doesnotexist');
             $this->fail('Exception missing');
-        }
-        catch (\Twig_Error_Loader $expected) {
+        } catch (\Twig_Error_Loader $expected) {
             $this->assertTrue(true);
         }
 
         try {
             $this->getTwigLoader()->getSource('layout:doesnotexist');
             $this->fail('Exception missing');
-        }
-        catch (\Twig_Error_Loader $expected) {
+        } catch (\Twig_Error_Loader $expected) {
             $this->assertTrue(true);
         }
 
         try {
             $this->getTwigLoader()->getSource('doesnotexist:bonsoir');
             $this->fail('Exception missing');
-        }
-        catch (\Twig_Error_Loader $expected) {
+        } catch (\Twig_Error_Loader $expected) {
             $this->assertTrue(true);
         }
     }

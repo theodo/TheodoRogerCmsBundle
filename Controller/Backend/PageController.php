@@ -12,7 +12,6 @@
 namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Theodo\RogerCmsBundle\Form\PageType;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

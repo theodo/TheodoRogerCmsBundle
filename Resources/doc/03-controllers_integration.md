@@ -25,7 +25,7 @@ Using a CMS-defined template in a view file requires only two lines of code
         /**
          * Some complicated stuff
          */
-             
+
         return $this->get('roger.templating')
             ->renderResponse(
                  'MyBundle:myFolder:my.html.twig',
@@ -38,7 +38,7 @@ Using a CMS-defined template in a view file requires only two lines of code
 
     ``` twig
     {# my.html.twig #}
-    {% extends 'layout:my-layout' %} 
+    {% extends 'layout:my-layout' %}
     ```
 
 ## Templates as files
@@ -82,7 +82,7 @@ How to give the client a possibility to change the lead text, without altering t
 the page row in database. To avoid that, you can register your template as standard CMS template, and move it
 to a file as soon as it's possible.*
 
-3. Use the "roger.templating" and "roger.content_repository" services in your controller to display your page: 
+3. Use the "roger.templating" and "roger.content_repository" services in your controller to display your page:
 
     ```php
     public function productListAction()
@@ -91,14 +91,14 @@ to a file as soon as it's possible.*
            ->getEntityManager()
            ->getRepository('MyBundle\Entity\Product')
            ->findAll();
-    
+
        $cmsPage = $this->get('roger.content_repository')
            ->getPageBySlug('products-list');
-    
+
        $variables = array(
           'products' => $products
        );
-    
+
        return $this->get('roger.templating')->renderResponse(
            'page:'.$cmsPage->getName(),
            array(

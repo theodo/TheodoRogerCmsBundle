@@ -6,11 +6,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\ORM\Mapping as ORM;
 
 use Theodo\RogerCmsBundle\Repository\PageRepository;
-use Theodo\RogerCmsBundle\Validator\Unique;
-use Theodo\RogerCmsBundle\Validator\Exists;
 use Theodo\RogerCmsBundle\Validator\TwigSyntax;
 
 /**
