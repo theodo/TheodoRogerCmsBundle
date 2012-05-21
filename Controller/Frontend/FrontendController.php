@@ -16,9 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 
-use Theodo\RogerCmsBundle\Extensions\Twig_Loader_Database;
-use Twig_Error_Syntax;
-use Twig_Loader_Array;
 
 /**
  * Handles displaying CMS pages

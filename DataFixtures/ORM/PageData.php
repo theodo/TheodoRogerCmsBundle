@@ -16,7 +16,7 @@ class PageData implements FixtureInterface
      * Load page fixtures
      *
      * @param ObjectManager $manager
-     * 
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */

@@ -40,8 +40,7 @@ class PageType extends AbstractType
         $builder->add('lifetime', 'text', array('required' => false));
 
         // Display publishedAt date only in edition
-        if (null !== $options['data']->getId())
-        {
+        if (null !== $options['data']->getId()) {
             $builder->add('publishedAt', 'date', array('required' => false));
         }
     }

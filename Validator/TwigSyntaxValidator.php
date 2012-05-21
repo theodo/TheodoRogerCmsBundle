@@ -2,13 +2,12 @@
 
 namespace Theodo\RogerCmsBundle\Validator;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class TwigSyntaxValidator extends ConstraintValidator
 {
-  
+
     public function __construct($twig_environment)
     {
         $this->twig = $twig_environment;

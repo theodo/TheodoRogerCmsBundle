@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\Exception\FileLoaderLoadException;
 
-use Theodo\RogerCmsBundle\Form\LayoutType;
 
 /**
  * This controller is used to override menu creation

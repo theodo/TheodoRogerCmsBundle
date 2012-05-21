@@ -200,7 +200,7 @@ class Media
 
     /**
      * Returns upload directory name
-     * 
+     *
      * @return string
      */
     public static function getUploadRootDir()

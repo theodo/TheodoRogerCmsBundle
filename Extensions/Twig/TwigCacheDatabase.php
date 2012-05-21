@@ -12,10 +12,9 @@
 namespace Theodo\RogerCmsBundle\Extensions\Twig;
 
 use Twig_Environment;
-use Twig_Function_Method;
 
 /**
- * TwitCacheDatabase is a helper for managing twig cache of cms managed pages 
+ * TwitCacheDatabase is a helper for managing twig cache of cms managed pages
  */
 class TwigCacheDatabase
 {
@@ -60,7 +59,7 @@ class TwigCacheDatabase
     }
 
     /**
-     * Invalidates cache for given object 
+     * Invalidates cache for given object
      *
      * @param string $name
      *

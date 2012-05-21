@@ -6,11 +6,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\ORM\Mapping as ORM;
 
 use Theodo\RogerCmsBundle\Repository\PageRepository;
-use Theodo\RogerCmsBundle\Validator\Unique;
-use Theodo\RogerCmsBundle\Validator\Exists;
 use Theodo\RogerCmsBundle\Validator\TwigSyntax;
 
 /**
@@ -538,7 +535,7 @@ class Page
 
     /**
      * Test if the page is a homepage
-     * 
+     *
      * @return Boolean
      *
      * @author Fabrice Bernhard <fabriceb@theodo.fr>
@@ -582,7 +579,7 @@ class Page
     /**
      * Get keywords
      *
-     * @return string 
+     * @return string
      */
     public function getKeywords()
     {

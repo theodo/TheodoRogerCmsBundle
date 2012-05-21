@@ -19,10 +19,7 @@ namespace Theodo\RogerCmsBundle\Tests\Repository;
 require_once __DIR__.'/../Test.php';
 
 use Theodo\RogerCmsBundle\Tests\Test as TestCase;
-use Theodo\RogerCmsBundle\Repository\ContentEntityRepository;
-use Theodo\RogerCmsBundle\Entity\Layout;
 use Theodo\RogerCmsBundle\Entity\Page;
-use Theodo\RogerCmsBundle\Entity\Snippet;
 
 class ContentEntityRepositoryTest extends TestCase
 {
