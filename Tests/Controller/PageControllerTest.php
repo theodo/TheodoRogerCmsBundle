@@ -35,10 +35,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/pages', array(), array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'admin'
-        ));
+        $crawler = $client->request('GET', '/admin/pages');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Homepage.*/', $client->getResponse()->getContent());
@@ -57,10 +54,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/pages/1/new', array(), array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'admin'
-        ));
+        $crawler = $client->request('GET', '/admin/pages/1/new');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Page.*/', $client->getResponse()->getContent());
@@ -76,10 +70,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/pages/1/edit', array(), array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'admin'
-        ));
+        $crawler = $client->request('GET', '/admin/pages/1/edit');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
@@ -95,10 +86,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/pages/1/update', array(), array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'admin'
-        ));
+        $crawler = $client->request('GET', '/admin/pages/1/update');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
@@ -114,10 +102,7 @@ class PageControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/pages', array(), array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'admin'
-        ));
+        $crawler = $client->request('GET', '/admin/pages');
 
         // Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
