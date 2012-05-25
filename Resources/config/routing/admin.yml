@@ -1,49 +1,6 @@
 login:
     pattern:  /
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:login }
-
-login_check:
-    pattern:   /login
-
-logout:
-    pattern:   /logout
-
-user_accessDenied:
-    pattern: /access-denied
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:accessDenied }
-
-# User routing
-user_list:
-    pattern:  /users
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:list, tab: settings, nav: users }
-
-user_edit:
-    pattern:  /users/{id}/edit
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, self: false, tab: settings, nav: users }
-
-user_new:
-    pattern:  /users/new
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: false, tab: settings, nav: users }
-
-user_remove:
-    pattern:  /users/{id}/remove
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:remove, tab: settings, nav: users }
-
-user_preferences:
-    pattern:  /preferences/edit
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: true, tab: settings, nav: personal }
-
-user_preferencesUpdate:
-    pattern:  /preferences/update
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, id: null, self: true, tab: settings, nav: personal }
-
-user_update:
-    pattern:  /users/{id}/update
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:edit, self: false, tab: settings, nav: personal }
-
-user_checkSessionLocale:
-    pattern:  /check-session/{redirect_route}
-    defaults: { _controller: TheodoRogerCmsBundle:Backend\User:checkSessionLocale }
+    defaults: { _controller: TheodoRogerCmsBundle:Backend\Page:index, tab: content, nav: pages }
 
 # Page routing
 page_list:
