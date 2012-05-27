@@ -1,34 +1,35 @@
 {% set current_tab = tab|default('content') %}
 {% set current_nav = nav|default('') %}
+
+
+{% macro nav(role, url, label, current) %}
+    {% if is_granted(role) %}
+        <li>
+            <a{% if current %} class="current"{% endif %} href="{{ url }}">
+                <span>{{ label|trans }}</span>
+            </a>
+        </li>
+    {% endif %}
+{% endmacro %}
+
 <ul id="navigation">
-    <li{% if current_tab == 'content' %} class="current"{% endif %}>
-        <a href="{{ url('page_list') }}">{% trans %}Content{% endtrans %}</a>
-        <ul class="nav_sub">
-            <li>
-                <a{% if current_nav == 'medias' %} class="current"{% endif %} href="{{ url('media_list') }}">
-                    <span>{% trans %}Medias{% endtrans %}</span>
-                </a>
-            </li>
-            <li>
-                <a{% if current_nav == 'pages' %} class="current"{% endif %} href="{{ url('page_list') }}">
-                    <span>{% trans %}Pages{% endtrans %}</span>
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li{% if current_tab == 'design' %} class="current"{% endif %}>
-        <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
-        <ul class="nav_sub">
-            <li>
-                <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
-                    <span>{% trans %}Layouts{% endtrans %}</span>
-                </a>
-            </li>
-            <li>
-                <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
-                    <span>{% trans %}Snippets{% endtrans %}</span>
-                </a>
-            </li>
-        </ul>
-    </li>
+    {% if is_granted('ROLE_ROGER_CMS_CONTENT_MANAGER') %}
+        <li{% if current_tab == 'content' %} class="current"{% endif %}>
+            <a href="{{ url('page_list') }}">{% trans %}Content{% endtrans %}</a>
+            <ul class="nav_sub">
+                {{ _self.nav('ROLE_ROGER_CMS_MEDIA_MANAGER', url('media_list'), 'Medias', current_nav == 'medias') }}
+                {{ _self.nav('ROLE_ROGER_CMS_PAGE_MANAGER', url('page_list'), 'Pages', current_nav == 'pages') }}
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted('ROLE_ROGER_CMS_DESIGN_MANAGER') %}
+        <li{% if current_tab == 'design' %} class="current"{% endif %}>
+            <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
+            <ul class="nav_sub">
+                {{ _self.nav('ROLE_ROGER_CMS_LAYOUT_MANAGER', url('layout_list'), 'Layouts', current_nav == 'layouts') }}
+                {{ _self.nav('ROLE_ROGER_CMS_SNIPPET_MANAGER', url('snippet_list'), 'Snippets', current_nav == 'snippets') }}
+            </ul>
+        </li>
+    {% endif %}
 </ul>
