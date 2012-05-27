@@ -16,46 +16,19 @@
             </li>
         </ul>
     </li>
-
-    {% if is_granted('ROLE_USER') %}
-        <li{% if current_tab == 'design' %} class="current"{% endif %}>
-            <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
-            <ul class="nav_sub">
-                <li>
-                    <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
-                        <span>{% trans %}Layouts{% endtrans %}</span>
-                    </a>
-                </li>
-                <li>
-                    <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
-                        <span>{% trans %}Snippets{% endtrans %}</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    {% endif %}
-
-    <li{% if current_tab == 'settings' %} class="current"{% endif %}>
-        <a href="{{ url('user_preferences') }}">{% trans %}Settings{% endtrans %}</a>
+    <li{% if current_tab == 'design' %} class="current"{% endif %}>
+        <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
         <ul class="nav_sub">
             <li>
-                <a{% if current_nav == 'personal' %} class="current"{% endif %} href="{{ url('user_preferences') }}">
-                    <span>{% trans %}Personal{% endtrans %}</span>
+                <a{% if current_nav == 'layouts' %} class="current"{% endif %} href="{{ url('layout_list') }}">
+                    <span>{% trans %}Layouts{% endtrans %}</span>
                 </a>
             </li>
-
-            {% if is_granted('ROLE_ADMIN') %}
-                <li>
-                    <a{% if current_nav == 'users' %} class="current"{% endif %} href="{{ url('user_list') }}">
-                        <span>{% trans %}Users{% endtrans %}</span>
-                    </a>
-                </li>
-               <!--<li>
-                    <a{% if current_nav == 'extensions' %} class="current"{% endif %} href="#">
-                        <span>{% trans %}Extensions{% endtrans %}</span>
-                    </a>
-                </li>-->
-            {% endif %}
+            <li>
+                <a{% if current_nav == 'snippets' %} class="current"{% endif %} href="{{ url('snippet_list') }}">
+                    <span>{% trans %}Snippets{% endtrans %}</span>
+                </a>
+            </li>
         </ul>
     </li>
 </ul>

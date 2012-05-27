@@ -20,6 +20,18 @@ To add the bundle to your project add the following entry to your deps file:
 
 ### Step 2: Dependencies
 
+**Using Composer**
+
+Add the Roger repository:
+
+``` json
+    "require": {
+        "theodo/roger-cms": "dev-master"
+    }
+```
+
+Then run ```php composer.phar install``` and you are done. You can now jump to the step 4.
+
 **Using the vendors script**
 
 Add the following lines to your `deps` file:
