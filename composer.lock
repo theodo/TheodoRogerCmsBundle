@@ -8,7 +8,7 @@
         {
             "package": "doctrine/data-fixtures",
             "version": "dev-master",
-            "source-reference": "7980ea20b3c6e5104241acb430e4822b8bc402ae"
+            "source-reference": "d233d05437c1a10034867f22069b4bb0f7dc96b6"
         },
         {
             "package": "doctrine/dbal",
@@ -17,7 +17,7 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "9c8cdd383be8d8a9fd8113289cd36e3453c81e1c"
+            "source-reference": "74632539010f1f8887e8afadf41a732efce971c1"
         },
         {
             "package": "doctrine/doctrine-fixtures-bundle",
@@ -31,7 +31,7 @@
         {
             "package": "gedmo/doctrine-extensions",
             "version": "dev-master",
-            "source-reference": "015de8edd4024dd1aeddd95d969448ce931a6c66"
+            "source-reference": "96d650bb17f3a3a70bbfe700bfd011177f0705fd"
         },
         {
             "package": "stof/doctrine-extensions-bundle",
@@ -41,16 +41,50 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
+            "source-reference": "adf07f1e539193ae1975348afc34ed37e1382e0a",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/symfony",
+            "version": "dev-master",
+            "source-reference": "adf07f1e539193ae1975348afc34ed37e1382e0a"
+        },
+        {
+            "package": "symfony/symfony",
+            "version": "dev-master",
             "source-reference": "e54f4e46c9347694767174dd8871a3f2ed04c65d",
-            "alias": "2.1.9999999.9999999-dev"
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "45d0f6fe67e2199d1148cf1c7e832674af4e8e93"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
             "source-reference": "078905ed9507808b260d34fd8928e79e3a600d1d",
-            "alias": "1.9.9999999.9999999-dev"
+            "alias-pretty-version": "1.8.x-dev",
+            "alias-version": "1.8.9999999.9999999-dev"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "45d0f6fe67e2199d1148cf1c7e832674af4e8e93",
+            "alias-pretty-version": "1.8.x-dev",
+            "alias-version": "1.8.9999999.9999999-dev"
         }
     ],
     "packages-dev": null,
-    "aliases": []
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "doctrine/doctrine-bundle": 20,
+        "stof/doctrine-extensions-bundle": 20,
+        "doctrine/doctrine-fixtures-bundle": 20
+    }
 }
