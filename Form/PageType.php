@@ -3,7 +3,7 @@
 namespace Theodo\RogerCmsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
@@ -16,7 +16,7 @@ class PageType extends AbstractType
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Set inputs
         $builder->add('parent_id', 'hidden', array('required' => true));
