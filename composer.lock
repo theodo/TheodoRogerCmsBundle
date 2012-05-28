@@ -1,5 +1,5 @@
 {
-    "hash": "57db9d19d08abc3f5af3ff85f9f11f9e",
+    "hash": "4c80503575bbccae635d3655a0adda5a",
     "packages": [
         {
             "package": "doctrine/common",
@@ -64,26 +64,7 @@
         }
     ],
     "packages-dev": [
-        {
-            "package": "jms/aop-bundle",
-            "version": "1.0.0"
-        },
-        {
-            "package": "jms/cg",
-            "version": "1.0.0"
-        },
-        {
-            "package": "jms/di-extra-bundle",
-            "version": "1.0.1"
-        },
-        {
-            "package": "jms/metadata",
-            "version": "1.1.1"
-        },
-        {
-            "package": "jms/security-extra-bundle",
-            "version": "1.1.0"
-        }
+
     ],
     "aliases": [
 
