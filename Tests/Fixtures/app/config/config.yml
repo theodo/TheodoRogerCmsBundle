@@ -1,5 +1,5 @@
 imports:
-    #- { resource: security.yml }
+    - { resource: security.yml }
 
 framework:
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }

@@ -33,7 +33,10 @@ class SnippetControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/snippets');
+        $crawler = $client->request('GET', '/admin/snippets', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Snippets.*/', $client->getResponse()->getContent());
@@ -51,7 +54,10 @@ class SnippetControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/snippets/new');
+        $crawler = $client->request('GET', '/admin/snippets/new', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Snippet.*/', $client->getResponse()->getContent());
@@ -67,7 +73,10 @@ class SnippetControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/snippets/1/edit');
+        $crawler = $client->request('GET', '/admin/snippets/1/edit', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
@@ -84,7 +93,10 @@ class SnippetControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/snippets/1');
+        $crawler = $client->request('GET', '/admin/snippets/1', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
@@ -100,7 +112,10 @@ class SnippetControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/snippets/1/remove');
+        $crawler = $client->request('GET', '/admin/snippets/1/remove', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
@@ -116,7 +131,10 @@ class SnippetControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/snippets');
+        $crawler = $client->request('GET', '/admin/snippets', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         //Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());

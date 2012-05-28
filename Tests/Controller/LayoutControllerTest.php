@@ -32,7 +32,10 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $client->request('GET', '/admin/layouts');
+        $client->request('GET', '/admin/layouts', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Layouts.*/', $client->getResponse()->getContent());
@@ -50,7 +53,10 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/layouts/new');
+        $crawler = $client->request('GET', '/admin/layouts/new', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*New Layout.*/', $client->getResponse()->getContent());
@@ -66,7 +72,10 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/layouts/1/edit');
+        $crawler = $client->request('GET', '/admin/layouts/1/edit', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
@@ -83,7 +92,10 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/layouts/1');
+        $crawler = $client->request('GET', '/admin/layouts/1', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*Edit.*/', $client->getResponse()->getContent());
@@ -99,7 +111,10 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/layouts/1/remove');
+        $crawler = $client->request('GET', '/admin/layouts/1/remove', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertRegexp('/.*permanently remove.*/', $client->getResponse()->getContent());
@@ -115,7 +130,10 @@ class LayoutControllerTest extends WebTestCase
     {
         $client = $this->createClient();
 
-        $crawler = $client->request('GET', '/admin/layouts');
+        $crawler = $client->request('GET', '/admin/layouts', array(), array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'adminpass'
+        ));
 
         //Test status
         $this->assertEquals(200, $client->getResponse()->getStatusCode());

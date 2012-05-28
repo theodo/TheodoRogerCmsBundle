@@ -1,5 +1,5 @@
 {
-    "hash": "2e5c6a3be1a6e7bcc222f33cd1a1075d",
+    "hash": "a6b39c3e9121f7679cf93450cc4a9b77",
     "packages": [
         {
             "package": "doctrine/common",
@@ -41,31 +41,19 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "adf07f1e539193ae1975348afc34ed37e1382e0a",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/symfony",
-            "version": "dev-master",
             "source-reference": "adf07f1e539193ae1975348afc34ed37e1382e0a"
         },
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "e54f4e46c9347694767174dd8871a3f2ed04c65d",
+            "source-reference": "adf07f1e539193ae1975348afc34ed37e1382e0a",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "45d0f6fe67e2199d1148cf1c7e832674af4e8e93"
-        },
-        {
-            "package": "twig/twig",
-            "version": "dev-master",
-            "source-reference": "078905ed9507808b260d34fd8928e79e3a600d1d",
+            "source-reference": "47e9b95c37d20dd40d94ccbb260bc835b6b1d540",
             "alias-pretty-version": "1.8.x-dev",
             "alias-version": "1.8.9999999.9999999-dev"
         },
@@ -75,9 +63,42 @@
             "source-reference": "45d0f6fe67e2199d1148cf1c7e832674af4e8e93",
             "alias-pretty-version": "1.8.x-dev",
             "alias-version": "1.8.9999999.9999999-dev"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "47e9b95c37d20dd40d94ccbb260bc835b6b1d540"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+        {
+            "package": "jms/aop-bundle",
+            "version": "1.0.0"
+        },
+        {
+            "package": "jms/cg",
+            "version": "1.0.0"
+        },
+        {
+            "package": "jms/di-extra-bundle",
+            "version": "1.0.1"
+        },
+        {
+            "package": "jms/metadata",
+            "version": "1.1.1"
+        },
+        {
+            "package": "jms/security-extra-bundle",
+            "version": "1.1.0"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "47e9b95c37d20dd40d94ccbb260bc835b6b1d540",
+            "alias-pretty-version": "1.8.x-dev",
+            "alias-version": "1.8.9999999.9999999-dev"
+        }
+    ],
     "aliases": [
 
     ],

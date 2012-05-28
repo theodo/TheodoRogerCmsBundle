@@ -18,6 +18,10 @@
     "stof/doctrine-extensions-bundle": "dev-master",
     "doctrine/doctrine-fixtures-bundle": "dev-master"
   },
+  "require-dev": {
+      "jms/security-extra-bundle": "1.1.*",
+      "jms/di-extra-bundle": "1.0.*"
+  },
   "autoload": {
     "psr-0": {
       "Theodo\\RogerCmsBundle": ""
