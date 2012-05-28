@@ -1,31 +1,31 @@
 {
-  "name": "theodo/roger-cms-bundle",
-  "type": "symfony-bundle",
-  "description": "Symfony port of radiant CMS",
-  "keywords":["cms"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Theodo",
-      "email": "contact@theodo.fr"
-    }
-  ],
-  "require": {
-    "php": ">=5.3.3",
-    "symfony/symfony": "2.1.*",
-    "doctrine/orm": "2.2.0",
-    "doctrine/doctrine-bundle": "dev-master",
-    "stof/doctrine-extensions-bundle": "dev-master",
-    "doctrine/doctrine-fixtures-bundle": "dev-master"
-  },
-  "require-dev": {
-      "jms/security-extra-bundle": "1.1.*",
-      "jms/di-extra-bundle": "1.0.*"
-  },
-  "autoload": {
-    "psr-0": {
-      "Theodo\\RogerCmsBundle": ""
-    }
-  },
-  "target-dir": "Theodo/RogerCmsBundle"
+    "name": "theodo/roger-cms-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony port of radiant CMS",
+    "keywords": ["cms"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Theodo",
+            "email": "contact@theodo.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.1.*",
+        "doctrine/orm": "2.2.0",
+        "doctrine/doctrine-bundle": "dev-master",
+        "stof/doctrine-extensions-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
+    },
+    "require-dev": {
+        "jms/security-extra-bundle": "1.1.*",
+        "jms/di-extra-bundle": "1.0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Theodo\\RogerCmsBundle": ""
+        }
+    },
+    "target-dir": "Theodo/RogerCmsBundle"
 }

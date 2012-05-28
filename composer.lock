@@ -1,5 +1,5 @@
 {
-    "hash": "a6b39c3e9121f7679cf93450cc4a9b77",
+    "hash": "57db9d19d08abc3f5af3ff85f9f11f9e",
     "packages": [
         {
             "package": "doctrine/common",
@@ -60,13 +60,6 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "45d0f6fe67e2199d1148cf1c7e832674af4e8e93",
-            "alias-pretty-version": "1.8.x-dev",
-            "alias-version": "1.8.9999999.9999999-dev"
-        },
-        {
-            "package": "twig/twig",
-            "version": "dev-master",
             "source-reference": "47e9b95c37d20dd40d94ccbb260bc835b6b1d540"
         }
     ],
@@ -90,13 +83,6 @@
         {
             "package": "jms/security-extra-bundle",
             "version": "1.1.0"
-        },
-        {
-            "package": "twig/twig",
-            "version": "dev-master",
-            "source-reference": "47e9b95c37d20dd40d94ccbb260bc835b6b1d540",
-            "alias-pretty-version": "1.8.x-dev",
-            "alias-version": "1.8.9999999.9999999-dev"
         }
     ],
     "aliases": [
