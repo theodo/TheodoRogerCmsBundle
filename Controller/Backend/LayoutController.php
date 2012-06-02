@@ -30,8 +30,8 @@ class LayoutController extends Controller
         $layouts = $this->get('roger.content_repository')->findAll('layout');
 
         return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig',
-                array('layouts' => $layouts)
-                );
+            array('layouts' => $layouts)
+        );
     }
 
     /**
