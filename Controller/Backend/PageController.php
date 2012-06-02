@@ -256,7 +256,7 @@ class PageController extends Controller
          * si la clef existe => on est en edition du twig brut
          * sinon on est uniquement sur l'edition des blocks
          */
-        if (key_exists('content', $data)) {
+        if (array_key_exists('content', $data)) {
             $page_content = $data['content'];
         } else {
             $page_content = '';
