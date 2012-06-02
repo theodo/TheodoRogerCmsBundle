@@ -31,10 +31,8 @@ class PageController extends Controller
     /**
      * List pages
      *
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function indexAction()
     {
@@ -52,14 +50,10 @@ class PageController extends Controller
     /**
      * Edit page action
      *
-     * @param integer $id
-     * @param integer $parent_id
-     *
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @author Romain Barberi <romainb@theodo.fr>
-     * @since 2011-06-21
+     * @param null $id
+     * @param null $parent_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function editAction($id = null, $parent_id = null)
     {
@@ -166,11 +160,9 @@ class PageController extends Controller
     /**
      * Remove page action
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function removeAction($id)
     {
@@ -203,11 +195,8 @@ class PageController extends Controller
     /**
      * Expand page action
      *
-     * @param integer $id
-     * @return response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-23
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function expandAction($id)
     {
@@ -233,17 +222,11 @@ class PageController extends Controller
     /**
      * Site map action
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-23
+     * @param $from_id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function siteMapComponentAction($from_id)
     {
-        // Retrieve request
-        $request = $this->getRequest();
-
         // Retrieve page
         $page = $this->get('roger.content_repository')->findOneById($from_id);
 
@@ -261,20 +244,16 @@ class PageController extends Controller
      *
      * @param $form
      * @param $request
-     *
-     * @author Romain Barberi <romainb@theodo.fr>
-     * @since 2011-08-11
      */
     protected function bindEditForm(&$form, $request)
     {
-
         $data = array_replace_recursive(
             $request->request->get($form->getName(), array()),
             $request->files->get($form->getName(), array())
         );
 
         /*
-         * si la clef existe => on est en editions du twig brut
+         * si la clef existe => on est en edition du twig brut
          * sinon on est uniquement sur l'edition des blocks
          */
         if (key_exists('content', $data)) {

@@ -15,15 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\MediaType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * Media controller
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
 class MediaController extends Controller
 {
     /**
      * Media list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-07-01
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -41,13 +47,8 @@ class MediaController extends Controller
     /**
      * Media edit
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
-     * @since 2011-07-06 mathieud ($hasErrors deleted)
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
@@ -97,11 +98,8 @@ class MediaController extends Controller
     /**
      * Media remove
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-21
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function removeAction($id)
     {

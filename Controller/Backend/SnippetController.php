@@ -14,16 +14,22 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\SnippetType;
 
+/**
+ * Snippet controller
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
 class SnippetController extends Controller
 {
 
     /**
      * Snippet list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -37,14 +43,8 @@ class SnippetController extends Controller
     /**
      * Snippet edit
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
-     * @since 2011-07-06 mathieud ($hasErrors deleted)
-     * @since 2011-07-08 cyrillej ($hasErrors readded^^)
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
@@ -98,11 +98,8 @@ class SnippetController extends Controller
     /**
      * Snippet delete
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-21
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function removeAction($id)
     {
