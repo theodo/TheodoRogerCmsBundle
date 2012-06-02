@@ -16,16 +16,20 @@ use Theodo\RogerCmsBundle\Form\LayoutType;
 
 /**
  * Controller for backend layout section
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
 class LayoutController extends Controller
 {
     /**
      * Layouts list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function indexAction()
     {
@@ -41,7 +45,7 @@ class LayoutController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -94,7 +98,7 @@ class LayoutController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21

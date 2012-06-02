@@ -30,10 +30,8 @@ class PageController extends Controller
     /**
      * List pages
      *
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function indexAction()
     {
@@ -54,7 +52,9 @@ class PageController extends Controller
      * @param integer $id       Id of page to edit. Null for new page.
      * @param integer $parentId Id of parent page in hierarchy. Null if page is homepage
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @author Romain Barberi <romainb@theodo.fr>
@@ -158,9 +158,11 @@ class PageController extends Controller
     /**
      * Remove page action
      *
-     * @param integer $id
+     * @param integer $id Id of page to remove
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
@@ -198,7 +200,7 @@ class PageController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
@@ -233,12 +235,13 @@ class PageController extends Controller
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
+=======
+     * @param $from_id
+     * @return \Symfony\Component\HttpFoundation\Response
+>>>>>>> Update phpdocs
      */
     public function siteMapComponentAction($fromId)
     {
-        // Retrieve request
-        $request = $this->getRequest();
-
         // Retrieve page
         $page = $this->get('roger.content_repository')->findOneById($fromId);
 
@@ -268,7 +271,7 @@ class PageController extends Controller
         );
 
         /*
-         * si la clef existe => on est en editions du twig brut
+         * si la clef existe => on est en edition du twig brut
          * sinon on est uniquement sur l'edition des blocks
          */
         if (key_exists('content', $data)) {

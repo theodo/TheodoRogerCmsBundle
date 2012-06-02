@@ -16,16 +16,19 @@ use Theodo\RogerCmsBundle\Form\SnippetType;
 
 /**
  * Handles backend snippet management
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
 class SnippetController extends Controller
 {
     /**
      * Snippet list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -41,7 +44,7 @@ class SnippetController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -107,7 +110,7 @@ class SnippetController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
