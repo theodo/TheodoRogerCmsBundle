@@ -14,13 +14,19 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\PageType;
 use Theodo\RogerCmsBundle\Entity\Page;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Controller for backend page management
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
 class PageController extends Controller
 {
-
     /**
      * List pages
      *
@@ -31,6 +37,10 @@ class PageController extends Controller
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_EDITOR')) {
+            throw new AccessDeniedException('You are not allowed to list the pages.');
+        }
+
         // Retrieve pages
         $pages = $this->get('roger.content_repository')->getFirstTwoLevelPages();
 
@@ -52,6 +62,10 @@ class PageController extends Controller
      */
     public function editAction($id = null, $parentId = null)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to edit this page.');
+        }
+
         // new page
         if (!$id) {
             $page = new Page();
@@ -153,6 +167,10 @@ class PageController extends Controller
      */
     public function removeAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to delete this page.');
+        }
+
         // Retrieve request
         $request = $this->getRequest();
 
@@ -187,6 +205,10 @@ class PageController extends Controller
      */
     public function expandAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to expand this page.');
+        }
+
         // Retrieve request
         $request = $this->getRequest();
 
