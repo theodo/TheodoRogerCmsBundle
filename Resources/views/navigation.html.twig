@@ -13,22 +13,22 @@
 {% endmacro %}
 
 <ul id="navigation">
-    {% if is_granted('ROLE_ROGER_CMS_CONTENT_MANAGER') %}
+    {% if is_granted('ROLE_ROGER_EDITOR') %}
         <li{% if current_tab == 'content' %} class="current"{% endif %}>
             <a href="{{ url('page_list') }}">{% trans %}Content{% endtrans %}</a>
             <ul class="nav_sub">
-                {{ _self.nav('ROLE_ROGER_CMS_MEDIA_MANAGER', url('media_list'), 'Medias', current_nav == 'medias') }}
-                {{ _self.nav('ROLE_ROGER_CMS_PAGE_MANAGER', url('page_list'), 'Pages', current_nav == 'pages') }}
+                {{ _self.nav('ROLE_ROGER_EDITOR', url('media_list'), 'Medias', current_nav == 'medias') }}
+                {{ _self.nav('ROLE_ROGER_EDITOR', url('page_list'), 'Pages', current_nav == 'pages') }}
             </ul>
         </li>
     {% endif %}
 
-    {% if is_granted('ROLE_ROGER_CMS_DESIGN_MANAGER') %}
+    {% if is_granted('ROLE_ROGER_DESIGNER') %}
         <li{% if current_tab == 'design' %} class="current"{% endif %}>
             <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
             <ul class="nav_sub">
-                {{ _self.nav('ROLE_ROGER_CMS_LAYOUT_MANAGER', url('layout_list'), 'Layouts', current_nav == 'layouts') }}
-                {{ _self.nav('ROLE_ROGER_CMS_SNIPPET_MANAGER', url('snippet_list'), 'Snippets', current_nav == 'snippets') }}
+                {{ _self.nav('ROLE_ROGER_DESIGNER', url('layout_list'), 'Layouts', current_nav == 'layouts') }}
+                {{ _self.nav('ROLE_ROGER_DESIGNER', url('snippet_list'), 'Snippets', current_nav == 'snippets') }}
             </ul>
         </li>
     {% endif %}
