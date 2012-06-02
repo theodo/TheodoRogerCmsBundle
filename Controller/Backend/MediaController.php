@@ -13,6 +13,7 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\MediaType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Backend media management controller
@@ -29,6 +30,10 @@ class MediaController extends Controller
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to list medias.');
+        }
+
         $medias = $this->get('roger.content_repository')->findAll('media');
 
         return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
@@ -50,6 +55,10 @@ class MediaController extends Controller
      */
     public function editAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to edit this media.');
+        }
+
         $media = null;
         if ($id) {
             $media = $this->get('roger.content_repository')->findOneById($id, 'media');
@@ -100,6 +109,10 @@ class MediaController extends Controller
      */
     public function removeAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to delete this media.');
+        }
+
         $media = $media = $this->get('roger.content_repository')->findOneById($id, 'media');
 
         $request = $this->get('request');

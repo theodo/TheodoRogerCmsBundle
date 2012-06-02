@@ -38,7 +38,7 @@ class PageController extends Controller
     public function indexAction()
     {
         if (false == $this->get('security.context')->isGranted('ROLE_ROGER_EDITOR')) {
-            throw new AccessDeniedException('You are not allowed to list the pages.');
+            throw new AccessDeniedException('You are not allowed to list pages.');
         }
 
         // Retrieve pages
