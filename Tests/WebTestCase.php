@@ -19,20 +19,12 @@ abstract class WebTestCase extends Test
     {
         parent::setUp();
 
-        static::$fixtureDir  = __DIR__.'/Fixtures/app';
+        static::$fixtureDir = __DIR__.'/Fixtures/app';
 
         $filesystem = new \Symfony\Component\Filesystem\Filesystem();
         $filesystem->remove(static::$fixtureDir.'/cache');
         $filesystem->remove(static::$fixtureDir.'/logs');
         $filesystem->mkdir(static::$fixtureDir.'/cache');
         $filesystem->mkdir(static::$fixtureDir.'/logs');
-    }
-
-
-    static protected function getKernelClass()
-    {
-        require_once static::$fixtureDir.'/AppTestKernel.php';
-
-        return 'Theodo\RogerCmsBundle\Tests\Fixtures\AppTestKernel';
     }
 }

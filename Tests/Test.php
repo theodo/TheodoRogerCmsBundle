@@ -35,6 +35,15 @@ abstract class Test extends WebTestCase
      */
     protected static $contentRepository;
 
+    protected static $fixtureDir;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        static::$fixtureDir = __DIR__.'/Fixtures/app';
+    }
+
     /**
      * Creates a Kernel, generate the Doctrine schema and load the fixtures.
      *
@@ -136,5 +145,12 @@ abstract class Test extends WebTestCase
     protected function getContentRepository()
     {
         return static::$contentRepository;
+    }
+
+    static protected function getKernelClass()
+    {
+        require_once static::$fixtureDir.'/AppTestKernel.php';
+
+        return 'Theodo\RogerCmsBundle\Tests\Fixtures\AppTestKernel';
     }
 }
