@@ -13,20 +13,31 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\SnippetType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * Snippet controller
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
 class SnippetController extends Controller
 {
 
     /**
      * Snippet list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to list snippets.');
+        }
+
         $snippets = $this->get('roger.content_repository')->findAll('snippet');
 
         return $this->render('TheodoRogerCmsBundle:Snippet:index.html.twig',
@@ -37,14 +48,8 @@ class SnippetController extends Controller
     /**
      * Snippet edit
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
-     * @since 2011-06-29 cyrillej ($hasErrors, copied from PageController by vincentg)
-     * @since 2011-07-06 mathieud ($hasErrors deleted)
-     * @since 2011-07-08 cyrillej ($hasErrors readded^^)
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
@@ -59,6 +64,10 @@ class SnippetController extends Controller
         $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
+                throw new AccessDeniedException('You are not allowed to edit this snippet.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {
@@ -98,19 +107,20 @@ class SnippetController extends Controller
     /**
      * Snippet delete
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-21
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function removeAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to delete this snippet.');
+        }
+
         $snippet = $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $snippet = $this->get('roger.content_repository')->remove($snippet);
+            $this->get('roger.content_repository')->remove($snippet);
 
             return $this->redirect($this->generateUrl('snippet_list'));
         }

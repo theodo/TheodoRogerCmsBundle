@@ -15,20 +15,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Theodo\RogerCmsBundle\Form\PageType;
 use Theodo\RogerCmsBundle\Entity\Page;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * Page controller
+ *
+ * @author Vincent Guillon <vincentg@theodo.fr>
+ * @author Romain Barberi <romainb@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
 class PageController extends Controller
 {
-
     /**
      * List pages
      *
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to list pages.');
+        }
+
         // Retrieve pages
         $pages = $this->get('roger.content_repository')->getFirstTwoLevelPages();
 
@@ -39,14 +50,10 @@ class PageController extends Controller
     /**
      * Edit page action
      *
-     * @param integer $id
-     * @param integer $parent_id
-     *
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @author Romain Barberi <romainb@theodo.fr>
-     * @since 2011-06-21
+     * @param null $id
+     * @param null $parent_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function editAction($id = null, $parent_id = null)
     {
@@ -103,6 +110,9 @@ class PageController extends Controller
 
         // Request is post
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+                throw new AccessDeniedException('You are not allowed to edit this page.');
+            }
 
             $this->bindEditForm($form, $request);
 
@@ -113,18 +123,21 @@ class PageController extends Controller
                 $this->get('roger.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
+
+                if ($request->get('save-and-publish')) {
+                    $page->publish();
+                }
+
+
                 $this->get('roger.content_repository')->save($page);
 
                 $this->get('roger.caching')->warmup('page:'.$page->getName());
 
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('page_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                if ($request->get('save-and-edit')) {
+                    return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
                 }
 
-                return $redirect;
+                return $this->redirect($this->generateUrl('page_list'));
             }
             else
             {
@@ -149,14 +162,16 @@ class PageController extends Controller
     /**
      * Remove page action
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function removeAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to delete this page.');
+        }
+
         // Retrieve request
         $request = $this->getRequest();
 
@@ -182,14 +197,15 @@ class PageController extends Controller
     /**
      * Expand page action
      *
-     * @param integer $id
-     * @return response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-23
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function expandAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to expand this page.');
+        }
+
         // Retrieve request
         $request = $this->getRequest();
 
@@ -208,17 +224,11 @@ class PageController extends Controller
     /**
      * Site map action
      *
-     * @param integer $id
-     * @return Response
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-23
+     * @param $from_id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function siteMapComponentAction($from_id)
     {
-        // Retrieve request
-        $request = $this->getRequest();
-
         // Retrieve page
         $page = $this->get('roger.content_repository')->findOneById($from_id);
 
@@ -236,23 +246,19 @@ class PageController extends Controller
      *
      * @param $form
      * @param $request
-     *
-     * @author Romain Barberi <romainb@theodo.fr>
-     * @since 2011-08-11
      */
     protected function bindEditForm(&$form, $request)
     {
-
         $data = array_replace_recursive(
             $request->request->get($form->getName(), array()),
             $request->files->get($form->getName(), array())
         );
 
         /*
-         * si la clef existe => on est en editions du twig brut
+         * si la clef existe => on est en edition du twig brut
          * sinon on est uniquement sur l'edition des blocks
          */
-        if (key_exists('content', $data)) {
+        if (array_key_exists('content', $data)) {
             $page_content = $data['content'];
         } else {
             $page_content = '';

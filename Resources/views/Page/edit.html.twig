@@ -18,14 +18,14 @@
 
 {% block cmscontent %}
     {% if page.id is not null %}
-    <h1>{% trans %}Edit Page{% endtrans %}</h1>
-    <form id="new_page" action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
+        <h1>{% trans %}Edit Page{% endtrans %}</h1>
+        <form id="new_page" action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% elseif parent_page == 'homepage' %}
-    <h1>{% trans %}New Homepage{% endtrans %}</h1>
-    <form id="new_page" action="{{ url('page_new', { 'parent_id': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
+        <h1>{% trans %}New Homepage{% endtrans %}</h1>
+        <form id="new_page" action="{{ url('page_new', { 'parent_id': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
-    <h1>{% trans %}New Page{% endtrans %}</h1>
-    <form id="new_page" action="{{ url('page_new', { 'parent_id': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
+        <h1>{% trans %}New Page{% endtrans %}</h1>
+        <form id="new_page" action="{{ url('page_new', { 'parent_id': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
         <div class="title">
             {{ form_row(form.name) }}
@@ -197,36 +197,35 @@
             </div>
         </div>
         <div class="set">
-             <p
-                <label class="required" for="page_layout">Layout</label>
-                <select class="required" name="page_layout" id="page_layout">
-                    <option value=""></option>
-                    {% for layout in layouts %}
-                        <option {{ layout_name == layout.name ? 'selected="selected"' : '' }} value="{{layout.name}}">{{layout.name}}</option>
-                    {% endfor%}
-                </select>
-            </p>
-        </div>
-        <div class="set">
-            <p>
-                {{ form_row(form.status) }}
-            </p>
-            {% if page.id is not null %}
-                <div>
-                    {{ form_label(form.published_at) }}
-                    {{ form_widget(form.published_at) }}
-                    {{ form_errors(form.published_at) }}
-                </div>
+            <label class="required" for="page_layout">Layout</label>
+            <select class="required" name="page_layout" id="page_layout">
+                <option value=""></option>
+                {% for layout in layouts %}
+                    <option {{ layout_name == layout.name ? 'selected="selected"' : '' }} value="{{layout.name}}">{{layout.name}}</option>
+                {% endfor%}
+            </select>
+            {% if not page.isPublished %}
+                {{ 'Status: %status%'|trans({'%status%': page.getStatus() }) }}
+            {% else %}
+                {{ 'Published on %date%'|trans({'%date%': page.getPublishedAt().format('Y-m-d') }) }}
             {% endif %}
         </div>
 
         {{ form_widget(form._token) }}
         {{ form_widget(form.parent_id) }}
+
         <p class="buttons" style="clear: left;">
-            <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
-            <input accesskey="s" class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
-            {% trans %}or{% endtrans %}
-            <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% if not page.isPublished and is_granted('ROLE_ROGER_PUBLISH_CONTENT')%}
+                <input accesskey="p" class="button" type="submit" value="{{ 'Save and publish'|trans }}" name="save-and-publish" />
+            {% endif %}
+            {% if is_granted('ROLE_ROGER_WRITE_CONTENT') %}
+                <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
+                <input accesskey="s" class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
+                {% trans %}or{% endtrans %}
+                <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% else %}
+                <a href="{{ url('page_list') }}">{% trans %}Back to list{% endtrans %}</a>
+            {% endif %}
         </p>
         {# <p class="updated_line">
           {% trans %}Last Updated by <strong>Administrator</strong> at 07:27 am on January 02, 2009{% endtrans %}

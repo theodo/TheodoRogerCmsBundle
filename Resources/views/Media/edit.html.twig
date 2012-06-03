@@ -44,10 +44,14 @@
             {{ form_rest(form) }}
         </div>
         <p class="buttons" style="clear: left;">
-            <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
-            <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
-            {% trans %}or{% endtrans %}
-            <a class="list-media" href="{{ url('media_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% if is_granted('ROLE_ROGER_WRITE_CONTENT') %}
+                <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
+                <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
+                {% trans %}or{% endtrans %}
+                <a class="list-media" href="{{ url('media_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% else %}
+                <a class="list-media" href="{{ url('media_list') }}">{% trans %}Back to list{% endtrans %}</a>
+            {% endif %}
             {# {% if media is defined %}
             <a href="{{ url('media_remove', { 'id': media.id }) }}">{% trans %}Remove{% endtrans %}</a>
             {% endif %}
