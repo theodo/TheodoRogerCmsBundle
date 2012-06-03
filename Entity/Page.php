@@ -121,6 +121,8 @@ class Page
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = PageRepository::STATUS_DRAFT;
+        $this->created_at = new \DateTime();
     }
 
     /**
@@ -594,5 +596,25 @@ class Page
     public function addPage(\Theodo\RogerCmsBundle\Entity\Page $children)
     {
         $this->children[] = $children;
+    }
+
+    /**
+     * Check if the page is published.
+     *
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->getStatus() == PageRepository::STATUS_PUBLISH;
+    }
+
+    /**
+     * Set the status and the publication date
+     * of the page.
+     */
+    public function publish()
+    {
+        $this->setStatus(PageRepository::STATUS_PUBLISH);
+        $this->setPublishedAt(new \DateTime());
     }
 }

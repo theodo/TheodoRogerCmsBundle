@@ -122,20 +122,24 @@ class PageController extends Controller
                 $this->get('roger.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
+
+                if ($request->get('save-and-publish')) {
+                    $page->publish();
+                }
+
+
                 $this->get('roger.content_repository')->save($page);
 
                 $this->get('roger.caching')->warmup('page:'.$page->getName());
 
-                // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('page_list'));
                 if ($request->get('save-and-edit')) {
-                    $redirect = $this->redirect(
-                        $this->generateUrl('page_edit', array('id' => $page->getId()))
-                    );
+                    return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
                 }
 
-                return $redirect;
-            } else {
+                return $this->redirect($this->generateUrl('page_list'));
+            }
+            else
+            {
                 $hasErrors = true;
             }
         }
