@@ -73,6 +73,51 @@ class Page
      */
     private $parent;
 
+    /**
+     * @var string $title
+     */
+    private $title;
+
+    /**
+     * @var text $keywords
+     */
+    private $keywords;
+
+    /**
+     * @var date $published_at
+     */
+    private $published_at;
+
+    /**
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
+     * @var datetime $updated_at
+     */
+    private $updated_at;
+
+    /**
+     * @var boolean $public
+     */
+    private $public;
+
+    /**
+     * @var integer $lifetime
+     */
+    private $lifetime;
+
+    /**
+     * @var boolean $cacheable
+     */
+    private $cacheable;
+
+    /**
+     * @var string $content_type
+     */
+    private $content_type;
+
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
@@ -289,16 +334,11 @@ class Page
     {
         return $this->parent;
     }
-    /**
-     * @var date $published_at
-     */
-    private $published_at;
-
 
     /**
      * Set published_at
      *
-     * @param date $publishedAt
+     * @param \DateTime $publishedAt
      */
     public function setPublishedAt($publishedAt)
     {
@@ -308,7 +348,7 @@ class Page
     /**
      * Get published_at
      *
-     * @return date $publishedAt
+     * @return \DateTime $publishedAt
      */
     public function getPublishedAt()
     {
@@ -356,16 +396,6 @@ class Page
         $metadata->addPropertyConstraint('status', new NotBlank());
         $metadata->addPropertyConstraint('status', new Choice(array('choices' => PageRepository::getAvailableStatus())));
     }
-    /**
-     * @var datetime $created_at
-     */
-    private $created_at;
-
-    /**
-     * @var datetime $updated_at
-     */
-    private $updated_at;
-
 
     /**
      * Set created_at
@@ -406,11 +436,6 @@ class Page
     {
         return $this->updated_at;
     }
-    /**
-     * @var string $content_type
-     */
-    private $content_type;
-
 
     /**
      * Set content_type
@@ -431,11 +456,6 @@ class Page
     {
         return $this->content_type;
     }
-    /**
-     * @var boolean $cacheable
-     */
-    private $cacheable;
-
 
     /**
      * Set cacheable
@@ -458,11 +478,6 @@ class Page
     }
 
     /**
-     * @var integer $lifetime
-     */
-    private $lifetime;
-
-    /**
      * Set lifetime
      *
      * @param integer $lifetime
@@ -481,12 +496,6 @@ class Page
     {
         return $this->lifetime;
     }
-
-    /**
-     * @var boolean $public
-     */
-    private $public;
-
 
     /**
      * Set public
@@ -530,16 +539,6 @@ class Page
     {
         return $this->getSlug() == PageRepository::SLUG_HOMEPAGE;
     }
-
-    /**
-     * @var string $title
-     */
-    private $title;
-
-    /**
-     * @var text $keywords
-     */
-    private $keywords;
 
     /**
      * Set title
