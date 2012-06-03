@@ -13,7 +13,7 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\SnippetType;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Snippet controller
@@ -53,10 +53,6 @@ class SnippetController extends Controller
      */
     public function editAction($id)
     {
-        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
-            throw new AccessDeniedException('You are not allowed to edit this snippet.');
-        }
-
         $snippet = null;
         if ($id) {
             $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
@@ -68,6 +64,10 @@ class SnippetController extends Controller
         $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
+                throw new AccessDeniedException('You are not allowed to edit this snippet.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {

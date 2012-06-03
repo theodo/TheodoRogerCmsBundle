@@ -23,12 +23,12 @@
         </li>
     {% endif %}
 
-    {% if is_granted('ROLE_ROGER_DESIGNER') %}
+    {% if is_granted('ROLE_ROGER_READ_DESIGN') %}
         <li{% if current_tab == 'design' %} class="current"{% endif %}>
             <a href="{{ url('layout_list') }}">{% trans %}Design{% endtrans %}</a>
             <ul class="nav_sub">
-                {{ _self.nav('ROLE_ROGER_DESIGNER', url('layout_list'), 'Layouts', current_nav == 'layouts') }}
-                {{ _self.nav('ROLE_ROGER_DESIGNER', url('snippet_list'), 'Snippets', current_nav == 'snippets') }}
+                {{ _self.nav('ROLE_ROGER_READ_DESIGN', url('layout_list'), 'Layouts', current_nav == 'layouts') }}
+                {{ _self.nav('ROLE_ROGER_READ_DESIGN', url('snippet_list'), 'Snippets', current_nav == 'snippets') }}
             </ul>
         </li>
     {% endif %}
