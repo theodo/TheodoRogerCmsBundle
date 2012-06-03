@@ -13,12 +13,12 @@
 {% endmacro %}
 
 <ul id="navigation">
-    {% if is_granted('ROLE_ROGER_EDITOR') %}
+    {% if is_granted('ROLE_ROGER_READ_CONTENT') %}
         <li{% if current_tab == 'content' %} class="current"{% endif %}>
             <a href="{{ url('page_list') }}">{% trans %}Content{% endtrans %}</a>
             <ul class="nav_sub">
-                {{ _self.nav('ROLE_ROGER_EDITOR', url('media_list'), 'Medias', current_nav == 'medias') }}
-                {{ _self.nav('ROLE_ROGER_EDITOR', url('page_list'), 'Pages', current_nav == 'pages') }}
+                {{ _self.nav('ROLE_ROGER_READ_CONTENT', url('media_list'), 'Medias', current_nav == 'medias') }}
+                {{ _self.nav('ROLE_ROGER_READ_CONTENT', url('page_list'), 'Pages', current_nav == 'pages') }}
             </ul>
         </li>
     {% endif %}
