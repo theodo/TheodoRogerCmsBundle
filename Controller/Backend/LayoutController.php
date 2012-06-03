@@ -13,6 +13,7 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\LayoutType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Controller for backend layout section
@@ -33,6 +34,10 @@ class LayoutController extends Controller
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to list layouts.');
+        }
+
         $layouts = $this->get('roger.content_repository')->findAll('layout');
 
         return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig', array(
@@ -54,6 +59,10 @@ class LayoutController extends Controller
      */
     public function editAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to edit this layout.');
+        }
+
         $layout = null;
         if ($id) {
             $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
@@ -105,6 +114,10 @@ class LayoutController extends Controller
      */
     public function removeAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to delete this layout.');
+        }
+
         $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
 
         $request = $this->get('request');

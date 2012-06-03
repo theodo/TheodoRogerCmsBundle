@@ -35,7 +35,7 @@ class PageController extends Controller
      */
     public function indexAction()
     {
-        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_EDITOR')) {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_CONTENT')) {
             throw new AccessDeniedException('You are not allowed to list pages.');
         }
 
