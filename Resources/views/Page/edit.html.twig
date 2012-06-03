@@ -223,10 +223,14 @@
         {{ form_widget(form._token) }}
         {{ form_widget(form.parent_id) }}
         <p class="buttons" style="clear: left;">
-            <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
-            <input accesskey="s" class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
-            {% trans %}or{% endtrans %}
-            <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% if is_granted('ROLE_ROGER_WRITE_CONTENT') %}
+                <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
+                <input accesskey="s" class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
+                {% trans %}or{% endtrans %}
+                <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% else %}
+                <a href="{{ url('page_list') }}">{% trans %}Back to list{% endtrans %}</a>
+            {% endif %}
         </p>
         {# <p class="updated_line">
           {% trans %}Last Updated by <strong>Administrator</strong> at 07:27 am on January 02, 2009{% endtrans %}
