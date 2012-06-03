@@ -71,14 +71,14 @@ class Page
     private $parent;
 
     /**
-     * @var DateTime $createdAt
+     * @var string $title
      */
-    private $createdAt;
+    private $title;
 
     /**
-     * @var DateTime $updatedAt
+     * @var text $keywords
      */
-    private $updatedAt;
+    private $keywords;
 
     /**
      * @var date $publishedAt
@@ -86,29 +86,14 @@ class Page
     private $publishedAt;
 
     /**
-     * @var string $contentType
+     * @var datetime $createdAt
      */
-    private $contentType;
+    private $createdAt;
 
     /**
-     * @var boolean $cacheable
+     * @var datetime $updatedAt
      */
-    private $cacheable;
-
-    /**
-     * @var string $title
-     */
-    private $title;
-
-    /**
-     * @var string $keywords
-     */
-    private $keywords;
-
-    /**
-     * @var integer $lifetime
-     */
-    private $lifetime;
+    private $updatedAt;
 
     /**
      * @var boolean $public
@@ -116,8 +101,20 @@ class Page
     private $public;
 
     /**
-     * Initalize children as ArrayCollection for new objects
+     * @var integer $lifetime
      */
+    private $lifetime;
+
+    /**
+     * @var boolean $cacheable
+     */
+    private $cacheable;
+
+    /**
+     * @var string $contentType
+     */
+    private $contentType;
+
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
@@ -338,7 +335,7 @@ class Page
     /**
      * Set publishedAt
      *
-     * @param date $publishedAt
+     * @param \DateTime $publishedAt
      */
     public function setPublishedAt($publishedAt)
     {
@@ -348,7 +345,7 @@ class Page
     /**
      * Get publishedAt
      *
-     * @return date $publishedAt
+     * @return \DateTime $publishedAt
      */
     public function getPublishedAt()
     {
