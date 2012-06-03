@@ -58,10 +58,6 @@ class MediaController extends Controller
      */
     public function editAction($id)
     {
-        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
-            throw new AccessDeniedException('You are not allowed to edit this media.');
-        }
-
         $media = null;
         if ($id) {
             $media = $this->get('roger.content_repository')->findOneById($id, 'media');
@@ -70,6 +66,10 @@ class MediaController extends Controller
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+                throw new AccessDeniedException('You are not allowed to edit this media.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {

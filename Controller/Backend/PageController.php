@@ -62,10 +62,6 @@ class PageController extends Controller
      */
     public function editAction($id = null, $parentId = null)
     {
-        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
-            throw new AccessDeniedException('You are not allowed to edit this page.');
-        }
-
         // new page
         if (!$id) {
             $page = new Page();
@@ -114,6 +110,9 @@ class PageController extends Controller
 
         // Request is post
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+                throw new AccessDeniedException('You are not allowed to edit this page.');
+            }
 
             $this->bindEditForm($form, $request);
 
