@@ -116,7 +116,7 @@ class MediaController extends Controller
             throw new AccessDeniedException('You are not allowed to delete this media.');
         }
 
-        $media = $media = $this->get('roger.content_repository')->findOneById($id, 'media');
+        $media = $this->get('roger.content_repository')->findOneById($id, 'media');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {

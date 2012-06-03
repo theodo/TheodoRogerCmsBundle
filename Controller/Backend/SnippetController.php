@@ -134,7 +134,7 @@ class SnippetController extends Controller
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $snippet = $this->get('roger.content_repository')->remove($snippet);
+            $this->get('roger.content_repository')->remove($snippet);
 
             return $this->redirect($this->generateUrl('snippet_list'));
         }
