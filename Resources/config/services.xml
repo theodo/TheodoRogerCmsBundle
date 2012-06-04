@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <!-- defines the path of your templates if you want to mix DB-stored templates and file templates -->
+        <parameter key="roger.twig.loader.fallback_path" />
+        <parameter key="roger.entity_manager.name">default</parameter>
+        <parameter key="roger.twig.loader.class">Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository</parameter>
+        <parameter key="roger.caching.class">Theodo\RogerCmsBundle\Extensions\Twig\TwigCacheDatabase</parameter>
+        <parameter key="roger.content_repository.class">Theodo\RogerCmsBundle\Repository\ContentEntityRepository</parameter>
+        <parameter key="roger.routing.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerRoutingExtension</parameter>
+        <parameter key="roger.twig.extension.actions.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerActionsExtension</parameter>
+        <parameter key="validator.twig_syntax.class">Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator</parameter>
+        <parameter key="gedmo.timestampable.listener.class">Gedmo\Timestampable\TimestampableListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="roger.content_repository" class="%roger.content_repository.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="roger.twig.loader" class="%roger.twig.loader.class%">
+            <argument type="service" id="roger.content_repository" />
+            <argument type="service" id="twig.loader" />
+            <argument>%roger.twig.loader.fallback_path%</argument>
+        </service>
+        <service id="roger.twig" class="%twig.class%">
+            <argument type="service" id="roger.twig.loader" />
+            <argument>%twig.options%</argument>
+        </service>
+        <service id="roger.templating" class="%templating.engine.twig.class%">
+            <argument type="service" id="roger.twig" />
+            <argument type="service" id="templating.name_parser" />
+            <argument type="service" id="file_locator" />
+            <argument type="service" id="templating.globals" />
+        </service>
+        <service id="roger.caching" class="%roger.caching.class%">
+            <argument type="service" id="roger.twig" />
+        </service>
+        <service id="roger.routing" class="%roger.routing.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="twig.extension" />
+        </service>
+        <service id="roger.twig.extension.actions" class="%roger.twig.extension.actions.class%">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+        </service>
+        <service id="validator.twig_syntax" class="%validator.twig_syntax.class%">
+            <argument type="service" id="roger.twig" />
+            <tag name="validator.constraint_validator" alias="validator.twig_syntax" />
+        </service>
+        <service id="doctrine.orm.validator.unique" class="Theodo\RogerCmsBundle\Validator\Constraints\RogerUniqueEntityValidator">
+            <tag name="validator.constraint_validator" alias="doctrine.org.validator.unique" />
+            <argument type="service" id="doctrine" />
+        </service>
+    </services>
+</container>
