@@ -34,9 +34,11 @@ Theodo\RogerCmsBundle\Entity\Page:
             type: string
             length: 127
         parentId:
+            column: parent_id
             type: integer
             nullable: true
         contentType:
+            column: content_type
             type: string
             length: 127
         cacheable:
@@ -47,14 +49,17 @@ Theodo\RogerCmsBundle\Entity\Page:
             type: integer
             nullable: true
         publishedAt:
+            column: published_at
             type: date
             nullable: true
         createdAt:
+            column: created_at
             type: datetime
             gedmo:
                 timestampable:
                     on: create
         updatedAt:
+            column: updated_at
             type: datetime
             gedmo:
                 timestampable:
@@ -64,7 +69,7 @@ Theodo\RogerCmsBundle\Entity\Page:
             targetEntity: Page
             inversedBy: children
             joinColumn:
-                name: parentId
+                name: parent_id
                 referencedColumnName: id
     oneToMany:
         children:
