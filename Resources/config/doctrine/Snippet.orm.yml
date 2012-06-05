@@ -20,11 +20,13 @@ Theodo\RogerCmsBundle\Entity\Snippet:
             type: integer
             nullable: true
         createdAt:
+            column: created_at
             type: datetime
             gedmo:
                 timestampable:
                     on: create
         updatedAt:
+            column: updated_at
             type: datetime
             gedmo:
                 timestampable:
