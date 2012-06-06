@@ -14,6 +14,7 @@
         <parameter key="roger.twig.extension.actions.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerActionsExtension</parameter>
         <parameter key="validator.twig_syntax.class">Theodo\RogerCmsBundle\Validator\TwigSyntaxValidator</parameter>
         <parameter key="gedmo.timestampable.listener.class">Gedmo\Timestampable\TimestampableListener</parameter>
+        <parameter key="doctrine.orm.validator.unique.class">Theodo\RogerCmsBundle\Validator\Constraints\RogerUniqueEntityValidator</parameter>
     </parameters>
 
     <services>
@@ -51,8 +52,8 @@
             <argument type="service" id="roger.twig" />
             <tag name="validator.constraint_validator" alias="validator.twig_syntax" />
         </service>
-        <service id="doctrine.orm.validator.unique" class="Theodo\RogerCmsBundle\Validator\Constraints\RogerUniqueEntityValidator">
-            <tag name="validator.constraint_validator" alias="doctrine.org.validator.unique" />
+        <service id="doctrine.orm.validator.unique" class="%doctrine.orm.validator.unique.class%">
+            <tag name="validator.constraint_validator" alias="doctrine.orm.validator.unique" />
             <argument type="service" id="doctrine" />
         </service>
     </services>
