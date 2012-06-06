@@ -9,20 +9,18 @@
     </route>
     <!-- Page routing -->
     <route id="page_list" pattern="/pages">
-        <default key=" _controller">TheodoRogerCmsBundle:Backend\Page:index</default>
+        <default key="_controller">TheodoRogerCmsBundle:Backend\Page:index</default>
     </route>
     <route id="page_new" pattern="/pages/{parentId}/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
         <default key="id" />
     </route>
-
     <route id="page_edit" pattern="/pages/{id}/edit">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
     </route>
     <route id="page_update" pattern="/pages/{id}/update">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
     </route>
-
     <route id="page_remove" pattern="/pages/{id}/remove">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:remove</default>
     </route>
