@@ -13,6 +13,7 @@
     </route>
     <route id="page_new" pattern="/pages/{parentId}/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
+        <default key="id" />
     </route>
 
     <route id="page_edit" pattern="/pages/{id}/edit">
@@ -35,6 +36,7 @@
     </route>
     <route id="layout_new" pattern="/layouts/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:edit</default>
+        <default key="id" />
     </route>
     <route id="layout_update" pattern="/layouts/{id}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:edit</default>
@@ -52,6 +54,7 @@
     </route>
     <route id="snippet_new" pattern="/snippets/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:edit</default>
+        <default key="id" />
     </route>
     <route id="snippet_update" pattern="/snippets/{id}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:edit</default>
@@ -69,6 +72,7 @@
     </route>
     <route id="media_new" pattern="/medias/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:edit</default>
+        <default key="id" />
     </route>
     <route id="media_update" pattern="/medias/{id}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:edit</default>
@@ -79,5 +83,4 @@
     <route id="media_remove" pattern="/medias/{id}/remove">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:remove</default>
     </route>
-
 </routes>
