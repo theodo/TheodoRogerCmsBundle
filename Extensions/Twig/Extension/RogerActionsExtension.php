@@ -14,6 +14,9 @@ namespace Theodo\RogerCmsBundle\Extensions\Twig\Extension;
 use Theodo\RogerCmsBundle\Extensions\Twig\TokenParser\SnippetTokenParser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * This Twig extension adds snippet rendering functions
+ */
 class RogerActionsExtension extends \Twig_Extension
 {
     private $container;
@@ -31,28 +34,30 @@ class RogerActionsExtension extends \Twig_Extension
     /**
      * Returns the Response content for a given controller or URI.
      *
-     * @param string $name The name of the snippet or its controller
+     * @param string $name       The name of the snippet or its controller
      * @param array  $attributes An array of request attributes
-     * @param array  $options    An array of options
+     *
+     * @return string The response content
      *
      * @see Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver::render()
      */
     public function renderSnippet($name, $attributes = array())
     {
-
         if (strpos($name, ':') !== false) {
             $controller = $name;
             $array = explode(':', $name);
             $name = end($array);
-        }
-        else {
+        } else {
             $controller = 'TheodoRogerCmsBundle:Frontend\Frontend:snippet';
         }
+
         $params['name'] = $name;
         $params['attributes'] = $attributes;
         $options['standalone'] = true;
 
-        return $this->container->get('templating.helper.actions')->render($controller, $params, $options);
+        return $this->container
+            ->get('templating.helper.actions')
+            ->render($controller, $params, $options);
     }
 
     /**
@@ -63,11 +68,15 @@ class RogerActionsExtension extends \Twig_Extension
     public function getTokenParsers()
     {
         return array(
-            // {% render 'theodo' with { 'arg': 42 } %}
             new SnippetTokenParser(),
         );
     }
 
+    /**
+     * Gets extension name
+     *
+     * @return string
+     */
     public function getName()
     {
         return 'roger_actions';

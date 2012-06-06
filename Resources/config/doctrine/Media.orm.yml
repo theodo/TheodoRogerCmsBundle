@@ -13,12 +13,14 @@ Theodo\RogerCmsBundle\Entity\Media:
             type: string
             length: 255
             unique: true
-        created_at:
+        createdAt:
+            column: created_at
             type: datetime
             gedmo:
                 timestampable:
                     on: create
-        updated_at:
+        updatedAt:
+            column: updated_at
             type: datetime
             gedmo:
                 timestampable:

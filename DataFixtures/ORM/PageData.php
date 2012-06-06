@@ -7,10 +7,15 @@ use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Data fixtures for Page model class
+ */
 class PageData implements FixtureInterface
 {
     /**
      * Load page fixtures
+     *
+     * @param ObjectManager $manager
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20

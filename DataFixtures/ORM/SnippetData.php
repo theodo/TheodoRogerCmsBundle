@@ -6,8 +6,14 @@ use Theodo\RogerCmsBundle\Entity\Snippet;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Data fixtures for Snippet model class
+ */
 class SnippetData implements FixtureInterface
 {
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
 

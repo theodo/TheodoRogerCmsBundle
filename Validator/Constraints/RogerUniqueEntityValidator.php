@@ -6,7 +6,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
-use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * This class is a correction to symfony entity validator

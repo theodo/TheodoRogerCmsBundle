@@ -1,6 +1,0 @@
-_roger_cms_admin:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing/admin.yml"
-    prefix: /admin
-
-_roger_cms_frontend:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing/frontend.yml"

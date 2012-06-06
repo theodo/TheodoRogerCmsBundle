@@ -2,7 +2,6 @@
 
 namespace Theodo\RogerCmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -32,14 +31,14 @@ class Snippet
     private $content;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @var boolean $cacheable
@@ -117,43 +116,43 @@ class Snippet
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -219,7 +218,7 @@ class Snippet
     /**
      * Snippet validator
      *
-     *
+     * @param ClassMetadata $metadata
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
