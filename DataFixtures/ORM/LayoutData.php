@@ -6,10 +6,15 @@ use Theodo\RogerCmsBundle\Entity\Layout;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * DataFixtures for Layout model
+ */
 class LayoutData implements FixtureInterface
 {
     /**
      * Load layout fixtures
+     *
+     * @param ObjectManager $manager
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20

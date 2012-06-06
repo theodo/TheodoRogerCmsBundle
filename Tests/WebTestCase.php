@@ -9,7 +9,6 @@ namespace Theodo\RogerCmsBundle\Tests;
 
 use Theodo\RogerCmsBundle\Tests\Test;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpKernel\Kernel;
 
 abstract class WebTestCase extends Test
 {

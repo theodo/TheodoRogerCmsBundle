@@ -14,6 +14,9 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\MediaType;
 
+/**
+ * Backend media management controller
+ */
 class MediaController extends Controller
 {
     /**
@@ -29,14 +32,15 @@ class MediaController extends Controller
         $medias = $this->get('roger.content_repository')->findAll('media');
 
         return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
-                array('medias' => $medias)
-                );
+            array('medias' => $medias)
+        );
     }
 
     /**
      * Media edit
      *
      * @param integer $id
+     *
      * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
@@ -60,16 +64,14 @@ class MediaController extends Controller
                 // save media
                 $media = $form->getData();
                 // TODO find way to force update without modifying the media
-                if (null !== $media->file)
-                {
+                if (null !== $media->file) {
                     $media->setPath(null);
                 }
                 $this->get('roger.content_repository')->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('media_list'));
-                if ($request->get('save-and-edit'))
-                {
+                if ($request->get('save-and-edit')) {
                     $redirect = $this->redirect($this->generateUrl('media_edit', array('id' => $media->getId())));
                 }
 
@@ -77,18 +79,20 @@ class MediaController extends Controller
             }
         }
 
-        return $this->render('TheodoRogerCmsBundle:Media:edit.html.twig',
-                array(
-                    'media' => $media,
-                    'form' => $form->createView(),
-                  )
-                );
+        return $this->render(
+            'TheodoRogerCmsBundle:Media:edit.html.twig',
+            array(
+                'media' => $media,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
      * Media remove
      *
      * @param integer $id
+     *
      * @return Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
@@ -106,8 +110,9 @@ class MediaController extends Controller
         }
 
         return $this->render('TheodoRogerCmsBundle:Media:remove.html.twig',
-                array(
-                  'media' => $media
-                ));
+            array(
+                'media' => $media
+            )
+        );
     }
 }

@@ -22,6 +22,9 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  */
 class RogerTwigEnvironmentPass implements CompilerPassInterface
 {
+    /**
+     * @param ContainerBuilder $container
+     */
     public function process(ContainerBuilder $container)
     {
         if (false === $container->hasDefinition('roger.twig')) {
@@ -29,11 +32,13 @@ class RogerTwigEnvironmentPass implements CompilerPassInterface
         }
 
         $definition = $container->getDefinition('roger.twig');
-        
-        // Extensions must always be registered before everything else.
-        // For instance, global variable definitions must be registered
-        // afterward. If not, the globals from the extensions will never
-        // be registered.
+
+        /*
+         * Extensions must always be registered before everything else.
+         * For instance, global variable definitions must be registered
+         * afterward. If not, the globals from the extensions will never
+         * be registered.
+         */
         $calls = $definition->getMethodCalls();
         $definition->setMethodCalls(array());
         // TODO: filter usefull extensions ?

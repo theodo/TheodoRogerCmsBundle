@@ -33,7 +33,7 @@
         {{ page.status|trans }}
     </td>
     <td class="add_child">
-        <a id="new-{{ page.slug }}-child" href="{{ url('page_new', {'parent_id' : page.id}) }}">
+        <a id="new-{{ page.slug }}-child" href="{{ url('page_new', {'parentId' : page.id}) }}">
           {% trans %}Add Child{% endtrans %}
         </a>
     </td>

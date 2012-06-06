@@ -76,7 +76,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
     public function getHomePage()
     {
         // Retrieve home page (page without parent_id)
-        $page = $this->getRepository('page')->findOneBy(array('parent_id' => null));
+        $page = $this->getRepository('page')->findOneBy(array('parentId' => null));
 
         return $page;
     }

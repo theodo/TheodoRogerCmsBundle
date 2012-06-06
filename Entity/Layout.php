@@ -2,7 +2,6 @@
 
 namespace Theodo\RogerCmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -30,19 +29,19 @@ class Layout
     private $content;
 
     /**
-     * @var string $content_type
+     * @var string $contentType
      */
-    private $content_type;
+    private $contentType;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * Set Id
@@ -105,27 +104,69 @@ class Layout
     }
 
     /**
-     * Set content_type
+     * Set contentType
      *
      * @param string $contentType
      */
     public function setContentType($contentType)
     {
-        $this->content_type = $contentType;
+        $this->contentType = $contentType;
     }
 
     /**
-     * Get content_type
+     * Get contentType
      *
      * @return string $contentType
      */
     public function getContentType()
     {
-        return $this->content_type;
+        return $this->contentType;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**
      * Layout validator
+     *
+     * @param ClassMetadata $metadata
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
@@ -136,45 +177,5 @@ class Layout
         // Content validator: not null
         $metadata->addPropertyConstraint('content', new NotBlank());
         $metadata->addPropertyConstraint('content', new TwigSyntax());
-    }
-
-    /**
-     * Set created_at
-     *
-     * @param datetime $createdAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return datetime
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set updated_at
-     *
-     * @param datetime $updatedAt
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-    }
-
-    /**
-     * Get updated_at
-     *
-     * @return datetime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
     }
 }

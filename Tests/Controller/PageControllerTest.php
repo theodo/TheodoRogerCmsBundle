@@ -148,7 +148,7 @@ class PageControllerTest extends WebTestCase
 
         // Submit valid form
         $crawler = $client->submit($form, array(
-            'page[parent_id]'    => static::$em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
+            'page[parentId]'    => static::$em->getRepository('TheodoRogerCmsBundle:Page')->findOneBy(array('slug' => PageRepository::SLUG_HOMEPAGE))->getId(),
             'page[name]'         => 'Functional test',
             'page[slug]'         => 'functional-test',
             'page[breadcrumb]'   => 'Functional test',
@@ -166,9 +166,9 @@ class PageControllerTest extends WebTestCase
 
         // Update Form
         $form = $crawler->filterXPath('//input[@type="submit"]')->form();
-        $form['page[published_at][year]'] = date('Y');
-        $form['page[published_at][month]'] = date('n');
-        $form['page[published_at][day]'] = date('j');
+        $form['page[publishedAt][year]'] = date('Y');
+        $form['page[publishedAt][month]'] = date('n');
+        $form['page[publishedAt][day]'] = date('j');
 
         // Submit the form
         $crawler = $client->submit($form);
