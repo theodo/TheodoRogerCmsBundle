@@ -340,8 +340,6 @@ var addTabPage = function (page_name)
     );
 
     highlightPageBlock(jQuery(".tab:last"));
-
-    CKEDITOR.replace('page_content_'+page_name);
 }
 
 /**
