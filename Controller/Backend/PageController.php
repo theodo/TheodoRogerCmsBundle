@@ -45,12 +45,11 @@ class PageController extends Controller
         return $this->render('TheodoRogerCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
 
-
     /**
      * Edit page action
      *
-     * @param integer $id       Id of page to edit. Null for new page.
-     * @param integer $parentId Id of parent page in hierarchy. Null if page is homepage
+     * @param  integer                                                                                       $id       Id of page to edit. Null for new page.
+     * @param  integer                                                                                       $parentId Id of parent page in hierarchy. Null if page is homepage
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
@@ -187,7 +186,7 @@ class PageController extends Controller
     /**
      * Expand page action
      *
-     * @param integer $id
+     * @param  integer                                    $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function expandAction($id)
@@ -214,7 +213,7 @@ class PageController extends Controller
     /**
      * Site map action
      *
-     * @param integer $fromId
+     * @param  integer                                    $fromId
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function siteMapComponentAction($fromId)
