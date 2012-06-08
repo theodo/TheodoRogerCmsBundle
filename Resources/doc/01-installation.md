@@ -88,7 +88,7 @@ _internal:
     prefix:   /_internal
 
 _roger_cms:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing.xml"
     prefix: /
 
 ```
@@ -101,11 +101,11 @@ _internal:
     prefix:   /_internal
 
 _roger_cms_admin:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing/admin.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing/admin.xml"
     prefix: /my-admin/cms
 
 _roger_cms_frontend:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing/frontend.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing/frontend.xml"
     prefix: /cms
 ```
 
