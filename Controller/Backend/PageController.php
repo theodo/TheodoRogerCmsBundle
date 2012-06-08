@@ -121,7 +121,6 @@ class PageController extends Controller
                     $page->publish();
                 }
 
-
                 $this->get('roger.content_repository')->save($page);
 
                 $this->get('roger.caching')->warmup('page:'.$page->getName());

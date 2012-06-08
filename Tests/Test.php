@@ -51,7 +51,7 @@ abstract class Test extends WebTestCase
      *
      * @param array $options An array of options
      */
-    static public function createRogerKernel(array $options = array())
+    public static function createRogerKernel(array $options = array())
     {
         static::$kernel = static::createKernel($options);
         static::$kernel->boot();
@@ -70,7 +70,7 @@ abstract class Test extends WebTestCase
      *
      * @return Client A Client instance
      */
-    static protected function createClient(array $options = array(), array $server = array())
+    protected static function createClient(array $options = array(), array $server = array())
     {
         static::createRogerKernel($options);
 
@@ -85,7 +85,7 @@ abstract class Test extends WebTestCase
      *
      * @throws Doctrine\DBAL\Schema\SchemaException
      */
-    static protected function generateSchema()
+    protected static function generateSchema()
     {
         static::$em = static::$kernel->getContainer()->get('doctrine')->getEntityManager();
         $metadatas = static::$em->getMetadataFactory()->getAllMetadata();
@@ -108,7 +108,7 @@ abstract class Test extends WebTestCase
      *
      * @throws InvalidArgumentException
      */
-    static protected function loadFixtures()
+    protected static function loadFixtures()
     {
         $path = __DIR__.'/../DataFixtures/ORM';
 
@@ -147,7 +147,7 @@ abstract class Test extends WebTestCase
         return static::$contentRepository;
     }
 
-    static protected function getKernelClass()
+    protected static function getKernelClass()
     {
         require_once static::$fixtureDir.'/AppTestKernel.php';
 

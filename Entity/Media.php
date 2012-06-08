@@ -32,7 +32,6 @@ class Media
      */
     public $file;
 
-
     /**
      * Set Id
      *

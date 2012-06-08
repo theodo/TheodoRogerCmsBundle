@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 
-
 /**
  * Handles displaying CMS pages
  */
