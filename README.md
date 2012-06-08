@@ -26,7 +26,7 @@ Add the Roger repository:
 
 ``` json
     "require": {
-        "theodo/roger-cms": "dev-master"
+        "theodo/roger-cms-bundle": "dev-master"
     }
 ```
 
