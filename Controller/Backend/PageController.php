@@ -45,7 +45,6 @@ class PageController extends Controller
         return $this->render('TheodoRogerCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
 
-
     /**
      * Edit page action
      *
@@ -200,7 +199,7 @@ class PageController extends Controller
     /**
      * Expand page action
      *
-     * @param integer $id
+     * @param integer $id Id of page to edit
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -233,14 +232,10 @@ class PageController extends Controller
      *
      * @param integer $fromId
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-23
-=======
-     * @param $from_id
-     * @return \Symfony\Component\HttpFoundation\Response
->>>>>>> Update phpdocs
      */
     public function siteMapComponentAction($fromId)
     {

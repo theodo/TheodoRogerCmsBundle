@@ -47,7 +47,7 @@ class SnippetController extends Controller
     /**
      * Snippet edit
      *
-     * @param integer $id
+     * @param integer $id Id of edited snippet
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
@@ -117,7 +117,7 @@ class SnippetController extends Controller
     /**
      * Snippet delete
      *
-     * @param integer $id
+     * @param integer $id Id of snippet to remove
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *

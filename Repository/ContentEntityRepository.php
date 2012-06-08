@@ -203,7 +203,7 @@ class ContentEntityRepository implements ContentRepositoryInterface
 
     /**
      *
-     * @param string $type
+     * @param  string           $type
      * @return EntityRepository
      *
      * @author Fabrice Bernhard <fabriceb@theodo.fr>
