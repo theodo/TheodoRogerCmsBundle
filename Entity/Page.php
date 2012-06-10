@@ -81,17 +81,17 @@ class Page
     private $keywords;
 
     /**
-     * @var date $publishedAt
+     * @var \DateTime $publishedAt
      */
     private $publishedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     private $createdAt;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     private $updatedAt;
 
@@ -119,7 +119,7 @@ class Page
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = PageRepository::STATUS_DRAFT;
-        $this->created_at = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
