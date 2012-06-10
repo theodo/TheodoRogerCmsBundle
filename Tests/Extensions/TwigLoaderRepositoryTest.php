@@ -26,7 +26,7 @@ class TwigLoaderRepositoryTest extends TestCase
     /**
      * @var Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository
      */
-    static protected $twigLoader;
+    protected static $twigLoader;
 
     public function setUp()
     {

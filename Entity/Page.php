@@ -71,44 +71,29 @@ class Page
     private $parent;
 
     /**
-     * @var DateTime $createdAt
-     */
-    private $createdAt;
-
-    /**
-     * @var DateTime $updatedAt
-     */
-    private $updatedAt;
-
-    /**
-     * @var date $publishedAt
-     */
-    private $publishedAt;
-
-    /**
-     * @var string $contentType
-     */
-    private $contentType;
-
-    /**
-     * @var boolean $cacheable
-     */
-    private $cacheable;
-
-    /**
      * @var string $title
      */
     private $title;
 
     /**
-     * @var string $keywords
+     * @var text $keywords
      */
     private $keywords;
 
     /**
-     * @var integer $lifetime
+     * @var \DateTime $publishedAt
      */
-    private $lifetime;
+    private $publishedAt;
+
+    /**
+     * @var \DateTime $createdAt
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime $updatedAt
+     */
+    private $updatedAt;
 
     /**
      * @var boolean $public
@@ -116,11 +101,25 @@ class Page
     private $public;
 
     /**
-     * Initalize children as ArrayCollection for new objects
+     * @var integer $lifetime
      */
+    private $lifetime;
+
+    /**
+     * @var boolean $cacheable
+     */
+    private $cacheable;
+
+    /**
+     * @var string $contentType
+     */
+    private $contentType;
+
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = PageRepository::STATUS_DRAFT;
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -336,7 +335,7 @@ class Page
     /**
      * Set publishedAt
      *
-     * @param date $publishedAt
+     * @param \DateTime $publishedAt
      */
     public function setPublishedAt($publishedAt)
     {
@@ -346,7 +345,7 @@ class Page
     /**
      * Get publishedAt
      *
-     * @return date $publishedAt
+     * @return \DateTime $publishedAt
      */
     public function getPublishedAt()
     {
@@ -594,5 +593,25 @@ class Page
     public function addPage(\Theodo\RogerCmsBundle\Entity\Page $children)
     {
         $this->children[] = $children;
+    }
+
+    /**
+     * Check if the page is published.
+     *
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->getStatus() == PageRepository::STATUS_PUBLISH;
+    }
+
+    /**
+     * Set the status and the publication date
+     * of the page.
+     */
+    public function publish()
+    {
+        $this->setStatus(PageRepository::STATUS_PUBLISH);
+        $this->setPublishedAt(new \DateTime());
     }
 }

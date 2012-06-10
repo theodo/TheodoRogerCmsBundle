@@ -13,22 +13,31 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\LayoutType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Controller for backend layout section
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
 class LayoutController extends Controller
 {
     /**
      * Layouts list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to list layouts.');
+        }
+
         $layouts = $this->get('roger.content_repository')->findAll('layout');
 
         return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig', array(
@@ -41,7 +50,7 @@ class LayoutController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -59,6 +68,10 @@ class LayoutController extends Controller
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
+                throw new AccessDeniedException('You are not allowed to edit this layout.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {
@@ -94,13 +107,17 @@ class LayoutController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
      */
     public function removeAction($id)
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to delete this layout.');
+        }
+
         $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
 
         $request = $this->get('request');

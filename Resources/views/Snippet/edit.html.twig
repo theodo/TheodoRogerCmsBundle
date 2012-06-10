@@ -81,10 +81,14 @@
             {{ form_rest(form) }}
         </div>
         <p class="buttons" style="clear: left;">
-            <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
-            <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
-            {% trans %}or{% endtrans %}
-            <a class="list-snippet" href="{{ url('snippet_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% if is_granted('ROLE_ROGER_WRITE_DESIGN') %}
+                <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
+                <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
+                {% trans %}or{% endtrans %}
+                <a class="list-snippet" href="{{ url('snippet_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% else %}
+                <a class="list-snippet" href="{{ url('snippet_list') }}">{% trans %}Back to list{% endtrans %}</a>
+            {% endif %}
             {# {% if snippet is defined %}
             <a href="{{ url('snippet_remove', { 'id': snippet.id }) }}">{% trans %}Remove{% endtrans %}</a>
             {% endif %}

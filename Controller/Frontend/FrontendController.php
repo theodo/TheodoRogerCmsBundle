@@ -13,9 +13,7 @@ namespace Theodo\RogerCmsBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
 use Theodo\RogerCmsBundle\Repository\PageRepository;
-
 
 /**
  * Handles displaying CMS pages
