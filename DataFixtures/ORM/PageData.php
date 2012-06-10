@@ -95,11 +95,13 @@ EOF
         $page3->setBreadcrumb('Theodo');
         $page3->setDescription("Theodo page");
         $page3->setStatus(PageRepository::STATUS_PUBLISH);
+        $page3->setPublishedAt(new \DateTime('now'));
         $page3->setParent($page1);
         $page3->setContentType(PageRepository::TYPE_TEXT_HTML);
-        $manager->persist($page3);
         $page3->setCacheable(true);
         $page3->setPublic(false);
+
+        $manager->persist($page3);
 
         // Create new page (Theodo team)
         $page4 = new Page();
