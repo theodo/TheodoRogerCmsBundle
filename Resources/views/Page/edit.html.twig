@@ -22,10 +22,10 @@
         <form id="new_page" action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% elseif parent_page == 'homepage' %}
         <h1>{% trans %}New Homepage{% endtrans %}</h1>
-        <form id="new_page" action="{{ url('page_new', { 'parent_id': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="new_page" action="{{ url('page_new', { 'parentId': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
         <h1>{% trans %}New Page{% endtrans %}</h1>
-        <form id="new_page" action="{{ url('page_new', { 'parent_id': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="new_page" action="{{ url('page_new', { 'parentId': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
         <div class="title">
             {{ form_row(form.name) }}
@@ -212,7 +212,7 @@
         </div>
 
         {{ form_widget(form._token) }}
-        {{ form_widget(form.parent_id) }}
+        {{ form_widget(form.parentId) }}
 
         <p class="buttons" style="clear: left;">
             {% if not page.isPublished and is_granted('ROLE_ROGER_PUBLISH_CONTENT')%}

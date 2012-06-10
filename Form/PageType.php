@@ -27,7 +27,7 @@ class PageType extends AbstractType
         $builder->add('description', 'text', array('required' => false));
         $builder->add('keywords', 'text', array('required' => false));
         $builder->add('content', 'textarea', array('required' => false));
-        $builder->add('content_type', 'choice', array(
+        $builder->add('contentType', 'choice', array(
             'choices'   => PageRepository::getAvailableContentTypes(),
             'required'  => true
         ));

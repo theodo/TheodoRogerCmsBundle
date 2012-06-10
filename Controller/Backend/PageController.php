@@ -272,7 +272,7 @@ class PageController extends Controller
          * sinon on est uniquement sur l'edition des blocks
          */
         if (array_key_exists('content', $data)) {
-            $page_content = $data['content'];
+            $pageContent = $data['content'];
         } else {
             $pageContent = '';
         }

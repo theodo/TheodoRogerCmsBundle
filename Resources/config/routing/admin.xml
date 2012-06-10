@@ -13,7 +13,7 @@
     </route>
     <route id="page_new" pattern="/pages/{parentId}/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
-        <default key="id" />
+        <default key="parentId" />
     </route>
     <route id="page_edit" pattern="/pages/{id}/edit">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
