@@ -134,7 +134,7 @@ class PageControllerTest extends WebTestCase
         $this->assertRegexp('/.*admin\/pages\/.*\/new$/', $client->getRequest()->getUri());
 
         // Retrieve form
-        $form = $crawler->filterXPath('//input[@name="save-and-edit"]')->form();
+        $form = $crawler->filterXPath('//input[@name="save-and-publish"]')->form();
 
         // Submit form with errors
         $crawler = $client->submit($form, array());
@@ -153,25 +153,8 @@ class PageControllerTest extends WebTestCase
             'page[slug]'         => 'functional-test',
             'page[breadcrumb]'   => 'Functional test',
             'page[content]'      => '<p>Functional test page content</p>',
-            'page[status]'       => PageRepository::STATUS_PUBLISH,
-            'save-and-edit'      => true
+            'save-and-publish'   => true
         ));
-
-        // Test return
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $crawler = $client->followRedirect();
-        $this->assertRegexp('/.*admin\/pages\/.*\/edit$/', $client->getRequest()->getUri());
-        $this->assertRegexp('/.*Edit Page.*/', $client->getResponse()->getContent());
-        $this->assertRegexp('/.*Functional test.*/', $client->getResponse()->getContent());
-
-        // Update Form
-        $form = $crawler->filterXPath('//input[@type="submit"]')->form();
-        $form['page[publishedAt][year]'] = date('Y');
-        $form['page[publishedAt][month]'] = date('n');
-        $form['page[publishedAt][day]'] = date('j');
-
-        // Submit the form
-        $crawler = $client->submit($form);
 
         // Test return
         $this->assertEquals(302, $client->getResponse()->getStatusCode());

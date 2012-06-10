@@ -13,22 +13,30 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\MediaType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Backend media management controller
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
 class MediaController extends Controller
 {
     /**
      * Media list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-07-01
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to list medias.');
+        }
+
         $medias = $this->get('roger.content_repository')->findAll('media');
 
         return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
@@ -41,7 +49,7 @@ class MediaController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -58,6 +66,10 @@ class MediaController extends Controller
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+                throw new AccessDeniedException('You are not allowed to edit this media.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {
@@ -93,14 +105,18 @@ class MediaController extends Controller
      *
      * @param integer $id
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
      */
     public function removeAction($id)
     {
-        $media = $media = $this->get('roger.content_repository')->findOneById($id, 'media');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to delete this media.');
+        }
+
+        $media = $this->get('roger.content_repository')->findOneById($id, 'media');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
