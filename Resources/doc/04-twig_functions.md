@@ -8,7 +8,7 @@ WARNING: This bundle is still under developement and is not considered stable.
 
 RogerCMS' twig extension adds 2 functions and one tag:
 
-1. `{{ snippet name }}`
+1. `{% snippet 'snippet_name' %}`
 2. `{{ page_url(page_slug) }}`
  * takes page slug as parameter
  * generates a full url (concatenated with all ascendants)
