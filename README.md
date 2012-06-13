@@ -96,7 +96,7 @@ Add the following lines to your `app/config/routing.yml` file:
 
 ``` bash
 RogerCms:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing.xml"
     prefix: /
 ```
 
