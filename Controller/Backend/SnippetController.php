@@ -91,10 +91,10 @@ class SnippetController extends Controller
                 $this->get('roger.caching')->warmup('snippet:'.$snippet->getName());
 
                 // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('snippet_list'));
+                $redirect = $this->redirect($this->generateUrl('roger_cms_snippet_list'));
                 if ($request->get('save-and-edit')) {
                     $redirect = $this->redirect(
-                        $this->generateUrl('snippet_edit', array(
+                        $this->generateUrl('roger_cms_snippet_edit', array(
                             'id' => $snippet->getId()
                         )));
                 }
@@ -136,7 +136,7 @@ class SnippetController extends Controller
         if ($request->getMethod() == 'POST') {
             $this->get('roger.content_repository')->remove($snippet);
 
-            return $this->redirect($this->generateUrl('snippet_list'));
+            return $this->redirect($this->generateUrl('roger_cms_snippet_list'));
         }
 
         return $this->render('TheodoRogerCmsBundle:Snippet:remove.html.twig',

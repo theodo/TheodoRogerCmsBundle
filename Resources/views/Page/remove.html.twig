@@ -13,11 +13,11 @@
     {% render "TheodoRogerCmsBundle:Backend\\Page:siteMapComponent" with {'fromId': page.id} %}
 </div>
 
-<form class="edit_page" action="{{ url('page_remove', {'id' : page.id}) }}" method="post">
+<form class="edit_page" action="{{ url('roger_cms_page_remove', {'id' : page.id}) }}" method="post">
     <p class="buttons">
         <input class="button" type="submit" value="{% trans %}Delete{% endtrans %}" />
         {% trans %}or{% endtrans %}
-        <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+        <a href="{{ url('roger_cms_page_list') }}">{% trans %}Cancel{% endtrans %}</a>
     </p>
 </form>
 {% endblock %}
