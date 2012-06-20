@@ -87,9 +87,9 @@ class LayoutController extends Controller
                 $this->get('roger.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('layout_list'));
+                $redirect = $this->redirect($this->generateUrl('roger_cms_layout_list'));
                 if ($request->get('save-and-edit')) {
-                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                    $redirect = $this->redirect($this->generateUrl('roger_cms_layout_edit', array('id' => $layout->getId())));
                 }
 
                 return $redirect;
@@ -124,7 +124,7 @@ class LayoutController extends Controller
         if ($request->getMethod() == 'POST') {
             $this->get('roger.content_repository')->remove($layout);
 
-            return $this->redirect($this->generateUrl('layout_list'));
+            return $this->redirect($this->generateUrl('roger_cms_layout_list'));
         }
 
         return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig', array(

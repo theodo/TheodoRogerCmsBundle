@@ -17,13 +17,13 @@
 {% block cmscontent %}
     {% if page.id is not null %}
         <h1>{% trans %}Edit Page{% endtrans %}</h1>
-        <form id="new_page" action="{{ url('page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="new_page" action="{{ url('roger_cms_page_update', { 'id': page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% elseif parent_page == 'homepage' %}
         <h1>{% trans %}New Homepage{% endtrans %}</h1>
-        <form id="new_page" action="{{ url('page_new', { 'parentId': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="new_page" action="{{ url('roger_cms_page_new', { 'parentId': 'homepage' }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
         <h1>{% trans %}New Page{% endtrans %}</h1>
-        <form id="new_page" action="{{ url('page_new', { 'parentId': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="new_page" action="{{ url('roger_cms_page_new', { 'parentId': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
         <div class="title">
             {{ form_row(form.name) }}
@@ -220,9 +220,9 @@
                 <input accesskey="S" class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
                 <input accesskey="s" class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
                 {% trans %}or{% endtrans %}
-                <a href="{{ url('page_list') }}">{% trans %}Cancel{% endtrans %}</a>
+                <a href="{{ url('roger_cms_page_list') }}">{% trans %}Cancel{% endtrans %}</a>
             {% else %}
-                <a href="{{ url('page_list') }}">{% trans %}Back to list{% endtrans %}</a>
+                <a href="{{ url('roger_cms_page_list') }}">{% trans %}Back to list{% endtrans %}</a>
             {% endif %}
         </p>
         {# <p class="updated_line">

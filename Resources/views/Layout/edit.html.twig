@@ -15,10 +15,10 @@
 {% block cmscontent %}
     {% if layout is not null %}
     <h1>{% trans %}Edit Layout{% endtrans %}</h1>
-    <form id="new_layout" class="edit_layout" action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
+    <form id="new_layout" class="edit_layout" action="{{ url('roger_cms_layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
     <h1>{% trans %}New Layout{% endtrans %}</h1>
-    <form id="new_layout" class="edit_layout" id="new_layout" action="{{ url('layout_new') }}" method="post" {{ form_enctype(form) }}>
+    <form id="new_layout" class="edit_layout" id="new_layout" action="{{ url('roger_cms_layout_new') }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
         <div class="form_area">
             <p class="title">
@@ -38,9 +38,9 @@
                 <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
                 <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
                 {% trans %}or{% endtrans %}
-                <a class="list-layout" href="{{ url('layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
+                <a class="list-layout" href="{{ url('roger_cms_layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
             {% else %}
-                <a class="list-layout" href="{{ url('layout_list') }}">{% trans %}Back to list{% endtrans %}</a>
+                <a class="list-layout" href="{{ url('roger_cms_layout_list') }}">{% trans %}Back to list{% endtrans %}</a>
             {% endif %}
             {# {% if layout is defined %}
             <a href="{{ url('layout_remove', { 'id': layout.id }) }}">{% trans %}Remove{% endtrans %}</a>
