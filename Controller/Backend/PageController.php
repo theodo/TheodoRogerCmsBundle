@@ -131,10 +131,10 @@ class PageController extends Controller
                 $this->get('roger.caching')->warmup('page:'.$page->getName());
 
                 if ($request->get('save-and-edit')) {
-                    return $this->redirect($this->generateUrl('page_edit', array('id' => $page->getId())));
+                    return $this->redirect($this->generateUrl('roger_cms_page_edit', array('id' => $page->getId())));
                 }
 
-                return $this->redirect($this->generateUrl('page_list'));
+                return $this->redirect($this->generateUrl('roger_cms_page_list'));
             }
             else
             {
@@ -185,7 +185,7 @@ class PageController extends Controller
             // Delete page
             $this->get('roger.content_repository')->remove($page);
 
-            return $this->redirect($this->generateUrl('page_list'));
+            return $this->redirect($this->generateUrl('roger_cms_page_list'));
         }
 
         return $this->render(

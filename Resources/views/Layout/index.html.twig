@@ -9,7 +9,7 @@
 <div id="actions">
     <ul>
         <li>
-          <a class="new-layout" href="{{ url('layout_new') }}">
+          <a class="new-layout" href="{{ url('roger_cms_layout_new') }}">
             <img alt="Plus" src="{{ asset('bundles/theodorogercms/images/admin/plus.png') }}" />{% trans %}New Layout{% endtrans %}</a>
         </li>
     </ul>
@@ -27,10 +27,10 @@
             <tr class="node level_1">
                 <td class="layout">
                     <img alt="" src="{{ asset('bundles/theodorogercms/images/admin/roger_layout.png') }}" />
-                    <a href="{{ url('layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
+                    <a href="{{ url('roger_cms_layout_edit', { 'id': layout.id }) }}">{{ layout.name }}</a>
                 </td>
                 <td class="remove">
-                    <a id="remove-layout-{{ layout.id }}" href="{{ url('layout_remove', { 'id': layout.id }) }}">{% trans %}Remove{% endtrans %}</a>
+                    <a id="remove-layout-{{ layout.id }}" href="{{ url('roger_cms_layout_remove', { 'id': layout.id }) }}">{% trans %}Remove{% endtrans %}</a>
                 </td>
             </tr>
         {% endfor %}

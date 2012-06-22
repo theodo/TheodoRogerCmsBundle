@@ -4,81 +4,81 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="login" pattern="/">
+    <route id="roger_cms_login" pattern="/">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:index</default>
     </route>
     <!-- Page routing -->
-    <route id="page_list" pattern="/pages">
+    <route id="roger_cms_page_list" pattern="/pages">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:index</default>
     </route>
-    <route id="page_new" pattern="/pages/{parentId}/new">
+    <route id="roger_cms_page_new" pattern="/pages/{parentId}/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
         <default key="parentId" />
     </route>
-    <route id="page_edit" pattern="/pages/{id}/edit">
+    <route id="roger_cms_page_edit" pattern="/pages/{id}/edit">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
     </route>
-    <route id="page_update" pattern="/pages/{id}/update">
+    <route id="roger_cms_page_update" pattern="/pages/{id}/update">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:edit</default>
     </route>
-    <route id="page_remove" pattern="/pages/{id}/remove">
+    <route id="roger_cms_page_remove" pattern="/pages/{id}/remove">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:remove</default>
     </route>
-    <route id="page_expand" pattern="/pages/{id}/expand/{level}">
+    <route id="roger_cms_page_expand" pattern="/pages/{id}/expand/{level}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Page:expand</default>
     </route>
 
     <!-- Layout routing -->
-    <route id="layout_list" pattern="/layouts">
+    <route id="roger_cms_layout_list" pattern="/layouts">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:index</default>
     </route>
-    <route id="layout_new" pattern="/layouts/new">
+    <route id="roger_cms_layout_new" pattern="/layouts/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:edit</default>
         <default key="id" />
     </route>
-    <route id="layout_update" pattern="/layouts/{id}">
+    <route id="roger_cms_layout_update" pattern="/layouts/{id}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:edit</default>
     </route>
-    <route id="layout_edit" pattern="/layouts/{id}/edit">
+    <route id="roger_cms_layout_edit" pattern="/layouts/{id}/edit">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:edit</default>
     </route>
-    <route id="layout_remove" pattern="/layouts/{id}/remove">
+    <route id="roger_cms_layout_remove" pattern="/layouts/{id}/remove">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Layout:remove</default>
     </route>
 
     <!-- Snippet routing -->
-    <route id="snippet_list" pattern="/snippets">
+    <route id="roger_cms_snippet_list" pattern="/snippets">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:index</default>
     </route>
-    <route id="snippet_new" pattern="/snippets/new">
+    <route id="roger_cms_snippet_new" pattern="/snippets/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:edit</default>
         <default key="id" />
     </route>
-    <route id="snippet_update" pattern="/snippets/{id}">
+    <route id="roger_cms_snippet_update" pattern="/snippets/{id}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:edit</default>
     </route>
-    <route id="snippet_edit" pattern="/snippets/{id}/edit">
+    <route id="roger_cms_snippet_edit" pattern="/snippets/{id}/edit">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:edit</default>
     </route>
-    <route id="snippet_remove" pattern="/snippets/{id}/remove">
+    <route id="roger_cms_snippet_remove" pattern="/snippets/{id}/remove">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Snippet:remove</default>
     </route>
 
     <!-- Media routing -->
-    <route id="media_list" pattern="/medias">
+    <route id="roger_cms_media_list" pattern="/medias">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:index</default>
     </route>
-    <route id="media_new" pattern="/medias/new">
+    <route id="roger_cms_media_new" pattern="/medias/new">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:edit</default>
         <default key="id" />
     </route>
-    <route id="media_update" pattern="/medias/{id}">
+    <route id="roger_cms_media_update" pattern="/medias/{id}">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:edit</default>
     </route>
-    <route id="media_edit" pattern="/medias/{id}/edit">
+    <route id="roger_cms_media_edit" pattern="/medias/{id}/edit">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:edit</default>
     </route>
-    <route id="media_remove" pattern="/medias/{id}/remove">
+    <route id="roger_cms_media_remove" pattern="/medias/{id}/remove">
         <default key="_controller">TheodoRogerCmsBundle:Backend\Media:remove</default>
     </route>
 </routes>

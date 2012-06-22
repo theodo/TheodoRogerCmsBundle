@@ -82,9 +82,9 @@ class MediaController extends Controller
                 $this->get('roger.content_repository')->save($media);
 
                 // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('media_list'));
+                $redirect = $this->redirect($this->generateUrl('roger_cms_media_list'));
                 if ($request->get('save-and-edit')) {
-                    $redirect = $this->redirect($this->generateUrl('media_edit', array('id' => $media->getId())));
+                    $redirect = $this->redirect($this->generateUrl('roger_cms_media_edit', array('id' => $media->getId())));
                 }
 
                 return $redirect;
@@ -122,7 +122,7 @@ class MediaController extends Controller
         if ($request->getMethod() == 'POST') {
             $media = $this->get('roger.content_repository')->remove($media);
 
-            return $this->redirect($this->generateUrl('media_list'));
+            return $this->redirect($this->generateUrl('roger_cms_media_list'));
         }
 
         return $this->render('TheodoRogerCmsBundle:Media:remove.html.twig',

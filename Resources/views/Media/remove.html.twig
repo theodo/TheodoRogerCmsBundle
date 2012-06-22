@@ -19,11 +19,11 @@
         </tr>
     </tbody>
 </table>
-<form action="{{ url('media_remove', { 'id': media.id }) }}" method="post" class="edit_media">
+<form action="{{ url('roger_cms_media_remove', { 'id': media.id }) }}" method="post" class="edit_media">
     <p class="buttons">
         <input class="button" type="submit" value="{% trans %}Delete Media{% endtrans %}" />
         {% trans %}or{% endtrans %}
-        <a href="{{ url('media_list') }}">{% trans %}Cancel{% endtrans %}</a>
+        <a href="{{ url('roger_cms_media_list') }}">{% trans %}Cancel{% endtrans %}</a>
     </p>
 </form>
 {% endblock %}
