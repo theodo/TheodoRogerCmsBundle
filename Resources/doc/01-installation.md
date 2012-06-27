@@ -15,6 +15,7 @@ To add the bundle to your project add the following entry to your deps file:
 [RogerCmsBundle]
     git=https://github.com/theodo/TheodoRogerCmsBundle.git
     target=/bundles/Theodo/RogerCmsBundle
+    version=origin/sf2.0.x
 ```
 
 
@@ -27,12 +28,12 @@ Add the following lines to your `deps` file:
 ``` bash
 [DoctrineExtensionsBundle]
     git=https://github.com/stof/StofDoctrineExtensionsBundle.git
-    version=origin/master
+    version=1.0.0
     target=/bundles/Stof/DoctrineExtensionsBundle
 
 [DoctrineExtensions]
     git=http://github.com/l3pp4rd/DoctrineExtensions.git
-    version=origin/master
+    version=v2.1.0
     target=/gedmo-doctrine-extensions
 ```
 
