@@ -40,12 +40,6 @@
         {
             "package": "gedmo/doctrine-extensions",
             "version": "dev-master",
-            "alias-pretty-version": "2.3.x-dev",
-            "alias-version": "2.3.9999999.9999999-dev"
-        },
-        {
-            "package": "gedmo/doctrine-extensions",
-            "version": "dev-master",
             "source-reference": "c801d6f5d9f768680a7f71dc4f27c8cb11acd0af",
             "commit-date": "1343804719"
         },
