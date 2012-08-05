@@ -8,14 +8,12 @@ framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
     secret:          d0c2f6bb2c9e532bd95a36fede828c3db0cb04bc
-    charset:         UTF-8
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  en
     session:
-        auto_start:     true
         storage_id: session.storage.filesystem
 
 # Twig Configuration
