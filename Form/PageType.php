@@ -26,11 +26,8 @@ class PageType extends AbstractType
         $builder->add('title', 'text', array('required' => false));
         $builder->add('description', 'text', array('required' => false));
         $builder->add('keywords', 'text', array('required' => false));
-        $builder->add('content', 'textarea', array('required' => false));
-        $builder->add('contentType', 'choice', array(
-            'choices'   => PageRepository::getAvailableContentTypes(),
-            'required'  => true
-        ));
+        $builder->add('content', 'roger_cms_page_content', array('required' => false));
+        $builder->add('layout', 'roger_cms_page_layout', array('required' => false));
         $builder->add('cacheable', 'checkbox', array('required' => false));
         $builder->add('public', 'checkbox', array('required' => false));
         $builder->add('lifetime', 'text', array('required' => false));

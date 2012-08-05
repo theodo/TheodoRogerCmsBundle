@@ -9,7 +9,9 @@ use Theodo\RogerCmsBundle\Entity\Layout;
 
 class LayoutType extends AbstractType
 {
-
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id', 'hidden');
@@ -17,6 +19,9 @@ class LayoutType extends AbstractType
         $builder->add('content', 'textarea', array('required' => false));
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getDefaultOptions()
     {
         return array(
@@ -24,8 +29,11 @@ class LayoutType extends AbstractType
         );
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getName()
     {
-        return 'layout';
+        return 'roger_cms_page_layout';
     }
 }

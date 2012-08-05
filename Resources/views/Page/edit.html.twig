@@ -196,12 +196,7 @@
         </div>
         <div class="set">
             <label class="required" for="page_layout">Layout</label>
-            <select class="required" name="page_layout" id="page_layout">
-                <option value=""></option>
-                {% for layout in layouts %}
-                    <option {{ layout_name == layout.name ? 'selected="selected"' : '' }} value="{{layout.name}}">{{layout.name}}</option>
-                {% endfor%}
-            </select>
+            {{ form_widget(form.layout) }}
             {% if not page.isPublished %}
                 {{ 'Status: %status%'|trans({'%status%': page.getStatus() }) }}
             {% else %}
