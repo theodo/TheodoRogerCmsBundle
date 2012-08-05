@@ -135,9 +135,7 @@ class PageController extends Controller
                 }
 
                 return $this->redirect($this->generateUrl('roger_cms_page_list'));
-            }
-            else
-            {
+            } else {
                 $hasErrors = true;
             }
         }
@@ -149,7 +147,6 @@ class PageController extends Controller
                 'page'        => $page,
                 'hasErrors'   => $hasErrors,
                 'parent_page' => $parentPage,
-                'layouts'     => $layouts,
                 'layout_name' => $layoutName,
                 'tabs'        => $tabs
             )

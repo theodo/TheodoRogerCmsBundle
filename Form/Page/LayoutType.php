@@ -3,7 +3,7 @@
 namespace Theodo\RogerCmsBundle\Form\Page;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 use Theodo\RogerCmsBundle\Form\DataTransformer\ChoiceWithTextInputTransformer;
 
@@ -17,24 +17,32 @@ class LayoutType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('choice', 'choice', array(
-            'choices'   => $options['choices'],
-            'multiple'  => false,
-            'expanded'  => true,
-            'label'     => 'Statut',
-            'required'  => false,
-        ));
-
-        $builder->add('text', 'text', array(
-            'required' => false,
-            'label' => '',
-        ));
+        $builder
+            ->add('choice', 'choice', array(
+                'choices'   => $options['choices'],
+                'multiple'  => false,
+                'expanded'  => false,
+                'label'     => 'Statut',
+                'required'  => false,
+            ))
+            ->add('text', 'text', array(
+                'required' => false,
+                'label' => '',
+            ))
+        ;
 
         $builder
-            ->appendClientTransformer(new CadioWithTextInputTransformer($options['choices']))
+            ->appendClientTransformer(new ChoiceWithTextInputTransformer($options['choices']))
         ;
+    }
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'choices' => array()
+        );
     }
 
     /**

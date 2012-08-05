@@ -160,7 +160,6 @@
                     <div class="page" id="page_body">
                         <div class="part" id="part_body">
                             <p>
-                                {# {{ form_label(form.content) }} #}
                                 {{ form_errors(form.content) }}
 
                                 <span class="reference_links">
@@ -168,7 +167,7 @@
                                 </span>
                             </p>
                             <div>
-                                {{ form_widget(form.content) }}
+                                {{ form_widget(form.content.content) }}
                             </div>
                         </div>
                     </div>
@@ -195,13 +194,18 @@
             </div>
         </div>
         <div class="set">
-            <label class="required" for="page_layout">Layout</label>
-            {{ form_widget(form.layout) }}
+            <div>
+                <label class="required" for="page_layout">Layout</label>
+                {{ form_widget(form.content.layout.choice) }}
+                {{ form_widget(form.content.layout.text) }}
+            </div>
+            <div>
             {% if not page.isPublished %}
                 {{ 'Status: %status%'|trans({'%status%': page.getStatus() }) }}
             {% else %}
                 {{ 'Published on %date%'|trans({'%date%': page.getPublishedAt().format('Y-m-d') }) }}
             {% endif %}
+            </div>
         </div>
 
         {{ form_widget(form._token) }}

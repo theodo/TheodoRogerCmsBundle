@@ -56,5 +56,12 @@
             <tag name="validator.constraint_validator" alias="doctrine.orm.validator.unique" />
             <argument type="service" id="doctrine" />
         </service>
+        <service id="form.type.roger_cms_page_content" class="Theodo\RogerCmsBundle\Form\Page\ContentType">
+            <tag name="form.type" alias="roger_cms_page_content" />
+            <argument type="service" id="roger.content_repository" />
+        </service>
+        <service id="form.type.roger_cms_page_layout" class="Theodo\RogerCmsBundle\Form\Page\LayoutType">
+            <tag name="form.type" alias="roger_cms_page_layout" />
+        </service>
     </services>
 </container>
