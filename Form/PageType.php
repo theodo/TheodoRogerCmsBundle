@@ -39,7 +39,7 @@ class PageType extends AbstractType
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-21
      */
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
            'data_class' => 'Theodo\RogerCmsBundle\Entity\Page',
