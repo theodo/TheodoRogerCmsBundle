@@ -83,10 +83,9 @@ class PageController extends Controller
         $layouts = $this->get('roger.content_repository')->findAll('layout');
         $pageContent = $page->getContent();
 
-        // Get the current layout from the Twig content
-        if (!($layoutName = $this->matchLayoutName($pageContent))) {
-            $layoutName = null;
-        }
+        $form = $this->createForm(new PageType(), $page);
+
+        $layoutName = $form->get('content')->get('layout');
 
         /**
          * Separate the different blocks from Twig
@@ -99,7 +98,6 @@ class PageController extends Controller
         }
 
         // Create form
-        $form = $this->createForm(new PageType(), $page);
 
         // Retrieve request
         $request = $this->getRequest();

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Form\DataTransformer\LayoutExtractor;
 
 class PageType extends AbstractType
 {
@@ -34,6 +35,11 @@ class PageType extends AbstractType
         $builder->add('cacheable', 'checkbox', array('required' => false));
         $builder->add('public', 'checkbox', array('required' => false));
         $builder->add('lifetime', 'text', array('required' => false));
+
+        $builder
+            ->get('content')
+            ->appendClientTransformer(new LayoutExtractor())
+        ;
     }
 
     /**
