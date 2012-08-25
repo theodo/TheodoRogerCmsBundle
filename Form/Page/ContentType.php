@@ -25,7 +25,7 @@ class ContentType extends AbstractType
         ;
     }
 
-    public function getPaternt(array $options)
+    public function getParent()
     {
         return 'form';
     }

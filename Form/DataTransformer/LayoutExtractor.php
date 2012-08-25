@@ -59,7 +59,7 @@ class LayoutExtractor implements DataTransformerInterface
         $pageContent = $array['content'];
 
         if ($array['layout']) {
-            $pageContent = '{% extends \'layout:"' . $array['layout'] . '"\' %}' . $pageContent;
+            $pageContent = '{% extends \'layout:' . $array['layout'] . '\' %}' . $pageContent;
         }
 
         return $pageContent;

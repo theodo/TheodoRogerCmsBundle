@@ -195,7 +195,7 @@
         </div>
         <div class="set">
             <div>
-                <label class="required" for="page_layout">Layout</label>
+                {{ form_label(form.content.layout) }}
                 {{ form_widget(form.content.layout.choice) }}
                 {{ form_widget(form.content.layout.text) }}
             </div>

@@ -262,28 +262,7 @@ class PageController extends Controller
             $request->files->get($form->getName(), array())
         );
 
-        /*
-         * si la clef existe => on est en edition du twig brut
-         * sinon on est uniquement sur l'edition des blocks
-         */
-        if (array_key_exists('content', $data)) {
-            $pageContent = $data['content'];
-        } else {
-            $pageContent = '';
-        }
-
-        // Gestion du layout
-        $layoutName = $request->get('page_layout', '');
-
-        // Gestion de la suppresion du layout
-        $layoutReplace = ('' != $layoutName) ? "{% extends 'layout:".$layoutName."' %}" : "";
-
-        // Maj du layout dans la page
-        if (is_int(strpos($pageContent, "{% extends 'layout"))) {
-            $pageContent = preg_replace("{% extends 'layout:(.*)' %}", $layoutReplace, $pageContent);
-        } else {
-            $pageContent = $layoutReplace.$pageContent;
-        }
+        $pageContent = '';
 
         // Gestion des blocks
         $blocks = $request->get('page_block', array());
@@ -297,7 +276,7 @@ class PageController extends Controller
             }
         }
 
-        $data['content'] = $pageContent;
+        $data['content']['content'] = $pageContent;
 
         // Bind form
         $form->bind($data);
