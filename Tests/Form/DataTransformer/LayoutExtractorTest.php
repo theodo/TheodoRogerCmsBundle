@@ -24,7 +24,7 @@ TWIG;
 
         $this->assertEquals('normal', $analysedData['layout']);
         $this->assertEquals('Test text', $analysedData['content']);
-    } 
+    }
 
     public function testConcatenateContent()
     {
