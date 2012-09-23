@@ -203,7 +203,10 @@
             {% if not page.isPublished %}
                 {{ 'Status: %status%'|trans({'%status%': page.getStatus() }) }}
             {% else %}
-                {{ 'Published on %date%'|trans({'%date%': page.getPublishedAt().format('Y-m-d') }) }}
+                {# TODO: temporary fix; try to reproduce getPublishedAt not set #}
+                {% if not page.getPublishedAt is null %}
+                    {{ 'Published on %date%'|trans({'%date%': page.getPublishedAt().format('Y-m-d') }) }}
+                {% endif %}
             {% endif %}
             </div>
         </div>
