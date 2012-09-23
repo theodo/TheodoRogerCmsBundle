@@ -85,7 +85,7 @@ class PageController extends Controller
 
         $form = $this->createForm(new PageType(), $page);
 
-        $layoutName = $form->get('content')->get('layout');
+        $layoutName = $form->get('content')->get('layout')->getData();
 
         /**
          * Separate the different blocks from Twig
@@ -280,21 +280,6 @@ class PageController extends Controller
 
         // Bind form
         $form->bind($data);
-    }
-
-    /**
-     * @param String $pageContent Content to find layout name in.
-     *
-     * @return String|Boolean Layout name or false if no layout
-     */
-    private function matchLayoutName($pageContent)
-    {
-        $layoutRegexp = '#{% extends [\',\"]layout:(?P<layoutName>(.*))[\',\"] %}#sU';
-        if (preg_match($layoutRegexp, $pageContent, $matches)) {
-            return $matches['layoutName'];
-        }
-
-        return false;
     }
 
     /**
