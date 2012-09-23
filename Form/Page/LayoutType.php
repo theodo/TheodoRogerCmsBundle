@@ -52,4 +52,12 @@ class LayoutType extends AbstractType
     {
         return 'roger_cms_page_layout';
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getParent()
+    {
+        return 'form';
+    }
 }

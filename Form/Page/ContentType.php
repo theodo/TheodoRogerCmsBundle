@@ -43,8 +43,10 @@ class ContentType extends AbstractType
             return array();
         }
 
-        return array_map(function($layout) {
+        $layoutNames = array_map(function($layout) {
             return $layout->getName();
         }, $layouts);
+
+        return array_combine(array_values($layoutNames), $layoutNames);
     }
 }
