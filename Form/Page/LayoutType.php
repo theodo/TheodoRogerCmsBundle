@@ -26,10 +26,12 @@ class LayoutType extends AbstractType
                 'expanded'  => false,
                 'label'     => 'Statut',
                 'required'  => false,
+                'error_bubbling' => true,
             ))
             ->add('text', 'text', array(
                 'required' => false,
                 'label' => '',
+                'error_bubbling' => true,
             ))
         ;
 

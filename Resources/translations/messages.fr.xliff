@@ -438,6 +438,10 @@
               <source>Keywords</source>
               <target>Mots-clefs</target>
           </trans-unit>
+          <trans-unit id="110">
+              <source>Can not save form due to some errors</source>
+              <target>Des erreurs empêchent l'envoi du formulaire</target>
+          </trans-unit>
         </body>
     </file>
 </xliff>

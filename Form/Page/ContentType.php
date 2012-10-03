@@ -18,9 +18,13 @@ class ContentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', 'textarea', array('required' => false))
+            ->add('content', 'textarea', array(
+                'required' => false,
+                'error_bubbling' => true,
+            ))
             ->add('layout', 'roger_cms_page_layout', array(
                 'choices' => $this->getLayoutNames(),
+                'error_bubbling' => true,
             ))
         ;
     }

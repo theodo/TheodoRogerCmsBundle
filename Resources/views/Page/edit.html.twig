@@ -2,6 +2,7 @@
 
 {% set body_class = 'reversed' %}
 
+
 {% block javascripts_assets %}
     <script type="text/javascript"> textarea_id = 'page_content'; form_id = 'new_page'; </script>
     <script src="{{ asset('bundles/theodorogercms/js/page.js') }}" type="text/javascript"></script>
@@ -25,73 +26,33 @@
         <h1>{% trans %}New Page{% endtrans %}</h1>
         <form id="new_page" action="{{ url('roger_cms_page_new', { 'parentId': parent_page.id }) }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
+        {% if hasErrors is defined and hasErrors %}
+        <div id="error">
+            {% trans %}Can not save form due to some errors{% endtrans %}
+            {{ form_errors(form) }}
+        </div>
+        {% endif %}
         <div class="title">
             {{ form_row(form.name) }}
+            {{ form_errors(form.name) }}
         </div>
         <div class="drawer">
             <div class="toggle_wrapper">
-                <div id="extra-fields" class="drawer_contents {% if (hasErrors is defined) and hasErrors %}display{% else %}hide{% endif %}">
+                {% set top_fields = ['slug', 'breadcrumb', 'description', 'title', 'keywords', 'contentType'] %}
+                <div id="extra-fields" class="drawer_contents {{ error_in_fields(form, top_fields|merge(['public', 'cacheable', 'lifetime'])) ?  'display' : 'hide' }}">
                     <table class="fieldset">
                         <tbody>
+                            {% for field in top_fields %}
                             <tr>
                                 <th class="label">
-                                    {{ form_label(form.slug) }}
+                                    {{ form_label(form[field]) }}
                                 </th>
                                 <td class="field">
-                                    {{ form_widget(form.slug) }}
-                                    {{ form_errors(form.slug) }}
+                                    {{ form_widget(form[field]) }}
+                                    {{ form_errors(form[field]) }}
                                 </td>
                             </tr>
-
-                            <tr>
-                                <th class="label">
-                                    {{ form_label(form.breadcrumb) }}
-                                </th>
-                                <td class="field">
-                                    {{ form_widget(form.breadcrumb) }}
-                                    {{ form_errors(form.breadcrumb) }}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th class="label">
-                                    {{ form_label(form.description) }}
-                                </th>
-                                <td class="field">
-                                    {{ form_widget(form.description) }}
-                                    {{ form_errors(form.description) }}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th class="label">
-                                    {{ form_label(form.title) }}
-                                </th>
-                                <td class="field">
-                                    {{ form_widget(form.title) }}
-                                    {{ form_errors(form.title) }}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th class="label">
-                                    {{ form_label(form.keywords) }}
-                                </th>
-                                <td class="field">
-                                    {{ form_widget(form.keywords) }}
-                                    {{ form_errors(form.keywords) }}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th class="label">
-                                    {{ form_label(form.contentType) }}
-                                </th>
-                                <td class="field">
-                                    {{ form_widget(form.contentType) }}
-                                    {{ form_errors(form.contentType) }}
-                                </td>
-                            </tr>
+                            {% endfor %}
 
                             <tr>
                                 <th class="label">
@@ -196,6 +157,7 @@
         <div class="set">
             <div>
                 {{ form_label(form.content.layout) }}
+                {{ form_errors(form.content.layout) }}
                 {{ form_widget(form.content.layout.choice) }}
                 {{ form_widget(form.content.layout.text) }}
             </div>

@@ -44,7 +44,6 @@ class PageController extends Controller
 
         return $this->render('TheodoRogerCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
-
     /**
      * Edit page action
      *
