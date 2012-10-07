@@ -37,7 +37,7 @@ class LayoutType extends AbstractType
 
         $builder
             ->appendClientTransformer(new ChoiceWithTextInputTransformer($options['choices']))
-        ;
+       ;
     }
 
     public function getDefaultOptions(array $options)

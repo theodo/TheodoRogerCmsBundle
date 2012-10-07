@@ -22,6 +22,10 @@ class LayoutExtractor implements DataTransformerInterface
      */
     public function transform($value)
     {
+        if ($value === null) {
+            return null;
+        }
+
         if ($value) {
             return array(
                 'layout' => trim($this->matchLayoutName($value), '"'),

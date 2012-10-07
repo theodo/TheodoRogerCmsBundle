@@ -85,18 +85,11 @@ class PageController extends Controller
         $form = $this->createForm(new PageType(), $page);
 
         $layoutName = $form->get('content')->get('layout')->getData();
+        $tabs = $form->get('content')->get('content')->getClientData();
 
-        /**
-         * Separate the different blocks from Twig
-         * @TODO: this does not work with nested blocks.
-         */
-        if ($matches = $this->matchBlocks($pageContent)) {
-            $tabs = array_combine($matches['block_name'], $matches['block_content']);
-        } else {
+        if (!is_array($tabs)) {
             $tabs = array();
         }
-
-        // Create form
 
         // Retrieve request
         $request = $this->getRequest();
@@ -110,7 +103,7 @@ class PageController extends Controller
                 throw new AccessDeniedException('You are not allowed to edit this page.');
             }
 
-            $this->bindEditForm($form, $request);
+            $form->bind($request);
 
             // Check form and save object
             if ($form->isValid()) {
@@ -243,42 +236,6 @@ class PageController extends Controller
                 'level' => 0
             )
         );
-    }
-
-    /**
-     * Bind the edit form
-     *
-     * @param Form    $form    The form to bind
-     * @param Request $request Request to bind
-     *
-     * @author Romain Barberi <romainb@theodo.fr>
-     * @since 2011-08-11
-     */
-    protected function bindEditForm($form, $request)
-    {
-        $data = array_replace_recursive(
-            $request->request->get($form->getName(), array()),
-            $request->files->get($form->getName(), array())
-        );
-
-        $pageContent = '';
-
-        // Gestion des blocks
-        $blocks = $request->get('page_block', array());
-
-        // Maj des différent blocks contenues dans la page
-        foreach ($blocks as $blockName => $blockContent) {
-            if (is_int(strpos($pageContent, '{% block '.$blockName.' %}'))) {
-                $pageContent = preg_replace('{% block '.$blockName.' %}(.*){% endblock %}', '{% block '.$blockName.' %}'.$blockContent.'{% endblock %}', $pageContent);
-            } else {
-                $pageContent .= '{% block '.$blockName.' %}'.$blockContent.'{% endblock %}';
-            }
-        }
-
-        $data['content']['content'] = $pageContent;
-
-        // Bind form
-        $form->bind($data);
     }
 
     /**

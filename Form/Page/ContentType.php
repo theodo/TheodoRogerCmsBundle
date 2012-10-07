@@ -3,6 +3,8 @@
 namespace Theodo\RogerCmsBundle\Form\Page;
 
 use Theodo\RogerCmsBundle\Repository\ContentRepositoryInterface;
+use Theodo\RogerCmsBundle\Form\DataTransformer\BlockTransformer;
+use Theodo\RogerCmsBundle\Form\DataTransformer\LayoutExtractor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -26,6 +28,12 @@ class ContentType extends AbstractType
                 'choices' => $this->getLayoutNames(),
                 'error_bubbling' => true,
             ))
+        ;
+
+        $builder->get('content')
+            ->appendClientTransformer(new BlockTransformer());
+        $builder
+            ->appendClientTransformer(new LayoutExtractor())
         ;
     }
 
