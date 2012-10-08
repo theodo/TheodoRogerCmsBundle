@@ -12,42 +12,34 @@ class ChoiceWithTextInputTransformerTest extends TestCase
 {
     /**
      * Tests transforming text from model to from
+     *
+     * @dataProvider getTestData
      */
-    public function testTransform()
+    public function testTransform($input, $expected)
     {
         $transformer = new Transformer($this->getChoices());
 
-        $expected = array(
-            'choice' => 'Choice 1',
-            'text' => '',
-        );
-        $this->assertEquals($expected, $transformer->transform('Choice 1'));
-
-        $expected = array(
-            'choice' => '',
-            'text' => 'Test',
-        );
-        $this->assertEquals($expected, $transformer->transform('Test'));
+        $this->assertEquals($expected, $transformer->transform($input));
     }
 
     /**
      * Test transforming form values into single string
+     *
+     * @dataProvider getTestData
      */
-    public function testReverseTransform()
+    public function testReverseTransform($expected, $input)
     {
         $transformer = new Transformer($this->getChoices());
 
-        $values = array(
-            'choice' => 'Choice 1',
-            'text' => '',
-        );
-        $this->assertEquals('Choice 1', $transformer->reverseTransform($values));
+        $this->assertEquals($expected, $transformer->reverseTransform($input));
+    }
 
-        $values = array(
-            'choice' => 'Choice 1',
-            'text' => 'Test',
+    public function getTestData()
+    {
+        return array(
+            array('Choice 1', array('choice' => 'Choice 1', 'text' => '')),
+            array('Test', array('choice' => '', 'text' => 'Test')),
         );
-        $this->assertEquals('Test', $transformer->reverseTransform($values));
     }
 
     /**

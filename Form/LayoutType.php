@@ -34,6 +34,6 @@ class LayoutType extends AbstractType
      */
     public function getName()
     {
-        return 'roger_cms_layout';
+        return 'layout';
     }
 }

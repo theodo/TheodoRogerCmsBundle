@@ -18,8 +18,6 @@
  */
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../WebTestCase.php';
-
 use Theodo\RogerCmsBundle\Tests\WebTestCase;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 
@@ -152,8 +150,10 @@ class PageControllerTest extends WebTestCase
             'page[name]'         => 'Functional test',
             'page[slug]'         => 'functional-test',
             'page[breadcrumb]'   => 'Functional test',
-            'page[content]'      => '<p>Functional test page content</p>',
-            'save-and-publish'   => true
+            'page[content][content]' => '<p>Functional test page content</p>',
+            'page[content][layout][choice]' => '',
+            'page[content][layout][text]' => '',
+            'save-and-publish'   => true,
         ));
 
         // Test return

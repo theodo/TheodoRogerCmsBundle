@@ -56,7 +56,7 @@ class LayoutExtractor implements DataTransformerInterface
             throw new UnexpectedTypeException('An array should be passed as argument');
         }
 
-        if (!isset($array['layout'], $array['content'])) {
+        if (!array_key_exists('layout', $array) || !array_key_exists('content', $array)) {
             throw new TransformationFailedException('Array needs to contain content and layout');
         }
 
