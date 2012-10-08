@@ -64,7 +64,7 @@ class ChoiceWithTextInputTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($array, 'array');
         }
 
-        if (!isset($array['text'], $array['choice'])) {
+        if (!empty($array['text']) && !isset($array['choice'])) {
             throw new TransformationFailedException('The data needs to contain "text" and "choice" fields');
         }
 
