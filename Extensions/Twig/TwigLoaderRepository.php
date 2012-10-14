@@ -100,12 +100,12 @@ class TwigLoaderRepository implements Twig_LoaderInterface
             return false;
         }
 
-        $type = $nameParts[0];
+        $type = array_shift($nameParts);
 
         if (!in_array($type, self::$types)) {
             return false;
         }
-        $name = $nameParts[1];
+        $name = implode(':', $nameParts);
 
         return array($type, $name);
     }
