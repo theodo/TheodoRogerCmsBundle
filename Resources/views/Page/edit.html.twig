@@ -100,7 +100,7 @@
                         <img alt="{% trans %}Add Part{% endtrans %}" src="{{ asset('bundles/theodorogercms/images/admin/add_tab.png') }}" />
                     </a>
                 </div>
-                {% if not layout_name %}
+                {% if not tabs %}
                     <a id="tab_body" href="#" class="tab here">
                         <span>{% trans %}Body{% endtrans %}</span>
                         <img src="{{ asset('bundles/theodorogercms/images/admin/tab_close.png') }}" class="close" alt="{% trans %}Remove part{% endtrans %}" title="{% trans %}Remove part{% endtrans %}" />
@@ -117,7 +117,7 @@
                 {%endif%}
             </div>
             <div class="pages" id="pages">
-                {% if not layout_name %}
+                {% if not tabs %}
                     <div class="page" id="page_body">
                         <div class="part" id="part_body">
                             <p>
