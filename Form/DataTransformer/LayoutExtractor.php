@@ -87,7 +87,7 @@ class LayoutExtractor implements DataTransformerInterface
     private function removeLayoutFromContent($pageContent)
     {
         if (strpos($pageContent, "{% extends 'layout") === 0) {
-            return preg_replace("/{% extends 'layout:(.*)' %}\s+/", '', $pageContent);
+            return preg_replace("/{% extends 'layout:(.*)' %}/", '', $pageContent);
         }
 
         return $pageContent;
