@@ -311,6 +311,7 @@ var loadAddTabListener = function ()
 /**
  * Add new block
  *
+ * @todo Find other solution for HTML template to generate the field name
  *
  * @author Romain Barberi <romainb@theodo.fr>
  * @since 2011-08-09
@@ -333,7 +334,7 @@ var addTabPage = function (page_name)
                     '</span>' +
                 '</p>' +
                 '<div>' +
-                    '<textarea id="page_content_'+page_name+'" class="textarea large" name="page_block['+page_name+']" style="width: 100%;"></textarea> ' +
+                    '<textarea id="page_content_'+page_name+'" class="textarea large" name="page[content][content]['+page_name+']" style="width: 100%;"></textarea> ' +
                 '</div>' +
             '</div>' +
         '</div>'
