@@ -238,19 +238,4 @@ class PageController extends Controller
             )
         );
     }
-
-    /**
-     * @param String $pageContent Content to search in.
-     *
-     * @return Array|Boolean Block name and content or false if no block
-     */
-    private function matchBlocks($pageContent)
-    {
-        if (!preg_match_all('#{% block (?P<block_name>(.*)) %}(?P<block_content>(.*)){% endblock %}#sU', $pageContent, $matches)) {
-
-            return false;
-        }
-
-        return $matches;
-    }
 }
