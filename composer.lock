@@ -76,18 +76,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "b29bad9738fada9486961f60542f2d2d77c7b501"
+                "reference": "a28b6bde290b0a908d32938e3393244086c2d89d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/data-fixtures/zipball/b29bad9738fada9486961f60542f2d2d77c7b501",
-                "reference": "b29bad9738fada9486961f60542f2d2d77c7b501",
+                "url": "https://github.com/doctrine/data-fixtures/archive/a28b6bde290b0a908d32938e3393244086c2d89d.zip",
+                "reference": "a28b6bde290b0a908d32938e3393244086c2d89d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1348136794",
+            "time": "1353557065",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -181,19 +181,20 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/DoctrineBundle.git",
-                "reference": "e69a6fd75fa3979e35b7004e6da6e9aea3765997"
+                "reference": "ac854d9452272d43b80a9043e0f33c2b9dd2cdd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/DoctrineBundle/zipball/e69a6fd75fa3979e35b7004e6da6e9aea3765997",
-                "reference": "e69a6fd75fa3979e35b7004e6da6e9aea3765997",
+                "url": "https://github.com/doctrine/DoctrineBundle/archive/ac854d9452272d43b80a9043e0f33c2b9dd2cdd5.zip",
+                "reference": "ac854d9452272d43b80a9043e0f33c2b9dd2cdd5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "doctrine/dbal": ">=2.2,<2.4-dev",
                 "symfony/framework-bundle": ">=2.1,<2.3-dev",
-                "symfony/doctrine-bridge": ">=2.1,<2.3-dev"
+                "symfony/doctrine-bridge": ">=2.1,<2.3-dev",
+                "jdorn/sql-formatter": ">=1.1,<2.0"
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2,<2.4-dev",
@@ -203,7 +204,7 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "1349273376",
+            "time": "1353489818",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -249,12 +250,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "1e2c7af26f9f7ac9110d47cee8133d700fb99ae1"
+                "reference": "9edc67af16e736a31605e7fa9c9e3edbd9db6427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/DoctrineFixturesBundle/zipball/1e2c7af26f9f7ac9110d47cee8133d700fb99ae1",
-                "reference": "1e2c7af26f9f7ac9110d47cee8133d700fb99ae1",
+                "url": "https://github.com/doctrine/DoctrineFixturesBundle/archive/9edc67af16e736a31605e7fa9c9e3edbd9db6427.zip",
+                "reference": "9edc67af16e736a31605e7fa9c9e3edbd9db6427",
                 "shasum": ""
             },
             "require": {
@@ -263,7 +264,7 @@
                 "doctrine/doctrine-bundle": "1.0.*",
                 "symfony/doctrine-bridge": ">=2.1.0,<2.3-dev"
             },
-            "time": "1349789605",
+            "time": "1350914272",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -432,24 +433,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle",
-                "reference": "773b37310ca244570032541be3c8ab27b814a83f"
+                "reference": "9a1931f9c9d8a1d045008142b275239c0160b95a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/stof/StofDoctrineExtensionsBundle/zipball/773b37310ca244570032541be3c8ab27b814a83f",
-                "reference": "773b37310ca244570032541be3c8ab27b814a83f",
+                "url": "https://github.com/stof/StofDoctrineExtensionsBundle/archive/9a1931f9c9d8a1d045008142b275239c0160b95a.zip",
+                "reference": "9a1931f9c9d8a1d045008142b275239c0160b95a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": "2.1.*",
-                "gedmo/doctrine-extensions": ">=2.3-dev"
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "gedmo/doctrine-extensions": "2.3.*"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/mongodb-odm-bundle": "2.1.*"
             },
-            "time": "1349111035",
+            "time": "1351778487",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -489,16 +490,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "v2.1.2"
+                "reference": "v2.1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/zipball/v2.1.2",
-                "reference": "v2.1.2",
+                "url": "https://github.com/symfony/symfony/archive/v2.1.3.zip",
+                "reference": "v2.1.3",
                 "shasum": ""
             },
             "require": {
@@ -545,9 +546,9 @@
                 "doctrine/orm": ">=2.2.3,<2.4-dev",
                 "doctrine/data-fixtures": "1.0.*",
                 "propel/propel1": "dev-master",
-                "monolog/monolog": "dev-master"
+                "monolog/monolog": "1.*"
             },
-            "time": "2012-09-20 07:13:00",
+            "time": "2012-10-30 01:14:14",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -582,26 +583,26 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.10.0",
+            "version": "v1.11.1",
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "v1.10.0"
+                "reference": "v1.11.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/zipball/v1.10.0",
-                "reference": "v1.10.0",
+                "url": "https://github.com/fabpot/Twig/archive/v1.11.1.zip",
+                "reference": "v1.11.1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-09-28 20:11:39",
+            "time": "2012-11-11 17:17:59",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10-dev"
+                    "dev-master": "1.11-dev"
                 }
             },
             "installation-source": "dist",
@@ -630,7 +631,55 @@
             ]
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+        {
+            "name": "jdorn/sql-formatter",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/jdorn/sql-formatter.git",
+                "reference": "v1.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/jdorn/sql-formatter/archive/v1.1.0.zip",
+                "reference": "v1.1.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-11-11 19:10:49",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Dorn",
+                    "email": "jeremy@jeremydorn.com",
+                    "homepage": "http://jeremydorn.com/"
+                }
+            ],
+            "description": "a PHP SQL highlighting library",
+            "homepage": "https://github.com/jdorn/sql-formatter/",
+            "keywords": [
+                "sql",
+                "highlight"
+            ]
+        }
+    ],
     "aliases": [
 
     ],
