@@ -43,6 +43,12 @@ class LayoutExtractorTest extends TestCase
 {% extends 'layout:normal' %}Test text
 TWIG
             , 'normal', 'Test text'
+            ),
+            array(
+<<<TWIG2
+{% extends 'AcmeDemoBundle:Default:index.html.twig' %}Test text
+TWIG2
+            , 'AcmeDemoBundle:Default:index.html.twig', 'Test text'
             )
         );
     }
