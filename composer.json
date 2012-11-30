@@ -19,6 +19,9 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master"
     },
+    "require-dev": {
+        "phake/phake": "dev-master",
+    },
     "autoload": {
         "psr-0": {
             "Theodo\\RogerCmsBundle": ""
