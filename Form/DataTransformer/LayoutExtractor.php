@@ -5,13 +5,14 @@ namespace Theodo\RogerCmsBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Theodo\RogerCmsBundle\Extractor\LayoutExtractorInterface;
 
 /**
  * This DataTransformer splits page content on template and proper content
  *
  * @autor Marek Kalnik <marekk@theodo.fr>
  */
-class LayoutExtractor implements DataTransformerInterface
+class LayoutExtractor implements DataTransformerInterface, LayoutExtractorInterface
 {
     /**
      * Receives page content and splits it
@@ -81,6 +82,22 @@ class LayoutExtractor implements DataTransformerInterface
         }
 
         return $pageContent;
+    }
+
+    /**
+     * Extracts layout from given twig template
+     *
+     * @param string $template
+     */
+    public function getLayout($template)
+    {
+        if ($layout = trim($this->matchLayoutName($template), '"')) {
+            return 'layout:' . $layout;
+        }
+
+        $layout = trim($this->matchTemplateName($template), '"');
+
+        return $layout;
     }
 
     /**

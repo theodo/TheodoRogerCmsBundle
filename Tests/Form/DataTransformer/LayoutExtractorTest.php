@@ -52,4 +52,22 @@ TWIG2
             )
         );
     }
+
+    /**
+     *
+     */
+    public function testExtractsLayout()
+    {
+        $extractor = new LayoutExtractor();
+
+        $data = <<<TWIG
+{% extends 'layout:normal' %}Test text
+TWIG;
+        $this->assertEquals('layout:normal', $extractor->getLayout($data));
+
+        $data = <<<TWIG2
+{% extends 'AcmeDemoBundle:Default:index.html.twig' %}Test text
+TWIG2;
+        $this->assertEquals('AcmeDemoBundle:Default:index.html.twig', $extractor->getLayout($data));
+    }
 }
