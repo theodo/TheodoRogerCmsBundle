@@ -29,5 +29,6 @@ class TheodoRogerCmsExtension extends Extension
 
         // Load the services.yml file
         $loader->load('services.xml');
+        $loader->load('validator.xml');
     }
 }

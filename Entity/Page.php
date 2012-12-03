@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Theodo\RogerCmsBundle\Repository\PageRepository;
+use Theodo\RogerCmsBundle\Validator\Constraints\ExistingLayout;
 use Theodo\RogerCmsBundle\Validator\TwigSyntax;
 
 /**
@@ -388,6 +389,7 @@ class Page
         $metadata->addConstraint(new UniqueEntity(array('fields' => array('slug'))));
 
         // Content validator: not null
+        $metadata->addPropertyConstraint('content', new ExistingLayout());
         $metadata->addPropertyConstraint('content', new NotBlank());
         $metadata->addPropertyConstraint('content', new TwigSyntax());
 
@@ -396,6 +398,7 @@ class Page
         $metadata->addPropertyConstraint('status', new Choice(array(
             'choices' => PageRepository::getAvailableStatus())
         ));
+
     }
 
     /**
