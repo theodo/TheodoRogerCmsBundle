@@ -16,6 +16,7 @@
         <parameter key="gedmo.timestampable.listener.class">Gedmo\Timestampable\TimestampableListener</parameter>
         <parameter key="doctrine.orm.validator.unique.class">Theodo\RogerCmsBundle\Validator\Constraints\RogerUniqueEntityValidator</parameter>
         <parameter key="roger.twig.extension.helper.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerHelperExtension</parameter>
+        <parameter key="theodo_roger_cms.extractor.layout.class">Theodo\RogerCmsBundle\Form\DataTransformer\LayoutExtractor</parameter>
     </parameters>
 
     <services>
@@ -24,11 +25,15 @@
         </service>
         <service id="roger.twig.loader" class="%roger.twig.loader.class%">
             <argument type="service" id="roger.content_repository" />
-            <argument type="service" id="twig.loader" />
-            <argument>%roger.twig.loader.fallback_path%</argument>
+        </service>
+        <service id="roger.twig.loader_chain" class="Twig_Loader_Chain">
+            <argument type="collection">
+                <argument type="service" id="roger.twig.loader" />
+                <argument type="service" id="twig.loader" />
+            </argument>
         </service>
         <service id="roger.twig" class="%twig.class%">
-            <argument type="service" id="roger.twig.loader" />
+            <argument type="service" id="roger.twig.loader_chain" />
             <argument>%twig.options%</argument>
         </service>
         <service id="roger.templating" class="%templating.engine.twig.class%">
@@ -67,5 +72,6 @@
         <service id="form.type.roger_cms_page_layout" class="Theodo\RogerCmsBundle\Form\Page\LayoutType">
             <tag name="form.type" alias="roger_cms_page_layout" />
         </service>
+        <service id="theodo_roger_cms.extractor.layout" class="%theodo_roger_cms.extractor.layout.class%" />
     </services>
 </container>

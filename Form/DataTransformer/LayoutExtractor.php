@@ -5,13 +5,14 @@ namespace Theodo\RogerCmsBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Theodo\RogerCmsBundle\Extractor\LayoutExtractorInterface;
 
 /**
  * This DataTransformer splits page content on template and proper content
  *
  * @autor Marek Kalnik <marekk@theodo.fr>
  */
-class LayoutExtractor implements DataTransformerInterface
+class LayoutExtractor implements DataTransformerInterface, LayoutExtractorInterface
 {
     /**
      * Receives page content and splits it
@@ -27,9 +28,16 @@ class LayoutExtractor implements DataTransformerInterface
         }
 
         if ($value) {
+            if (!($layout = trim($this->matchLayoutName($value), '"'))) {
+                $layout = trim($this->matchTemplateName($value), '"');
+                $content = $this->removeLayoutFromContent($value, $layout);
+            } else {
+                $content = $this->removeLayoutFromContent($value, 'layout:'.$layout);
+            }
+
             return array(
-                'layout' => trim($this->matchLayoutName($value), '"'),
-                'content' => $this->removeLayoutFromContent($value),
+                'layout' => $layout,
+                'content' => $content,
             );
         }
 
@@ -63,10 +71,33 @@ class LayoutExtractor implements DataTransformerInterface
         $pageContent = $array['content'];
 
         if ($array['layout']) {
-            $pageContent = '{% extends \'layout:' . $array['layout'] . '\' %}' . $pageContent;
+            $layout = explode(':', $array['layout']);
+            if (count($layout) === 3) {
+                $layoutPart = '{% extends \'' . $array['layout'] . '\' %}';
+            } else {
+                $layoutPart = '{% extends \'layout:' . $array['layout'] . '\' %}';
+            }
+
+            $pageContent = $layoutPart . $pageContent;
         }
 
         return $pageContent;
+    }
+
+    /**
+     * Extracts layout from given twig template
+     *
+     * @param string $template
+     */
+    public function getLayout($template)
+    {
+        if ($layout = trim($this->matchLayoutName($template), '"')) {
+            return 'layout:' . $layout;
+        }
+
+        $layout = trim($this->matchTemplateName($template), '"');
+
+        return $layout;
     }
 
     /**
@@ -84,10 +115,25 @@ class LayoutExtractor implements DataTransformerInterface
         return false;
     }
 
-    private function removeLayoutFromContent($pageContent)
+    /**
+     * @param string $pageContent Contet to find the template name in.
+     *
+     * @return string|boolean Template name or false if no template
+     */
+    private function matchTemplateName($pageContent)
     {
-        if (strpos($pageContent, "{% extends 'layout") === 0) {
-            return preg_replace("/{% extends 'layout:(.*)' %}/", '', $pageContent);
+        $layoutRegexp = '#{% extends [\',\"][\"]?(.*)[\"]?[\',\"] %}#';
+        if (preg_match($layoutRegexp, $pageContent, $matches)) {
+            return $matches[1];
+        }
+
+        return false;
+    }
+
+    private function removeLayoutFromContent($pageContent, $layout)
+    {
+        if (strpos($pageContent, "{% extends") === 0) {
+            return preg_replace("/{% extends '" . $layout . "' %}/", '', $pageContent);
         }
 
         return $pageContent;
