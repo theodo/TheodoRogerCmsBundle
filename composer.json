@@ -16,11 +16,11 @@
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "v1.0.0",
         "stof/doctrine-extensions-bundle": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "doctrine/data-fixtures": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "require-dev": {
-        "phake/phake": "dev-master"
+        "phake/phake": "dev-master",
+        "doctrine/data-fixtures": "dev-master"
     },
     "autoload": {
         "psr-0": {

@@ -1,5 +1,5 @@
 {
-    "hash": "7e390d37432ce145381fa6b732b17ec2",
+    "hash": "bb47bb7f2a68e0a4aaa163c490ffe024",
     "packages": [
         {
             "name": "doctrine/common",
@@ -25,7 +25,7 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Common": "lib/"
@@ -138,7 +138,7 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\DBAL": "lib/"
@@ -213,7 +213,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Bundle\\DoctrineBundle": ""
@@ -334,7 +334,7 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\ORM": "lib/"
@@ -400,7 +400,7 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Gedmo": "lib/"
@@ -562,7 +562,7 @@
                     "dev-master": "2.1-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony": "src/",
@@ -613,7 +613,7 @@
                     "dev-master": "1.11-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
@@ -694,7 +694,7 @@
     "stability-flags": {
         "stof/doctrine-extensions-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "doctrine/data-fixtures": 20,
-        "phake/phake": 20
+        "phake/phake": 20,
+        "doctrine/data-fixtures": 20
     }
 }
