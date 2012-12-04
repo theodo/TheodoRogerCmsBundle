@@ -11,14 +11,16 @@
 
 namespace Theodo\RogerCmsBundle\Extensions\Twig;
 
-use Twig_LoaderInterface;
 use Twig_Error_Loader;
+use Twig_LoaderInterface;
 use Twig_Loader_Filesystem;
 use Theodo\RogerCmsBundle\Repository\ContentRepositoryInterface;
 
 /**
  * Loads a template from a repository.
  *
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
  */
 class TwigLoaderRepository implements Twig_LoaderInterface
 {
@@ -30,43 +32,19 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     protected $contentRepository = null;
 
     /**
-     * @var Twig_LoaderInterface
-     */
-    protected $fallbackLoader = null;
-
-    /**
      * Registers content repository and fallback loader
      *
      * @param ContentRepositoryInterface $contentRepository Cms objects repository
-     * @param Twig_LoaderInterface       $fallbackLoader    Twig loader for objects not handled by CMS
-     * @param String                     $fallbackPath      Path to use by Twig loader
-     *
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since  2011-06-22
      */
-    public function __construct(ContentRepositoryInterface $contentRepository, Twig_LoaderInterface $fallbackLoader = null, $fallbackPath = null)
+    public function __construct(ContentRepositoryInterface $contentRepository)
     {
         $this->contentRepository = $contentRepository;
-        $this->fallbackLoader = $fallbackLoader;
-        if ($this->fallbackLoader instanceof Twig_Loader_Filesystem
-            && $fallbackPath != null) {
-          $pathPrefix = __DIR__.'/../../../../../';
-
-          if (!file_exists($pathPrefix.$fallbackPath)) {
-              throw new \InvalidArgumentException('The specified fallback path does not exist. Tried to access: '.$pathPrefix.$fallbackPath);
-          }
-
-          $this->fallbackLoader->addPath($pathPrefix.$fallbackPath);
-        }
     }
 
     /**
      * Getter for content repository
      *
      * @return ContentRepositoryInterface The current content repository
-     *
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2001-06-22
      */
     public function getContentRepository()
     {
@@ -77,9 +55,6 @@ class TwigLoaderRepository implements Twig_LoaderInterface
      * Setter for content repository
      *
      * @param ContentRepositoryInterface $contentRepository
-     *
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2001-06-22
      */
     public function setContentRepository(ContentRepositoryInterface $contentRepository)
     {
@@ -89,6 +64,8 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     /**
      * Parse an identifier of an RogerCms object and return it's name and type
      *
+     * @todo Extract to another object injected as a service
+     *
      * @param string $name A CMS object identifier
      *
      * @return array|false Array of type and name, false if identifier contains no type
@@ -96,7 +73,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     public static function parseName($name)
     {
         $nameParts = explode(':', $name);
-        if (count($nameParts) < 2) {
+        if (count($nameParts) != 2) {
             return false;
         }
 
@@ -118,16 +95,13 @@ class TwigLoaderRepository implements Twig_LoaderInterface
      * @param string $name The name of the template to load
      *
      * @return string The template source code
-     *
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2011-06-22
      */
     public function getSource($name)
     {
         $parsedInfo = self::parseName($name);
 
         if ($parsedInfo === false) {
-            return $this->fallbackLoader->getSource($name);
+            throw new Twig_Error_Loader('Unable to parse ' . $name);
         } else {
             list($type, $name) = $parsedInfo;
         }
@@ -153,7 +127,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     public function getCacheKey($name)
     {
         if (self::parseName($name) === false) {
-            return $this->fallbackLoader->getCacheKey($name);
+            throw new Twig_Error_Loader('Unable to parse ' . $name);
         }
 
         return $name;
@@ -171,7 +145,7 @@ class TwigLoaderRepository implements Twig_LoaderInterface
     public function isFresh($name, $time)
     {
         if (self::parseName($name) === false) {
-            return $this->fallbackLoader->isFresh($name, $time);
+            throw new Twig_Error_Loader('Unable to parse ' . $name);
         }
 
         return true;
