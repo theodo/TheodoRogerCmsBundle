@@ -17,7 +17,7 @@ Add the Roger repository to your composer.json file:
     }
 ```
 
-Then run ```php composer.phar update theodo/reger-cms-bundle``` and you are done.
+Then run ```php composer.phar update theodo/roger-cms-bundle``` and you are done.
 
 ### Step 2: AppKernel.php
 
@@ -63,4 +63,4 @@ and update your db.
 
 ### Step 5: Read the docs
 
-For more documentation, check out the Resources/doc folder.
+For more documentation, check out the [`Resources/doc`](https://github.com/theodo/TheodoRogerCmsBundle/tree/master/Resources/doc) folder.
