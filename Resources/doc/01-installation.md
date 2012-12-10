@@ -85,9 +85,11 @@ and update your db.
 
 You need to enable the timestampable behavoiur of stof_doctrine_extension
 
+``` yml
 # app/config/config.yml
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
         default:
             timestampable: true
+```
