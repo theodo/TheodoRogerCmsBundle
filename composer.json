@@ -14,7 +14,7 @@
         "php": ">=5.3.3",
         "symfony/symfony": ">=2.1.5, <2.2-dev",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "doctrine/doctrine-bundle": "v1.0.0",
+        "doctrine/doctrine-bundle": ">=1.0.0, <1.2-dev",
         "stof/doctrine-extensions-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
