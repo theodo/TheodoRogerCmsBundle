@@ -35,12 +35,15 @@
         <service id="roger.twig" class="%twig.class%">
             <argument type="service" id="roger.twig.loader_chain" />
             <argument>%twig.options%</argument>
+            <call method="addGlobal">
+                <argument>app</argument>
+                <argument type="service" id="templating.globals" />
+            </call>
         </service>
         <service id="roger.templating" class="%templating.engine.twig.class%">
             <argument type="service" id="roger.twig" />
             <argument type="service" id="templating.name_parser" />
             <argument type="service" id="file_locator" />
-            <argument type="service" id="templating.globals" />
         </service>
         <service id="roger.caching" class="%roger.caching.class%">
             <argument type="service" id="roger.twig" />
