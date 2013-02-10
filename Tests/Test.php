@@ -56,7 +56,7 @@ abstract class Test extends WebTestCase
         static::$kernel = static::createKernel($options);
         static::$kernel->boot();
 
-        static::$contentRepository = static::$kernel->getContainer()->get('roger.content_repository');
+        static::$contentRepository = static::$kernel->getContainer()->get('theodo_roger_cms.content_repository');
 
         static::generateSchema();
         static::loadFixtures();

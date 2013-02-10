@@ -11,7 +11,6 @@
 
 namespace Theodo\RogerCmsBundle\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\PageType;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -25,7 +24,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Fabrice Bernhard <fabriceb@theodo.fr>
  * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
-class PageController extends Controller
+class PageController extends BackendController
 {
     /**
      * List pages
@@ -40,7 +39,7 @@ class PageController extends Controller
         }
 
         // Retrieve pages
-        $pages = $this->get('roger.content_repository')->getFirstTwoLevelPages();
+        $pages = $this->getContentRepository()->getFirstTwoLevelPages();
 
         return $this->render('TheodoRogerCmsBundle:Page:index.html.twig', array('pages' => $pages));
     }
@@ -64,7 +63,7 @@ class PageController extends Controller
         // new page
         if (!$id) {
             $page = new Page();
-            $parentPage = $this->get('roger.content_repository')->findOneById($parentId);
+            $parentPage = $this->getContentRepository()->findOneById($parentId);
             // Create the homepage
             if ($parentPage) {
                 $page->setParentId($parentPage->getId());
@@ -75,12 +74,12 @@ class PageController extends Controller
         }
         // update page
         else {
-            $page = $this->get('roger.content_repository')->findOneById($id);
+            $page = $this->getContentRepository()->findOneById($id);
             $parentPage = $page->getParent();
         }
 
         // Get all layouts
-        $layouts = $this->get('roger.content_repository')->findAll('layout');
+        $layouts = $this->getContentRepository()->findAll('layout');
         $pageContent = $page->getContent();
 
         $form = $this->createForm(new PageType(), $page);
@@ -109,7 +108,7 @@ class PageController extends Controller
             // Check form and save object
             if ($form->isValid()) {
                 // remove twig cached file
-                $this->get('roger.caching')->invalidate('page:'.$page->getName());
+                $this->get('theodo_roger_cms.caching')->invalidate('page:'.$page->getName());
 
                 $page = $form->getData();
 
@@ -117,9 +116,9 @@ class PageController extends Controller
                     $page->publish();
                 }
 
-                $this->get('roger.content_repository')->save($page);
+                $this->getContentRepository()->save($page);
 
-                $this->get('roger.caching')->warmup('page:'.$page->getName());
+                $this->get('theodo_roger_cms.caching')->warmup('page:'.$page->getName());
 
                 if ($request->get('save-and-edit')) {
                     return $this->redirect($this->generateUrl('roger_cms_page_edit', array('id' => $page->getId())));
@@ -166,12 +165,12 @@ class PageController extends Controller
         $request = $this->getRequest();
 
         // Retrieve page
-        $page = $this->get('roger.content_repository')->findOneById($id);
+        $page = $this->getContentRepository()->findOneById($id);
 
         // Request is post
         if ($request->getMethod() == 'POST') {
             // Delete page
-            $this->get('roger.content_repository')->remove($page);
+            $this->getContentRepository()->remove($page);
 
             return $this->redirect($this->generateUrl('roger_cms_page_list'));
         }
@@ -204,7 +203,7 @@ class PageController extends Controller
         $request = $this->getRequest();
 
         // Retrieve page childrens
-        $pages = $this->get('roger.content_repository')->findOneById($id)->getChildren();
+        $pages = $this->getContentRepository()->findOneById($id)->getChildren();
 
         return $this->render(
             'TheodoRogerCmsBundle:Page:page-list.html.twig',
@@ -228,7 +227,7 @@ class PageController extends Controller
     public function siteMapComponentAction($fromId)
     {
         // Retrieve page
-        $page = $this->get('roger.content_repository')->findOneById($fromId);
+        $page = $this->getContentRepository()->findOneById($fromId);
 
         return $this->render(
             'TheodoRogerCmsBundle:Page:site-map-component.html.twig',

@@ -28,6 +28,7 @@ class TheodoRogerCmsExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         // Load the services.yml file
+        $loader->load('form.xml');
         $loader->load('services.xml');
         $loader->load('validator.xml');
     }

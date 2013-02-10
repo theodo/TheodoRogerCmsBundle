@@ -35,11 +35,11 @@ class FrontendController extends Controller
     {
         // Get corresponding page
         if (!$slug) {
-            $page = $this->get('roger.content_repository')->getHomepage();
+            $page = $this->get('theodo_roger_cms.content_repository')->getHomepage();
         } else {
             $slug = explode('/', $slug);
             $slug = $slug[count($slug) - 1];
-            $page = $this->get('roger.content_repository')->getPageBySlug($slug);
+            $page = $this->get('theodo_roger_cms.content_repository')->getPageBySlug($slug);
         }
 
         // Initialize new response
@@ -47,7 +47,7 @@ class FrontendController extends Controller
 
         // Handle 404
         if (!$page || PageRepository::STATUS_PUBLISH !== $page->getStatus()) {
-            $page = $this->get('roger.content_repository')->getPageBySlug('error404');
+            $page = $this->get('theodo_roger_cms.content_repository')->getPageBySlug('error404');
             if (!$page) {
                 throw $this->createNotFoundException(
                     sprintf('There is no page corresponding to slug "%s".', $slug)
@@ -65,7 +65,7 @@ class FrontendController extends Controller
 
         $response->headers->set('Content-Type', $page->getContentType());
 
-        return $this->get('roger.templating')
+        return $this->get('theodo_roger_cms.templating')
             ->renderResponse(
                 'page:'.$page->getName(), array('page' => $page) + $variables, $response
             );
@@ -84,7 +84,7 @@ class FrontendController extends Controller
      */
     public function snippetAction($name, $attributes = array())
     {
-        $snippet = $this->get('roger.content_repository')
+        $snippet = $this->get('theodo_roger_cms.content_repository')
             ->findOneByName($name, 'snippet');
 
         if (!$snippet) {
@@ -97,7 +97,7 @@ class FrontendController extends Controller
             // return the 304 Response immediately
             return $response;
         } else {
-            return $this->get('roger.templating')->renderResponse(
+            return $this->get('theodo_roger_cms.templating')->renderResponse(
                 'snippet:'.$snippet->getName(),
                 $attributes,
                 $response

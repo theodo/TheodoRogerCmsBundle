@@ -37,7 +37,7 @@ class SnippetController extends Controller
             throw new AccessDeniedException('You are not allowed to list snippets.');
         }
 
-        $snippets = $this->get('roger.content_repository')->findAll('snippet');
+        $snippets = $this->get('theodo_roger_cms.content_repository')->findAll('snippet');
 
         return $this->render('TheodoRogerCmsBundle:Snippet:index.html.twig',
             array('snippets' => $snippets)
@@ -61,7 +61,7 @@ class SnippetController extends Controller
     {
         $snippet = null;
         if ($id) {
-            $snippet = $this->get('roger.content_repository')
+            $snippet = $this->get('theodo_roger_cms.content_repository')
                 ->findOneById($id, 'snippet');
         }
         $form = $this->createForm(new SnippetType(), $snippet);
@@ -80,15 +80,15 @@ class SnippetController extends Controller
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($snippet) {
-                    $this->get('roger.caching')
+                    $this->get('theodo_roger_cms.caching')
                         ->invalidate('snippet:'.$snippet->getName());
                 }
 
                 //save snippet
                 $snippet = $form->getData();
-                $this->get('roger.content_repository')->save($snippet);
+                $this->get('theodo_roger_cms.content_repository')->save($snippet);
 
-                $this->get('roger.caching')->warmup('snippet:'.$snippet->getName());
+                $this->get('theodo_roger_cms.caching')->warmup('snippet:'.$snippet->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('roger_cms_snippet_list'));
@@ -130,11 +130,11 @@ class SnippetController extends Controller
             throw new AccessDeniedException('You are not allowed to delete this snippet.');
         }
 
-        $snippet = $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
+        $snippet = $snippet = $this->get('theodo_roger_cms.content_repository')->findOneById($id, 'snippet');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->get('roger.content_repository')->remove($snippet);
+            $this->get('theodo_roger_cms.content_repository')->remove($snippet);
 
             return $this->redirect($this->generateUrl('roger_cms_snippet_list'));
         }
