@@ -47,13 +47,16 @@
             <argument type="service" id="router" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="twig.extension" />
+            <tag name="theodo_roger_cms.twig.extension" />
         </service>
         <service id="theodo_roger_cms.twig.extension.helper" class="%theodo_roger_cms.twig.extension.helper.class%">
             <tag name="twig.extension" />
+            <tag name="theodo_roger_cms.twig.extension" />
         </service>
         <service id="theodo_roger_cms.twig.extension.actions" class="%theodo_roger_cms.twig.extension.actions.class%">
             <argument type="service" id="service_container" />
             <tag name="twig.extension" />
+            <tag name="theodo_roger_cms.twig.extension" />
         </service>
         <service id="theodo_roger_cms.extractor.layout" class="%theodo_roger_cms.extractor.layout.class%" />
     </services>
