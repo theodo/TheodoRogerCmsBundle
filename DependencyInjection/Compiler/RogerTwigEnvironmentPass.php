@@ -27,11 +27,11 @@ class RogerTwigEnvironmentPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (false === $container->hasDefinition('roger.twig')) {
+        if (false === $container->hasDefinition('theodo_roger_cms.twig')) {
             return;
         }
 
-        $definition = $container->getDefinition('roger.twig');
+        $definition = $container->getDefinition('theodo_roger_cms.twig');
 
         /*
          * Extensions must always be registered before everything else.
@@ -45,7 +45,7 @@ class RogerTwigEnvironmentPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds('twig.extension') as $id => $attributes) {
             $definition->addMethodCall('addExtension', array(new Reference($id)));
         }
-        foreach ($container->findTaggedServiceIds('roger.twig.extension') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('theodo_roger_cms.twig.extension') as $id => $attributes) {
             $definition->addMethodCall('addExtension', array(new Reference($id)));
         }
         $definition->setMethodCalls(array_merge($definition->getMethodCalls(), $calls));

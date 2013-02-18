@@ -11,7 +11,6 @@
 
 namespace Theodo\RogerCmsBundle\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\MediaType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -24,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Fabrice Bernhard <fabriceb@theodo.fr>
  * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
-class MediaController extends Controller
+class MediaController extends BackendController
 {
     /**
      * Media list
@@ -37,7 +36,7 @@ class MediaController extends Controller
             throw new AccessDeniedException('You are not allowed to list medias.');
         }
 
-        $medias = $this->get('roger.content_repository')->findAll('media');
+        $medias = $this->getContentRepository()->findAll('media');
 
         return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
             array('medias' => $medias)
@@ -60,7 +59,7 @@ class MediaController extends Controller
     {
         $media = null;
         if ($id) {
-            $media = $this->get('roger.content_repository')->findOneById($id, 'media');
+            $media = $this->getContentRepository()->findOneById($id, 'media');
         }
         $form = $this->createForm(new MediaType(), $media);
         $request = $this->get('request');
@@ -79,7 +78,7 @@ class MediaController extends Controller
                 if (null !== $media->file) {
                     $media->setPath(null);
                 }
-                $this->get('roger.content_repository')->save($media);
+                $this->getContentRepository()->save($media);
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('roger_cms_media_list'));
@@ -116,11 +115,11 @@ class MediaController extends Controller
             throw new AccessDeniedException('You are not allowed to delete this media.');
         }
 
-        $media = $this->get('roger.content_repository')->findOneById($id, 'media');
+        $media = $this->getContentRepository()->findOneById($id, 'media');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $media = $this->get('roger.content_repository')->remove($media);
+            $media = $this->getContentRepository()->remove($media);
 
             return $this->redirect($this->generateUrl('roger_cms_media_list'));
         }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="theodo_roger_cms.extractor.layout.class">Theodo\RogerCmsBundle\Form\DataTransformer\LayoutExtractor</parameter>
+    </parameters>
+
+    <services>
+        <service id="theodo_roger_cms.form.type.page_content" class="Theodo\RogerCmsBundle\Form\Page\ContentType">
+            <tag name="form.type" alias="roger_cms_page_content" />
+            <argument type="service" id="theodo_roger_cms.content_repository" />
+        </service>
+        <service id="theodo_roger_cms.form.type.page_layout" class="Theodo\RogerCmsBundle\Form\Page\LayoutType">
+            <tag name="form.type" alias="roger_cms_page_layout" />
+        </service>
+    </services>
+</container>
