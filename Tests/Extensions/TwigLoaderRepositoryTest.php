@@ -39,7 +39,8 @@ class TwigLoaderRepositoryTest extends TestCase
         static::createRogerKernel();
 
         // Load "test" entity manager
-        static::$twigLoader = static::$kernel->getContainer()->get('roger.twig.loader');
+        static::$twigLoader = static::$kernel->getContainer()
+            ->get('theodo_roger_cms.twig.loader');
 
         $source = $this->getTwigLoader()->getSource('page:Homepage');
         $this->assertRegExp('/id="homepage"/', $source);

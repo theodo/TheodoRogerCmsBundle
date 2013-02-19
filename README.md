@@ -39,7 +39,22 @@ Register TheodoRogerCmsBundle in your `app/AppKernel.php` file:
 
 Follow StofDoctrineExtensionsBundle's doc to add the configuration for **timestampable** behavior.
 
-### Step 3: Routing
+### Step 3: Doctrine configuration
+
+This bundle uses Doctrine PHPCR ODM for object persistance. Configure it to suit your needs.
+The simplest configuration would be as follow:
+
+```yaml
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+            connection: doctrine.dbal.default_connection
+    odm:
+        auto_mapping: true
+```
+
+### Step 4: Routing
 
 Add the following lines to your `app/config/routing.yml` file:
 
@@ -49,18 +64,6 @@ RogerCms:
     prefix: /
 ```
 
-### Step 4: Database and entities
-
-RogerCMS uses database to store all content informations, so you need to add its
-entities to your entity manager. As it also uses his own user management system
-it may be a good idea to use a separate database. For further informations on
-how to setup and manage a separate database connection for the CMS, refer to
-99-multiple_databases.md file.
-
-If you don't feel like having Roger in separate db, the Symfony Standard Edition
-default config will work out of the box. Just generate your schema/migrations
-and update your db.
-
 ### Step 5: Read the docs
 
-For more documentation, check out the [`Resources/doc`](https://github.com/theodo/TheodoRogerCmsBundle/tree/master/Resources/doc) folder.
+For more documentation, check out the [`Resources/doc`](Resources/doc) folder.

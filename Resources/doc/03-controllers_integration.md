@@ -17,7 +17,7 @@ One of the main goals of RogerCMS is to provide easy means to achieve that.
 
 Using a CMS-defined template in a view file requires only two lines of code
 
-1. In the return part of your controller, call the "roger.templating" service:
+1. In the return part of your controller, call the "theodo_roger_cms.templating" service:
 
     ```php
     public function myAction()
@@ -26,7 +26,7 @@ Using a CMS-defined template in a view file requires only two lines of code
          * Some complicated stuff
          */
 
-        return $this->get('roger.templating')
+        return $this->get('theodo_roger_cms.templating')
             ->renderResponse(
                  'MyBundle:myFolder:my.html.twig',
                  $variables
@@ -82,7 +82,7 @@ How to give the client a possibility to change the lead text, without altering t
 the page row in database. To avoid that, you can register your template as standard CMS template, and move it
 to a file as soon as it's possible.*
 
-3. Use the "roger.templating" and "roger.content_repository" services in your controller to display your page:
+3. Use the "theodo_roger_cms.templating" and "theodo_roger_cms.content_repository" services in your controller to display your page:
 
     ```php
     public function productListAction()
@@ -92,14 +92,14 @@ to a file as soon as it's possible.*
            ->getRepository('MyBundle\Entity\Product')
            ->findAll();
 
-       $cmsPage = $this->get('roger.content_repository')
+       $cmsPage = $this->get('theodo_roger_cms.content_repository')
            ->getPageBySlug('products-list');
 
        $variables = array(
           'products' => $products
        );
 
-       return $this->get('roger.templating')->renderResponse(
+       return $this->get('theodo_roger_cms.templating')->renderResponse(
            'page:'.$cmsPage->getName(),
            array(
                'page' => $cmsPage

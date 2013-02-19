@@ -11,7 +11,6 @@
 
 namespace Theodo\RogerCmsBundle\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\LayoutType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -24,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Fabrice Bernhard <fabriceb@theodo.fr>
  * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  */
-class LayoutController extends Controller
+class LayoutController extends BackendController
 {
     /**
      * Layouts list
@@ -38,7 +37,7 @@ class LayoutController extends Controller
             throw new AccessDeniedException('You are not allowed to list layouts.');
         }
 
-        $layouts = $this->get('roger.content_repository')->findAll('layout');
+        $layouts = $this->get('theodo_roger_cms.content_repository')->findAll('layout');
 
         return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig', array(
             'layouts' => $layouts
@@ -61,7 +60,7 @@ class LayoutController extends Controller
     {
         $layout = null;
         if ($id) {
-            $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
+            $layout = $this->getContentRepository()->findOneById($id, 'layout');
         }
 
         $form = $this->createForm(new LayoutType(), $layout);
@@ -77,14 +76,14 @@ class LayoutController extends Controller
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($layout) {
-                    $this->get('roger.caching')->invalidate('layout:'.$layout->getName());
+                    $this->get('theodo_roger_cms.caching')->invalidate('layout:'.$layout->getName());
                 }
 
                 // save layout
                 $layout = $form->getData();
-                $this->get('roger.content_repository')->save($layout);
+                $this->getContentRepository()->save($layout);
 
-                $this->get('roger.caching')->warmup('layout:'.$layout->getName());
+                $this->get('theodo_roger_cms.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
                 $redirect = $this->redirect($this->generateUrl('roger_cms_layout_list'));
@@ -118,11 +117,11 @@ class LayoutController extends Controller
             throw new AccessDeniedException('You are not allowed to delete this layout.');
         }
 
-        $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
+        $layout = $this->getContentRepository()->findOneById($id, 'layout');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->get('roger.content_repository')->remove($layout);
+            $this->getContentRepository()->remove($layout);
 
             return $this->redirect($this->generateUrl('roger_cms_layout_list'));
         }
