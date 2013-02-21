@@ -147,8 +147,8 @@ class Media
     }
 
     /**
-     * @ORM\prePersist
-     * @ORM\preUpdate
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
     public function preUpload()
     {
@@ -158,8 +158,8 @@ class Media
     }
 
     /**
-     * @ORM\postPersist
-     * @ORM\postUpdate
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
      */
     public function upload()
     {
@@ -176,7 +176,7 @@ class Media
     }
 
     /**
-     * @ORM\postRemove
+     * @ORM\PostRemove
      */
     public function removeUpload()
     {
