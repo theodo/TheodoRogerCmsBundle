@@ -27,5 +27,10 @@
             "Theodo\\RogerCmsBundle": ""
         }
     },
-    "target-dir": "Theodo/RogerCmsBundle"
+    "target-dir": "Theodo/RogerCmsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }
