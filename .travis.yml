@@ -4,6 +4,6 @@ php:
   - 5.4
 
 before_script:
-  - composer install --prefer-source --dev
+  - composer update --prefer-source
 
 script: phpunit
