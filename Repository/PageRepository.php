@@ -114,7 +114,8 @@ EOF;
      */
     public function queryHomepage()
     {
-        $query = $this->getEntityManager()->createQuery("SELECT p FROM TheodoRogerCmsBundle:Page p WHERE p.parentId IS NULL");
+        $query = $this->getEntityManager()
+            ->createQuery("SELECT p FROM TheodoRogerCmsBundle:Page p WHERE p.parentId IS NULL");
 
         return $query;
     }
@@ -127,8 +128,8 @@ EOF;
      */
     public function getHomepage()
     {
-      $query = $this->queryHomepage();
+        $query = $this->queryHomepage();
 
-      return $query->getSingleResult();
+        return $query->getSingleResult();
     }
 }
