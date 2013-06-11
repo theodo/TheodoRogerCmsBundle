@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\Form\Page;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Theodo\RogerCmsBundle\Form\DataTransformer\ChoiceWithTextInputTransformer;
 
 /**
@@ -40,11 +41,15 @@ class LayoutType extends AbstractType
        ;
     }
 
-    public function getDefaultOptions(array $options)
+
+    /**
+     * @inheritdoc
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'choices' => array()
-        );
+        ));
     }
 
     /**

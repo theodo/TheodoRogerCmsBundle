@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 
@@ -37,16 +38,13 @@ class PageType extends AbstractType
     }
 
     /**
-     * Form default options
-     *
-     * @author Vincent Guillon <vincentg@theodo.fr>
-     * @since 2011-06-21
+     * @inheritdoc
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-           'data_class' => 'Theodo\RogerCmsBundle\Entity\Page',
-        );
+        $resolver->setDefaults(array(
+            'data_class' => 'Theodo\RogerCmsBundle\Entity\Page',
+        ));
     }
 
     /**
