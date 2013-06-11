@@ -7,19 +7,23 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class TwigSyntaxValidator extends ConstraintValidator
 {
-
-    public function __construct($twig_environment)
+    /**
+     * {@inheritDoc}
+     *
+     * @param $twig_environment
+     */
+    public function __construct(\Twig_Environment $twig_environment)
     {
         $this->twig = $twig_environment;
     }
 
     /**
-     * Validation function
+     * {@inheritDoc}
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-29
      */
-    public function isValid($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
         try {
             $this->twig->parse($this->twig->tokenize($value));

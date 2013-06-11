@@ -19,7 +19,7 @@ class RogerHelperExtension extends \Twig_Extension
      */
     public function errorInFields(FormView $form, array $fieldNames)
     {
-        if (!$form->hasChildren()) {
+        if (0 !== $form->count()) {
             return false;
         }
 
