@@ -36,7 +36,7 @@ class LayoutType extends AbstractType
         ;
 
         $builder
-            ->appendClientTransformer(new ChoiceWithTextInputTransformer($options['choices']))
+            ->addViewTransformer(new ChoiceWithTextInputTransformer($options['choices']))
        ;
     }
 
