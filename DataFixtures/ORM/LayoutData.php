@@ -3,18 +3,23 @@
 namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 
 use Theodo\RogerCmsBundle\Entity\Layout;
-use Theodo\RogerCmsBundle\Repository\LayoutRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * DataFixtures for Layout model
+ */
 class LayoutData implements FixtureInterface
 {
     /**
      * Load layout fixtures
      *
+     * @param ObjectManager $manager
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Create new page (homepage)
         $layout1 = new Layout();
@@ -28,7 +33,7 @@ class LayoutData implements FixtureInterface
   <div id="container">
     {% block content %}{% endblock %}
   </div>
-  
+
   <hr />
   <div id="footer">
     {% block footer %}{% endblock %}

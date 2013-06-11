@@ -2,7 +2,6 @@
 
 namespace Theodo\RogerCmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -31,6 +30,30 @@ class Snippet
      */
     private $content;
 
+    /**
+     * @var datetime $createdAt
+     */
+    private $createdAt;
+
+    /**
+     * @var datetime $updatedAt
+     */
+    private $updatedAt;
+
+    /**
+     * @var boolean $cacheable
+     */
+    private $cacheable;
+
+    /**
+     * @var boolean $public
+     */
+    private $public;
+
+    /**
+     * @var integer $lifetime
+     */
+    private $lifetime;
 
     /**
      * Set id
@@ -93,70 +116,44 @@ class Snippet
     }
 
     /**
-     * @var datetime $created_at
-     */
-    private $created_at;
-
-    /**
-     * @var datetime $updated_at
-     */
-    private $updated_at;
-
-
-    /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
-    /**
-     * @var boolean $cacheable
-     */
-    private $cacheable;
-
-    /**
-     * @var boolean $public
-     */
-    private $public;
-
-    /**
-     * @var integer $lifetime
-     */
-    private $lifetime;
-
 
     /**
      * Set cacheable
@@ -171,7 +168,7 @@ class Snippet
     /**
      * Get cacheable
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCacheable()
     {
@@ -191,7 +188,7 @@ class Snippet
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
@@ -211,17 +208,17 @@ class Snippet
     /**
      * Get lifetime
      *
-     * @return integer 
+     * @return integer
      */
     public function getLifetime()
     {
         return $this->lifetime;
     }
 
-        /**
+    /**
      * Snippet validator
      *
-     * 
+     * @param ClassMetadata $metadata
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {

@@ -1,13 +1,9 @@
 {% extends "TheodoRogerCmsBundle::layout.html.twig" %}
 
 {% set body_class = 'reversed' %}
-{% set tab = 'design' %}
-{% set nav = 'layouts' %}
 
 {% block javascripts_assets %}
-<script type="text/javascript"> textarea_id = 'layout_content'; form_id = 'new_layout'; </script>
-<script src="{{ asset('bundles/theodorogercms/js/edit_area/edit_area_full.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/theodorogercms/js/twig-highlight.js') }}" type="text/javascript"></script>
+    {% include "TheodoRogerCmsBundle::editor.html.twig" %}
 {% endblock %}
 
 {% block page_title %}
@@ -19,10 +15,10 @@
 {% block cmscontent %}
     {% if layout is not null %}
     <h1>{% trans %}Edit Layout{% endtrans %}</h1>
-    <form id="new_layout" class="edit_layout" action="{{ url('layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
+    <form id="new_layout" class="edit_layout" action="{{ url('roger_cms_layout_update', { 'id': layout.id }) }}" method="post" {{ form_enctype(form) }}>
     {% else %}
     <h1>{% trans %}New Layout{% endtrans %}</h1>
-    <form id="new_layout" class="edit_layout" id="new_layout" action="{{ url('layout_new') }}" method="post" {{ form_enctype(form) }}>
+    <form id="new_layout" class="edit_layout" id="new_layout" action="{{ url('roger_cms_layout_new') }}" method="post" {{ form_enctype(form) }}>
     {% endif %}
         <div class="form_area">
             <p class="title">
@@ -38,10 +34,14 @@
             {{ form_rest(form) }}
         </div>
         <p class="buttons" style="clear: left;">
-            <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
-            <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
-            {% trans %}or{% endtrans %}
-            <a class="list-layout" href="{{ url('layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% if is_granted('ROLE_ROGER_WRITE_DESIGN') %}
+                <input class="button" type="submit" value="{% trans %}Save Changes{% endtrans %}" name="save-and-list" />
+                <input class="button" type="submit" value="{% trans %}Save and Continue Editing{% endtrans %}" name="save-and-edit" />
+                {% trans %}or{% endtrans %}
+                <a class="list-layout" href="{{ url('roger_cms_layout_list') }}">{% trans %}Cancel{% endtrans %}</a>
+            {% else %}
+                <a class="list-layout" href="{{ url('roger_cms_layout_list') }}">{% trans %}Back to list{% endtrans %}</a>
+            {% endif %}
             {# {% if layout is defined %}
             <a href="{{ url('layout_remove', { 'id': layout.id }) }}">{% trans %}Remove{% endtrans %}</a>
             {% endif %}

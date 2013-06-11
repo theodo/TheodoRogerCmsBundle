@@ -5,16 +5,22 @@ namespace Theodo\RogerCmsBundle\DataFixtures\ORM;
 use Theodo\RogerCmsBundle\Entity\Page;
 use Theodo\RogerCmsBundle\Repository\PageRepository;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Data fixtures for Page model class
+ */
 class PageData implements FixtureInterface
 {
     /**
      * Load page fixtures
      *
+     * @param ObjectManager $manager
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Create new page (homepage)
         $page1 = new Page();
@@ -74,7 +80,7 @@ EOF
         $page3->setContent(<<<EOF
 {% extends 'layout:normal' %}
 
-{% block content %} 
+{% block content %}
 <div id="theodo">
   <h2>Theodo</h2>
 </div>
@@ -89,11 +95,13 @@ EOF
         $page3->setBreadcrumb('Theodo');
         $page3->setDescription("Theodo page");
         $page3->setStatus(PageRepository::STATUS_PUBLISH);
+        $page3->setPublishedAt(new \DateTime('now'));
         $page3->setParent($page1);
         $page3->setContentType(PageRepository::TYPE_TEXT_HTML);
-        $manager->persist($page3);
         $page3->setCacheable(true);
         $page3->setPublic(false);
+
+        $manager->persist($page3);
 
         // Create new page (Theodo team)
         $page4 = new Page();

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="theodo_roger_cms.entity_manager.name">default</parameter>
+        <parameter key="theodo_roger_cms.twig.loader.class">Theodo\RogerCmsBundle\Extensions\Twig\TwigLoaderRepository</parameter>
+        <parameter key="theodo_roger_cms.caching.class">Theodo\RogerCmsBundle\Extensions\Twig\TwigCacheDatabase</parameter>
+        <parameter key="theodo_roger_cms.content_repository.class">Theodo\RogerCmsBundle\Repository\ContentEntityRepository</parameter>
+        <parameter key="theodo_roger_cms.routing.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerRoutingExtension</parameter>
+        <parameter key="theodo_roger_cms.twig.extension.actions.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerActionsExtension</parameter>
+        <parameter key="theodo_roger_cms.twig.extension.helper.class">Theodo\RogerCmsBundle\Extensions\Twig\Extension\RogerHelperExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="theodo_roger_cms.content_repository" class="%theodo_roger_cms.content_repository.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="theodo_roger_cms.twig.loader" class="%theodo_roger_cms.twig.loader.class%">
+            <argument type="service" id="theodo_roger_cms.content_repository" />
+        </service>
+        <service id="theodo_roger_cms.twig.loader_chain" class="Twig_Loader_Chain">
+            <argument type="collection">
+                <argument type="service" id="theodo_roger_cms.twig.loader" />
+                <argument type="service" id="twig.loader" />
+            </argument>
+        </service>
+        <service id="theodo_roger_cms.twig" class="%twig.class%">
+            <argument type="service" id="theodo_roger_cms.twig.loader_chain" />
+            <argument>%twig.options%</argument>
+            <call method="addGlobal">
+                <argument>app</argument>
+                <argument type="service" id="templating.globals" />
+            </call>
+        </service>
+        <service id="theodo_roger_cms.templating" class="%templating.engine.twig.class%">
+            <argument type="service" id="theodo_roger_cms.twig" />
+            <argument type="service" id="templating.name_parser" />
+            <argument type="service" id="file_locator" />
+        </service>
+        <service id="theodo_roger_cms.caching" class="%theodo_roger_cms.caching.class%">
+            <argument type="service" id="theodo_roger_cms.twig" />
+        </service>
+        <service id="theodo_roger_cms.routing" class="%theodo_roger_cms.routing.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="twig.extension" />
+            <tag name="theodo_roger_cms.twig.extension" />
+        </service>
+        <service id="theodo_roger_cms.twig.extension.helper" class="%theodo_roger_cms.twig.extension.helper.class%">
+            <tag name="twig.extension" />
+            <tag name="theodo_roger_cms.twig.extension" />
+        </service>
+        <service id="theodo_roger_cms.twig.extension.actions" class="%theodo_roger_cms.twig.extension.actions.class%">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+            <tag name="theodo_roger_cms.twig.extension" />
+        </service>
+        <service id="theodo_roger_cms.extractor.layout" class="%theodo_roger_cms.extractor.layout.class%" />
+    </services>
+</container>

@@ -11,33 +11,44 @@
 
 namespace Theodo\RogerCmsBundle\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\MediaType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class MediaController extends Controller
+/**
+ * Backend media management controller
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
+class MediaController extends BackendController
 {
     /**
      * Media list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-07-01
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        $medias = $this->get('roger.content_repository')->findAll('media');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to list medias.');
+        }
+
+        $medias = $this->getContentRepository()->findAll('media');
 
         return $this->render('TheodoRogerCmsBundle:Media:index.html.twig',
-                array('medias' => $medias)
-                );
+            array('medias' => $medias)
+        );
     }
 
     /**
      * Media edit
      *
      * @param integer $id
-     * @return Response
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -48,66 +59,75 @@ class MediaController extends Controller
     {
         $media = null;
         if ($id) {
-            $media = $this->get('roger.content_repository')->findOneById($id, 'media');
+            $media = $this->getContentRepository()->findOneById($id, 'media');
         }
         $form = $this->createForm(new MediaType(), $media);
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_CONTENT')) {
+                throw new AccessDeniedException('You are not allowed to edit this media.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {
                 // save media
                 $media = $form->getData();
                 // TODO find way to force update without modifying the media
-                if (null !== $media->file)
-                {
+                if (null !== $media->file) {
                     $media->setPath(null);
                 }
-                $this->get('roger.content_repository')->save($media);
+                $this->getContentRepository()->save($media);
 
                 // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('media_list'));
-                if ($request->get('save-and-edit'))
-                {
-                    $redirect = $this->redirect($this->generateUrl('media_edit', array('id' => $media->getId())));
+                $redirect = $this->redirect($this->generateUrl('roger_cms_media_list'));
+                if ($request->get('save-and-edit')) {
+                    $redirect = $this->redirect($this->generateUrl('roger_cms_media_edit', array('id' => $media->getId())));
                 }
 
                 return $redirect;
             }
         }
 
-        return $this->render('TheodoRogerCmsBundle:Media:edit.html.twig',
-                array(
-                    'media' => $media,
-                    'form' => $form->createView(),
-                  )
-                );
+        return $this->render(
+            'TheodoRogerCmsBundle:Media:edit.html.twig',
+            array(
+                'media' => $media,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
      * Media remove
      *
      * @param integer $id
-     * @return Response
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
      */
     public function removeAction($id)
     {
-        $media = $media = $this->get('roger.content_repository')->findOneById($id, 'media');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_CONTENT')) {
+            throw new AccessDeniedException('You are not allowed to delete this media.');
+        }
+
+        $media = $this->getContentRepository()->findOneById($id, 'media');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $media = $this->get('roger.content_repository')->remove($media);
+            $media = $this->getContentRepository()->remove($media);
 
-            return $this->redirect($this->generateUrl('media_list'));
+            return $this->redirect($this->generateUrl('roger_cms_media_list'));
         }
 
         return $this->render('TheodoRogerCmsBundle:Media:remove.html.twig',
-                array(
-                  'media' => $media
-                ));
+            array(
+                'media' => $media
+            )
+        );
     }
 }

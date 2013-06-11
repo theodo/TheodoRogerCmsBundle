@@ -14,7 +14,7 @@ namespace Theodo\RogerCmsBundle\Extensions\Twig\TokenParser;
 use Theodo\RogerCmsBundle\Extensions\Twig\Node\SnippetNode;
 
 /**
- *
+ * Handles snippet token parsing
  *
  * @author Mathieu Dähne <mathieud@theodo.fr>
  */

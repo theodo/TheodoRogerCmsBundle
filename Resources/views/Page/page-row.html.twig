@@ -17,11 +17,11 @@
     <td class="page" style="padding-left: {% spaceless %}{{ padding_left }}{% endspaceless %};">
         <span class="w1">
             {% if page.children|length > 0 and page.parent %}
-                <a class="expandable" href="{{ url('page_expand', {'id' : page.id, 'level' : level + 1}) }}">
+                <a class="expandable" href="{{ url('roger_cms_page_expand', {'id' : page.id, 'level' : level + 1}) }}">
                     <img alt="toggle children" class="expander" src="{{ asset('bundles/theodorogercms/images/admin/expand.png') }}" />
                 </a>
             {% endif %}
-            <a id="edit-{{ page.slug }}" href="{{ url('page_edit', {'id' : page.id}) }}">
+            <a id="edit-{{ page.slug }}" href="{{ url('roger_cms_page_edit', {'id' : page.id}) }}">
                 <span class="content_type">{{ page.contentSubtype }}</span>
                 <img alt="" class="icon" src="{{ asset('bundles/theodorogercms/images/admin/roger_page.png') }}" />
                 <span class="title">{{ page.name }}</span>
@@ -33,12 +33,12 @@
         {{ page.status|trans }}
     </td>
     <td class="add_child">
-        <a id="new-{{ page.slug }}-child" href="{{ url('page_new', {'parent_id' : page.id}) }}">
+        <a id="new-{{ page.slug }}-child" href="{{ url('roger_cms_page_new', {'parentId' : page.id}) }}">
           {% trans %}Add Child{% endtrans %}
         </a>
     </td>
     <td class="remove">
-        <a id="remove-{{ page.slug }}" href="{{ url('page_remove', {'id' : page.id}) }}">
+        <a id="remove-{{ page.slug }}" href="{{ url('roger_cms_page_remove', {'id' : page.id}) }}">
           {% trans %}Remove{% endtrans %}
         </a>
     </td>

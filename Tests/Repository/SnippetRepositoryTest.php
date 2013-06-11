@@ -20,12 +20,13 @@ require_once __DIR__.'/../Test.php';
 
 use Theodo\RogerCmsBundle\Tests\Test as TestCase;
 use Theodo\RogerCmsBundle\Entity\Snippet;
-use Doctrine\ORM\Query;
 
 class SnippetRepositoryTest extends TestCase
 {
     public function setUp()
     {
+        parent::setUp();
+
         static::createRogerKernel();
     }
 

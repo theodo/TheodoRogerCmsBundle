@@ -11,34 +11,45 @@
 
 namespace Theodo\RogerCmsBundle\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\LayoutType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class LayoutController extends Controller
+/**
+ * Controller for backend layout section
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
+class LayoutController extends BackendController
 {
-
     /**
-     * Layout list
+     * Layouts list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function indexAction()
     {
-        $layouts = $this->get('roger.content_repository')->findAll('layout');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to list layouts.');
+        }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig',
-                array('layouts' => $layouts)
-                );
+        $layouts = $this->get('theodo_roger_cms.content_repository')->findAll('layout');
+
+        return $this->render('TheodoRogerCmsBundle:Layout:index.html.twig', array(
+            'layouts' => $layouts
+        ));
     }
 
     /**
-     * Layout edit
+     * Edit a layout
      *
      * @param integer $id
-     * @return Response
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -49,68 +60,74 @@ class LayoutController extends Controller
     {
         $layout = null;
         if ($id) {
-            $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
+            $layout = $this->getContentRepository()->findOneById($id, 'layout');
         }
 
         $form = $this->createForm(new LayoutType(), $layout);
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
+                throw new AccessDeniedException('You are not allowed to edit this layout.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($layout) {
-                    $this->get('roger.caching')->invalidate('layout:'.$layout->getName());
+                    $this->get('theodo_roger_cms.caching')->invalidate('layout:'.$layout->getName());
                 }
 
                 // save layout
                 $layout = $form->getData();
-                $this->get('roger.content_repository')->save($layout);
+                $this->getContentRepository()->save($layout);
 
-                $this->get('roger.caching')->warmup('layout:'.$layout->getName());
+                $this->get('theodo_roger_cms.caching')->warmup('layout:'.$layout->getName());
 
                 // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('layout_list'));
+                $redirect = $this->redirect($this->generateUrl('roger_cms_layout_list'));
                 if ($request->get('save-and-edit')) {
-                    $redirect = $this->redirect($this->generateUrl('layout_edit', array('id' => $layout->getId())));
+                    $redirect = $this->redirect($this->generateUrl('roger_cms_layout_edit', array('id' => $layout->getId())));
                 }
 
                 return $redirect;
             }
         }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig',
-                array(
-                    'layout' => $layout,
-                    'form' => $form->createView(),
-                  )
-                );
+        return $this->render('TheodoRogerCmsBundle:Layout:edit.html.twig', array(
+            'layout' => $layout,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
      * Layout remove
      *
      * @param integer $id
-     * @return Response
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
      */
     public function removeAction($id)
     {
-        $layout = $this->get('roger.content_repository')->findOneById($id, 'layout');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to delete this layout.');
+        }
+
+        $layout = $this->getContentRepository()->findOneById($id, 'layout');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $this->get('roger.content_repository')->remove($layout);
+            $this->getContentRepository()->remove($layout);
 
-            return $this->redirect($this->generateUrl('layout_list'));
+            return $this->redirect($this->generateUrl('roger_cms_layout_list'));
         }
 
-        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig',
-                array(
-                  'layout' => $layout
-                ));
+        return $this->render('TheodoRogerCmsBundle:Layout:remove.html.twig', array(
+            'layout' => $layout
+        ));
     }
 }

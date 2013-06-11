@@ -10,20 +10,19 @@
  * with this source code in the file LICENSE.
  */
 
+namespace Theodo\RogerCmsBundle\Tests;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Common\DataFixtures\Loader as DataFixturesLoader;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+
 /**
  * Test class.
  *
  * @author Benjamin Grandfond <benjaming@theodo.fr>
  */
-
-namespace Theodo\RogerCmsBundle\Tests;
-
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\DoctrineFixturesBundle\Common\DataFixtures\Loader as DataFixturesLoader;
-use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-
 abstract class Test extends WebTestCase
 {
     /**
@@ -36,6 +35,15 @@ abstract class Test extends WebTestCase
      */
     protected static $contentRepository;
 
+    protected static $fixtureDir;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        static::$fixtureDir = __DIR__.'/Fixtures/app';
+    }
+
     /**
      * Creates a Kernel, generate the Doctrine schema and load the fixtures.
      *
@@ -43,12 +51,12 @@ abstract class Test extends WebTestCase
      *
      * @param array $options An array of options
      */
-    static public function createRogerKernel(array $options = array())
+    public static function createRogerKernel(array $options = array())
     {
         static::$kernel = static::createKernel($options);
         static::$kernel->boot();
 
-        static::$contentRepository = static::$kernel->getContainer()->get('roger.content_repository');
+        static::$contentRepository = static::$kernel->getContainer()->get('theodo_roger_cms.content_repository');
 
         static::generateSchema();
         static::loadFixtures();
@@ -57,12 +65,12 @@ abstract class Test extends WebTestCase
     /**
      * Creates a Client.
      *
-     * @param array   $options An array of options to pass to the createKernel class
-     * @param array   $server  An array of server parameters
+     * @param array $options An array of options to pass to the createKernel class
+     * @param array $server  An array of server parameters
      *
      * @return Client A Client instance
      */
-    static protected function createClient(array $options = array(), array $server = array())
+    protected static function createClient(array $options = array(), array $server = array())
     {
         static::createRogerKernel($options);
 
@@ -77,7 +85,7 @@ abstract class Test extends WebTestCase
      *
      * @throws Doctrine\DBAL\Schema\SchemaException
      */
-    static protected function generateSchema()
+    protected static function generateSchema()
     {
         static::$em = static::$kernel->getContainer()->get('doctrine')->getEntityManager();
         $metadatas = static::$em->getMetadataFactory()->getAllMetadata();
@@ -100,7 +108,7 @@ abstract class Test extends WebTestCase
      *
      * @throws InvalidArgumentException
      */
-    static protected function loadFixtures()
+    protected static function loadFixtures()
     {
         $path = __DIR__.'/../DataFixtures/ORM';
 
@@ -137,5 +145,12 @@ abstract class Test extends WebTestCase
     protected function getContentRepository()
     {
         return static::$contentRepository;
+    }
+
+    protected static function getKernelClass()
+    {
+        require_once static::$fixtureDir.'/AppTestKernel.php';
+
+        return 'Theodo\RogerCmsBundle\Tests\Fixtures\AppTestKernel';
     }
 }

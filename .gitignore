@@ -1,10 +1,8 @@
 # Vendors
-Fixtures/Symfony/vendor/*
-Fixtures/Symfony/app/cache/*
-Fixtures/Symfony/app/logs/*
-Fixtures/Symfony/vendor/*
-Fixtures/Symfony/web/bundles/*
-Fixtures/Symfony/app/bootstrap_cache.php.cache
+vendor
+
+#Composer
+composer.phar
 
 # PHPUnit special files
 phpunit.xml
@@ -16,8 +14,8 @@ clover.html
 *.php~
 
 # Cache
-Tests/cache
-Tests/logs
+Tests/Fixtures/app/cache
+Tests/Fixtures/app/logs
 Tests/autoload.php
 
 # Filesystem
@@ -26,3 +24,4 @@ Tests/autoload.php
 # IDES
 .nbproject
 .idea
+*.swp

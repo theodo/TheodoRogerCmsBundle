@@ -11,113 +11,99 @@
 
 namespace Theodo\RogerCmsBundle\Extensions\Twig;
 
-use Twig_LoaderInterface;
 use Twig_Error_Loader;
+use Twig_LoaderInterface;
 use Twig_Loader_Filesystem;
 use Theodo\RogerCmsBundle\Repository\ContentRepositoryInterface;
 
 /**
  * Loads a template from a repository.
  *
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
  */
 class TwigLoaderRepository implements Twig_LoaderInterface
 {
+    public static $types = array('page', 'snippet', 'layout');
 
-    static $types = array('page', 'snippet', 'layout');
     /**
-     *
      * @var ContentRepositoryInterface
      */
-    protected $content_repository = null;
+    protected $contentRepository = null;
 
     /**
+     * Registers content repository and fallback loader
      *
-     * @var Twig_LoaderInterface
+     * @param ContentRepositoryInterface $contentRepository Cms objects repository
      */
-    protected $fallback_loader = null;
-
-    /**
-     *
-     * @param ContentRepositoryInterface $content_repository
-     * @param Twig_LoaderInterface $fallback_loader
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2001-06-22
-     */
-    public function __construct(ContentRepositoryInterface $content_repository, Twig_LoaderInterface $fallback_loader = null, $fallback_path = null)
+    public function __construct(ContentRepositoryInterface $contentRepository)
     {
-        $this->content_repository = $content_repository;
-        $this->fallback_loader = $fallback_loader;
-        if ($this->fallback_loader instanceof Twig_Loader_Filesystem && $fallback_path != null)
-        {
-          $path_prefix = __DIR__.'/../../../../../';
-
-          if (!file_exists($path_prefix.$fallback_path))
-          {
-              throw new \InvalidArgumentException('The specified fallback path does not exist. Tried to access: '.$path_prefix.$fallback_path);
-          }
-
-          $this->fallback_loader->addPath($path_prefix.$fallback_path);
-        }
+        $this->contentRepository = $contentRepository;
     }
 
     /**
+     * Getter for content repository
      *
-     * @return EntityManager
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2001-06-22
+     * @return ContentRepositoryInterface The current content repository
      */
     public function getContentRepository()
     {
-        return $this->content_repository;
+        return $this->contentRepository;
     }
 
     /**
+     * Setter for content repository
      *
-     * @param ContentRepositoryInterface $content_repository
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2001-06-22
+     * @param ContentRepositoryInterface $contentRepository
      */
-    public function setContentRepository(ContentRepositoryInterface $content_repository)
+    public function setContentRepository(ContentRepositoryInterface $contentRepository)
     {
-        $this->content_repository = $content_repository;
+        $this->contentRepository = $contentRepository;
     }
 
+    /**
+     * Parse an identifier of an RogerCms object and return it's name and type
+     *
+     * @todo Extract to another object injected as a service
+     *
+     * @param string $name A CMS object identifier
+     *
+     * @return array|false Array of type and name, false if identifier contains no type
+     */
     public static function parseName($name)
     {
-        $name_parts = explode(':', $name);
-        if (count($name_parts) < 2) {
+        $nameParts = explode(':', $name);
+        if (count($nameParts) != 2) {
             return false;
         }
 
-        $type = $name_parts[0];
+        $type = array_shift($nameParts);
+
         if (!in_array($type, self::$types)) {
             return false;
         }
-        $name = $name_parts[1];
+        $name = implode(':', $nameParts);
 
         return array($type, $name);
     }
 
     /**
      * Gets the source code of a template, given its name.
-     * Name format can be 'name' or 'type:name' where type is 'page', 'layout', or 'snippet'
+     * Name format can be 'name' or 'type:name'
+     * where type is 'page', 'layout', or 'snippet'
      *
-     * @param  string $name The name of the template to load
+     * @param string $name The name of the template to load
      *
      * @return string The template source code
-     *
-     * @author Fabrice Bernhard <fabriceb@theodo.fr>
-     * @since 2011-06-22
      */
     public function getSource($name)
     {
-        $parsed_info = self::parseName($name);
+        $parsedInfo = self::parseName($name);
 
-        if ($parsed_info === false) {
-            return $this->fallback_loader->getSource($name);
-        }
-        else {
-            list($type, $name) = $parsed_info;
+        if ($parsedInfo === false) {
+            throw new Twig_Error_Loader('Unable to parse ' . $name);
+        } else {
+            list($type, $name) = $parsedInfo;
         }
 
         // Load source from content repository
@@ -128,37 +114,40 @@ class TwigLoaderRepository implements Twig_LoaderInterface
             throw new Twig_Error_Loader('Template "'.$name.'" not found in the database for type: '.$type);
         }
 
-        //$this->get('logger')->info('RogerCmsBundle: ('.$type.', '.$name.' loaded');
-
         return $source;
     }
 
     /**
      * Gets the cache key to use for the cache for a given template name.
      *
-     * @param  string $name The name of the template to load
+     * @param string $name The name of the template to load
      *
      * @return string The cache key
      */
     public function getCacheKey($name)
     {
         if (self::parseName($name) === false) {
-            return $this->fallback_loader->getCacheKey($name);
+            throw new Twig_Error_Loader('Unable to parse ' . $name);
         }
+
         return $name;
     }
 
     /**
-     * Returns true if the template is still fresh.
+     * Check if a non-cms template is still fresh.
+     * Returns true for cms templates as their state is handled differently.
      *
-     * @param string    $name The template name
-     * @param timestamp $time The last modification time of the cached template
+     * @param string  $name The template name
+     * @param integer $time Timestamp of the last modification time
+     *
+     * @return boolean
      */
     public function isFresh($name, $time)
     {
         if (self::parseName($name) === false) {
-            return $this->fallback_loader->isFresh($name, $time);
+            throw new Twig_Error_Loader('Unable to parse ' . $name);
         }
-        return true; // isFresh is handled by cache invalidation
+
+        return true;
     }
 }

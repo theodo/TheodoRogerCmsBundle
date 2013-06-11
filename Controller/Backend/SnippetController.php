@@ -13,32 +13,43 @@ namespace Theodo\RogerCmsBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Theodo\RogerCmsBundle\Form\SnippetType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * Handles backend snippet management
+ *
+ * @author Mathieu Dähne <mathieud@theodo.fr>
+ * @author Cyrille Jouineau <cyrillej@theodo.fr>
+ * @author Marek Kalnik <marekk@theodo.fr>
+ * @author Fabrice Bernhard <fabriceb@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ */
 class SnippetController extends Controller
 {
-
     /**
      * Snippet list
      *
-     * @return Response
-     *
-     * @author Mathieu Dähne <mathieud@theodo.fr>
-     * @since 2011-06-20
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        $snippets = $this->get('roger.content_repository')->findAll('snippet');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_READ_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to list snippets.');
+        }
+
+        $snippets = $this->get('theodo_roger_cms.content_repository')->findAll('snippet');
 
         return $this->render('TheodoRogerCmsBundle:Snippet:index.html.twig',
-                array('snippets' => $snippets)
-                );
+            array('snippets' => $snippets)
+        );
     }
 
     /**
      * Snippet edit
      *
-     * @param integer $id
-     * @return Response
+     * @param integer $id Id of edited snippet
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-20
@@ -50,7 +61,8 @@ class SnippetController extends Controller
     {
         $snippet = null;
         if ($id) {
-            $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
+            $snippet = $this->get('theodo_roger_cms.content_repository')
+                ->findOneById($id, 'snippet');
         }
         $form = $this->createForm(new SnippetType(), $snippet);
         $request = $this->get('request');
@@ -59,65 +71,78 @@ class SnippetController extends Controller
         $hasErrors = false;
 
         if ($request->getMethod() == 'POST') {
+            if (false == $this->get('security.context')->isGranted('ROLE_ROGER_WRITE_DESIGN')) {
+                throw new AccessDeniedException('You are not allowed to edit this snippet.');
+            }
+
             $form->bindRequest($request);
 
             if ($form->isValid()) {
                 // remove twig cached file
                 if ($snippet) {
-                    $this->get('roger.caching')->invalidate('snippet:'.$snippet->getName());
+                    $this->get('theodo_roger_cms.caching')
+                        ->invalidate('snippet:'.$snippet->getName());
                 }
 
                 //save snippet
                 $snippet = $form->getData();
-                $this->get('roger.content_repository')->save($snippet);
+                $this->get('theodo_roger_cms.content_repository')->save($snippet);
 
-                $this->get('roger.caching')->warmup('snippet:'.$snippet->getName());
+                $this->get('theodo_roger_cms.caching')->warmup('snippet:'.$snippet->getName());
 
                 // Set redirect route
-                $redirect = $this->redirect($this->generateUrl('snippet_list'));
+                $redirect = $this->redirect($this->generateUrl('roger_cms_snippet_list'));
                 if ($request->get('save-and-edit')) {
-                    $redirect = $this->redirect($this->generateUrl('snippet_edit', array('id' => $snippet->getId())));
+                    $redirect = $this->redirect(
+                        $this->generateUrl('roger_cms_snippet_edit', array(
+                            'id' => $snippet->getId()
+                        )));
                 }
 
                 return $redirect;
-            }
-            else {
+            } else {
                 $hasErrors = true;
             }
         }
 
         return $this->render('TheodoRogerCmsBundle:Snippet:edit.html.twig',
-                array(
-                    'snippet' => $snippet,
-                    'form' => $form->createView(),
-                    'hasErrors'   => $hasErrors,
-                  )
-                );
+            array(
+                'snippet' => $snippet,
+                'form' => $form->createView(),
+                'hasErrors'   => $hasErrors,
+            )
+        );
     }
 
     /**
      * Snippet delete
      *
-     * @param integer $id
-     * @return Response
+     * @param integer $id Id of snippet to remove
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-21
      */
     public function removeAction($id)
     {
-        $snippet = $snippet = $this->get('roger.content_repository')->findOneById($id, 'snippet');
+        if (false == $this->get('security.context')->isGranted('ROLE_ROGER_DELETE_DESIGN')) {
+            throw new AccessDeniedException('You are not allowed to delete this snippet.');
+        }
+
+        $snippet = $snippet = $this->get('theodo_roger_cms.content_repository')->findOneById($id, 'snippet');
 
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
-            $snippet = $this->get('roger.content_repository')->remove($snippet);
+            $this->get('theodo_roger_cms.content_repository')->remove($snippet);
 
-            return $this->redirect($this->generateUrl('snippet_list'));
+            return $this->redirect($this->generateUrl('roger_cms_snippet_list'));
         }
 
         return $this->render('TheodoRogerCmsBundle:Snippet:remove.html.twig',
-                array(
-                  'snippet' => $snippet
-                ));
+            array(
+                'snippet' => $snippet
+            )
+        );
     }
 }

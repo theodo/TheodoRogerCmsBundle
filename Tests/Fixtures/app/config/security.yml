@@ -1,0 +1,47 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ROGER_CONTENT:   [ROLE_ROGER_READ_CONTENT, ROLE_ROGER_WRITE_CONTENT, ROLE_ROGER_DELETE_CONTENT, ROLE_ROGER_PUBLISH_CONTENT]
+        ROLE_ROGER_DESIGN:    [ROLE_ROGER_READ_DESIGN, ROLE_ROGER_WRITE_DESIGN, ROLE_ROGER_DELETE_DESIGN]
+        ROLE_ROGER_EDITOR:    [ROLE_ROGER_CONTENT, ROLE_ROGER_READ_DESIGN, ROLE_ROGER_PUBLISHER]
+        ROLE_ROGER_DESIGNER:  [ROLE_ROGER_CONTENT, ROLE_ROGER_DESIGN, ROLE_ROGER_PUBLISHER]
+
+        ROLE_ADMIN:           [ROLE_USER, ROLE_ROGER_DESIGNER, ROLE_ROGER_EDITOR]
+        ROLE_SUPER_ADMIN:     [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    designer:
+                        password: designpass
+                        roles:
+                            - ROLE_USER
+                            - ROLE_ROGER_DESIGNER
+                    editor:
+                        password: editpass
+                        roles:
+                            - ROLE_USER
+                            - ROLE_ROGER_EDITOR
+                    admin:
+                        password: adminpass
+                        roles:
+                            - ROLE_ADMIN
+
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        roger_admin:
+            pattern:    ^/admin
+            http_basic:
+                realm: "Secured Demo Area"
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

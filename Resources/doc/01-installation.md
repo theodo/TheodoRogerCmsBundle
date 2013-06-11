@@ -17,48 +17,7 @@ To add the bundle to your project add the following entry to your deps file:
     target=/bundles/Theodo/RogerCmsBundle
 ```
 
-
-### Step 2: Dependencies
-
-**Using the vendors script**
-
-Add the following lines to your `deps` file:
-
-``` bash
-[DoctrineExtensionsBundle]
-    git=https://github.com/stof/StofDoctrineExtensionsBundle.git
-    version=origin/master
-    target=/bundles/Stof/DoctrineExtensionsBundle
-
-[DoctrineExtensions]
-    git=http://github.com/l3pp4rd/DoctrineExtensions.git
-    version=origin/master
-    target=/gedmo-doctrine-extensions
-```
-
-**Notice:**
-TheodoRogerCms depends on Twig and it's not usable without it.
-Due to some bugs in previous versions of Twig, v 1.2.0 or higher is required.
-
-### Step 3: autoload.php
-
-You need to register the `Theodo` namespace before using the bundle. Add the following line to your `app/autoload.php` file: `'Theodo' => __DIR__.'/../vendor/bundles',`.
-As TheodoRogerCms depends on the DoctrineExtensionsBundle and the DoctrineExtensions library you also need to register them in the autoload.
-
-``` php
-    use Symfony\Component\ClassLoader\UniversalClassLoader;
-    use Doctrine\Common\Annotations\AnnotationRegistry;
-
-    $loader = new UniversalClassLoader();
-    $loader->registerNamespaces(array(
-        'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
-        'Stof'             => __DIR__.'/../vendor/bundles',
-        'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
-        'Theodo'           => __DIR__.'/../vendor/bundles',
-    ));
-```
-
-### Step 4: AppKernel.php
+### Step 2: AppKernel.php
 
 Register TheodoRogerCmsBundle in your `app/AppKernel.php` file:
 
@@ -74,11 +33,12 @@ Register TheodoRogerCmsBundle in your `app/AppKernel.php` file:
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Theodo\RogerCmsBundle\TheodoRogerCmsBundle(),
         );
+    }
 ```
 
 Follow StofDoctrineExtensionsBundle's doc to add the configuration for **timestampable** behavior.
 
-### Step 5: Routing
+### Step 3: Routing
 
 Add the following lines to your `app/config/routing.yml` file:
 
@@ -88,7 +48,7 @@ _internal:
     prefix:   /_internal
 
 _roger_cms:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing.xml"
     prefix: /
 
 ```
@@ -101,17 +61,15 @@ _internal:
     prefix:   /_internal
 
 _roger_cms_admin:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing/admin.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing/admin.xml"
     prefix: /my-admin/cms
 
 _roger_cms_frontend:
-    resource: "@TheodoRogerCmsBundle/Resources/config/routing/frontend.yml"
+    resource: "@TheodoRogerCmsBundle/Resources/config/routing/frontend.xml"
     prefix: /cms
 ```
 
-
-
-### Step 6: Database and entities
+### Step 4: Database and entities
 
 RogerCMS uses database to store all content informations, so you need to add its
 entities to your entity manager. As it also uses his own user management system
@@ -122,3 +80,16 @@ how to setup and manage a separate database connection for the CMS, refer to
 If you don't feel like having Roger in separate db, the Symfony Standard Edition
 default config will work out of the box. Just generate your schema/migrations
 and update your db.
+
+### Step 5: Timestampable behaviour
+
+You need to enable the timestampable behavoiur of stof_doctrine_extension
+
+``` yml
+# app/config/config.yml
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+```

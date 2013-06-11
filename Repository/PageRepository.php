@@ -35,6 +35,7 @@ class PageRepository extends EntityRepository
      * Return list of available status
      *
      * @return array
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
@@ -52,6 +53,7 @@ class PageRepository extends EntityRepository
      * Return list of available content types
      *
      * @return array
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-07-04
      */
@@ -68,6 +70,7 @@ class PageRepository extends EntityRepository
      * Return list of available content subtypes
      *
      * @return array
+     *
      * @author cyrillej
      * @since 2011-07-05
      */
@@ -84,6 +87,7 @@ class PageRepository extends EntityRepository
      * List main pages
      *
      * @return array
+     *
      * @author Vincent Guillon <vincentg@theodo.fr>
      * @since 2011-06-20
      */
@@ -94,7 +98,7 @@ class PageRepository extends EntityRepository
 SELECT p, c, c2 FROM TheodoRogerCmsBundle:Page p
   LEFT JOIN p.children c
   LEFT JOIN c.children c2
-  WHERE p.parent_id IS NULL
+  WHERE p.parentId IS NULL
   ORDER BY p.name
 EOF;
 
@@ -105,19 +109,17 @@ EOF;
     }
 
     /**
-     *
      * @author Mathieu Dähne <mathieud@theodo.fr>
      * @since 2011-06-28
      */
     public function queryHomepage()
     {
-        $query = $this->getEntityManager()->createQuery("SELECT p FROM TheodoRogerCmsBundle:Page p WHERE p.parent_id IS NULL");
+        $query = $this->getEntityManager()->createQuery("SELECT p FROM TheodoRogerCmsBundle:Page p WHERE p.parentId IS NULL");
 
         return $query;
     }
 
     /**
-     *
      * Retrieve the homepage
      *
      * @author Mathieu Dähne <mathieud@theodo.fr>

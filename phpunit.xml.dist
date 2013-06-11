@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
         backupGlobals="false"
         backupStaticAttributes="false"
@@ -15,13 +13,9 @@
 
     <testsuites>
         <testsuite name="TheodoRogerCmsBundle Test Suite">
-            <directory suffix="Test.php">./Tests</directory>
+            <directory suffix="Test.php">./Tests/</directory>
         </testsuite>
     </testsuites>
-
-    <php>
-        <server name="KERNEL_DIR" value="Fixtures/Symfony/app" />
-    </php>
 
     <filter>
         <whitelist>
@@ -30,6 +24,7 @@
                 <directory>./DataFixtures</directory>
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
+                <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>

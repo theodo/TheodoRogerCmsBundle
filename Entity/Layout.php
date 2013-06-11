@@ -2,7 +2,6 @@
 
 namespace Theodo\RogerCmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -30,10 +29,19 @@ class Layout
     private $content;
 
     /**
-     * @var string $content_type
+     * @var string $contentType
      */
-    private $content_type;
+    private $contentType;
 
+    /**
+     * @var datetime $createdAt
+     */
+    private $createdAt;
+
+    /**
+     * @var datetime $updatedAt
+     */
+    private $updatedAt;
 
     /**
      * Set Id
@@ -96,50 +104,24 @@ class Layout
     }
 
     /**
-     * Set content_type
+     * Set contentType
      *
      * @param string $contentType
      */
     public function setContentType($contentType)
     {
-        $this->content_type = $contentType;
+        $this->contentType = $contentType;
     }
 
     /**
-     * Get content_type
+     * Get contentType
      *
      * @return string $contentType
      */
     public function getContentType()
     {
-        return $this->content_type;
+        return $this->contentType;
     }
-
-    /**
-     * Layout validator
-     *
-     * 
-     */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {        
-        // Name validator: not null
-        $metadata->addPropertyConstraint('name', new NotBlank());
-        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
-
-        // Content validator: not null
-        $metadata->addPropertyConstraint('content', new NotBlank());
-        $metadata->addPropertyConstraint('content', new TwigSyntax());
-    }
-    /**
-     * @var datetime $created_at
-     */
-    private $created_at;
-
-    /**
-     * @var datetime $updated_at
-     */
-    private $updated_at;
-
 
     /**
      * Set created_at
@@ -148,17 +130,17 @@ class Layout
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -168,16 +150,32 @@ class Layout
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
+    }
+
+    /**
+     * Layout validator
+     *
+     * @param ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        // Name validator: not null
+        $metadata->addPropertyConstraint('name', new NotBlank());
+        $metadata->addConstraint(new UniqueEntity(array('fields' => array('name'))));
+
+        // Content validator: not null
+        $metadata->addPropertyConstraint('content', new NotBlank());
+        $metadata->addPropertyConstraint('content', new TwigSyntax());
     }
 }

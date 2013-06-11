@@ -20,11 +20,11 @@
         </tr>
     </tbody>
 </table>
-<form action="{{ url('snippet_remove', { 'id': snippet.id }) }}" method="post" class="edit_snippet">
+<form action="{{ url('roger_cms_snippet_remove', { 'id': snippet.id }) }}" method="post" class="edit_snippet">
     <p class="buttons">
         <input class="button" type="submit" value="{% trans %}Delete Snippet{% endtrans %}" />
         {% trans %}or{% endtrans %}
-        <a href="{{ url('snippet_list') }}">{% trans %}Cancel{% endtrans %}</a>
+        <a href="{{ url('roger_cms_snippet_list') }}">{% trans %}Cancel{% endtrans %}</a>
     </p>
 </form>
 {% endblock %}
