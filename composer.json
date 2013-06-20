@@ -12,10 +12,10 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": ">=2.1.5, <2.2-dev",
+        "symfony/symfony": "2.3.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "doctrine/doctrine-bundle": ">=1.0.0, <1.2-dev",
-        "stof/doctrine-extensions-bundle": "dev-master",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
         "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "require-dev": {
