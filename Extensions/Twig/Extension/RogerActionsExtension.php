@@ -11,8 +11,9 @@
 
 namespace Theodo\RogerCmsBundle\Extensions\Twig\Extension;
 
-use Theodo\RogerCmsBundle\Extensions\Twig\TokenParser\SnippetTokenParser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Controller\ControllerReference;
+use Theodo\RogerCmsBundle\Extensions\Twig\TokenParser\SnippetTokenParser;
 
 /**
  * This Twig extension adds snippet rendering functions
@@ -57,7 +58,7 @@ class RogerActionsExtension extends \Twig_Extension
 
         return $this->container
             ->get('templating.helper.actions')
-            ->render($controller, $params, $options);
+            ->render(new ControllerReference($controller, $params), $options);
     }
 
     /**

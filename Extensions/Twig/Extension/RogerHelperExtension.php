@@ -26,8 +26,12 @@ class RogerHelperExtension extends \Twig_Extension
         $fieldNames = array_flip($fieldNames);
 
         foreach ($form->getChildren() as $name => $field) {
-            if (isset($fieldNames[$name]) && $form->getChild($name)->get('errors')) {
-                return true;
+            if (isset($fieldNames[$name])) {
+                $vars = $form->getChild($name)->vars;
+                if (isset($vars['errors']) && $vars['errors']) {
+
+                    return true;
+                }
             }
         }
 
