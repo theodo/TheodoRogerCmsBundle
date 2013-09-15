@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Theodo\RogerCmsBundle\Entity\Layout;
 
 class LayoutType extends AbstractType
@@ -22,11 +23,11 @@ class LayoutType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'Theodo\RogerCmsBundle\Entity\Layout',
-        );
+        ));
     }
 
     /**

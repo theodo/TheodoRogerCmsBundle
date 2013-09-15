@@ -62,7 +62,7 @@ class RogerRoutingExtension extends \Twig_Extension
             ->findOneBySlug($slug);
 
         return $this->generator
-            ->generate('page', array('slug' => $page->getFullSlug()), true);
+            ->generate('theodo_roger_cms_page', array('slug' => $page->getFullSlug()), true);
     }
 
     /**
@@ -91,6 +91,6 @@ class RogerRoutingExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'roger_routing';
+        return 'theodo_roger_cms_routing';
     }
 }
