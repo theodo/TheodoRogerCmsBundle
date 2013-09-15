@@ -3,9 +3,11 @@
 namespace Theodo\RogerCmsBundle\Tests\Form\Page;
 
 use Symfony\Component\Form\PreloadedExtension;
-use Symfony\Component\Form\Test\TypeTestCase;
 use Theodo\RogerCmsBundle\Form\Page\ContentType;
 use Theodo\RogerCmsBundle\Form\Page\LayoutType;
+
+// Used for < 2.3 compatibility
+use Symfony\Component\Form\Tests\Extension\Core\Type\TypeTestCase;
 
 class ContentTypeTests extends TypeTestCase
 {
