@@ -85,7 +85,7 @@ class PageController extends BackendController
         $form = $this->createForm(new PageType(), $page);
 
         $layoutName = $form->get('content')->get('layout')->getData();
-        $tabs = $form->get('content')->get('content')->getClientData();
+        $tabs = $form->get('content')->get('content')->getViewData();
 
         if (!is_array($tabs)) {
             $tabs = array();

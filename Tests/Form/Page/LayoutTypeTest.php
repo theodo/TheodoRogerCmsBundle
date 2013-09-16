@@ -2,6 +2,7 @@
 
 namespace Theodo\RogerCmsBundle\Tests\Form\Page;
 
+// Used for < 2.3 compatibility
 use Symfony\Component\Form\Tests\Extension\Core\Type\TypeTestCase;
 use Theodo\RogerCmsBundle\Form\Page\LayoutType;
 

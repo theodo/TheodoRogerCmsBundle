@@ -19,8 +19,6 @@
  */
 namespace Theodo\RogerCmsBundle\Tests\Entity;
 
-require_once __DIR__.'/Test.php';
-
 use Theodo\RogerCmsBundle\Tests\Entity\Test as TestCase;
 use Theodo\RogerCmsBundle\Entity\Page;
 

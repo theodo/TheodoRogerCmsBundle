@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Theodo\RogerCmsBundle\Entity\Media;
 
 class MediaType extends AbstractType
@@ -17,11 +18,15 @@ class MediaType extends AbstractType
         $builder->add('file', 'file', array('required' => false));
     }
 
-    public function getDefaultOptions(array $options)
+
+    /**
+     * @inheritdoc
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'Theodo\RogerCmsBundle\Entity\Media',
-        );
+        ));
     }
 
     public function getName()

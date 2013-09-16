@@ -69,7 +69,7 @@ class MediaController extends BackendController
                 throw new AccessDeniedException('You are not allowed to edit this media.');
             }
 
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 // save media

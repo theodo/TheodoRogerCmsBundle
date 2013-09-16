@@ -71,7 +71,7 @@ class LayoutController extends BackendController
                 throw new AccessDeniedException('You are not allowed to edit this layout.');
             }
 
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 // remove twig cached file

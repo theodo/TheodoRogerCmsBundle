@@ -87,7 +87,7 @@ abstract class Test extends WebTestCase
      */
     protected static function generateSchema()
     {
-        static::$em = static::$kernel->getContainer()->get('doctrine')->getEntityManager();
+        static::$em = static::$kernel->getContainer()->get('doctrine')->getManager();
         $metadatas = static::$em->getMetadataFactory()->getAllMetadata();
 
         $connection = static::$em->getConnection();
