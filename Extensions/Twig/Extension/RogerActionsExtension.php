@@ -54,7 +54,11 @@ class RogerActionsExtension extends \Twig_Extension
 
         $params['name'] = $name;
         $params['attributes'] = $attributes;
-        $options['standalone'] = true;
+        $options = array();
+
+        if ($this->container->has('fragment.renderer.esi')) {
+            $options['standalone'] = true;
+        }
 
         return $this->container
             ->get('templating.helper.actions')
