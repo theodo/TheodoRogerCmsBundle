@@ -2,16 +2,17 @@
 
 namespace Theodo\RogerCmsBundle\Tests\Form\Page;
 
-use Symfony\Component\Form\Tests\Extension\Core\Type\TypeTestCase;
+use Symfony\Component\Form\PreloadedExtension;
 use Theodo\RogerCmsBundle\Form\Page\ContentType;
 use Theodo\RogerCmsBundle\Form\Page\LayoutType;
+
+// Used for < 2.3 compatibility
+use Symfony\Component\Form\Tests\Extension\Core\Type\TypeTestCase;
 
 class ContentTypeTests extends TypeTestCase
 {
     public function testBind()
     {
-        $this->factory->addType(new LayoutType());
-
         $layout = new Layout();
         $layout->name = 'normal';
 
@@ -42,6 +43,15 @@ class ContentTypeTests extends TypeTestCase
 
         $form->bind($data);
         $this->assertTrue($form->isValid());
+    }
+
+    protected function getExtensions()
+    {
+        $layoutType = new LayoutType();
+
+        return array(new PreloadedExtension(array(
+            $layoutType->getName() => $layoutType,
+        ), array()));
     }
 }
 

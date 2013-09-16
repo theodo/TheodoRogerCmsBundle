@@ -10,8 +10,6 @@
 
 namespace Theodo\RogerCmsBundle\Tests\Controller;
 
-require_once __DIR__.'/../WebTestCase.php';
-
 use Theodo\RogerCmsBundle\Tests\WebTestCase;
 
 /**

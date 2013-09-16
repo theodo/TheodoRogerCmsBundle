@@ -31,9 +31,9 @@ class ContentType extends AbstractType
         ;
 
         $builder->get('content')
-            ->appendClientTransformer(new BlockTransformer());
+            ->addViewTransformer(new BlockTransformer());
         $builder
-            ->appendClientTransformer(new LayoutExtractor())
+            ->addViewTransformer(new LayoutExtractor())
         ;
     }
 

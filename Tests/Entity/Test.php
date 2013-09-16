@@ -25,6 +25,6 @@ abstract class Test extends BaseTestCase
         self::createRogerKernel();
 
         // Load "test" entity manager
-        static::$em = static::$kernel->getContainer()->get('doctrine')->getEntityManager();
+        static::$em = static::$kernel->getContainer()->get('doctrine')->getManager();
     }
 }

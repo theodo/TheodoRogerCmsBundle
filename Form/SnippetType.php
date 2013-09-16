@@ -5,6 +5,7 @@ namespace Theodo\RogerCmsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Theodo\RogerCmsBundle\Entity\Snippet;
 
 class SnippetType extends AbstractType
@@ -20,11 +21,14 @@ class SnippetType extends AbstractType
         $builder->add('lifetime', 'text', array('required' => false));
     }
 
-    public function getDefaultOptions(array $options)
+    /**
+     * @inheritdoc
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'Theodo\RogerCmsBundle\Entity\Snippet',
-        );
+        ));
     }
 
     public function getName()
