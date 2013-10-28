@@ -2,7 +2,8 @@ Theodo RogerCMSBundle
 =====================
 
 WARNING: This bundle is still under developpement.
-While it is functional, the service names, configuration options etc. may change without worrying about BC breaks.
+While it is functional, the service names, configuration options etc. may change
+without worrying about BC breaks.
 
 ## Installation
 
