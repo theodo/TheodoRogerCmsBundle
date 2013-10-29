@@ -32,10 +32,11 @@
             {{ form_errors(form) }}
         </div>
         {% endif %}
-        <div class="title">
-            {{ form_row(form.name) }}
+        <p class="title">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
             {{ form_errors(form.name) }}
-        </div>
+        </p>
         <div class="drawer">
             <div class="toggle_wrapper">
                 {% set top_fields = ['slug', 'breadcrumb', 'description', 'title', 'keywords', 'contentType'] %}

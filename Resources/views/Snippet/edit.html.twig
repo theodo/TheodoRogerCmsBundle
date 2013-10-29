@@ -22,7 +22,9 @@
     {% endif %}
         <div class="form_area">
             <p class="title">
-                {{ form_row(form.name) }}
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
             </p>
             <div class="drawer">
                 <div class="toggle_wrapper">
