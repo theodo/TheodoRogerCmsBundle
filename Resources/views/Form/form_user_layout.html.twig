@@ -67,15 +67,15 @@
 {# waiting for my request on github to be dealt with #}
 {% block widget_choice_options %}
 {% spaceless %}
-    {% for choice, label in options %}
-        {% if _form_is_choice_group(label) %}
-            <optgroup label="{{ choice }}">
-                {% for nestedChoice, nestedLabel in label %}
-                    <option value="{{ nestedChoice }}"{% if _form_is_choice_selected(form, nestedChoice) %} selected="selected"{% endif %}>{{ nestedLabel|trans }}</option>
+    {% for label, choice in choices %}
+        {% if choice is iterable %}
+            <optgroup label="{{ label }}">
+                {% for nestedChoice, nestedLabel in choice %}
+                    <option value="{{ nestedChoice }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ nestedLabel|trans }}</option>
                 {% endfor %}
             </optgroup>
         {% else %}
-            <option value="{{ choice }}"{% if _form_is_choice_selected(form, choice) %} selected="selected"{% endif %}>{{ label|trans }}</option>
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ label|trans }}</option>
         {% endif %}
     {% endfor %}
 {% endspaceless %}
